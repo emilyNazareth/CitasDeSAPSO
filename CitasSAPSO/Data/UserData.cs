@@ -145,7 +145,7 @@ namespace CitasSAPSO.Data
             int processQuantity = _professional.Process.Length;
             string sqlQuery = $"exec sp_registrar_usuario_professional " + _professional.Cedula + ",'" + _professional.Name + "','" + _professional.FirstLastName + "','" +
                 _professional.SecondLastName + "','" + _professional.PersonalPhone + "','" + _professional.RoomPhone + "','" + _professional.Birthday + "','" +
-                _professional.Gender + "','" + _professional.CivilStatus + "'," + _professional.PlaceNumber + ",'" + _professional.Status + "','" +
+                _professional.Gender + "','" + _professional.CivilStatus + "'," + _professional.PlaceNumber + "," + _professional.Status + ",'" +
                  _professional.EmergencyContact + "'," + _professional.EmergencyContactNumber + ",'" + _professional.Scholarship + "','" +
                _professional.Specialty + "'," + _professional.SchoolCode + ",'" + _professional.Province + "','" + _professional.Canton + "','" + _professional.District + "','" +
                 _professional.Address + "'";
@@ -233,7 +233,7 @@ namespace CitasSAPSO.Data
                     professionalTemp.Gender = Char.Parse(catalogueReader["tc_sexo"].ToString());
                     professionalTemp.CivilStatus = catalogueReader["tc_sexo"].ToString();
                     professionalTemp.PlaceNumber = Int32.Parse(catalogueReader["tn_numero_plaza"].ToString());
-                    professionalTemp.Status = catalogueReader["tc_estado"].ToString();
+                    professionalTemp.Status = Int32.Parse(catalogueReader["tc_estado"].ToString());
                     professionalTemp.EmergencyContact = catalogueReader["tc_contacto_emergencia"].ToString();
                     professionalTemp.EmergencyContactNumber = Int32.Parse(catalogueReader["tn_contacto_emergencia"].ToString());
                     professionalTemp.Scholarship = catalogueReader["tc_escolaridad"].ToString();
@@ -283,9 +283,9 @@ namespace CitasSAPSO.Data
                         professionalTemp.Gender = Char.Parse(catalogueReader["tc_sexo"].ToString());
                         professionalTemp.CivilStatus = catalogueReader["tc_estado_civil"].ToString();
                         professionalTemp.PlaceNumber = Int32.Parse(catalogueReader["tn_numero_plaza"].ToString());
-                        professionalTemp.Status = catalogueReader["tn_estado"].ToString();
+                        professionalTemp.Status = Int32.Parse(catalogueReader["tn_estado"].ToString());
                         professionalTemp.EmergencyContact = catalogueReader["tn_contacto_emergencia"].ToString();
-                        professionalTemp.EmergencyContactNumber = Int32.Parse(catalogueReader["tn_numero_contacto"].ToString());
+                        professionalTemp.EmergencyContactNumber = Int32.Parse(catalogueReader["tn_contacto_emergencia"].ToString());
                         professionalTemp.Scholarship = catalogueReader["tc_escolaridad"].ToString();
                         professionalTemp.Specialty = catalogueReader["tc_especialidad"].ToString();
                         professionalTemp.SchoolCode = catalogueReader["tn_codigo_colegio"].ToString();
@@ -313,7 +313,7 @@ namespace CitasSAPSO.Data
 
             string sqlQuery = $"exec sp_modificar_profesional " + _professional.Cedula + ",'" + _professional.Name + "','" + _professional.FirstLastName + "','" +
                 _professional.SecondLastName + "','" + _professional.PersonalPhone + "','" + _professional.RoomPhone + "','" + _professional.Birthday + "','" +
-                _professional.Gender + "','" + _professional.CivilStatus + "'," + _professional.PlaceNumber + ",'" + _professional.Status + "','" +
+                _professional.Gender + "','" + _professional.CivilStatus + "'," + _professional.PlaceNumber + "," + _professional.Status + ",'" +
                  _professional.EmergencyContact + "'," + _professional.EmergencyContactNumber + ",'" + _professional.Scholarship + "','" +
                _professional.Specialty + "'," + _professional.SchoolCode + ",'" + _professional.Province + "','" + _professional.Canton + "','" + _professional.District + "','" +
                 _professional.Address + "'";
