@@ -353,6 +353,7 @@
     <Content Include="Views\User\ConsultTableFunctionary.cshtml" />
     <Content Include="Views\User\DateDetailFunctionary.cshtml" />
     <Content Include="Views\Appointment\About.cshtml" />
+    <Content Include="Views\Appointment\MainFunctionaryRegisterAdministrator.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
