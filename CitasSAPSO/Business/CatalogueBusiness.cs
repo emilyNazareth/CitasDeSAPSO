@@ -32,5 +32,11 @@ namespace CitasSAPSO.Business
             CatalogueData adminData = new CatalogueData();
             adminData.DeleteCatalogueItems(_catalogue);
         }
+        public List<CatalogueModels> GetCatalogueFunctionary(string _catalogue)
+        {
+            CatalogueData catalogue = new CatalogueData();
+            return catalogue.GetCatalogueFunctionary(_catalogue);
+        }
+
     }
 }

@@ -7,212 +7,218 @@
     @foreach (CitasSAPSO.Models.UserModels data in ViewBag.data)
     {
 
-   
-    <div class="row align-items-start">
-        <div class="col">
-            <p class="text-success">Datos Personales</p>
-            <div class="row functionary-register">
-                <label class="col-sm-6 control-label small" for="identification">Numero de identificacion:</label>
-                <input class="col-sm-4 form-control form-control-sm" type="text" id="cedula" name="cedula" value=@data.Cedula>
+
+        <div class="row align-items-start">
+            <div class="col">
+                <p class="text-success">Datos Personales</p>
+                <div class="row functionary-register">
+                    <label class="col-sm-6 control-label small" for="identification">Numero de identificacion:</label>
+                    <input class="col-sm-4 form-control form-control-sm" type="text" id="cedula" name="cedula" value=@data.Cedula>
+
+                </div>
+                <div class="row functionary-register">
+                    <label class="col-sm-6 control-label small" for="name">Nombre:</label>
+                    <input class="col-sm-4 form-control form-control-sm" type="text" id="identification" name="name" value=@data.Name>
+                </div>
+                <div class="row functionary-register">
+                    <label class="col-sm-6 control-label small" for="firstLastName">Primer Apellido:</label>
+                    <input class="col-sm-4 form-control form-control-sm" type="text" id="firstLastName" name="firstLastName" value=@data.FirstLastName>
+                </div>
+                <div class="row functionary-register">
+                    <label class="col-sm-6 control-label small" for="secondLastName">Segundo Apellido:</label>
+                    <input class="col-sm-4 form-control form-control-sm" type="text" id="secondLastName" name="secondLastName" value=@data.SecondLastName>
+                </div>
+                <div class="row functionary-register">
+                    <label class="col-sm-6 control-label small" for="personalPhone">Teléfono Personal:</label>
+                    <input class="col-sm-4 form-control form-control-sm" type="text" id="personalPhone" name="personalPhone" value=@data.PersonalPhone>
+                </div>
+                <div class="row functionary-register">
+                    <label class="col-sm-6 control-label small" for="housePhone">Teléfono de habitación:</label>
+                    <input class="col-sm-4 form-control form-control-sm" type="text" id="housePhone" name="roomPhone" value=@data.RoomPhone>
+                </div>
+                <div class="row functionary-register">
+                    <label class="col-sm-6 control-label small" for="birthday">Fecha de nacimineto</label>
+                    <input type="datetime" class="col-sm-4 form-control form-control-sm" id="birthday" name="birthday" value="@data.Birthday" />
+                </div>
+                <div class="row functionary-register">
+                    <label class="col-sm-6 control-label small" for="gender">Sexo</label>
+                    <select class="col-sm-5 custom-select custom-select-sm" id="gender" name="gender">
+                        @if (@data.Gender == 'M')
+                        {
+                            <option value="M" selected>Masculino</option>
+                            <option value="F">Femenino</option>
+                        }
+                        else
+                        {
+                            <option value="M">Masculino</option>
+                            <option value="F" selected>Femenino</option>
+                        }
+
+
+                    </select>
+                </div>
+                <div class="row functionary-register">
+                    <label class="col-sm-6 control-label small" for="scholarship">Escolaridad</label>
+                    <select class="col-sm-5 custom-select custom-select-sm" id="scholarship" name="scholarship">
+                        <option value=@data.Scholarship selected>@data.Scholarship</option>
+                        <option value="Primaria">Primaria</option>
+                        <option value="Segundaria">Segundaria</option>
+                    </select>
+                </div>
+                <div class="row functionary-register">
+                    <label class="col-sm-6 control-label small" for="province">Provincia</label>
+                    <select class="col-sm-5 custom-select custom-select-sm" id="province" name="province">
+                        <option value=@data.Province selected>@data.Province</option>
+                        <option value="san jose">San José</option>
+                        <option value="heredia">Heredia</option>
+                        <option value="cartago">Cartago</option>
+                        <option value="alajuela">Alajuela</option>
+                        <option value="puntarenas">Puntarenas</option>
+                        <option value="guanacaste">Guanacaste</option>
+                        <option value="limon">Limón</option>
+                    </select>
+                </div>
+                <div class="row functionary-register">
+                    <label class="col-sm-6 control-label small" for="canton">Cantón</label>
+                    <select class="col-sm-5 custom-select custom-select-sm" id="canton" name="canton">
+                        <option value=@data.Canton selected>@data.Canton</option>
+                        <option value="Canton1">Canton1</option>
+                        <option value="Canton2">Canton2</option>
+                        <option value="Canton3">Canton3</option>
+                    </select>
+                </div>
+                <div class="row functionary-register">
+                    <label class="col-sm-6 control-label small" for="district">Distrito</label>
+                    <select class="col-sm-5 custom-select custom-select-sm" id="district" name="district">
+                        <option value=@data.District selected>@data.District</option>
+                        <option value="Distrito1">Distrito1</option>
+                        <option value="Distrito2">Distrito2</option>
+                        <option value="Distrito3">Distrito3</option>
+                    </select>
+                </div>
+                <div class="row functionary-register">
+                    <label class="col-sm-6 control-label small" for="civilStatus">Estado civil:</label>
+                    <select class="col-sm-5 custom-select custom-select-sm" id="civilStatus" name="civilStatus">
+                        <option value=@data.CivilStatus selected>@data.CivilStatus</option>
+                        <option value="Casado(a)">Casado(a)</option>
+                        <option value="Divorsiado(a)">Divorsiado(a)</option>
+                        <option value="Viudo(a)">Viudo(a)</option>
+                        <option value="Soltero(a)">Soltero(a)</option>
+                    </select>
+                </div>
+                <div class="row functionary-register">
+                    <label class="col-sm-6 control-label small" for="address">Dirección:</label>
+                    <textarea class="col-sm-6 form-control form-control-sm" id="address" name="address" rows="1">@data.Address</textarea>
+                </div>
+            </div>
+            <div class="col">
+                <br />
+
+                <div class="row functionary-register">
+                    <label class="col-sm-4 control-label small" for="assistance">Asistencia</label>
+                    <select class="col-sm-5 custom-select custom-select-sm" id="assistance" name="assistance">
+                        @if (@data.Assistance == 1)
+                        {
+                            <option value="1" selected>Asiste</option>
+                            <option value="0">No Asiste</option>
+                        }
+                        else
+                        {
+                            <option value="1">Asiste</option>
+                            <option value="0" selected>No Asiste</option>
+                        }
+
+
+                    </select>
+                </div>
 
             </div>
-            <div class="row functionary-register">
-                <label class="col-sm-6 control-label small" for="name">Nombre:</label>
-                <input class="col-sm-4 form-control form-control-sm" type="text" id="identification" name="name" value=@data.Name>
-            </div>
-            <div class="row functionary-register">
-                <label class="col-sm-6 control-label small" for="firstLastName">Primer Apellido:</label>
-                <input class="col-sm-4 form-control form-control-sm" type="text" id="firstLastName" name="firstLastName" value=@data.FirstLastName>
-            </div>
-            <div class="row functionary-register">
-                <label class="col-sm-6 control-label small" for="secondLastName">Segundo Apellido:</label>
-                <input class="col-sm-4 form-control form-control-sm" type="text" id="secondLastName" name="secondLastName" value=@data.SecondLastName>
-            </div>
-            <div class="row functionary-register">
-                <label class="col-sm-6 control-label small" for="personalPhone">Teléfono Personal:</label>
-                <input class="col-sm-4 form-control form-control-sm" type="text" id="personalPhone" name="personalPhone" value=@data.PersonalPhone>
-            </div>
-            <div class="row functionary-register">
-                <label class="col-sm-6 control-label small" for="housePhone">Teléfono de habitación:</label>
-                <input class="col-sm-4 form-control form-control-sm" type="text" id="housePhone" name="roomPhone" value=@data.RoomPhone>
-            </div>
-            <div class="row functionary-register">
-                <label class="col-sm-6 control-label small" for="birthday">Fecha de nacimineto</label>
-                <input type="datetime"  class="col-sm-4 form-control form-control-sm" id="birthday" name="birthday" value="@data.Birthday.GetDateTimeFormats()[5]" />
-            </div>
-            <div class="row functionary-register">
-                <label class="col-sm-6 control-label small" for="gender">Sexo</label>
-                <select class="col-sm-5 custom-select custom-select-sm" id="gender" name="gender">
-                    @if (@data.Gender == 'M')
-                    {
-                        <option value="M" selected>Masculino</option>
-                        <option value="F">Femenino</option>
-                    }
-                    else
-                    {
-                        <option value="M">Masculino</option>
-                        <option value="F" selected>Femenino</option>
-                    }
+            <div class="col">
+                <p class="text-success">Datos Laborales</p>
+                <div class="row functionary-register">
+                    <label class="col-sm-6 control-label small" for="area">Área</label>
+                    <select class="col-sm-5 custom-select custom-select-sm" id="area" name="areaID">
+                        <!--Se cargar desde javaScript-->
+                        <option value=@data.AreaID selected>@data.NameArea</option>
+                        @foreach (CitasSAPSO.Models.CatalogueModels areas in ViewBag.areas)
+                        {
+                            <option value="@areas.ID">@areas.Name</option>
+
+                        }
+                    </select>
+                </div>
+                <div class="row functionary-register">
+                    <label class="col-sm-6 control-label small" for="office">Oficina</label>
+                    <select class="col-sm-5 custom-select custom-select-sm" id="office" name="officeID">
+                        <option value=@data.OfficeID selected>@data.NameOffice</option>
+                        @foreach (CitasSAPSO.Models.CatalogueModels offices in ViewBag.offices)
+                        {
+                            <option value="@offices.ID">@offices.Name</option>
+
+                        }
+                    </select>
+                </div>
+                <div class="row functionary-register">
+                    <label class="col-sm-6 control-label small" for="place">Puesto</label>
+                    <select class="col-sm-5 custom-select custom-select-sm" id="place" name="placeID">
+                        <option value=@data.PlaceID selected>@data.NamePlace</option>
+                        @foreach (CitasSAPSO.Models.CatalogueModels places in ViewBag.places)
+                        {
+                            <option value="@places.ID">@places.Name</option>
+
+                        }
+                    </select>
+                </div>
+                <div class="row functionary-register">
+                    <label class="col-sm-6 control-label small" for="admissionDate">Fecha de ingreso</label>
+                    <input type="datetime" class="col-sm-4 form-control form-control-sm" id="admissionDate" name="admissionDate" value="@data.AdmissionDate" />
+                </div>
+                <div class="row functionary-register">
+                    <label class="col-sm-6 control-label small" for="officePhone">Teléfono Oficina:</label>
+                    <input class="col-sm-4 form-control form-control-sm" type="text" id="oficePhone" name="oficePhone" value=@data.OficePhone>
+                </div>
+                <div class="row functionary-register">
+                    <label class="col-sm-6 control-label small" for="email">Correo electrónico:</label>
+                    <input class="col-sm-4 form-control form-control-sm" type="email" id="mail" name="mail" value=@data.Mail>
+                </div>
+                <p class="text-success">Aplica si el puesto lo amerita</p>
+                <div class="row functionary-register">
+                    <label class="col-sm-6 control-label small" for="plateCode">Código de placa:</label>
+                    <select class="col-sm-5 custom-select custom-select-sm" id="idPlaca" name="idPlaca">
+                        <option value=@data.IdPlaca selected>@data.IdPlaca</option>
+                        <option value="Codigo1">Código1</option>
+                        <option value="Codigo2">Código2</option>
+                        <option value="Codigo3">Código3</option>
+                    </select>
+                </div>
+                <div class="row functionary-register">
+                    <label class="col-sm-6 control-label small" for="expDate">Fecha de vecimiento portación de armas</label>
+                    <input type="datetime" class="col-sm-4 form-control form-control-sm" id="PortationExpirationDay" name="PortationExpirationDay" value="@data.PortationExpirationDay" />
+                </div>
+                <br />
+                <div class="row justify-content-end">
+                    <!--Contorlar con Sessión-->
+                    <!----
+    <a class="btn btn-success btn-sm" asp-controller="Home" asp-action="Index">Atrás</a>
+    <a class="btn btn-success btn-sm" asp-controller="Administrator" asp-action="AdministratorDashboard">Atrás(Admin)</a>
+
+    <a class="btn btn-success btn-sm" style="margin-left: 5px;" asp-controller="Home" asp-action="ScheduleDates">Siguiente</!-->
 
 
-                </select>
+
+                    @Html.ActionLink("Atrás", "Index", "Home", null, new { @class = "btn btn-success btn-sm" })
+                    @Html.ActionLink("Atrás(Admin)", "DashboardAdministrator", "Administrator", null, new { @class = "btn btn-success btn-sm" })
+                    <input class="btn btn-success btn-sm" type="submit" id="siguiente" name="siguiente" value="Siguiente" style="margin-left: 5px;" />
+                    @*Html.ActionLink("Siguiente", "ScheduleDatesHome", "Home", null, new { @class = "btn btn-success btn-sm" })*@
+
+                </div>
             </div>
-            <div class="row functionary-register">
-                <label class="col-sm-6 control-label small" for="scholarship">Escolaridad</label>
-                <select class="col-sm-5 custom-select custom-select-sm" id="scholarship" name="scholarship">
-                    <option value=@data.Scholarship selected>@data.Scholarship</option>
-                    <option value="Primaria">Primaria</option>
-                    <option value="Segundaria">Segundaria</option>
-                </select>
-            </div>
-            <div class="row functionary-register">
-                <label class="col-sm-6 control-label small" for="province">Provincia</label>
-                <select class="col-sm-5 custom-select custom-select-sm" id="province" name="province">
-                    <option value=@data.Province selected>@data.Province</option>
-                    <option value="san jose">San José</option>
-                    <option value="heredia">Heredia</option>
-                    <option value="cartago">Cartago</option>
-                    <option value="alajuela">Alajuela</option>
-                    <option value="puntarenas">Puntarenas</option>
-                    <option value="guanacaste">Guanacaste</option>
-                    <option value="limon">Limón</option>
-                </select>
-            </div>
-            <div class="row functionary-register">
-                <label class="col-sm-6 control-label small" for="canton">Cantón</label>
-                <select class="col-sm-5 custom-select custom-select-sm" id="canton" name="canton">
-                    <option value=@data.Canton selected>@data.Canton</option>
-                    <option value="Canton1">Canton1</option>
-                    <option value="Canton2">Canton2</option>
-                    <option value="Canton3">Canton3</option>
-                </select>
-            </div>
-            <div class="row functionary-register">
-                <label class="col-sm-6 control-label small" for="district">Distrito</label>
-                <select class="col-sm-5 custom-select custom-select-sm" id="district" name="district">
-                    <option value=@data.District selected>@data.District</option>
-                    <option value="Distrito1">Distrito1</option>
-                    <option value="Distrito2">Distrito2</option>
-                    <option value="Distrito3">Distrito3</option>
-                </select>
-            </div>
-            <div class="row functionary-register">
-                <label class="col-sm-6 control-label small" for="civilStatus">Estado civil:</label>
-                <select class="col-sm-5 custom-select custom-select-sm" id="civilStatus" name="civilStatus">
-                    <option value=@data.CivilStatus selected>@data.CivilStatus</option>
-                    <option value="Casado(a)">Casado(a)</option>
-                    <option value="Divorsiado(a)">Divorsiado(a)</option>
-                    <option value="Viudo(a)">Viudo(a)</option>
-                    <option value="Soltero(a)">Soltero(a)</option>
-                </select>
-            </div>
-            <div class="row functionary-register">
-                <label class="col-sm-6 control-label small" for="address">Dirección:</label>
-                <textarea class="col-sm-6 form-control form-control-sm" id="address" name="address" rows="1">@data.Address</textarea>
-            </div>
+
         </div>
-        <div class="col">
-            <br />
-
-            <div class="row functionary-register">
-                <label class="col-sm-4 control-label small" for="assistance">Asistencia</label>
-                <select class="col-sm-5 custom-select custom-select-sm" id="assistance" name="assistance">
-                    @if (@data.Assistance == 1)
-                    {
-                        <option value="1" selected>Asiste</option>
-                        <option value="0">No Asiste</option>
-                    }
-                    else
-                    {
-                        <option value="1">Asiste</option>
-                        <option value="0" selected>No Asiste</option>
-                    }
-
-
-                </select>
-            </div>
-
-        </div>
-        <div class="col">
-            <p class="text-success">Datos Laborales</p>
-            <div class="row functionary-register">
-                <label class="col-sm-6 control-label small" for="area">Área</label>
-                <select class="col-sm-5 custom-select custom-select-sm" id="area" name="areaID">
-                    <!--Se cargar desde javaScript-->
-                    <option value=@data.AreaID selected>@data.NameArea</option>
-                    <option value="1">Area1</option>
-                    <option value="2">Area2</option>
-                    <option value="3">Area3</option>
-                </select>
-            </div>
-            <div class="row functionary-register">
-                <label class="col-sm-6 control-label small" for="office">Oficina</label>
-                <select class="col-sm-5 custom-select custom-select-sm" id="office" name="officeID">
-                    <option value=@data.OfficeID selected>@data.NameOffice</option>
-                    <option value="1">Oficina1</option>
-                    <option value="2">Oficina2</option>
-                    <option value="3">Oficina3</option>
-                </select>
-            </div>
-            <div class="row functionary-register">
-                <label class="col-sm-6 control-label small" for="place">Puesto</label>
-                <select class="col-sm-5 custom-select custom-select-sm" id="place" name="placeID">
-                    <option value=@data.PlaceID selected>@data.NamePlace</option>
-                    <option value="1">Puesto1</option>
-                    <option value="2">Puesto2</option>
-                    <option value="3">Puesto3</option>
-                </select>
-            </div>
-            <div class="row functionary-register">
-                <label class="col-sm-6 control-label small" for="admissionDate">Fecha de ingreso</label>
-                <input type="datetime" class="col-sm-4 form-control form-control-sm" id="admissionDate" name="admissionDate" value="@data.AdmissionDate.GetDateTimeFormats()[5]" />
-            </div>
-            <div class="row functionary-register">
-                <label class="col-sm-6 control-label small" for="officePhone">Teléfono Oficina:</label>
-                <input class="col-sm-4 form-control form-control-sm" type="text" id="oficePhone" name="oficePhone" value=@data.OficePhone>
-            </div>
-            <div class="row functionary-register">
-                <label class="col-sm-6 control-label small" for="email">Correo electrónico:</label>
-                <input class="col-sm-4 form-control form-control-sm" type="email" id="mail" name="mail" value=@data.Mail>
-            </div>
-            <p class="text-success">Aplica si el puesto lo amerita</p>
-            <div class="row functionary-register">
-                <label class="col-sm-6 control-label small" for="plateCode">Código de placa:</label>
-                <select class="col-sm-5 custom-select custom-select-sm" id="idPlaca" name="idPlaca">
-                    <option value=@data.IdPlaca selected>@data.IdPlaca</option>
-                    <option value="Codigo1">Código1</option>
-                    <option value="Codigo2">Código2</option>
-                    <option value="Codigo3">Código3</option>
-                </select>
-            </div>
-            <div class="row functionary-register">
-                <label class="col-sm-6 control-label small" for="expDate">Fecha de vecimiento portación de armas</label>
-                <input type="datetime" class="col-sm-4 form-control form-control-sm" id="PortationExpirationDay" name="PortationExpirationDay" value="@data.PortationExpirationDay.GetDateTimeFormats()[5]" />
-            </div>
-            <br />
-            <div class="row justify-content-end">
-                <!--Contorlar con Sessión-->
-                <!----
-                <a class="btn btn-success btn-sm" asp-controller="Home" asp-action="Index">Atrás</a>
-                <a class="btn btn-success btn-sm" asp-controller="Administrator" asp-action="AdministratorDashboard">Atrás(Admin)</a>
-
-                <a class="btn btn-success btn-sm" style="margin-left: 5px;" asp-controller="Home" asp-action="ScheduleDates">Siguiente</!-->
-
-                <input class="btn btn-success btn-sm" type="submit" id="siguiente" name="siguiente" value="Siguiente" style="margin-left: 5px;" />
-
-                @Html.ActionLink("Atrás", "Index", "Appointment", null, new { @class = "btn btn-success btn-sm" })
-                @Html.ActionLink("Atrás(Admin)", "DashboardAdministrator", "User", null, new { @class = "btn btn-success btn-sm" })
-
-                @*Html.ActionLink("Siguiente", "ScheduleDatesHome", "Home", null, new { @class = "btn btn-success btn-sm" })*@
-
-            </div>
-        </div>
-
-    </div>
     }
 </form>
-    <script>
-      /*  window.onload = function () {
-            loadFunctionaryRegister();
-        }*/
-    </script>
+<script>
+    /*  window.onload = function () {
+          loadFunctionaryRegister();
+      }*/
+</script>

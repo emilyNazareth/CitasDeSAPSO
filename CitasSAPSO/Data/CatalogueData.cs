@@ -127,6 +127,30 @@ namespace CitasSAPSO.Data
                 connection.Close();
             }
         }
+        public List<CatalogueModels> GetCatalogueFunctionary(string _catalogue)
+        {
+            List<CatalogueModels> catalogues = new List<CatalogueModels>();
+
+
+            string sqlQuery = $"exec sp_obtener_"+_catalogue;
+            using (SqlCommand command = new SqlCommand(sqlQuery, connection))
+            {
+                command.CommandType = CommandType.Text;
+                connection.Open();
+                SqlDataReader responseReader = command.ExecuteReader();
+                while (responseReader.Read())
+                {
+                    CatalogueModels resultCatalogue = new CatalogueModels();
+                    resultCatalogue.ID = Int32.Parse(responseReader["pk_id_"+_catalogue].ToString());
+                    resultCatalogue.Name = responseReader["tc_nombre_"+_catalogue].ToString();
+                    catalogues.Add(resultCatalogue);
+                } 
+                connection.Close();
+            }
+
+
+            return catalogues;
+        }
 
     }
 }
