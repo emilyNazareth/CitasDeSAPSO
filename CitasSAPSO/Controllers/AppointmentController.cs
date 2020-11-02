@@ -43,8 +43,21 @@ namespace CitasSAPSO.Controllers
             return Json("Datos erroneos");
         }
 
+
+        public ActionResult MainFunctionaryRegisterAdministrator()
+        {
+            CatalogueBusiness appointmentBusiness = new CatalogueBusiness();
+            ViewBag.places = appointmentBusiness.GetCatalogueFunctionary("puesto");
+            ViewBag.areas = appointmentBusiness.GetCatalogueFunctionary("area");
+            ViewBag.offices = appointmentBusiness.GetCatalogueFunctionary("oficina");
+            return View("MainFunctionaryRegisterAdministrator");
+        }
         public ActionResult MainFunctionaryRegisterHome()
         {
+            CatalogueBusiness appointmentBusiness = new CatalogueBusiness();
+            ViewBag.places = appointmentBusiness.GetCatalogueFunctionary("puesto");
+            ViewBag.areas = appointmentBusiness.GetCatalogueFunctionary("area");
+            ViewBag.offices = appointmentBusiness.GetCatalogueFunctionary("oficina");
             return View("MainFunctionaryRegisterHome");
         }
 
@@ -53,8 +66,6 @@ namespace CitasSAPSO.Controllers
         {
             UserBusiness functionaryBusiness = new UserBusiness();
             functionaryBusiness.RegisterFunctionary(functionary);
-
-
             CatalogueModels catalogueProcess = new CatalogueModels();
             catalogueProcess.Table = "proceso";
             CatalogueBusiness adminBusiness = new CatalogueBusiness();
@@ -65,6 +76,10 @@ namespace CitasSAPSO.Controllers
         public ActionResult MainFunctionaryModifyHome()
         {
             string cedula = Request.Params["Cedula"];
+            CatalogueBusiness appointmentBusiness = new CatalogueBusiness();
+            ViewBag.places = appointmentBusiness.GetCatalogueFunctionary("puesto");
+            ViewBag.areas = appointmentBusiness.GetCatalogueFunctionary("area");
+            ViewBag.offices = appointmentBusiness.GetCatalogueFunctionary("oficina");
             UserBusiness functionaryBusiness = new UserBusiness();
             ViewBag.data = functionaryBusiness.GetFunctionaryByCedula(Int32.Parse(cedula));
             return View("MainFunctionaryModifyHome");
@@ -73,10 +88,15 @@ namespace CitasSAPSO.Controllers
         [HttpPost]
         public ActionResult MainFunctionaryModifyHome(UserModels functionary)
         {
+            CatalogueModels catalogueProcess = new CatalogueModels();
+            catalogueProcess.Table = "proceso";
             UserBusiness functionaryBusiness = new UserBusiness();
             functionaryBusiness.ModifyFunctionary(functionary);
+            CatalogueBusiness catalogueBusiness = new CatalogueBusiness();
+            ViewBag.process = catalogueBusiness.GetListCatalogue(catalogueProcess);
             return View("ScheduleDatesHome");
         }
+
 
         public ActionResult ScheduleDatesHome()
         {
