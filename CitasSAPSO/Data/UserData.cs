@@ -352,6 +352,7 @@ namespace CitasSAPSO.Data
 
         }
 
+
         /*
         Delete a professional acording to the identification
        */
@@ -367,6 +368,30 @@ namespace CitasSAPSO.Data
             }
         }
 
+        /*
+         Get a list of professional process
+        */
+
+        public List<CatalogueModels> GetListProcessProfessional(int id_professional)
+        {
+            var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["connDB"].ConnectionString);
+            List<CatalogueModels> catalogueItems = new List<CatalogueModels>();
+
+            string sqlQuery = $"exec sp_obtener_procesos_profesional @cedula='{id_professional}'";
+            using (SqlCommand command = new SqlCommand(sqlQuery, connection))
+            {
+                command.CommandType = CommandType.Text;
+                connection.Open();
+                SqlDataReader catalogueReader = command.ExecuteReader();
+                while (catalogueReader.Read())
+                {
+                    CatalogueModels catalogueTemp = new CatalogueModels();
+                    catalogueTemp.ID = Int32.Parse(catalogueReader["pk_id_proceso"].ToString());
+                    catalogueTemp.Name = catalogueReader["tc_nombre_proceso"].ToString();
+                    catalogueItems.Add(catalogueTemp);
+                }
+                connection.Close();
+            }
 
 
             return catalogueItems;
