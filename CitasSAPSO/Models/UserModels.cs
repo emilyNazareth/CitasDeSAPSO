@@ -34,7 +34,7 @@ namespace CitasSAPSO.Models
         public string EmergencyContact { get; set; }
         public string Specialty { get; set; }
         public string SchoolCode { get; set; }
-        public string Status { get; set; }
+        public int Status { get; set; }
         public int[] Process { get; set; }
         public int EmergencyContactNumber { get; set; }
 

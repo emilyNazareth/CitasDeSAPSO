@@ -68,7 +68,7 @@
 
 
                 @{
-                    if (professional.Status == "0")
+                    if (professional.Status == 0)
                     {
                         <div class="professional-register" id="state">
                             <label>Estado</label>
@@ -79,7 +79,7 @@
                             <input id="inactive" type="radio" for="status" name="status"  value="Inactive">Inactivo
                         </div>
                     }
-                    if (professional.Status == "1")
+                    if (professional.Status == 1)
                     {
                         <div class="professional-register" id="state">
                             <label>Estado</label>
@@ -135,8 +135,8 @@
                     <input class="col-sm-4 form-control form-control-sm" type="text" id="EmergencyContact" name="EmergencyContact" value="@professional.EmergencyContact">
                 </div>
                 <div class="row professional-register">
-                    <label class="col-sm-6 control-label small" for="contactNumber">Número del contacto:</label>
-                    <input class="col-sm-4 form-control form-control-sm" type="text" id="contactNumber" name="contactNumber" value="@professional.EmergencyContactNumber">
+                    <label class="col-sm-6 control-label small" for="EmergencyContactNumber">Número del contacto:</label>
+                    <input class="col-sm-4 form-control form-control-sm" type="text" id="EmergencyContactNumber" name="EmergencyContactNumber" value="@professional.EmergencyContactNumber">
                 </div>
                 <div class="row professional-register">
                     <label class="col-sm-6 control-label small" for="scholarship">Escolaridad:</label>
