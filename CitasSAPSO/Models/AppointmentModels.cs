@@ -18,5 +18,14 @@ namespace CitasSAPSO.Models
         public CatalogueModels Assistance { get; set; }
         public CatalogueModels SubActivity { get; set; }
         public int Deleted { get; set; }
+
+        public AppointmentModels()
+        {
+            Functionary = new UserModels();
+            Professional = new UserModels();
+            SubProcess = new CatalogueModels();
+            Assistance = new CatalogueModels();
+                
+        }
     }
 }

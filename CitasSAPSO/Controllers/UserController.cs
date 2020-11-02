@@ -55,7 +55,6 @@ namespace CitasSAPSO.Controllers
         public ActionResult MainProfessionalUpdateAdministrator()
         {
             int id_professional = Convert.ToInt32(Request.Params["login"]);
-            Console.WriteLine(Request.Params["login"]);
             CatalogueModels catalogueProcess = new CatalogueModels();
             catalogueProcess.Table = "proceso";
             CatalogueBusiness catalogueBusiness = new CatalogueBusiness();

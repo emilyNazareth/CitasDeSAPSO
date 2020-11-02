@@ -291,38 +291,3 @@ function loadProcessInfo() {
     }
 }
 
-function saveAppointment() {
-    var FunctionaryId = document.getElementById("FunctionaryId").value;
-    var Date = document.getElementById("Date").value;
-    var Hour = document.getElementById("Hour").value;
-    var ProfessionalId = document.getElementById("ProfessionalId").value;
-    var Patient = document.getElementById("Patient").value;
-    var State = document.getElementById("State").value;
-    var SubprocessId = document.getElementById("SubprocessId").value;
-   // var Assistance = document.getElementById("Assistance").value;
-  //  var SubActivityId = document.getElementById("SubActivityId").value;
-
-    var parameters =
-    {
-        "FunctionaryId" : FunctionaryId,
-        "Date": Date,
-        "Hour": Hour,
-        "ProfessionalId": ProfessionalId,
-        "Patient": Patient,
-        "State": State,
-        "SubprocessId": SubprocessId,
-        "Assistance": 1,
-        "SubActivityId": 1
-    };
-    $.ajax(
-        {
-            data: parameters,
-            url: '/Appointment/SaveAppointment',
-            type: 'post',
-            success: function (response) {
-                location.href = "/Appointment/DateConfirmationHome";
-            }
-
-        }
-    );
-}

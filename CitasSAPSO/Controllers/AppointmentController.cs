@@ -27,8 +27,6 @@ namespace CitasSAPSO.Controllers
         }
 
        
-
-
         public ActionResult MainFunctionaryRegisterAdministrator()
         {
             CatalogueBusiness appointmentBusiness = new CatalogueBusiness();
@@ -51,20 +49,26 @@ namespace CitasSAPSO.Controllers
         {
             UserBusiness functionaryBusiness = new UserBusiness();
             functionaryBusiness.RegisterFunctionary(functionary);
+            
             CatalogueModels catalogueProcess = new CatalogueModels();
             catalogueProcess.Table = "proceso";
-            CatalogueBusiness adminBusiness = new CatalogueBusiness();
-            ViewBag.process = adminBusiness.GetListCatalogue(catalogueProcess);
+
+            CatalogueBusiness catalogueBusiness = new CatalogueBusiness();
+            UserBusiness userBusiness = new UserBusiness();
+
+            ViewBag.professional = userBusiness.GetListProfessionals();
+            ViewBag.subprocess = catalogueBusiness.GetCatalogueFunctionary("subproceso");
+            ViewBag.process = catalogueBusiness.GetListCatalogue(catalogueProcess);
             return View("ScheduleDatesHome");
         }
 
         public ActionResult MainFunctionaryModifyHome()
         {
             string cedula = Request.Params["Cedula"];
-            CatalogueBusiness appointmentBusiness = new CatalogueBusiness();
-            ViewBag.places = appointmentBusiness.GetCatalogueFunctionary("puesto");
-            ViewBag.areas = appointmentBusiness.GetCatalogueFunctionary("area");
-            ViewBag.offices = appointmentBusiness.GetCatalogueFunctionary("oficina");
+            CatalogueBusiness catalogueBusiness = new CatalogueBusiness();
+            ViewBag.places = catalogueBusiness.GetCatalogueFunctionary("puesto");
+            ViewBag.areas = catalogueBusiness.GetCatalogueFunctionary("area");
+            ViewBag.offices = catalogueBusiness.GetCatalogueFunctionary("oficina");
             UserBusiness functionaryBusiness = new UserBusiness();
             ViewBag.data = functionaryBusiness.GetFunctionaryByCedula(Int32.Parse(cedula));
             return View("MainFunctionaryModifyHome");

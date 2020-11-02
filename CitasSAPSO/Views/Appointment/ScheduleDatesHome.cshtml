@@ -21,11 +21,12 @@
             <div class="col-sm ">
                 <div class="form-group row scheduleDatesFilter">
                     <label class="col-sm-4 col-form-label-sm" for="process">Proceso</label>
-                    <select class="col-sm-4 custom-select custom-select-sm" id="process" >
+                    <select class="col-sm-4 custom-select custom-select-sm" id="process">
                         @foreach (CitasSAPSO.Models.CatalogueModels process in ViewBag.process)
                         {
                             <option value="@process.ID">@process.Name</option>
                         }
+                        <option value="0">Test</option>
                     </select>
                 </div>
             </div>
@@ -66,6 +67,12 @@
                 <div class="form-group row scheduleDatesFilter">
                     <label class="col-sm-4 control-label small" for="hour">Hora deseada</label>
                     <input type="time" class="col-sm-4 form-control form-control-sm" id="Hour" name="Hour" />
+                </div>
+            </div>
+            <div class="col-sm ">
+                <div class="form-group row scheduleDatesFilter">
+                    <label class="col-sm-4 control-label small" for="date">Fecha: </label>
+                    <input type="date" class="col-sm-4 form-control form-control-sm" id="date" />
                 </div>
             </div>
         </div>
@@ -137,9 +144,9 @@
             <h3>Su solicitud será enviada</h3>
 
         </div>
-        <input type="number" id="FunctionaryId" name="FunctionaryId" value="302560310" hidden />
+        <input type="number" id="FunctionaryId" name="FunctionaryId" value="305030090" hidden />
         <input type="text" id="Patient" name="Patient" value="paciente" hidden />
-        <input type="date" id="Date" name="Date" value="2020/10/24" hidden />
+        @*<input type="date" id="fecha" name="fecha" value="2020/10/24" hidden />*@
         <input type="text" id="State" name="State" value="Estado" hidden />
         <br />
         <div class="row">
@@ -150,7 +157,7 @@
                 @Html.ActionLink("Atrás", "MainFunctionaryRegisterHome", "Appointment", null, new { @class = "btn btn-success btn-sm" })
 
                 <button type="button" name="finalizar" id="finalizar" href="javascript:;"
-                        onclick="saveAppointment(); return false;"
+                        onclick="saveAppointment2(); return false;"
                         class="btn btn-success btn-sm ">
                     Finalizar
                 </button>
@@ -161,7 +168,48 @@
 
 
 <script>
-        window.onload = function () {
+    window.onload = function () {
             loadScheduleDates();
-        }
+    }
+
+    function saveAppointment2() {
+        alert("Entre");
+
+        var FunctionaryId = document.getElementById("FunctionaryId").value;
+        var fecha = document.getElementById("date").value;
+        var Hour = document.getElementById("Hour").value;
+        var ProfessionalId = document.getElementById("ProfessionalId").value;
+        var Patient = document.getElementById("Patient").value;
+        var State = document.getElementById("State").value;
+        var SubprocessId = document.getElementById("SubprocessId").value;
+        //var Assistance = document.getElementById("Assistance").value;
+        //var SubActivityId = document.getElementById("SubActivityId").value;
+
+   
+        var parameters =
+        {
+            "Functionary": { "Cedula": FunctionaryId },
+            "Date": fecha,
+            "Hour": Hour,
+            "Professional": { "Cedula": ProfessionalId },
+            "Patient": Patient,
+            "State": State,
+            "SubProcess": { "ID": SubprocessId },
+            "Assistance": { "ID": 1 },
+            "SubActivity": { "ID": 1 }
+        };
+        alert(fecha);
+
+        $.ajax(
+            {
+                data: parameters,
+                url: '/Appointment/SaveAppointment',
+                type: 'post',
+                success: function (response) {
+                    location.href = "/Appointment/DateConfirmationHome";
+                }
+
+            }
+        );
+    }
     </script>
