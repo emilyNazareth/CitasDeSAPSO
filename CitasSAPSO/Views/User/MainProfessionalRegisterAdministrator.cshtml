@@ -1,0 +1,162 @@
+
+@{
+    ViewData["Title"] = "MainProfessionalRegister";
+}
+<form asp-controller="Administrator" asp-action="MainProfessionalRegisterAdministrator" method="post">
+    <div class="row align-items-start">
+        <div class="col">
+            <p class="text-success">Datos Personales del Profesional</p>
+            <div class="row professional-register">
+                <label class="col-sm-6 control-label small" for="Cedula">Numero de identificacion:</label>
+                <input class="col-sm-4 form-control form-control-sm" type="text" id="Cedula" name="Cedula">
+
+            </div>
+            <div class="row professional-register">
+                <label class="col-sm-6 control-label small" for="name">Nombre:</label>
+                <input required class="col-sm-4 form-control form-control-sm" type="text" id="name" name="name">
+            </div>
+            <div class="row professional-register">
+                <label class="col-sm-6 control-label small" for="firstLastName">Primer Apellido:</label>
+                <input class="col-sm-4 form-control form-control-sm" type="text" id="firstLastName" name="firstLastName">
+            </div>
+            <div class="row professional-register">
+                <label class="col-sm-6 control-label small" for="secondLastName">Segundo Apellido:</label>
+                <input class="col-sm-4 form-control form-control-sm" type="text" id="secondLastName" name="secondLastName">
+            </div>
+            <div class="row professional-register">
+                <label class="col-sm-6 control-label small" for="personalPhone">Teléfono Personal:</label>
+                <input class="col-sm-4 form-control form-control-sm" type="text" id="personalPhone" name="personalPhone">
+            </div>
+            <div class="row professional-register">
+                <label class="col-sm-6 control-label small" for="RoomPhone">Teléfono de habitación:</label>
+                <input class="col-sm-4 form-control form-control-sm" type="text" id="RoomPhone" name="RoomPhone">
+            </div>
+            <div class="row professional-register">
+                <label class="col-sm-6 control-label small" for="birthday">Fecha de nacimiento</label>
+                <input type="date" class="col-sm-4 form-control form-control-sm" id="birthday" name="birthday" />
+            </div>
+            <div class="row professional-register">
+                <label class="col-sm-6 control-label small" for="gender">Sexo</label>
+                <select class="col-sm-5 custom-select custom-select-sm" id="gender" name="gender">
+                    <option value="M">Masculino</option>
+                    <option value="F">Femenino</option>
+                </select>
+            </div>
+            <div class="row professional-register">
+                <label class="col-sm-6 control-label small" for="civilStatus">Estado civil:</label>
+                <select class="col-sm-5 custom-select custom-select-sm" id="civilStatus" name="civilStatus">
+                    <option value="Casado(a)">Casado(a)</option>
+                    <option value="Divorsiado(a)">Divorsiado(a)</option>
+                    <option value="Viudo(a)">Viudo(a)</option>
+                    <option value="Soltero(a)">Soltero(a)</option>
+                </select>
+            </div>
+            <div class="row professional-register">
+                <label class="col-sm-6 control-label small" for="placeNumber">Número de plaza</label>
+                <select class="col-sm-5 custom-select custom-select-sm" id="placeNumber" name="placeNumber">
+                    <option value="1">Uno</option>
+                    <option value="2">Dos</option>
+                </select>
+            </div>
+
+            <div class="professional-register" id="state">
+                <label>Estado</label>
+                <br />
+                <input id="active" type="radio" for="status" name="status" value="Active" checked>Activo
+                <br />
+                <input id="inactive" type="radio" for="status" name="status" value="Inactive">Inactivo
+            </div>
+
+
+
+        </div>
+        <div class="col">
+            <br />
+            <div class="row professional-register">
+                <label class="col-sm-6 control-label small" for="process">Procesos a los que pertenece:</label>
+                <select multiple id="process" name="process">
+                    @foreach (CitasSAPSO.Models.CatalogueModels process in ViewBag.process)
+                    {
+                        <option value="@process.ID">@process.Name</option>
+                    }
+                </select>
+            </div>
+            <div class="row professional-register">
+                <label class="col-sm-6 control-label small" for="EmergencyContact">Contacto en caso de emergencia:</label>
+                <input class="col-sm-4 form-control form-control-sm" type="text" id="EmergencyContact" name="EmergencyContact">
+            </div>
+            <div class="row professional-register">
+                <label class="col-sm-6 control-label small" for="contactNumber">Número del contacto:</label>
+                <input class="col-sm-4 form-control form-control-sm" type="text" id="contactNumber" name="contactNumber">
+            </div>
+            <div class="row professional-register">
+                <label class="col-sm-6 control-label small" for="scholarship">Escolaridad:</label>
+                <select class="col-sm-5 custom-select custom-select-sm" id="scholarship" name="scholarship">
+                    <option value="Técnico">Técnico</option>
+                    <option value="Bachillerato">Bachillerato</option>
+                    <option value="Licenciatura">Licenciatura</option>
+                    <option value="Maestría">Maestría</option>
+                    <option value="Doctorado">Doctorado</option>
+                </select>
+            </div>
+            <div class="row professional-register">
+                <label class="col-sm-6 control-label small" for="specialty">Especialidad:</label>
+                <select class="col-sm-5 custom-select custom-select-sm" id="specialty" name="specialty">
+                    <option value="Especialidad 1">Especialidad 1</option>
+                    <option value="Especialidad 2">Especialidad 2</option>
+                    <option value="Especialidad 3">Especialidad 3</option>
+                </select>
+            </div>
+            <div class="row professional-register">
+                <label class="col-sm-6 control-label small" for="schoolCode">Código de colegio:</label>
+                <input class="col-sm-4 form-control form-control-sm" type="number" id="schoolCode" name="schoolCode">
+            </div>
+            <div class="row professional-register">
+                <label class="col-sm-6 control-label small" for="province">Provincia</label>
+                <select class="col-sm-5 custom-select custom-select-sm" id="province" name="province">
+                    <option value="san jose">San José</option>
+                    <option value="heredia">Heredia</option>
+                    <option value="cartago">Cartago</option>
+                    <option value="alajuela">Alajuela</option>
+                    <option value="puntarenas">Puntarenas</option>
+                    <option value="guanacaste">Guanacaste</option>
+                    <option value="limon">Limón</option>
+                </select>
+            </div>
+            <div class="row professional-register">
+                <label class="col-sm-6 control-label small" for="canton">Cantón</label>
+                <select class="col-sm-5 custom-select custom-select-sm" id="canton" name="canton">
+                    <option value="Canton1">Canton1</option>
+                    <option value="Canton1">Canton1</option>
+                    <option value="Canton3">Canton3</option>
+                </select>
+            </div>
+            <div class="row professional-register">
+                <label class="col-sm-6 control-label small" for="district">Distrito</label>
+                <select class="col-sm-5 custom-select custom-select-sm" id="district" name="district">
+                    <option value="Distrito1">Distrito1</option>
+                    <option value="Distrito2">Distrito2</option>
+                    <option value="Distrito3">Distrito3</option>
+                </select>
+            </div>
+            <div class="row professional-register">
+                <label class="col-sm-6 control-label small" for="address">Dirección:</label>
+                <textarea class="col-sm-6 form-control form-control-sm" id="address" name="address" rows="1"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col justify-content-lg-start">
+
+            @Html.ActionLink("Atrás", "DashboardAdministrator", "User", null, new { @class = "btn btn-success btn-sm" })
+
+        </div>
+        <div class="col justify-content-end">
+            <a onclick="registerProfessional()" class="btn btn-success btn-sm" style="margin-left: 100px;">Aceptar</a>            
+        </div>
+    </div>
+</form>
+<div class="alert-danger">
+    <span id="resultado"></span>
+</div>
+<script src="~/Scripts/Site.js"></script>

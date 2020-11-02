@@ -1,0 +1,132 @@
+﻿using CitasSAPSO.Business;
+using CitasSAPSO.Models;
+using Newtonsoft.Json;
+using System;
+using System.Diagnostics;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+
+namespace CitasSAPSO.Controllers
+{
+    public class UserController : Controller
+    {
+        public ActionResult DashboardAdministrator()
+        {
+            Debug.WriteLine("ADMIN CONTROLLER" + (string)(Session["Identification"]));
+            Debug.WriteLine((string)(Session["Password"]));
+            return View("DashboardAdministrator");
+        }
+
+
+        
+        public ActionResult SearchProfessionalAdministrator()
+        {
+            UserBusiness UserBusiness = new UserBusiness();
+            ViewBag.professionals = UserBusiness.GetListProfessionals();
+            return View("SearchProfessionalAdministrator");
+        }
+        [System.Web.Services.WebMethod]
+        public object LoadProfessionalTable()
+        {
+            UserBusiness UserBusiness = new UserBusiness();
+            object json = new { data = UserBusiness.GetListProfessionals() };
+            return json;
+        }
+        public String SearchProfessionalByFiltersAdministrator(int cedula, String nombre, String apellido)
+        {
+            UserModels professional = new UserModels();
+            professional.Cedula = cedula;
+            professional.Name = nombre;
+            professional.FirstLastName = apellido;
+
+            UserBusiness administratorBusiness = new UserBusiness();
+            //object json = 
+            return JsonConvert.SerializeObject(administratorBusiness.SearchProfessionals(professional));
+
+        }
+        public ActionResult MainProfessionalRegisterAdministrator()
+        {
+            CatalogueModels catalogueProcess = new CatalogueModels();
+            catalogueProcess.Table = "proceso";
+            CatalogueBusiness adminBusiness = new CatalogueBusiness();
+            ViewBag.process = adminBusiness.GetListCatalogue(catalogueProcess);
+            return View("MainProfessionalRegisterAdministrator");
+        }
+        public ActionResult MainProfessionalUpdateAdministrator()
+        {
+            int id_professional = Convert.ToInt32(Request.Params["login"]);
+            Console.WriteLine(Request.Params["login"]);
+            CatalogueModels catalogueProcess = new CatalogueModels();
+            catalogueProcess.Table = "proceso";
+            CatalogueBusiness catalogueBusiness = new CatalogueBusiness();
+            ViewBag.process = catalogueBusiness.GetListCatalogue(catalogueProcess);
+            UserBusiness userBusiness = new UserBusiness();
+            ViewBag.professional = userBusiness.GetProfessionalByIdentification(id_professional);
+            ViewBag.processProfessional = userBusiness.GetListProcessProfessional(id_professional);
+            return View("MainProfessionalUpdateAdministrator");
+        }
+
+        public ActionResult ConsultDateAdministrator()
+        {
+            return View("ConsultDateAdministrator");
+        }
+
+
+        [HttpPost]
+        public ActionResult MainProfessionalRegisterAdministrator(UserModels professional)
+        {
+            UserBusiness professionalBusiness = new UserBusiness();
+            professionalBusiness.RegisterProfessional(professional);
+            CatalogueModels catalogueProcess = new CatalogueModels();
+            catalogueProcess.Table = "proceso";
+            CatalogueBusiness catalogueBusiness = new CatalogueBusiness();
+            ViewBag.process = catalogueBusiness.GetListCatalogue(catalogueProcess);
+            return View("MainProfessionalRegisterAdministrator");
+        }
+        [HttpPost]
+        public ActionResult MainProfessionalUpdateAdministrator(UserModels professional)
+        {
+            UserBusiness professionalBusiness = new UserBusiness();
+            professionalBusiness.ModifyProfessional(professional);
+            CatalogueModels catalogueProcess = new CatalogueModels();
+            catalogueProcess.Table = "proceso";
+            CatalogueBusiness catalogueBusiness = new CatalogueBusiness();
+            ViewBag.process = catalogueBusiness.GetListCatalogue(catalogueProcess);
+            return Json("Exitoso");
+        }
+        [HttpPost]
+        public ActionResult MainProfessionalDeleteAdministrator(int id_professional)
+        {
+            UserBusiness professionalBusiness = new UserBusiness();
+            professionalBusiness.DeleteProfessional(id_professional);
+            return Json("Exitoso");
+        }
+                                             
+        public ActionResult DashboardProfessional()
+        {
+            return View();
+        }
+
+        public ActionResult ShowDateDetail()
+        {
+            return View("DateDetailProfessional");
+        }
+
+        public ActionResult ProfessionalLogin()
+        {
+            return View("DashboardProfessional");
+        }
+
+        public ActionResult ConsultDateFunctionary()
+        {
+            return View("ConsultDateFunctionary");
+        }
+
+        public ActionResult DateDetailFunctionary()
+        {
+            return View("DateDetailFunctionary");
+        }
+
+    }
+}

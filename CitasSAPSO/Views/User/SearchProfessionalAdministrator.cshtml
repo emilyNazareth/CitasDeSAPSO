@@ -1,0 +1,152 @@
+@{
+    ViewData["Title"] = "SearchProfessional";
+}
+
+<center>
+    <h3 class="titles">Profesional</h3>
+    <p class="text-success"> Seleccione el tipo de búsqueda</p>
+</center>
+
+<center>
+    <form id="login-form">
+        <div class="form-group row">
+            <label for="identificationInput" class="col-sm-7 col-form-label-sm">Cédula</label>
+
+            <input type="text" name="id" id="id" class="col-sm-5 form-control form-control-sm">
+
+        </div>
+        <div class="form-group row">
+            <label for="nameInput" class="col-sm-7 col-form-label-sm">Nombre</label>
+            <input type="text" name="nameInput" id="name" class="col-sm-5 form-control form-control-sm">
+        </div>
+        <div class="form-group row">
+            <label for="lastnameInput" class="col-sm-7 col-form-label-sm">Apellidos</label>
+            <input type="text" name="lastnameInput" id="lastname" class="col-sm-5 form-control form-control-sm">
+        </div>
+        <div>
+            <a class="btn btn-success btn-sm" id="consultDate" onclick="searchProfessional()" name="consultDate">Buscar</a>
+        </div>
+    </form>
+</center>
+<br />
+<div class="row condultFunctionaryTable">
+    <span id="messageSpanId"></span>
+
+
+    <table id="tbl" class="table table-bordered table-striped table-hover table-sm table-responsive-md">
+        <thead>
+            <tr>
+                <th scope="col">Consecutivo</th>
+                <th scope="col">Cédula</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellidos</th>
+                <th scope="col">Modificar</th>
+                <th scope="col">Borrar</th>
+            </tr>
+        </thead>
+
+        <tbody id="tbody">
+
+            @foreach (CitasSAPSO.Models.UserModels professionals in ViewBag.professionals)
+            {
+                <tr>
+                    <td>@professionals.ProfessionalId</td>
+                    <td>@professionals.Cedula</td>
+                    <td>@professionals.Name</td>
+                    <td>@professionals.FirstLastName</td>
+                    <td><a class=" btn btn-success btn-sm" onclick="modifyProffesional()">Modificar</a></td>
+                    <td>
+                        <button onclick="deleteProffesional()" type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#cancelModal">
+                            Eliminar
+                        </button>
+                    </td>
+                </tr>
+            }
+
+
+        </tbody>
+    </table>
+    <div class="" style="margin-left:50px">
+        <span id="result"></span>
+    </div>
+    <br />
+    <br />
+    <div style="padding:50px" class="row justify-content-end">
+        <a class="btn btn-success btn-sm" href="javascript:history.back()">Atrás</a>
+    </div>
+</div>
+
+<script>
+    function modifyProffesional() {
+        $("#tbl tr").click(function () {
+            $(this).addClass('selected').siblings().removeClass('selected');
+            var id = $(this).find('td:first').html();
+            var value = $(this).find('td:nth-child(1)');
+            var identification = value.next().text();
+            modifyProfessionalUrl(identification);
+        });
+    }
+
+    function deleteProffesional() {
+        $("#tbl tr").click(function () {
+            $(this).addClass('selected').siblings().removeClass('selected');
+            var id = $(this).find('td:first').html();
+            var value = $(this).find('td:nth-child(1)');
+            var identification = value.next().text();
+            $(this).remove();
+            var parameters = { "id_professional": identification };
+            $.ajax(
+                {
+                    data: parameters,
+                    url: '/User/MainProfessionalDeleteAdministrator',
+                    type: 'post',
+                    beforeSend: function () {
+                        $("#result").html("Procesando, espere por favor ...");
+                    },
+                    success: function (response) {
+                        $("#result").html("Eliminado");
+                    }
+                }
+            );
+        });
+    }
+
+
+    function searchProfessional() {
+        var cedula = $('#id').val();
+        var nombre = $('#name').val()
+        var apellido = $('#lastname').val()
+        if (!cedula) {
+            cedula = 0;
+        }
+        var parameters = { "cedula": cedula, "nombre": nombre, "apellido": apellido };
+        $.ajax(
+            {
+                data: parameters,
+                url: '/User/SearchProfessionalByFiltersAdministrator',
+                type: 'post',
+                beforeSend: function () {
+                    //$("#messageSpanId").html("Procesando, espere por favor ...");
+                },
+                success: function (response) {
+                    var data = JSON.parse(response);
+                    var text = "";
+                    for (i in data) {
+                        text += "<tr>";
+                        text += '<td>' + data[i].ProfessionalId + '</td>';
+                        text += '<td>' + data[i].Cedula + '</td>';
+                        text += '<td>' + data[i].Name + '</td>';
+                        text += '<td>' + data[i].FirstLastName + '</td>';
+                        text += '<td><a class=" btn btn-success btn-sm" onclick="modifyProffesional()">Modificar</a></td>';
+                        text += '<button onclick="deleteProffesional()" type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#cancelModal">';
+                        text += "</tr>";
+                    }
+                    $("#tbody").html(text);
+
+
+                }
+            }
+        );
+    }
+
+</script>

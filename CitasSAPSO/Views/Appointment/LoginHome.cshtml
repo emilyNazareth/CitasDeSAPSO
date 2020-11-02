@@ -1,0 +1,54 @@
+﻿@{
+    ViewData["Title"] = "LogIn";
+}
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<center>
+    <form id="login-form">
+        <h3 class="text-center text-info">Login</h3>
+        <div class="form-group">
+            <input type="text" name="identification" id="identification" class="form-control" placeholder="Usuario">
+        </div>
+        <div class="form-group">
+            <input type="Password" name="password" id="password" class="form-control" placeholder="Contraseña">
+        </div>
+        <br />
+        <span id="messageSpanId"></span>
+        <br />
+        <div>
+            <a class="btn btn-success" id="administratorLogin" name="administratorLogin" style="margin-right: 1px;" onclick="login($('#identification').val(), $('#password').val())">LogIn</a>
+        </div>      
+    </form>
+</center>
+  <div class="col-sm-3">
+            @Html.ActionLink("Atrás", "Index", "Appointment", null, new { @class = "btn btn-success" })
+        </div>
+<script>
+
+    function login(identification, password) {
+        console.log("Identification:" + identification);
+        console.log("Password" + password);
+        var parameters = { "identification": identification, "password": password };
+        $.ajax(
+            {
+                data: parameters,
+                url: '/Appointment/ValidationLogin',
+                type: 'post',
+                beforeSend: function () {
+                    
+                },
+                success: function (response) {
+                    if (response == "Administrator") {
+                        location.href = "/User/DashboardAdministrator";
+                    } else if (response == "Professional")
+                    {
+                        location.href = "/User/ProfessionalLogin";
+                    }
+                    $("#messageSpanId").html(response);
+                }
+            }
+        );
+    }
+     
+
+</script>

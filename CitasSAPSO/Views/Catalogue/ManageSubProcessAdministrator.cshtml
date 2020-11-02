@@ -1,0 +1,162 @@
+﻿@{
+    ViewData["Title"] = "ManageThread";
+}
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<center>
+    <form id="login-form">
+        <h3 class="text-center text-info">Administración de subproceso</h3>
+        <div class="form-group">
+            <input type="number" name="id" id="id" class="form-control" placeholder="ID" readonly>
+        </div>
+        <div class="form-group">
+            <input type="text" name="description" id="description" class="form-control" placeholder="Descripción">
+        </div>
+
+        <div class="row">
+            <div class="col-sm-3">
+                <select id="father" class="form-control" style=" min-width: 300px; ">
+                    @*<option value="#">Seleccione...</option>*@
+                    @foreach (CitasSAPSO.Models.CatalogueModels process in ViewBag.process)
+                    {
+                        <option value="@process.ID">@process.Name</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <br />
+        <div class="row justify-content-end">
+            <div>
+                <a class="btn btn-success" id="updatePlace" name="updatePlace" onclick="updateSubprocess($('#id').val(),
+                             $('#description').val(), $('#father').val())"> Modificar</a>
+            </div>
+            <div>
+                <a class="btn btn-success" id="registerPlace" name="registerPlace" style="margin-right: 1px;" onclick="registerSubprocess($('#description').val(), $('#father').val())">Nuevo</a>
+            </div>
+            <div>
+                <a class="btn btn-success" id="deletePlace" name="deletePlace" style="margin-right: 1px;" onclick="deleteSubprocess($('#id').val())">Eliminar</a>
+            </div>
+            <div>
+                <a class="btn btn-success" id="cleanPlace" name="cleanPlace" onclick="cleanThread()">Limpiar</a>
+            </div>
+        </div>
+        <span id="messageSpanId"></span>
+        <br />
+
+
+        <h5 class="text-center text-info">Lista de registros almacenados</h5>
+
+        <table id="tableID" class="table table-sm">
+            <thead>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">ID</th>
+                    <th scope="col">Descripción</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (CitasSAPSO.Models.CatalogueModels subprocess in ViewBag.subprocess)
+                {
+                    <tr>
+                        <th> <a href="#" class="stretched-link " style="position: relative;">Seleccionar</a> </th>
+                        <td>@subprocess.ID</td>
+                        <td>@subprocess.Name</td>
+                        <td style="display:none;">@subprocess.FatherID</td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </form>
+
+</center>
+
+<div class="col-sm-3">
+    @Html.ActionLink("Atrás", "DashboardAdministrator", "User", null, new { @class = "btn btn-success" })
+</div>
+
+<script>
+    //limpia el formulario
+    function cleanThread() {
+        document.getElementById("login-form").reset();
+        $("#messageSpanId").html("");
+    }
+    function updateSubprocess(id, description, father) {
+        var parameters = { "id": id, "description": description, "father": father };
+        $.ajax(
+            {
+                data: parameters,
+                url: '/Catalogue/ModifySubprocessAdministrator',
+                type: 'post',
+                beforeSend: function () {
+                    $("#messageSpanId").html("Procesando, espere por favor ...");
+                },
+                success: function (response) {
+                    if (response == "Exitoso") {
+                        location.href = "/Catalogue/ManageSubProcessAdministrator";
+                    } else {
+                        $("#messageSpanId").html("No se pudo agregar");
+                    }
+                }
+            }
+        );
+    }
+
+    function registerSubprocess(description, father) {
+        var parameters = { "description": description, "father": father };
+        $.ajax(
+            {
+                data: parameters,
+                url: '/Catalogue/RegisterSubprocessAdministrator',
+                type: 'post',
+                beforeSend: function () {
+                    $("#messageSpanId").html("Procesando, espere por favor ...");
+                },
+                success: function (response) {
+                    if (response == "Exitoso") {
+                        location.href = "/Catalogue/ManageSubProcessAdministrator";
+                    } else {
+                        $("#messageSpanId").html("No se pudo agregar");
+                    }
+                }
+            }
+        );
+    }
+
+    function deleteSubprocess(id) {
+        var parameters = { "id": id };
+        $.ajax(
+            {
+                data: parameters,
+                url: '/Catalogue/DeleteSubprocessAdministrator',
+                type: 'post',
+                beforeSend: function () {
+                    $("#messageSpanId").html("Procesando, espere por favor ...");
+                },
+                success: function (response) {
+                    if (response == "Exitoso") {
+                        location.href = "/Catalogue/ManageSubProcessAdministrator";
+                    } else {
+                        $("#messageSpanId").html("No se pudo agregar");
+                    }
+                }
+            }
+        );
+    }
+
+
+    //obtener valores de los campos seleccionados de la tabla
+    $("#tableID tr").click(function () {
+        $(this).addClass('selected').siblings().removeClass('selected');
+        var id = $(this).find('td:first').html();
+        var value = $(this).find('td:nth-child(2)');
+        var td3 = $(this).find('td:nth-child(3)');
+        var description = value.next().text();
+        var father = td3.next().text();
+        $("#id").val(id);
+        $("#description").val(description);
+        $("#father").val(father);
+    });
+
+</script>

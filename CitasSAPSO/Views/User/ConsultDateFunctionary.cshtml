@@ -1,0 +1,140 @@
+﻿@{
+    ViewData["Title"] = "ConsultDateFunctionary";
+}
+
+<center>
+    <h3 class="titles">Citas</h3>
+    <p class="text-success"> Seleccione el tipo de búsqueda</p>
+</center>
+
+<center>
+    <form id="login-form">
+        <div class="form-group row">
+            <label for="identificationInput" class="col-sm-7 col-form-label-sm">Cédula</label>
+            <input type="text" name="identificationInput" id="identificationInput" class="col-sm-5 form-control form-control-sm">
+        </div>
+        <div class="form-group row">
+            <label for="consecutiveInput" class="col-sm-7 col-form-label-sm">Consecutivo</label>
+            <input type="text" name="consecutiveInput" id="consecutiveInput" class="col-sm-5 form-control form-control-sm">
+        </div>
+        <div>
+            <a class="btn btn-success btn-sm" id="consultDate" name="consultDate">Consultar</a>
+        </div>
+    </form>
+</center>
+<br />
+<div class="row condultFunctionaryTable">
+    <table class="table table-bordered table-striped table-hover table-sm table-responsive-md">
+        <thead>
+            <tr>
+                <th scope="col">Consecutivo</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Primer Apellido</th>
+                <th scope="col">Segundo Apellido</th>
+                <th scope="col">Cédula</th>
+                <th scope="col">Psicólogo</th>
+                <th scope="col">Proceso</th>
+                <th scope="col">Actividad</th>
+                <th scope="col">Fecha</th>
+                <th scope="col">Hora Inicio</th>
+                <th scope="col">Ver Detalle</th>
+                <!--Controlar con Session solo Admin-->
+                <th scope="col">Modificar</th>
+                <!---->
+                <th scope="col">Cancelar</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><a class=" btn btn-success btn-sm" asp-controller="Functionary" asp-action="FunctionaryDateDetail">Ver</a></td>
+                <!--Controlar con Session solo Admin-->
+                <td><a class=" btn btn-success btn-sm" asp-controller="Home" asp-action="MainFunctionaryRegister">Modificar</a></td>
+                <!---->
+                <td>
+                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#cancelModal">
+                        Cancelar
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><a class=" btn btn-success btn-sm" asp-controller="Functionary" asp-action="FunctionaryDateDetail">Ver</a></td>
+                <!--Controlar con Session solo Admin-->
+                <td><a class=" btn btn-success btn-sm" asp-controller="Home" asp-action="MainFunctionaryRegister">Modificar</a></td>
+                <!---->
+                <td>
+                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#cancelModal">
+                        Cancelar
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><a class=" btn btn-success btn-sm" asp-controller="Functionary" asp-action="FunctionaryDateDetail">Ver</a></td>
+                <!--Controlar con Session solo Admin-->
+                <td><a class=" btn btn-success btn-sm" asp-controller="Home" asp-action="MainFunctionaryRegister">Modificar</a></td>
+                <!---->
+                <td>
+                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#cancelModal">
+                        Cancelar
+                    </button>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+
+    <div class="modal fade" id="cancelModal" tabindex="-1" role="dialog" aria-labelledby="cancelModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="cancelModalLabel">Cancelar Cita</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="justificationInput">Justificación:</label>
+                        <textarea class="form-control" id="justificationInput" name="justificationInput" rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Atrás</button>
+                    <button type="button" class="btn btn-danger">Confirmar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-end">
+        <a class="btn btn-success btn-sm" href="/Appointment/Index">Atrás</a>
+    </div>
+</div>

@@ -1,0 +1,116 @@
+﻿@{
+    ViewData["Title"] = "AdministratorConsultDate";
+}
+
+<center>
+    <h3 class="titles">Citas</h3>
+    <p class="text-success"> Seleccione el tipo de búsqueda</p>
+</center>
+
+
+<div class="row">
+    <div class="col-sm ">
+        <div class="form-group row scheduleDatesFilter">
+            <label class="col-sm-4 control-label small" for="initialDate">Fecha inicial</label>
+            <input type="date" class="col-sm-4 form-control form-control-sm" id="initialDate" name="initialDate" />
+        </div>
+    </div>
+    <div class="col-sm ">
+        <div class="form-group row scheduleDatesFilter">
+            <label class="col-sm-4 control-label small" for="finalDate">Fecha Final</label>
+            <input type="date" class="col-sm-4 form-control form-control-sm" id="finalDate" name="finalDate" />
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm ">
+        <div class="form-group row scheduleDatesFilter">
+            <label class="col-sm-4 col-form-label-sm" for="process">Proceso</label>
+            <select class="col-sm-4 custom-select custom-select-sm" id="process" name="process">
+                <!--opciones se cargar con javaScrip-->
+            </select>
+        </div>
+    </div>
+    <div class="col-sm ">
+        <div class="form-group row scheduleDatesFilter">
+            <label class="col-sm-4 col-form-label-sm" for="assistance">Asistencia</label>
+            <select class="col-sm-4 custom-select custom-select-sm" id="assistance" name="assistance">
+                <option value="1">Asistencia1</option>
+                <option value="1">Asistencia2</option>
+            </select>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm ">
+        <div class="form-group row scheduleDatesFilter">
+            <label class="col-sm-4 col-form-label-sm" for="office">Oficina</label>
+            <select class="col-sm-4 custom-select custom-select-sm" id="office" name="office">
+                <option value="1">Oficina1</option>
+                <option value="1">Oficina2</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-sm ">
+        <div class="form-group row scheduleDatesFilter">
+            <label class="col-sm-4 col-form-label-sm" for="identification">Cédula</label>
+            <input type="text" class="col-sm-4 form-control form-control-sm" id="identification" name="identification" />
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm ">
+        <div class="form-group row scheduleDatesFilter">
+            <label class="col-sm-4 col-form-label-sm" for="professional">Profesional</label>
+            <select class="col-sm-4 custom-select custom-select-sm" id="professional" name="professional">
+                <option value="1">Profesional1</option>
+                <option value="1">Profesional2</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-sm ">
+        <div class="form-group row scheduleDatesFilter">
+            <label class="col-sm-4 col-form-label-sm" for="gender">Sexo</label>
+            <select class="col-sm-4 custom-select custom-select-sm" id="gender" name="gender">
+                <option value="1">M</option>
+                <option value="1">F</option>
+            </select>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm ">
+        <div class="form-group row scheduleDatesFilter">
+            <label class="col-sm-4 col-form-label-sm" for="dateStatus">Estado Cita</label>
+            <select class="col-sm-4 custom-select custom-select-sm" id="dateStatus" name="dateStatus">
+                <option value="1">Estado Cita1</option>
+                <option value="1">Estado Cita2</option>
+            </select>
+        </div>
+        <div class="form-group row scheduleDatesFilter">
+            <label class="col-sm-4 col-form-label-sm" for="consecutive">Consecutivo</label>
+            <input type="text" class="col-sm-4 form-control form-control-sm" id="consecutive" name="consecutive" />
+        </div>
+    </div>
+    <div class="col-sm ">
+        <div class="form-group row scheduleDatesFilter">
+            <label class="col-sm-4 col-form-label-sm" for="age">Edad</label>
+            <input type="number" class="col-sm-4 form-control form-control-sm" id="age" name="age" />
+        </div>
+    </div>
+</div>
+
+<div class="row administratorConsultTable">
+    @{Html.RenderPartial("~/Views/User/ConsultTableFunctionary.cshtml");}
+    <div class="row justify-content-end">        
+            @Html.ActionLink("Atrás", "DashboardAdministrator", "User", null, new { @class = "btn btn-success btn-sm" })        
+    </div>
+</div>
+
+<script>
+    window.onload = function () {
+        loadAdministratorConsult();
+    }
+
+</script>
+

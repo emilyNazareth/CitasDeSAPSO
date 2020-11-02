@@ -1,0 +1,148 @@
+﻿@{
+    ViewData["Title"] = "ManageArea";
+}
+
+@model  CitasSAPSO.Models.CatalogueModels
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<center>
+    <form id="login-form">
+        <h3 class="text-center text-info">Administración de area</h3>
+        <div class="form-group">
+            <input type="number" name="id" id="id" class="form-control" placeholder="ID" readonly>
+        </div>
+        <div class="form-group">
+            <input type="text" name="description" id="description" class="form-control" placeholder="Descripción">
+        </div>
+
+        <div class="row justify-content-end">
+            <div>
+                <a class="btn btn-success" id="updateArea" name="updateArea" onclick="updateArea($('#id').val(),
+                             $('#description').val())"> Modificar</a>
+            </div>
+            <div>
+                <a class="btn btn-success" id="registerArea" name="registerArea" style="margin-left: 1px;" onclick="registerArea($('#description').val())">Nuevo</a>
+            </div>
+            <div>
+                <a class="btn btn-success" id="deleteArea" name="deleteArea" style="margin-left: 1px;" onclick="deleteArea($('#id').val())">Eliminar</a>
+            </div>
+            <div>
+                <a class="btn btn-success" id="cleanArea" name="cleanArea" style="margin-left: 1px;" onclick="cleanArea()">Limpiar</a>
+            </div>
+        </div>
+        <span id="messageSpanId"></span>
+        <br />
+        <br />
+
+        <h5 class="text-center text-info">Lista de registros almacenados</h5>
+        <br />
+
+        <table id="tableID" class="table table-sm">
+            <thead>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">ID</th>
+                    <th scope="col">Descripción</th>
+                </tr>
+            </thead>
+            <tbody>               
+                    @foreach (CitasSAPSO.Models.CatalogueModels areas in ViewBag.areas)
+                    {
+                        <tr>
+                            <th> <a href="#" class="stretched-link " style="position: relative;">Seleccionar</a> </th>
+                            <td>@areas.ID</td>
+                            <td>@areas.Name</td>
+
+                        </tr>
+                    }
+            </tbody>
+            </table>
+
+        </form>
+
+    </center>
+
+    <div class="col-sm-3">
+        @Html.ActionLink("Atrás", "DashboardAdministrator", "User", null, new { @class = "btn btn-success" })
+    </div>
+
+    <script>
+        //limpia el formulario
+        function cleanArea() {
+            document.getElementById("login-form").reset();
+            $("#messageSpanId").html("");
+        }
+        //metodos para llamados a modificar, agregar y borrar con ajax
+        function updateArea(id, description) {
+            var parameters = { "id": id, "description": description };
+            $.ajax(
+                {
+                    data: parameters,
+                    url: '/Catalogue/ModifyAreaAdministrator',
+                    type: 'post',
+                    beforeSend: function () {
+                        $("#messageSpanId").html("Procesando, espere por favor ...");
+                    },
+                    success: function (response) {
+                        if (response == "Exitoso") {
+                            location.href = "/Catalogue/ManageAreaAdministrator";
+                        } else {
+                            $("#messageSpanId").html("No se pudo agregar");
+                        }
+                    }
+                }
+            );     
+        }
+        function registerArea(description) {
+            var parameters = { "description": description };
+            $.ajax(
+                {
+                    data: parameters,
+                    url: '/Catalogue/RegisterAreaAdministrator',
+                    type: 'post',
+                    beforeSend: function () {
+                        $("#messageSpanId").html("Procesando, espere por favor ...");
+                    },
+                    success: function (response) {
+                        if (response == "Exitoso") {
+                            location.href = "/Catalogue/ManageAreaAdministrator";
+                        } else {
+                            $("#messageSpanId").html("No se pudo agregar");
+                        }
+                    }
+                }
+            );        
+        }
+        function deleteArea(id) {
+            var parameters = { "id": id};
+            $.ajax(
+                {
+                    data: parameters,
+                    url: '/Catalogue/DeleteAreaAdministrator',
+                    type: 'post',
+                    beforeSend: function () {
+                        $("#messageSpanId").html("Procesando, espere por favor ...");
+                    },
+                    success: function (response) {
+                        if (response == "Exitoso") {
+                            location.href = "/Catalogue/ManageAreaAdministrator";
+                        } else {
+                            $("#messageSpanId").html("No se pudo agregar");
+                        }
+                    }
+                }
+            );     
+        }
+
+
+        //obtener valores de los campos seleccionados de la tabla
+        $("#tableID tr").click(function () {
+            $(this).addClass('selected').siblings().removeClass('selected');
+            var id = $(this).find('td:first').html();
+            var value = $(this).find('td:nth-child(2)');
+            var description = value.next().text();
+            $("#id").val(id);
+            $("#description").val(description);
+        });
+
+    </script>

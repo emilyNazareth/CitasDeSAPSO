@@ -1,0 +1,148 @@
+@{
+    ViewData["Title"] = "ScheduleDatesHome";
+}
+
+<center><h3 class="titles">Agenda</h3></center>
+
+<div class="row">
+    <div class="col-sm-2">
+        <div class="card">
+            <div class="card-header">
+                Observaciones
+            </div>
+            <div class="card-body">
+                <textarea class="form-control form-control-sm" id="observations" rows="4"></textarea>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-sm-10">
+        <div class="row">
+            <div class="col-sm ">
+                <div class="form-group row scheduleDatesFilter">
+                    <label class="col-sm-4 col-form-label-sm" for="process">Proceso</label>
+                    <select class="col-sm-4 custom-select custom-select-sm" id="process">
+                        @foreach (CitasSAPSO.Models.CatalogueModels process in ViewBag.process)
+                        {
+                            <option value="@process.ID">@process.Name</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm ">
+                <div class="form-group row scheduleDatesFilter">
+                    <label class="col-sm-4 col-form-label-sm" for="subprocess">Subproceso</label>
+                    <select class="col-sm-4 custom-select custom-select-sm" id="SubprocessId" name="SubprocessId">
+                        <option value="1">Subproceso1</option>
+                        <option value="1">Subproceso2</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm">
+                <div class="form-group row scheduleDatesFilter">
+                    <label class="col-sm-4 col-form-label-sm" for="professional">Profesional</label>
+                    <select class="col-sm-4 custom-select custom-select-sm" id="ProfessionalId" name="ProfessionalId">
+                        <option value="1">Profesional</option>
+                        <option value="1">Tipo de Cita2</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm ">
+                <div class="form-group row scheduleDatesFilter">
+                    <label class="col-sm-4 col-form-label-sm" for="dateType">Tipo de Cita</label>
+                    <select class="col-sm-4 custom-select custom-select-sm" id="dateType">
+                        <option value="1">Tipo de Cita1</option>
+                        <option value="1">Tipo de Cita2</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm ">
+                <div class="form-group row scheduleDatesFilter">
+                    <label class="col-sm-4 control-label small" for="hour">Hora deseada</label>
+                    <input type="time" class="col-sm-4 form-control form-control-sm" id="Hour" name="Hour" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm ">
+                <div class="form-group row scheduleDatesFilter">
+                    <label class="col-sm-4 control-label small" for="initialDate">Fecha inicial</label>
+                    <input type="date" class="col-sm-4 form-control form-control-sm" id="initialDate" />
+                </div>
+            </div>
+            <div class="col-sm ">
+                <div class="form-group row scheduleDatesFilter">
+                    <label class="col-sm-4 control-label small" for="finalDate">Fecha Final</label>
+                    <input type="date" class="col-sm-4 form-control form-control-sm" id="finalDate" />
+                </div>
+            </div>
+        </div>
+        <br />
+
+        <div class="row procesoInfo">
+            <!--Proceso Clínico-->
+            <div class="row">
+                <div class="col-sm ">
+                    <div class="form-group row">
+                        <label class="col-sm control-label small" for="autoId">ID</label>
+                        <input type="text" class="col-sm form-control form-control-sm" id="Id" name="Id" disabled value="1" />
+                    </div>
+                </div>
+                <div class="col-sm ">
+                    <div class="form-group row">
+                        <label class="col-sm control-label small" for="email">Correo electrónico</label>
+                        <input type="email" class="col-sm-6 form-control form-control-sm" id="email" />
+                    </div>
+                </div>
+                <div class="col-sm ">
+                    <div class="form-group row ">
+                        <label class="col-sm control-label small" for="appointmentType">Tipo</label>
+                        <input type="text" class="col-sm form-control form-control-sm" id="appointmentType" disabled value="Presencial" />
+                    </div>
+                </div>
+                <div class="col-sm ">
+                    <div class="form-group row">
+                        <label class="col-sm control-label small" for="telephone">ID</label>
+                        <input type="text" class="col-sm form-control form-control-sm" id="telephone" disabled value="88888888" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group row ">
+                    <label class="col-sm control-label small" for="description">Descripción</label>
+                    <textarea class="form-control form-control" id="description" name="description" rows="4"></textarea>
+                </div>
+            </div>
+
+        </div>
+        <input type="number" id="FunctionaryId" name="FunctionaryId" value="24" hidden />
+        <input type="text" id="Patient" name="Patient" value="paciente" hidden />
+        <input type="date" id="Date" name="Date" value="2020/10/24" hidden />
+        <input type="text" id="State" name="State" value="Estado" hidden />
+        <br />
+        <div class="row">
+            <div class="col-sm-11 scheduleDatesTable">
+                @{Html.RenderPartial("WeekTableHome");}
+            </div>
+            <div class="col-sm-1">
+                @Html.ActionLink("Atrás", "MainFunctionaryRegisterHome", "Appointment", null, new { @class = "btn btn-success btn-sm" })
+               
+                <button type="button" name="finalizar" id="finalizar" href="javascript:;"
+                        onclick="saveAppointment(); return false;"
+                        class="btn btn-success btn-sm ">
+                    Finalizar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--<script>
+    window.onload = function () {
+        loadScheduleDates();
+    }
+</script>-->

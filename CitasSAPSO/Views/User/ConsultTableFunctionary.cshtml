@@ -1,0 +1,134 @@
+﻿
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<table id="tableID" class="table table-bordered table-striped table-hover table-sm table-responsive-md">
+    <thead>
+        <tr>
+            <th scope="col">Consecutivo</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Primer Apellido</th>
+            <th scope="col">Segundo Apellido</th>
+            <th scope="col">Cédula</th>
+            <th scope="col">Psicólogo</th>
+            <th scope="col">Proceso</th>
+            <th scope="col">Actividad</th>
+            <th scope="col">Fecha</th>
+            <th scope="col">Hora Inicio</th>
+            <th scope="col">Ver Detalle</th>
+            <!--Controlar con Session solo Admin-->
+            <th scope="col">Modificar</th>
+            <!---->
+            <th scope="col">Cancelar</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">1</th>
+            <td>Luis</td>
+            <td>Hidalgo</td>
+            <td>Quiros</td>
+            <td>305240010</td>
+            <td>Ana</td>
+            <td>Armas</td>
+            <td>Act1</td>
+            <td>10/22/2020</td>
+            <td>2:30</td>
+            <td><a class=" btn btn-success btn-sm" asp-controller="Functionary" asp-action="FunctionaryDateDetail">Ver</a></td>
+            <!--Controlar con Session solo Admin
+    <td><a class=" btn btn-success btn-sm" id="modify" onclick="modifyFunctionary()">Modificar</a></td>
+        -->
+   
+    <td><a class=" btn btn-success btn-sm" id="modify"  >Modificar</a></td>
+    <!---->
+            <td>
+                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#cancelModal">
+                    Cancelar
+                </button>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">2</th>
+            <td>Jose</td>
+            <td>Hidalgo</td>
+            <td>Quiros</td>
+            <td>9630</td>
+            <td>Analibe</td>
+            <td>Armas</td>
+            <td>Act3</td>
+            <td>10/1/2020</td>
+            <td>5:30</td>
+            <td><a class=" btn btn-success btn-sm" asp-controller="Functionary" asp-action="FunctionaryDateDetail">Ver</a></td>
+            <!--Controlar con Session solo Admin-->
+            <td><a class=" btn btn-success btn-sm" id="modify">Modificar</a></td>
+            <!---->
+            <td>
+                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#cancelModal">
+                    Cancelar
+                </button>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">3</th>
+            <td>Marta</td>
+            <td>Solis</td>
+            <td>Obando</td>
+            <td>105251006</td>
+            <td>Analibe</td>
+            <td>Clinico</td>
+            <td>Act2</td>
+            <td>9/8/2020</td>
+            <td>6:00</td>
+            <td><a class=" btn btn-success btn-sm" asp-controller="Functionary" asp-action="FunctionaryDateDetail">Ver</a></td>
+            <!--Controlar con Session solo Admin-->
+            <td><a class=" btn btn-success btn-sm" id="modify">Modificar</a></td>
+            <!---->
+            <td>
+                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#cancelModal">
+                    Cancelar
+                </button>
+            </td>
+        </tr>
+
+    </tbody>
+</table>
+
+<div class="modal fade" id="cancelModal" tabindex="-1" role="dialog" aria-labelledby="cancelModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cancelModalLabel">Cancelar Cita</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="justificationInput">Justificación:</label>
+                    <textarea class="form-control" id="justificationInput" name="justificationInput" rows="3"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Atrás</button>
+                <button type="button" class="btn btn-danger">Confirmar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+   /* function modifyFunctionary() {
+       // alert("El btn funciona : ");
+        localStorage.setItem('code', 9630);
+        alert(value);
+        //location.href = "/Home/MainFunctionaryModifyHome?Cedula=" + 9630;
+
+    }*/
+
+    $("#tableID tr").click(function () {
+        $(this).addClass('selected').siblings().removeClass('selected');
+        var value = $(this).find('td:nth-child(4)');
+        var cedula = value.next().text();
+        //alert("descripcion: " + cedula);
+        location.href = "/Appointment/MainFunctionaryModifyHome?Cedula=" + cedula;
+    });
+</script>

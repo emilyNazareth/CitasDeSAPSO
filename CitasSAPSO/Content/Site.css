@@ -1,0 +1,108 @@
+﻿
+body, html {
+    height: 100%;
+    margin: 0;
+}
+
+.bg1 {
+    position: relative;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("img/FondoSAPSO.png");
+    background-color: transparent;
+    height: 100%;
+}
+
+#btnGetDate {
+    margin-top: 5em;
+}
+
+.dateRequest-card {
+    margin-top: 4em;
+    background-color: transparent;
+    height: 400px;
+}
+
+#date_info {
+    text-align: center;
+}
+
+.detailDateForm {
+    max-height: 427px;
+    font-size: 11px;
+}
+
+.functionary-register {
+    margin-bottom: 3px;
+    margin-top: 3px;
+}
+
+.professional-register {
+    margin-bottom: 3px;
+    margin-top: 3px;
+}
+
+
+.scheduleDatesFilter {
+    margin-bottom: 3px;
+    margin-top: 3px;
+}
+
+#idInput {
+    margin-top: 30px;
+}
+
+.homeOptions {
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+#login-form {
+    max-width: 300px;
+    text-align: center;
+}
+
+.nav-link {
+    color: white;
+    background-color: #f47424;
+    margin-right: 15px;
+}
+
+.titles {
+    margin: 0;
+    font: bold;
+    color: #f87c28;
+}
+
+.scheduleDatesTable {
+    font-size: 10px;
+    max-width: 650px;
+    max-height: 275px;
+}
+
+.weekTable {
+    max-width: 700px;
+    max-height: 400px;
+}
+
+    .weekTable tbody tr td:hover, .scheduleDatesTable tbody tr td:hover {
+        background-color: #fcbc94;
+    }
+
+    .weekTable tbody tr:hover, .scheduleDatesTable tbody tr:hover {
+        background-color: #fadbc3;
+    }
+
+#back {
+    position: relative;
+    left: 0px;
+    top: 10px;
+}
+
+.btn-success {
+    background-color: #FF9900 !important;
+    border-color: #FF9900 !important;
+}
+

@@ -1,0 +1,97 @@
+﻿@{
+    ViewData["Title"] = "FunctionaryDateDetail";
+}
+
+
+
+<center><h3 class="titles">Detalles de cita</h3></center>
+<div class="row detailDateForm">
+    <div class="col">
+        <div class="form-group row">
+            <label class="col-sm-6 col-form-label-sm" for="cosecutive">Cosecutivo:</label>
+            <input type="text" class="col-sm-6 form-control form-control-sm" id="cosecutive" name="cosecutive" disabled />
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-6 col-form-label-sm" for="name">Nombre:</label>
+            <input type="text" class="col-sm-6 form-control form-control-sm" id="name" name="name" disabled />
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-6 col-form-label-sm" for="firstLastName">Primer Apellido:</label>
+            <input type="text" class="col-sm-6 form-control form-control-sm" id="firstLastName" name="firstLastName" disabled />
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-6 col-form-label-sm" for="secondLastName">Segundo Apellido:</label>
+            <input type="text" class="col-sm-6 form-control form-control-sm" id="secondLastName" name="secondLastName" disabled />
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-6 col-form-label-sm" for="identification">cedula:</label>
+            <input type="text" class="col-sm-6 form-control form-control-sm" id="identification" name="identification" disabled />
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-6 col-form-label-sm" for="gender">Sexo:</label>
+            <input type="text" class="col-sm-6 form-control form-control-sm" id="gender" name="gender" disabled />
+        </div>
+    </div>
+    <div class="col">
+
+        <div class="form-group row">
+            <label class="col-sm-6 col-form-label-sm" for="place">Puesto:</label>
+            <input type="text" class="col-sm-6 form-control form-control-sm" id="place" name="place" disabled />
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-6 col-form-label-sm" for="area">Área:</label>
+            <input type="text" class="col-sm-6 form-control form-control-sm" id="area" name="area" disabled />
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-6 col-form-label-sm" for="office">Oficina:</label>
+            <input type="text" class="col-sm-6 form-control form-control-sm" id="office" name="office" disabled />
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-6 col-form-label-sm" for="telephone">Teléfono:</label>
+            <input type="text" class="col-sm-6 form-control form-control-sm" id="telephone" name="telephone" disabled />
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-6 col-form-label-sm" for="email">Correo electrónico:</label>
+            <input type="email" class="col-sm-6 form-control form-control-sm" id="email" name="email" disabled />
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-6 col-form-label-sm" for="process">Proceso:</label>
+            <input type="text" class="col-sm-6 form-control form-control-sm" id="process" name="process" disabled />
+        </div>
+    </div>
+    <div class="col">
+        <div class="form-group row">
+            <label class="col-sm-6 col-form-label-sm" for="initialDate">Fecha Inicio:</label>
+            <input type="text" class="col-sm-6 form-control form-control-sm" id="initialDate" name="initialDate" disabled />
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-6 col-form-label-sm" for="finalDate">Fecha final:</label>
+            <input type="text" class="col-sm-6 form-control form-control-sm" id="finalDate" name="finalDate" disabled />
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-6 col-form-label-sm" for="initialhour">Hora Inicio:</label>
+            <input type="text" class="col-sm-6 form-control form-control-sm" id="initialhour" name="initialhour" disabled />
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-6 col-form-label-sm" for="finalhour">Hora final:</label>
+            <input type="text" class="col-sm-6 form-control form-control-sm" id="finalhour" name="finalhour" disabled />
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-6 col-form-label-sm" for="registerDate">Fecha registro:</label>
+            <input type="text" class="col-sm-6 form-control form-control-sm" id="registerDate" name="registerDate" disabled />
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-6 col-form-label-sm" for="assignedPsychologist">Psicólogo asignado:</label>
+            <input type="text" class="col-sm-6 form-control form-control-sm" id="assignedPsychologist" name="assignedPsychologist" disabled />
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-6 col-form-label-sm" for="activity">Actividad:</label>
+            <input type="text" class="col-sm-6 form-control form-control-sm" id="activity" name="activity" disabled />
+        </div>
+    </div>
+</div>
+<div class="row">
+    <!--Controlar con Sesión-->
+    <a class="btn btn-success" asp-controller="User" asp-action="FunctionaryConsultDate">Atrás</a>
+    <a class="btn btn-success" asp-controller="User" asp-action="AdministratorConsultDate">Atrás(admin)</a>
+</div>

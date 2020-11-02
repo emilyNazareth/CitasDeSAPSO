@@ -1,0 +1,178 @@
+﻿
+@{
+    ViewData["Title"] = "MainFunctionaryRegister";
+}
+
+    <form asp-controller="Administrator" asp-action="MainProfessionalRegisterAdministrator" method="post">
+        <div class="row align-items-start">
+            <div class="col">
+                <p class="text-success">Datos Personales</p>
+                <div class="row functionary-register">
+                    <label class="col-sm-6 control-label small" for="identification">Numero de identificacion:</label>
+                    <input class="col-sm-4 form-control form-control-sm" type="text" id="cedula" name="cedula" >
+                    @*foreach (CitasSAPSO.Models.FunctionaryModels process in ViewBag.process)
+        {
+            <input class="col-sm-4 form-control form-control-sm" type="text" id="cedula" name="cedula" value=@process.Cedula>
+        }*@
+                </div>
+                <div class="row functionary-register">
+                    <label class="col-sm-6 control-label small" for="name">Nombre:</label>
+                    <input class="col-sm-4 form-control form-control-sm" type="text" id="identification" name="name">
+                </div>
+                <div class="row functionary-register">
+                    <label class="col-sm-6 control-label small" for="firstLastName">Primer Apellido:</label>
+                    <input class="col-sm-4 form-control form-control-sm" type="text" id="firstLastName" name="firstLastName">
+                </div>
+                <div class="row functionary-register">
+                    <label class="col-sm-6 control-label small" for="secondLastName">Segundo Apellido:</label>
+                    <input class="col-sm-4 form-control form-control-sm" type="text" id="secondLastName" name="secondLastName">
+                </div>
+                <div class="row functionary-register">
+                    <label class="col-sm-6 control-label small" for="personalPhone">Teléfono Personal:</label>
+                    <input class="col-sm-4 form-control form-control-sm" type="text" id="personalPhone" name="personalPhone">
+                </div>
+                <div class="row functionary-register">
+                    <label class="col-sm-6 control-label small" for="housePhone">Teléfono de habitación:</label>
+                    <input class="col-sm-4 form-control form-control-sm" type="text" id="housePhone" name="roomPhone">
+                </div>
+                <div class="row functionary-register">
+                    <label class="col-sm-6 control-label small" for="birthday">Fecha de nacimineto</label>
+                    <input type="date" placeholder="dd-mm-yyyy" class="col-sm-4 form-control form-control-sm" id="birthday" name="birthday" />
+                </div>
+                <div class="row functionary-register">
+                    <label class="col-sm-6 control-label small" for="gender">Sexo</label>
+                    <select class="col-sm-5 custom-select custom-select-sm" id="gender" name="gender">
+                        <option value="M">Masculino</option>
+                        <option value="F">Femenino</option>
+                    </select>
+                </div>
+                <div class="row functionary-register">
+                    <label class="col-sm-6 control-label small" for="scholarship">Escolaridad</label>
+                    <select class="col-sm-5 custom-select custom-select-sm" id="scholarship" name="scholarship">
+                        <option value="Primaria">Primaria</option>
+                        <option value="Segundaria">Segundaria</option>
+                    </select>
+                </div>
+                <div class="row functionary-register">
+                    <label class="col-sm-6 control-label small" for="province">Provincia</label>
+                    <select class="col-sm-5 custom-select custom-select-sm" id="province" name="province">
+                        <option value="san jose">San José</option>
+                        <option value="heredia">Heredia</option>
+                        <option value="cartago">Cartago</option>
+                        <option value="alajuela">Alajuela</option>
+                        <option value="puntarenas">Puntarenas</option>
+                        <option value="guanacaste">Guanacaste</option>
+                        <option value="limon">Limón</option>
+                    </select>
+                </div>
+                <div class="row functionary-register">
+                    <label class="col-sm-6 control-label small" for="canton">Cantón</label>
+                    <select class="col-sm-5 custom-select custom-select-sm" id="canton" name="canton">
+                        <option value="Canton1">Canton1</option>
+                        <option value="Canton2">Canton2</option>
+                        <option value="Canton3">Canton3</option>
+                    </select>
+                </div>
+                <div class="row functionary-register">
+                    <label class="col-sm-6 control-label small" for="district">Distrito</label>
+                    <select class="col-sm-5 custom-select custom-select-sm" id="district" name="district">
+                        <option value="Distrito1">Distrito1</option>
+                        <option value="Distrito2">Distrito2</option>
+                        <option value="Distrito3">Distrito3</option>
+                    </select>
+                </div>
+                <div class="row functionary-register">
+                    <label class="col-sm-6 control-label small" for="civilStatus">Estado civil:</label>
+                    <select class="col-sm-5 custom-select custom-select-sm" id="civilStatus" name="civilStatus">
+                        <option value="Casado(a)">Casado(a)</option>
+                        <option value="Divorsiado(a)">Divorsiado(a)</option>
+                        <option value="Viudo(a)">Viudo(a)</option>
+                        <option value="Soltero(a)">Soltero(a)</option>
+                    </select>
+                </div>
+                <div class="row functionary-register">
+                    <label class="col-sm-6 control-label small" for="address">Dirección:</label>
+                    <textarea class="col-sm-6 form-control form-control-sm" id="address" name="address" rows="1"></textarea>
+                </div>
+            </div>
+            <div class="col">
+                <br />
+
+
+                <div class="row functionary-register">
+                    <label class="col-sm-4 control-label small" for="assistance">Asistencia</label>
+                    <select class="col-sm-5 custom-select custom-select-sm" id="assistance" name="assistance">
+
+                        <option value="1">Asiste</option>
+                        <option value="0">No Asiste</option>
+
+                    </select>
+                </div>
+
+            </div>
+            <div class="col">
+                <p class="text-success">Datos Laborales</p>
+                <div class="row functionary-register">
+                    <label class="col-sm-6 control-label small" for="area">Área</label>
+                    <select class="col-sm-5 custom-select custom-select-sm" id="area" name="areaID">
+                        <!--Se cargar desde javaScript-->
+                        <option value="1">Area1</option>
+                        <option value="2">Area2</option>
+                    </select>
+                </div>
+                <div class="row functionary-register">
+                    <label class="col-sm-6 control-label small" for="office">Oficina</label>
+                    <select class="col-sm-5 custom-select custom-select-sm" id="office" name="officeID">
+                        <option value="1">Oficina1</option>
+                        <option value="2">Oficina2</option>
+                        <option value="3">Oficina3</option>
+                    </select>
+                </div>
+                <div class="row functionary-register">
+                    <label class="col-sm-6 control-label small" for="place">Puesto</label>
+                    <select class="col-sm-5 custom-select custom-select-sm" id="place" name="placeID">
+                        <option value="1">Puesto1</option>
+                        <option value="2">Puesto2</option>
+                        <option value="3">Puesto3</option>
+                    </select>
+                </div>
+                <div class="row functionary-register">
+                    <label class="col-sm-6 control-label small" for="admissionDate">Fecha de ingreso</label>
+                    <input type="date" placeholder="dd-mm-yyyy" class="col-sm-4 form-control form-control-sm" id="admissionDate" name="admissionDate" />
+                </div>
+                <div class="row functionary-register">
+                    <label class="col-sm-6 control-label small" for="officePhone">Teléfono Oficina:</label>
+                    <input class="col-sm-4 form-control form-control-sm" type="text" id="oficePhone" name="oficePhone">
+                </div>
+                <div class="row functionary-register">
+                    <label class="col-sm-6 control-label small" for="email">Correo electrónico:</label>
+                    <input class="col-sm-4 form-control form-control-sm" type="email" id="mail" name="mail">
+                </div>
+                <p class="text-success">Aplica si el puesto lo amerita</p>
+                <div class="row functionary-register">
+                    <label class="col-sm-6 control-label small" for="plateCode">Código de placa:</label>
+                    <select class="col-sm-5 custom-select custom-select-sm" id="idPlaca" name="idPlaca">
+                        <option value="Codigo1">Código1</option>
+                        <option value="Codigo2">Código2</option>
+                        <option value="Codigo3">Código3</option>
+                    </select>
+                </div>
+                <div class="row functionary-register">
+                    <label class="col-sm-6 control-label small" for="expDate">Fecha de vecimiento portación de armas</label>
+                    <input type="date" placeholder="dd-mm-yyyy" class="col-sm-4 form-control form-control-sm" id="PortationExpirationDay" name="PortationExpirationDay" />
+                </div>
+                <br />
+                <div class="row justify-content-end">                   
+                    <input class="btn btn-success btn-sm" type="submit" id="siguiente" name="siguiente" value="Siguiente" style="margin-left: 5px;" />                   
+                    @Html.ActionLink("Atrás", "DashboardAdministrator", "User", null, new { @class = "btn btn-success btn-sm" })
+                </div>
+            </div>
+
+        </div>
+
+    </form>
+    <script>
+        window.onload = function () {
+            loadFunctionaryRegister();
+        }
+    </script>

@@ -1,0 +1,93 @@
+﻿@{
+    ViewData["Title"] = "DashboardProfessional";
+}
+
+
+
+<center><h3 class="titles">Agenda Profesional</h3></center>
+<br />
+<div class="row">
+    <div class="col-sm-5">
+        <form id="professionalDashboard-form">
+            <div class="row">
+                <div class="col">
+                    <div class="form-group row">
+                        <label class="col-sm-7 col-form-label-sm" for="initialDate">Fecha Inicial</label>
+                        <input type="date" class="col-sm-5 form-control form-control-sm" id="initialDate" name="initialDate" />
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-7 col-form-label-sm" for="process">Proceso</label>
+                        <select class="col-sm-5 custom-select custom-select-sm" id="process" name="process">
+                            <!--opciones se cargar con javaScrip-->
+                        </select>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-7 col-form-label-sm" for="office">Oficina</label>
+                        <select class="col-sm-5 custom-select custom-select-sm" id="office" name="office">
+                            <option selected>Choose...</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-7 col-form-label-sm" for="dateState">Estado cita</label>
+                        <select class="col-sm-5 custom-select custom-select-sm" id="dateState" name="dateState">
+                            <option selected>Choose...</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-7 col-form-label-sm" for="consecutive">Consecutivo</label>
+                        <input type="text" class="col-sm-5 form-control form-control-sm" id="consecutive" name="consecutive" />
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group row">
+                        <label class="col-sm-7 col-form-label-sm" for="finalDate">Fecha Final</label>
+                        <input type="date" class="col-sm-5 form-control form-control-sm" id="finalDate" name="finalDate" />
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-7 col-form-label-sm" for="Asistence">Asistencia</label>
+                        <select class="col-sm-5 custom-select custom-select-sm" id="Asistence" name="Asistence">
+                            <!--opciones se cargar con javaScrip-->
+                        </select>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-7 col-form-label-sm" for="identification">Cédula</label>
+                        <input type="text" class="col-sm-5 form-control form-control-sm" id="identification" name="identification" />
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-7 col-form-label-sm" for="gender">Sexo</label>
+                        <select class="col-sm-5 custom-select custom-select-sm" id="gender" name="gender">
+                            <option selected>Choose...</option>
+                            <option value="M">M</option>
+                            <option value="F">F</option>
+                        </select>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-7 col-form-label-sm" for="age">Edad</label>
+                        <input type="number" class="col-sm-5 form-control form-control-sm" id="age" name="age" />
+                    </div>
+                </div>
+            </div>
+            <div>
+                <a class="btn btn-success" id="query" name="query">Consultar</a>
+            </div>
+        </form>
+
+    </div>
+    <div class="col-sm-7 weekTable">
+        @{Html.RenderPartial("~/Views/Appointment/WeekTableHome.cshtml");}
+        <div class="row justify-content-end">
+            @Html.ActionLink("Cerrar Sesión", "Index", "Appointment", null, new { @class = "btn btn-success btn-sm" })
+        </div>
+    </div>
+</div>
+<script>
+    window.onload = function () {
+        loadProfessionalDashboardInfo();
+    }
+</script>
