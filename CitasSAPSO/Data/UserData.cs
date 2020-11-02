@@ -16,8 +16,8 @@ namespace CitasSAPSO.Data
         public UserData()
         {
             connection = new SqlConnection(ConfigurationManager.ConnectionStrings["connDB"].ConnectionString);
-        }        
-     
+        }
+
 
         public List<UserModels> GetFunctionary(int _cedula)
         {
@@ -60,10 +60,10 @@ namespace CitasSAPSO.Data
                     resultFunctionary.AdmissionDate = responseReader["tf_fecha_ingreso"].ToString();
                     resultFunctionary.Assistance = Int32.Parse(responseReader["tc_asistencia"].ToString());
 
-                } 
+                }
                 connection.Close();
             }
-          
+
             functionary.Add(resultFunctionary);
             return functionary;
         }
@@ -71,7 +71,7 @@ namespace CitasSAPSO.Data
 
 
         public void SaveFunctionary(UserModels _functionary)
-        {           
+        {
 
             string sqlQuery = $"exec sp_registrar_funcionario " + _functionary.Cedula + ",'" + _functionary.Name + "','" + _functionary.FirstLastName
                 + "','" + _functionary.SecondLastName + "','" + _functionary.PersonalPhone + "','" + _functionary.RoomPhone + "','" + _functionary.Birthday
@@ -367,32 +367,6 @@ namespace CitasSAPSO.Data
             }
         }
 
-        /*
-         Get a list of professional process
-        */
 
-        public List<CatalogueModels> GetListProcessProfessional(int id_professional)
-        {
-            var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["connDB"].ConnectionString);
-            List<CatalogueModels> catalogueItems = new List<CatalogueModels>();
-
-            string sqlQuery = $"exec sp_obtener_procesos_profesional @cedula='{id_professional}'";
-            using (SqlCommand command = new SqlCommand(sqlQuery, connection))
-            {
-                command.CommandType = CommandType.Text;
-                connection.Open();
-                SqlDataReader catalogueReader = command.ExecuteReader();
-                while (catalogueReader.Read())
-                {
-                    CatalogueModels catalogueTemp = new CatalogueModels();
-                    catalogueTemp.ID = Int32.Parse(catalogueReader["pk_id_proceso"].ToString());
-                    catalogueTemp.Name = catalogueReader["tc_nombre_proceso"].ToString();
-                    catalogueItems.Add(catalogueTemp);
-                }
-                connection.Close();
-            }
-
-            return catalogueItems;
-        }
     }
 }

@@ -57,10 +57,7 @@ namespace CitasSAPSO.Business
         {
             return professionalData.GetProfessionalByIdentification(id_professional);
         }
-        public List<CatalogueModels> GetListProcessProfessional(int id_professional)
-        {
-            return professionalData.GetListProcessProfessional(id_professional);
-        }
+       
         public void DeleteProfessional(int id_professional)
         {
             professionalData.DeleteProfessional(id_professional);
