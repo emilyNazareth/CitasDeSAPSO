@@ -392,6 +392,7 @@ namespace CitasSAPSO.Data
                 connection.Close();
             }
 
+
             return catalogueItems;
         }
 
