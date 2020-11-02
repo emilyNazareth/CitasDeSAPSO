@@ -102,8 +102,12 @@ namespace CitasSAPSO.Controllers
         {
             CatalogueModels catalogueProcess = new CatalogueModels();
             catalogueProcess.Table = "proceso";
-            CatalogueBusiness catalogueBusiness = new CatalogueBusiness();
-            ViewBag.process = catalogueBusiness.GetListCatalogue(catalogueProcess);
+            CatalogueBusiness appointmentBusiness = new CatalogueBusiness();
+            UserBusiness userBusiness = new UserBusiness();
+
+            ViewBag.professional = userBusiness.GetListProfessionals();
+            ViewBag.subprocess = appointmentBusiness.GetCatalogueFunctionary("subproceso");
+            ViewBag.process = appointmentBusiness.GetListCatalogue(catalogueProcess);
             return View();
         }
 
