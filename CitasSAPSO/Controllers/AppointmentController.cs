@@ -53,14 +53,15 @@ namespace CitasSAPSO.Controllers
             CatalogueModels catalogueProcess = new CatalogueModels();
             catalogueProcess.Table = "proceso";
 
-            CatalogueBusiness catalogueBusiness = new CatalogueBusiness();
             UserBusiness userBusiness = new UserBusiness();
-
             ViewBag.professional = userBusiness.GetListProfessionals();
+
+            CatalogueBusiness catalogueBusiness = new CatalogueBusiness();
             ViewBag.subprocess = catalogueBusiness.GetCatalogueFunctionary("subproceso");
             ViewBag.process = catalogueBusiness.GetListCatalogue(catalogueProcess);
             return View("ScheduleDatesHome");
         }
+
 
         public ActionResult MainFunctionaryModifyHome()
         {
@@ -79,9 +80,15 @@ namespace CitasSAPSO.Controllers
         {
             CatalogueModels catalogueProcess = new CatalogueModels();
             catalogueProcess.Table = "proceso";
+
             UserBusiness functionaryBusiness = new UserBusiness();
             functionaryBusiness.ModifyFunctionary(functionary);
+
+            UserBusiness userBusiness = new UserBusiness();
+            ViewBag.professional = userBusiness.GetListProfessionals();
+
             CatalogueBusiness catalogueBusiness = new CatalogueBusiness();
+            ViewBag.subprocess = catalogueBusiness.GetCatalogueFunctionary("subproceso");
             ViewBag.process = catalogueBusiness.GetListCatalogue(catalogueProcess);
             return View("ScheduleDatesHome");
         }
