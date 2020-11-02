@@ -68,10 +68,10 @@
         </tr>
         <tr>
             <th scope="row">3</th>
-            <td>Marta</td>
-            <td>Solis</td>
-            <td>Obando</td>
-            <td>105251006</td>
+            <td>Gustavo</td>
+            <td>Loaiza</td>
+            <td>Quiros</td>
+            <td>302560310</td>
             <td>Analibe</td>
             <td>Clinico</td>
             <td>Act2</td>
@@ -116,19 +116,12 @@
 
 
 <script>
-   /* function modifyFunctionary() {
-       // alert("El btn funciona : ");
-        localStorage.setItem('code', 9630);
-        alert(value);
-        //location.href = "/Home/MainFunctionaryModifyHome?Cedula=" + 9630;
-
-    }*/
 
     $("#tableID tr").click(function () {
         $(this).addClass('selected').siblings().removeClass('selected');
         var value = $(this).find('td:nth-child(4)');
         var cedula = value.next().text();
-        //alert("descripcion: " + cedula);
+        //alert(cedula);
         location.href = "/Appointment/MainFunctionaryModifyHome?Cedula=" + cedula;
     });
 </script>

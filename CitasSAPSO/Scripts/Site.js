@@ -82,7 +82,6 @@ function modifyProfessionalUrl(identification) {
 }
 
 function modifyInformationProfessional() {
-
     var cedula = document.getElementById("Cedula").value;
     var name = document.getElementById("name").value;
     var firstLastName = document.getElementById("firstLastName").value;
@@ -96,13 +95,13 @@ function modifyInformationProfessional() {
     var stateValue;
 
     if (document.getElementById('active').checked) {
-        stateValue = '0';
+        stateValue = 0;
     } else {
-        stateValue = '1';
+        stateValue = 1;
     }
     
-    var EmergencyContact = document.getElementById("EmergencyContact").value;
-    var contactNumber = document.getElementById("contactNumber").value;
+    var EmergencyContact = document.getElementById("EmergencyContact").value;    
+    var contactNumber = document.getElementById("EmergencyContactNumber").value;
     var scholarship = document.getElementById("scholarship").value;
     var specialty = document.getElementById("specialty").value;
     var schoolCode = document.getElementById("schoolCode").value;
@@ -110,7 +109,7 @@ function modifyInformationProfessional() {
     var canton = document.getElementById("canton").value;
     var district = document.getElementById("district").value;
     var address = document.getElementById("address").value;
-
+    
     var process = [];
     $.each($("#process option:selected"), function () {
         process.push($(this).val());
@@ -174,9 +173,9 @@ function registerProfessional() {
     var stateValue;
 
     if (document.getElementById('active').checked) {
-        stateValue = '0';
+        stateValue = 0;
     } else {
-        stateValue = '1';
+        stateValue = 1;
     }
 
   
@@ -185,7 +184,7 @@ function registerProfessional() {
         process.push($(this).val());
     });
     var EmergencyContact = document.getElementById("EmergencyContact").value;
-    var contactNumber = document.getElementById("contactNumber").value;
+    var contactNumber = document.getElementById("EmergencyContactNumber").value;
     var scholarship = document.getElementById("scholarship").value;
     var specialty = document.getElementById("specialty").value;
     var schoolCode = document.getElementById("schoolCode").value;
@@ -209,7 +208,7 @@ function registerProfessional() {
         "Status": stateValue,
         "process": process,
         "EmergencyContact": EmergencyContact, 
-        "contactNumber": contactNumber,
+        "EmergencyContactNumber": contactNumber,
         "scholarship": scholarship,
         "specialty": specialty,
         "schoolCode": schoolCode,
@@ -223,7 +222,7 @@ function registerProfessional() {
     $.ajax(
         {
             data: parameters,
-            url: '/User/MainProfessionalRegisterAdministrator?login="me"&password="1234"',
+            url: '/User/MainProfessionalRegisterAdministrator',
             type: 'post',
             beforeSend: function () {
                 $("#resultado").html("Procesando, espere por favor ...");                

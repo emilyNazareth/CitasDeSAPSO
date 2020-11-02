@@ -48,8 +48,8 @@ namespace CitasSAPSO.Controllers
         {
             CatalogueModels catalogueProcess = new CatalogueModels();
             catalogueProcess.Table = "proceso";
-            CatalogueBusiness adminBusiness = new CatalogueBusiness();
-            ViewBag.process = adminBusiness.GetListCatalogue(catalogueProcess);
+            CatalogueBusiness catalogueBusiness = new CatalogueBusiness();
+            ViewBag.process = catalogueBusiness.GetListCatalogue(catalogueProcess);
             return View("MainProfessionalRegisterAdministrator");
         }
         public ActionResult MainProfessionalUpdateAdministrator()
@@ -62,7 +62,7 @@ namespace CitasSAPSO.Controllers
             ViewBag.process = catalogueBusiness.GetListCatalogue(catalogueProcess);
             UserBusiness userBusiness = new UserBusiness();
             ViewBag.professional = userBusiness.GetProfessionalByIdentification(id_professional);
-            ViewBag.processProfessional = userBusiness.GetListProcessProfessional(id_professional);
+            ViewBag.processProfessional = catalogueBusiness.GetListProcessProfessional(id_professional);
             return View("MainProfessionalUpdateAdministrator");
         }
 

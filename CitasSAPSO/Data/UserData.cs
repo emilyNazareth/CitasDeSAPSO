@@ -16,8 +16,8 @@ namespace CitasSAPSO.Data
         public UserData()
         {
             connection = new SqlConnection(ConfigurationManager.ConnectionStrings["connDB"].ConnectionString);
-        }        
-     
+        }
+
 
         public List<UserModels> GetFunctionary(int _cedula)
         {
@@ -60,10 +60,10 @@ namespace CitasSAPSO.Data
                     resultFunctionary.AdmissionDate = responseReader["tf_fecha_ingreso"].ToString();
                     resultFunctionary.Assistance = Int32.Parse(responseReader["tc_asistencia"].ToString());
 
-                } 
+                }
                 connection.Close();
             }
-          
+
             functionary.Add(resultFunctionary);
             return functionary;
         }
@@ -71,7 +71,7 @@ namespace CitasSAPSO.Data
 
 
         public void SaveFunctionary(UserModels _functionary)
-        {           
+        {
 
             string sqlQuery = $"exec sp_registrar_funcionario " + _functionary.Cedula + ",'" + _functionary.Name + "','" + _functionary.FirstLastName
                 + "','" + _functionary.SecondLastName + "','" + _functionary.PersonalPhone + "','" + _functionary.RoomPhone + "','" + _functionary.Birthday
@@ -145,7 +145,7 @@ namespace CitasSAPSO.Data
             int processQuantity = _professional.Process.Length;
             string sqlQuery = $"exec sp_registrar_usuario_professional " + _professional.Cedula + ",'" + _professional.Name + "','" + _professional.FirstLastName + "','" +
                 _professional.SecondLastName + "','" + _professional.PersonalPhone + "','" + _professional.RoomPhone + "','" + _professional.Birthday + "','" +
-                _professional.Gender + "','" + _professional.CivilStatus + "'," + _professional.PlaceNumber + ",'" + _professional.Status + "','" +
+                _professional.Gender + "','" + _professional.CivilStatus + "'," + _professional.PlaceNumber + "," + _professional.Status + ",'" +
                  _professional.EmergencyContact + "'," + _professional.EmergencyContactNumber + ",'" + _professional.Scholarship + "','" +
                _professional.Specialty + "'," + _professional.SchoolCode + ",'" + _professional.Province + "','" + _professional.Canton + "','" + _professional.District + "','" +
                 _professional.Address + "'";
@@ -233,7 +233,7 @@ namespace CitasSAPSO.Data
                     professionalTemp.Gender = Char.Parse(catalogueReader["tc_sexo"].ToString());
                     professionalTemp.CivilStatus = catalogueReader["tc_sexo"].ToString();
                     professionalTemp.PlaceNumber = Int32.Parse(catalogueReader["tn_numero_plaza"].ToString());
-                    professionalTemp.Status = catalogueReader["tc_estado"].ToString();
+                    professionalTemp.Status = Int32.Parse(catalogueReader["tc_estado"].ToString());
                     professionalTemp.EmergencyContact = catalogueReader["tc_contacto_emergencia"].ToString();
                     professionalTemp.EmergencyContactNumber = Int32.Parse(catalogueReader["tn_contacto_emergencia"].ToString());
                     professionalTemp.Scholarship = catalogueReader["tc_escolaridad"].ToString();
@@ -283,9 +283,9 @@ namespace CitasSAPSO.Data
                         professionalTemp.Gender = Char.Parse(catalogueReader["tc_sexo"].ToString());
                         professionalTemp.CivilStatus = catalogueReader["tc_estado_civil"].ToString();
                         professionalTemp.PlaceNumber = Int32.Parse(catalogueReader["tn_numero_plaza"].ToString());
-                        professionalTemp.Status = catalogueReader["tn_estado"].ToString();
-                        professionalTemp.EmergencyContact = catalogueReader["tn_contacto_emergencia"].ToString();
-                        professionalTemp.EmergencyContactNumber = Int32.Parse(catalogueReader["tn_numero_contacto"].ToString());
+                        professionalTemp.Status = Int32.Parse(catalogueReader["tn_estado"].ToString());
+                        professionalTemp.EmergencyContact = catalogueReader["tc_contacto_emergencia"].ToString();
+                        professionalTemp.EmergencyContactNumber = Int32.Parse(catalogueReader["tn_contacto_emergencia"].ToString());
                         professionalTemp.Scholarship = catalogueReader["tc_escolaridad"].ToString();
                         professionalTemp.Specialty = catalogueReader["tc_especialidad"].ToString();
                         professionalTemp.SchoolCode = catalogueReader["tn_codigo_colegio"].ToString();
@@ -313,7 +313,7 @@ namespace CitasSAPSO.Data
 
             string sqlQuery = $"exec sp_modificar_profesional " + _professional.Cedula + ",'" + _professional.Name + "','" + _professional.FirstLastName + "','" +
                 _professional.SecondLastName + "','" + _professional.PersonalPhone + "','" + _professional.RoomPhone + "','" + _professional.Birthday + "','" +
-                _professional.Gender + "','" + _professional.CivilStatus + "'," + _professional.PlaceNumber + ",'" + _professional.Status + "','" +
+                _professional.Gender + "','" + _professional.CivilStatus + "'," + _professional.PlaceNumber + "," + _professional.Status + ",'" +
                  _professional.EmergencyContact + "'," + _professional.EmergencyContactNumber + ",'" + _professional.Scholarship + "','" +
                _professional.Specialty + "'," + _professional.SchoolCode + ",'" + _professional.Province + "','" + _professional.Canton + "','" + _professional.District + "','" +
                 _professional.Address + "'";
@@ -367,30 +367,7 @@ namespace CitasSAPSO.Data
             }
         }
 
-        /*
-         Get a list of professional process
-        */
 
-        public List<CatalogueModels> GetListProcessProfessional(int id_professional)
-        {
-            var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["connDB"].ConnectionString);
-            List<CatalogueModels> catalogueItems = new List<CatalogueModels>();
-
-            string sqlQuery = $"exec sp_obtener_procesos_profesional @cedula='{id_professional}'";
-            using (SqlCommand command = new SqlCommand(sqlQuery, connection))
-            {
-                command.CommandType = CommandType.Text;
-                connection.Open();
-                SqlDataReader catalogueReader = command.ExecuteReader();
-                while (catalogueReader.Read())
-                {
-                    CatalogueModels catalogueTemp = new CatalogueModels();
-                    catalogueTemp.ID = Int32.Parse(catalogueReader["pk_id_proceso"].ToString());
-                    catalogueTemp.Name = catalogueReader["tc_nombre_proceso"].ToString();
-                    catalogueItems.Add(catalogueTemp);
-                }
-                connection.Close();
-            }
 
             return catalogueItems;
         }
@@ -436,6 +413,7 @@ namespace CitasSAPSO.Data
         }
 
         
+
 
     }
 }
