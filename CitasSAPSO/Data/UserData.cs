@@ -84,7 +84,6 @@ namespace CitasSAPSO.Data
                 command.CommandType = CommandType.Text;
                 connection.Open();
                 SqlDataReader responseReader = command.ExecuteReader();
-
                 connection.Close();
             }
         }

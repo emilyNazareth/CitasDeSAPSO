@@ -44,6 +44,12 @@ namespace CitasSAPSO.Models
         public int Assistance { get; set; }
         public string PortationExpirationDay { get; set; }
         public string AdmissionDate { get; set; }
-        public RoleModels role { get; set; }
+        public RoleModels Role { get; set; }
+
+        public UserModels()
+        {
+            Role = new RoleModels();
+        }
     }
+
 }
