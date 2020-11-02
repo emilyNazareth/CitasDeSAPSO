@@ -55,7 +55,6 @@ namespace CitasSAPSO.Controllers
         public ActionResult MainProfessionalUpdateAdministrator()
         {
             int id_professional = Convert.ToInt32(Request.Params["login"]);
-            Console.WriteLine(Request.Params["login"]);
             CatalogueModels catalogueProcess = new CatalogueModels();
             catalogueProcess.Table = "proceso";
             CatalogueBusiness catalogueBusiness = new CatalogueBusiness();
@@ -117,14 +116,26 @@ namespace CitasSAPSO.Controllers
             return View("DashboardProfessional");
         }
 
-        public ActionResult ConsultDateFunctionary()
+        public ActionResult ConsultAppointmentFunctionary()
         {
-            return View("ConsultDateFunctionary");
+            return View("ConsultAppointmentFunctionary");
         }
 
         public ActionResult DateDetailFunctionary()
         {
             return View("DateDetailFunctionary");
+        }
+        [HttpPost]
+        public ActionResult SearchAppointmentFunctionary(int _FunctionaryId, int _IdAppointment)
+        {
+            AppointmentModels appointment = new AppointmentModels();
+            appointment.Id = _IdAppointment;
+            appointment.Functionary.Cedula = _FunctionaryId;
+
+            AppointmentBusiness appointmentBusiness = new AppointmentBusiness();
+            ViewBag.appointments = appointmentBusiness.SearchAppointmentsForFunctionary(appointment);
+
+            return View("ConsultAppointmentFunctionary");
         }
 
         public ActionResult ValidationLogin(int identification, String password)

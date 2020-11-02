@@ -33,7 +33,32 @@ function loadFunctionaryRegister() {
 }
 
 function loadScheduleDates() {
-    loadProcesses()
+    $(document).ready(function () {
+        
+        hideProcess();
+        $('#process').on("change", function () {
+            hideProcess();
+            var processId = document.getElementById("process").value;
+            switch (processId) {
+                case '4':
+                    $("#procesoClinico").show();
+                    break;
+                case '5':
+                    $("#incidente").show();
+                    break;
+                case '6':
+                    $("#armas").show();
+                case '7':
+                    $("#charlas").show();
+                    break;
+                case '8':
+                    $("#capituloV").show();
+                    break;
+            }
+
+
+        });
+    });
 }
 
 function loadProfessionalDashboardInfo() {
@@ -236,38 +261,33 @@ function registerProfessional() {
 
 }
 
-function saveAppointment() {
-    var FunctionaryId = document.getElementById("FunctionaryId").value;
-    var Date = document.getElementById("Date").value;
-    var Hour = document.getElementById("Hour").value;
-    var ProfessionalId = document.getElementById("ProfessionalId").value;
-    var Patient = document.getElementById("Patient").value;
-    var State = document.getElementById("State").value;
-    var SubprocessId = document.getElementById("SubprocessId").value;
-   // var Assistance = document.getElementById("Assistance").value;
-  //  var SubActivityId = document.getElementById("SubActivityId").value;
-
-    var parameters =
-    {
-        "FunctionaryId" : FunctionaryId,
-        "Date": Date,
-        "Hour": Hour,
-        "ProfessionalId": ProfessionalId,
-        "Patient": Patient,
-        "State": State,
-        "SubprocessId": SubprocessId,
-        "Assistance": 1,
-        "SubActivityId": 1
-    };
-    $.ajax(
-        {
-            data: parameters,
-            url: '/Appointment/SaveAppointment',
-            type: 'post',
-            success: function (response) {
-                location.href = "/Appointment/DateConfirmationHome";
-            }
-
-        }
-    );
+function hideProcess() {
+    $("#armas").hide();
+    $("#incidente").hide();
+    $("#charlas").hide();
+    $("#capituloV").hide();
+    $("#procesoClinico").hide();
 }
+
+function loadProcessInfo() {
+    var processId = document.getElementById("process").value;
+    hideProcess();
+    switch (processId) {
+        case 4:
+            var pc = document.getElementById("procesoClinico");
+            pc.style.display = "block";
+            break;
+        case 5:
+            $("#incidente").show();
+            break;
+        case 6:
+            $("#armas").show();
+        case 7:
+            $("#charlas").show();
+            break;
+        case 8:
+            $("#capituloV").show();
+            break;
+    }
+}
+
