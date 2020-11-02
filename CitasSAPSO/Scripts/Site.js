@@ -82,8 +82,6 @@ function modifyProfessionalUrl(identification) {
 }
 
 function modifyInformationProfessional() {
-    alert('Hii');
-
     var cedula = document.getElementById("Cedula").value;
     var name = document.getElementById("name").value;
     var firstLastName = document.getElementById("firstLastName").value;
@@ -102,7 +100,7 @@ function modifyInformationProfessional() {
         stateValue = 1;
     }
     
-    var EmergencyContact = document.getElementById("EmergencyContact").value;
+    var EmergencyContact = document.getElementById("EmergencyContact").value;    
     var contactNumber = document.getElementById("EmergencyContactNumber").value;
     var scholarship = document.getElementById("scholarship").value;
     var specialty = document.getElementById("specialty").value;
@@ -111,7 +109,7 @@ function modifyInformationProfessional() {
     var canton = document.getElementById("canton").value;
     var district = document.getElementById("district").value;
     var address = document.getElementById("address").value;
-
+    
     var process = [];
     $.each($("#process option:selected"), function () {
         process.push($(this).val());
