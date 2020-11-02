@@ -62,5 +62,17 @@ namespace CitasSAPSO.Business
         {
             professionalData.DeleteProfessional(id_professional);
         }
+
+        public String UserValidation(UserModels user)
+        {
+            UserData userData = new UserData();
+            return userData.UserValidation(user);
+        }
+
+        public String GetRol(UserModels user)
+        {
+            UserData userData = new UserData();
+            return userData.GetRol(user);
+        }
     }
 }

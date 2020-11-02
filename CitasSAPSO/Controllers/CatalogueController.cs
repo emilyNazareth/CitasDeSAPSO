@@ -2,6 +2,7 @@
 using CitasSAPSO.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -332,7 +333,7 @@ namespace CitasSAPSO.Controllers
             return View("ManageSubActivityAdministrator");
         }
         public ActionResult ManagePlaceAdministrator()
-        {
+        {            
             CatalogueModels cataloguePlace = new CatalogueModels();
             cataloguePlace.Table = "puesto";
             CatalogueBusiness catalogueBusiness = new CatalogueBusiness();

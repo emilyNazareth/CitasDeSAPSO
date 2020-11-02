@@ -26,22 +26,7 @@ namespace CitasSAPSO.Controllers
             return View();
         }
 
-        public ActionResult ValidationLogin(int identification, String password)
-        {
-            Session["Identification"] = identification.ToString();
-            Session["Password"] = password;
-            Debug.WriteLine((string)(Session["Identification"]));
-            Debug.WriteLine((string)(Session["Password"]));
-            if ((Session["Identification"]).Equals("304440444"))
-            {
-                return Json("Professional");
-            }
-            else if ((Session["Identification"]).Equals("304850984"))
-            {
-                return Json("Administrator");
-            }
-            return Json("Datos erroneos");
-        }
+       
 
 
         public ActionResult MainFunctionaryRegisterAdministrator()
