@@ -1,4 +1,6 @@
-﻿using System.Web;
+﻿using System.Diagnostics.Eventing.Reader;
+using System.Web;
+using System.Web.ModelBinding;
 using System.Web.Mvc;
 
 namespace CitasSAPSO
@@ -7,7 +9,7 @@ namespace CitasSAPSO
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
-            filters.Add(new HandleErrorAttribute());
+            filters.Add(new HandleErrorAttribute());           
         }
     }
 }

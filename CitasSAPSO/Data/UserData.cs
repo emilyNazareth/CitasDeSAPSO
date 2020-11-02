@@ -394,5 +394,48 @@ namespace CitasSAPSO.Data
 
             return catalogueItems;
         }
+
+        public String UserValidation(UserModels user)
+        {
+            string value = "0";
+            var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["connDB"].ConnectionString);           
+            string sqlQuery = $"exec sp_verify_user @cedula_usuario_ = {user.Cedula}, @contraseña_ = '{user.Password}'";
+            using (SqlCommand command = new SqlCommand(sqlQuery, connection))
+            {
+                command.CommandType = CommandType.Text;
+                connection.Open();
+                SqlDataReader userReader = command.ExecuteReader();
+                while (userReader.Read())
+                {
+                    value = userReader["value"].ToString();
+                }
+                connection.Close();
+            }
+
+            return value;
+        }
+
+        public String GetRol(UserModels user)
+        {
+            string rol = null;
+            var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["connDB"].ConnectionString);
+            string sqlQuery = $"exec sp_obtener_rol @cedula_usuario_ = {user.Cedula}";
+            using (SqlCommand command = new SqlCommand(sqlQuery, connection))
+            {
+                command.CommandType = CommandType.Text;
+                connection.Open();
+                SqlDataReader userReader = command.ExecuteReader();
+                while (userReader.Read())
+                {
+                    rol = userReader["rol"].ToString();
+                }
+                connection.Close();
+            }
+
+            return rol;
+        }
+
+        
+
     }
 }

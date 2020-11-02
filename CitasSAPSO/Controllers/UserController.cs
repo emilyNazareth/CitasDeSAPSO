@@ -2,6 +2,7 @@
 using CitasSAPSO.Models;
 using Newtonsoft.Json;
 using System;
+using System.Configuration;
 using System.Diagnostics;
 using System.Linq;
 using System.Web;
@@ -12,9 +13,7 @@ namespace CitasSAPSO.Controllers
     public class UserController : Controller
     {
         public ActionResult DashboardAdministrator()
-        {
-            Debug.WriteLine("ADMIN CONTROLLER" + (string)(Session["Identification"]));
-            Debug.WriteLine((string)(Session["Password"]));
+        {      
             return View("DashboardAdministrator");
         }
 
@@ -126,6 +125,38 @@ namespace CitasSAPSO.Controllers
         public ActionResult DateDetailFunctionary()
         {
             return View("DateDetailFunctionary");
+        }
+
+        public ActionResult ValidationLogin(int identification, String password)
+        {
+            String value;          
+            UserModels user = new UserModels();
+            user.Cedula = identification;
+            user.Password = password;                       
+            UserBusiness userBusiness = new UserBusiness();
+            value = userBusiness.UserValidation(user);
+            if (value.Equals("1"))
+            {
+                Session["Identification"] = user.Cedula.ToString();
+                Debug.WriteLine("IDENTIFICATION: " + (string)(Session["Identification"]));
+                if (GetRol(user).Equals("Profesional"))
+                {
+                    return Json("Professional");
+                }
+                else 
+                {                    
+                    return Json("Administrator");
+                }
+            }                
+            return Json("Datos erroneos");
+        }
+
+        public string GetRol(UserModels user)
+        {
+            String rol;     
+            UserBusiness userBusiness = new UserBusiness();
+            rol = userBusiness.GetRol(user);                      
+            return rol;
         }
 
     }
