@@ -127,6 +127,60 @@ namespace CitasSAPSO.Data
                 connection.Close();
             }
         }
+        public List<CatalogueModels> GetCatalogueFunctionary(string _catalogue)
+        {
+            List<CatalogueModels> catalogues = new List<CatalogueModels>();
 
+
+            string sqlQuery = $"exec sp_obtener_"+_catalogue;
+            using (SqlCommand command = new SqlCommand(sqlQuery, connection))
+            {
+                command.CommandType = CommandType.Text;
+                connection.Open();
+                SqlDataReader responseReader = command.ExecuteReader();
+                while (responseReader.Read())
+                {
+                    CatalogueModels resultCatalogue = new CatalogueModels();
+                    resultCatalogue.ID = Int32.Parse(responseReader["pk_id_"+_catalogue].ToString());
+                    resultCatalogue.Name = responseReader["tc_nombre_"+_catalogue].ToString();
+                    catalogues.Add(resultCatalogue);
+                } 
+                connection.Close();
+            }
+
+
+            return catalogues;
+        }
+
+        /*
+        Get a list of professional process
+        */
+
+        public List<CatalogueModels> GetListProcessProfessional(int id_professional)
+        {
+            var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["connDB"].ConnectionString);
+            List<CatalogueModels> catalogueItems = new List<CatalogueModels>();
+
+            string sqlQuery = $"exec sp_obtener_procesos_profesional @cedula='{id_professional}'";
+            using (SqlCommand command = new SqlCommand(sqlQuery, connection))
+            {
+                command.CommandType = CommandType.Text;
+                connection.Open();
+                SqlDataReader catalogueReader = command.ExecuteReader();
+                while (catalogueReader.Read())
+                {
+                    CatalogueModels catalogueTemp = new CatalogueModels();
+                    catalogueTemp.ID = Int32.Parse(catalogueReader["pk_id_proceso"].ToString());
+                    catalogueTemp.Name = catalogueReader["tc_nombre_proceso"].ToString();
+                    catalogueItems.Add(catalogueTemp);
+                }
+                connection.Close();
+            }
+
+            return catalogueItems;
+        }
     }
+
 }
+
+
