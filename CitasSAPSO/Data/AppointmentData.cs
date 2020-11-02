@@ -10,9 +10,10 @@ namespace CitasSAPSO.Data
 {
     public class AppointmentData
     {
-
+        private SqlConnection connection;
         public AppointmentData()
         {
+            connection = new SqlConnection(ConfigurationManager.ConnectionStrings["connDB"].ConnectionString);
         }
 
         //search appointment by id for view specific details
@@ -22,9 +23,8 @@ namespace CitasSAPSO.Data
             AppointmentModels appointment = new AppointmentModels();
             string sqlQuery = $"exec sp_buscar_cita_por_id ('" + _idAppointment + "')";
 
-            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["connDB"].ConnectionString))
+            using (SqlCommand command = new SqlCommand(sqlQuery, connection))
             {
-                SqlCommand command = new SqlCommand();
                 command.CommandType = CommandType.Text;
                 command.CommandText = sqlQuery;
                 connection.Open();
@@ -41,7 +41,7 @@ namespace CitasSAPSO.Data
                     appointment.SubprocessId = responseReader["fk_id_subproceso"].ToString();
                     appointment.SubActivityId = responseReader["fk_id_subactividad"].ToString();
                     appointment.Assistance = responseReader["fk_id_asistencia"].ToString();
-                } // while
+                } 
                 connection.Close();
             }
 
@@ -57,9 +57,8 @@ namespace CitasSAPSO.Data
             string sqlQuery = $"exec sp_buscar_cita_por_filtro ('" + _initDate + "','" + _endDate + "','" + _idProcess + "','" + _assistence
                 + "','" + _office + "','" + _userCedula + "','" + _gender + "','" + _state + "','" + _idAppointment + "','" + _yearsOld + "')";
 
-            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["connDB"].ConnectionString))
+            using (SqlCommand command = new SqlCommand(sqlQuery, connection))
             {
-                SqlCommand command = new SqlCommand();
                 command.CommandType = CommandType.Text;
                 command.CommandText = sqlQuery;
                 connection.Open();
@@ -89,9 +88,8 @@ namespace CitasSAPSO.Data
             List<AppointmentModels> appointments = new List<AppointmentModels>();
             string sqlQuery = $"exec sp_obtener_citas()";
 
-            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["connDB"].ConnectionString))
+            using (SqlCommand command = new SqlCommand(sqlQuery, connection))
             {
-                SqlCommand command = new SqlCommand();
                 command.CommandType = CommandType.Text;
                 command.CommandText = sqlQuery;
                 connection.Open();
@@ -122,7 +120,6 @@ namespace CitasSAPSO.Data
         //add new appointment
         public void SaveAppointment(AppointmentModels _appointment)
         {
-            var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["connDB"].ConnectionString);
             string sqlQuery = $"exec sp_registrar_cita " + _appointment.FunctionaryId + ",'" + _appointment.Date + "','"
                 + _appointment.Hour + "'," + _appointment.ProfessionalId + ",'" + _appointment.Patient + "','"
                 + _appointment.State + "'," + _appointment.SubprocessId + "," + _appointment.Assistance + ","
@@ -140,13 +137,12 @@ namespace CitasSAPSO.Data
         public void UpdateAppointment(AppointmentModels _appointment)
         {
             string sqlQuery = $"exec sp_guardar_cita_ (" + _appointment.FunctionaryId + ",'" + _appointment.Date + "','"
-                +_appointment.Hour + "'," + _appointment.ProfessionalId + ",'" + _appointment.Patient + "','"
+                + _appointment.Hour + "'," + _appointment.ProfessionalId + ",'" + _appointment.Patient + "','"
                 + _appointment.State + "'," + _appointment.SubprocessId + "," + _appointment.Assistance + "',"
                 + _appointment.SubActivityId + ")";
 
-            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["connDB"].ConnectionString))
+            using (SqlCommand command = new SqlCommand(sqlQuery, connection))
             {
-                SqlCommand command = new SqlCommand();
                 command.CommandType = CommandType.Text;
                 command.CommandText = sqlQuery;
                 connection.Open();
@@ -154,6 +150,38 @@ namespace CitasSAPSO.Data
                 connection.Close();
             }
 
+        }
+
+        public List<AppointmentModels> SearchAppointmentsForFunctionary( AppointmentModels _appointment)
+        {
+
+            string sqlQuery = $"exec sp_buscar_cita_para_funcionario "  +_appointment.Functionary.Cedula + ","+_appointment.Id+" ;";
+            List<AppointmentModels> appointments = new List<AppointmentModels>();
+
+            using (SqlCommand command = new SqlCommand(sqlQuery, connection))
+            {
+                command.CommandType = CommandType.Text;
+                command.CommandText = sqlQuery;
+                connection.Open();
+                SqlDataReader responseReader = command.ExecuteReader();
+                
+                while (responseReader.Read())
+                {
+                    AppointmentModels appointment = new AppointmentModels();
+                    appointment.Id = Int32.Parse(responseReader["pk_id_cita"].ToString());
+                    appointment.Functionary.Cedula = Int32.Parse(responseReader["fk_id_funcionario"].ToString());
+                    appointment.Functionary.Cedula = Int32.Parse(responseReader[""].ToString());
+                    appointment.Date = responseReader["tf_fecha"].ToString();
+                    appointment.Hour = responseReader["tc_hora"].ToString();
+                    appointment.Professional.Cedula = Int32.Parse(responseReader["fk_id_profesional"].ToString());                    
+                    appointment.Professional.Cedula = Int32.Parse(responseReader["nombre_profesional"].ToString());                    
+                    appointments.Add(appointment);
+                } 
+
+                connection.Close();
+            }
+
+            return appointments;
         }
 
     }

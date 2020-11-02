@@ -349,7 +349,7 @@
     <Content Include="Views\Appointment\MainFunctionaryModifyHome.cshtml" />
     <Content Include="Views\User\DashboardProfessional.cshtml" />
     <Content Include="Views\User\DateDetailProfessional.cshtml" />
-    <Content Include="Views\User\ConsultDateFunctionary.cshtml" />
+    <Content Include="Views\User\ConsultAppointmentFunctionary.cshtml" />
     <Content Include="Views\User\ConsultTableFunctionary.cshtml" />
     <Content Include="Views\User\DateDetailFunctionary.cshtml" />
     <Content Include="Views\Appointment\About.cshtml" />
