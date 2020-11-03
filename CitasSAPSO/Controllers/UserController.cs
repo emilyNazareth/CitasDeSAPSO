@@ -74,7 +74,7 @@ namespace CitasSAPSO.Controllers
         [HttpPost]
         public ActionResult MainProfessionalRegisterAdministrator(UserModels professional)
         {
-            UserBusiness professionalBusiness = new UserBusiness();
+            UserBusiness professionalBusiness = new UserBusiness();            
             professionalBusiness.RegisterProfessional(professional);
             CatalogueModels catalogueProcess = new CatalogueModels();
             catalogueProcess.Table = "proceso";

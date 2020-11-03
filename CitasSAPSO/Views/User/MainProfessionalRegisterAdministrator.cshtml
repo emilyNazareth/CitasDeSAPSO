@@ -2,14 +2,21 @@
 @{
     ViewData["Title"] = "MainProfessionalRegister";
 }
-<form asp-controller="Administrator" asp-action="MainProfessionalRegisterAdministrator" method="post">
+<form class="needs-validation" novalidate  asp-controller="Administrator" asp-action="MainProfessionalRegisterAdministrator" method="post">
     <div class="row align-items-start">
         <div class="col">
             <p class="text-success">Datos Personales del Profesional</p>
             <div class="row professional-register">
                 <label class="col-sm-6 control-label small" for="Cedula">Numero de identificacion:</label>
-                <input class="col-sm-4 form-control form-control-sm" type="text" id="Cedula" name="Cedula">
-
+                <input  class="col-sm-4 form-control form-control-sm" type="text" id="Cedula" name="Cedula" required>
+            </div>
+            <div class="row professional-register">
+                <label class="col-sm-6 control-label small" for="Password">Contraseña:</label>
+                <input class="col-sm-4 form-control form-control-sm" type="password" id="Password" name="Password" required>
+            </div>
+            <div class="row professional-register">
+                <label class="col-sm-6 control-label small" for="ConfirmPassword">Confirmar contraseña:</label>
+                <input class="col-sm-4 form-control form-control-sm" type="password" id="ConfirmPassword" name="ConfirmPassword" required>
             </div>
             <div class="row professional-register">
                 <label class="col-sm-6 control-label small" for="name">Nombre:</label>

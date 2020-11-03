@@ -185,6 +185,8 @@ function modifyInformationProfessional() {
 
 function registerProfessional() {    
     var cedula = document.getElementById("Cedula").value;
+    var password = document.getElementById("Password").value;
+    var confirmPassword = document.getElementById("ConfirmPassword").value;
     var name = document.getElementById("name").value;
     var firstLastName = document.getElementById("firstLastName").value;
     var secondLastName = document.getElementById("secondLastName").value;
@@ -221,6 +223,8 @@ function registerProfessional() {
     var parameters =
     {
         "cedula": cedula,
+        "password": password,
+        "confirmPassword": confirmPassword,
         "name": name,
         "firstLastName": firstLastName,
         "secondLastName": secondLastName,
@@ -242,22 +246,29 @@ function registerProfessional() {
         "district": district,
         "address": address
 
+      
 
     };
-    $.ajax(
-        {
-            data: parameters,
-            url: '/User/MainProfessionalRegisterAdministrator',
-            type: 'post',
-            beforeSend: function () {
-                $("#resultado").html("Procesando, espere por favor ...");                
-            },
-            success: function (response) {
-                $("#resultado").html("Registrado con éxito");
+    if (password != confirmPassword) {
+        $("#resultado").html("Contraseñas incorrectas");
+    } else {       
+        $.ajax(
+                {
+                    data: parameters,
+                    url: '/User/MainProfessionalRegisterAdministrator',
+                    type: 'post',
+                    beforeSend: function () {
+                        $("#resultado").html("Procesando, espere por favor ...");                
+                    },
+                    success: function (response) {
+                        $("#resultado").html("Registrado con éxito");
                 
-            }
-        }
-    );
+                    }
+                }
+            );
+    }
+
+    
 
 }
 
