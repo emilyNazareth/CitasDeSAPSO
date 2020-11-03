@@ -35,6 +35,24 @@ namespace CitasSAPSO.Controllers
             ViewBag.offices = appointmentBusiness.GetCatalogueFunctionary("oficina");
             return View("MainFunctionaryRegisterAdministrator");
         }
+
+        [HttpPost]
+        public ActionResult MainFunctionaryRegisterAdministrator(UserModels functionary)
+        {
+            UserBusiness functionaryBusiness = new UserBusiness();
+            functionaryBusiness.RegisterFunctionary(functionary);
+
+            CatalogueModels catalogueProcess = new CatalogueModels();
+            catalogueProcess.Table = "proceso";
+
+            UserBusiness userBusiness = new UserBusiness();
+            ViewBag.professional = userBusiness.GetListProfessionals();
+
+            CatalogueBusiness catalogueBusiness = new CatalogueBusiness();
+            ViewBag.subprocess = catalogueBusiness.GetCatalogueFunctionary("subproceso");
+            ViewBag.process = catalogueBusiness.GetListCatalogue(catalogueProcess);
+            return View("ScheduleDatesHome");
+        }
         public ActionResult MainFunctionaryRegisterHome()
         {
             CatalogueBusiness appointmentBusiness = new CatalogueBusiness();

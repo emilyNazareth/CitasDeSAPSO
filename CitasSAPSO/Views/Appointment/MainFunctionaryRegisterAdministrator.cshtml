@@ -4,7 +4,7 @@
     ViewData["Title"] = "MainFunctionaryRegisterAdministrator";
 }
 
-<form asp-controller="Appointment" asp-action="MainFunctionaryRegisterHome" method="post">
+<form asp-controller="Appointment" asp-action="MainFunctionaryRegisterAdministrator" method="post">
     <div class="row align-items-start">
         <div class="col">
             <p class="text-success">Datos Personales</p>
@@ -175,16 +175,17 @@
             <div class="row justify-content-end">
                 <!--Contorlar con Sessión-->
                 <!----
-                <a class="btn btn-success btn-sm" asp-controller="Home" asp-action="Index">Atrás</a>
-                <a class="btn btn-success btn-sm" asp-controller="Administrator" asp-action="AdministratorDashboard">Atrás(Admin)</a>
+    <a class="btn btn-success btn-sm" asp-controller="Home" asp-action="Index">Atrás</a>
+    <a class="btn btn-success btn-sm" asp-controller="Administrator" asp-action="AdministratorDashboard">Atrás(Admin)</a>
 
-                <a class="btn btn-success btn-sm" style="margin-left: 5px;" asp-controller="Home" asp-action="ScheduleDates">Siguiente</!-->
+    <a class="btn btn-success btn-sm" style="margin-left: 5px;" asp-controller="Home" asp-action="ScheduleDates">Siguiente</!-->
 
+                @Html.ActionLink("Atrás", "DashboardAdministrator", "User", null, new { @class = "btn btn-success btn-sm" })
                 <input class="btn btn-success btn-sm" type="submit" id="siguiente" name="siguiente" value="Siguiente" style="margin-left: 5px;" />
 
 
-                @Html.ActionLink("Atrás", "Index", "Home", null, new { @class = "btn btn-success btn-sm" })
-                @Html.ActionLink("Atrás(Admin)", "DashboardAdministrator", "Administrator", null, new { @class = "btn btn-success btn-sm" })
+
+
 
                 @*Html.ActionLink("Siguiente", "ScheduleDatesHome", "Home", null, new { @class = "btn btn-success btn-sm" })*@
 
