@@ -172,12 +172,15 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Business\AppointmentBusiness.cs" />
     <Compile Include="Business\CatalogueBusiness.cs" />
+    <Compile Include="Business\SecurityBusiness.cs" />
     <Compile Include="Business\UserBusiness.cs" />
     <Compile Include="Controllers\AppointmentController.cs" />
     <Compile Include="Controllers\CatalogueController.cs" />
+    <Compile Include="Controllers\SecurityController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Data\AppointmentData.cs" />
     <Compile Include="Data\CatalogueData.cs" />
+    <Compile Include="Data\SecurityData.cs" />
     <Compile Include="Data\UserData.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -354,6 +357,8 @@
     <Content Include="Views\User\DateDetailFunctionary.cshtml" />
     <Content Include="Views\Appointment\About.cshtml" />
     <Content Include="Views\Appointment\MainFunctionaryRegisterAdministrator.cshtml" />
+    <Content Include="Views\Security\Security.cshtml" />
+    <Content Include="Views\Security\ManageRoles.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

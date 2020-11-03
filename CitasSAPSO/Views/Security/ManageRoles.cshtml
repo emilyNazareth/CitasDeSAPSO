@@ -1,0 +1,149 @@
+﻿
+@{
+    ViewBag.Title = "ManageRoles";
+}
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<center>
+    <form id="login-form" method="post">
+        <h3 class="text-center text-info">Administración de Roles</h3>
+        <div class="form-group">
+            <input type="text" name="id" id="id" class="form-control" placeholder="ID" readonly>
+        </div>
+        <div class="form-group">
+            <input type="text" name="roleName" id="roleName" class="form-control" placeholder="Nombre">
+        </div>
+
+        <div class="row justify-content-end">
+            <div>
+                <a class="btn btn-success" id="updatePlace" name="updatePlace" onclick="updateRole($('#id').val(),
+                             $('#roleName').val())"> Modificar</a>
+            </div>
+            <div>
+                <a class="btn btn-success" id="registerPlace" name="registerPlace" style="margin-right: 1px;"
+                   onclick="registerRole($('#roleName').val())">Nuevo</a>
+            </div>
+            <div>
+                <a class="btn btn-success" id="deletePlace" name="deletePlace" style="margin-right: 1px;" 
+                   onclick="deleteRole($('#id').val())">Eliminar</a>
+            </div>
+            <div>
+                <a class="btn btn-success" id="cleanPlace" name="cleanPlace" onclick="cleanProcess()">Limpiar</a>
+            </div>
+        </div>
+        <span id="messageSpanId"></span>
+        <br />
+        <br />
+
+        <h5 class="text-center text-info">Lista de roles existentes</h5>
+        <br />
+
+        <table id="tableID" class="table table-sm">
+            <thead>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nombre</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (CitasSAPSO.Models.RoleModels role in ViewBag.roles)
+                {
+                    <tr>
+                        <th> <a href="#" class="stretched-link " style="position: relative;">Seleccionar</a> </th>
+                        <td>@role.IdRole</td>
+                        <td>@role.Name</td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </form>
+
+</center>
+
+<div class="col-sm-3">
+    @Html.ActionLink("Atrás", "DashboardAdministrator", "User", null, new { @class = "btn btn-success" })
+</div>
+
+<script>
+    //limpia el formulario
+    function cleanProcess() {
+        document.getElementById("login-form").reset();
+        $("#messageSpanId").html("");
+    }
+
+    //obtener valores de los campos seleccionados de la tabla
+    $("#tableID tr").click(function () {
+        $(this).addClass('selected').siblings().removeClass('selected');
+        var id = $(this).find('td:first').html();
+        var value = $(this).find('td:nth-child(2)');
+        var description = value.next().text();
+        $("#id").val(id);
+        $("#roleName").val(description);
+    });
+
+    //metodos para llamados a modificar, agregar y borrar con ajax
+    function updateRole(id, roleName) {
+        var parameters = { "id": id, "roleName": roleName };
+        $.ajax(
+            {
+                data: parameters,
+                url: '/Security/ModifyRole',
+                type: 'post',
+                beforeSend: function () {
+                    $("#messageSpanId").html("Procesando, espere por favor ...");
+                },
+                success: function (response) {
+                    if (response == "Exitoso") {
+                        location.href = "/Security/ManageRoles";
+                    } else {
+                        $("#messageSpanId").html("No se pudo agregar");
+                    }
+                }
+            }
+        );
+    }
+    function registerRole(roleName) {
+        var parameters = { "roleName": roleName };
+        $.ajax(
+            {
+                data: parameters,
+                url: '/Security/RegisterRole',
+                type: 'post',
+                beforeSend: function () {
+                    $("#messageSpanId").html("Procesando, espere por favor ...");
+                },
+                success: function (response) {
+                    if (response == "Exitoso") {
+                        location.href = "/Security/ManageRoles";
+                    } else {
+                        $("#messageSpanId").html("No se pudo agregar");
+                    }
+                }
+            }
+        );
+    }
+
+    function deleteRole(id) {
+        var parameters = { "id": id };
+        $.ajax(
+            {
+                data: parameters,
+                url: '/Security/DeleteRole',
+                type: 'post',
+                beforeSend: function () {
+                    $("#messageSpanId").html("Procesando, espere por favor ...");
+                },
+                success: function (response) {
+                    if (response == "Exitoso") {
+                        location.href = "/Security/ManageRoles";
+                    } else {
+                        $("#messageSpanId").html("No se pudo agregar");
+                    }
+                }
+            }
+        );
+    }
+</script>

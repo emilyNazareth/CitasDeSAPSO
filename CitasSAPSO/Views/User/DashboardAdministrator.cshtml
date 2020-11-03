@@ -41,9 +41,20 @@
                     Administrar Cita
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    @Html.ActionLink("Asignar cita", "MainFunctionaryRegisterAdministrator", "Appointment", null, new { @class = "dropdown-item" }) 
+                    @Html.ActionLink("Asignar cita", "MainFunctionaryRegisterAdministrator", "Appointment", null, new { @class = "dropdown-item" })
                     @Html.ActionLink("Buscar cita", "ConsultDateAdministrator", "User", null, new { @class = "dropdown-item" })
-             
+
+
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Seguridad
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    @Html.ActionLink("Asignar Roles", "Security", "Security", null, new { @class = "dropdown-item" })
+                    @Html.ActionLink("Administrar Roles", "ManageRoles", "Security", null, new { @class = "dropdown-item" })
+
 
                 </div>
             </li>

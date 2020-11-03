@@ -1,0 +1,138 @@
+﻿@{
+    ViewData["Title"] = "Security";
+}
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<center>
+    <form id="login-form" method="post">
+        <h3 class="text-center text-info">Administrar Seguridad</h3>
+        <div class="form-group">
+            <input type="text" name="id" id="id" class="form-control" placeholder="Cédula" readonly>
+        </div>
+        <div class="form-group">
+            <input type="text" name="userName" id="userName" class="form-control" placeholder="Nombre de Usuario" readonly>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label-sm" for="role">Rol</label>
+            <select class="col-sm-4 custom-select custom-select-sm" id="role" name="role">
+                @foreach (CitasSAPSO.Models.RoleModels role in ViewBag.roles)
+                {
+                    <option value="@role.IdRole">@role.Name</option>
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <input type="password" name="password" id="password" class="form-control" placeholder="contraseña" >
+        </div>
+
+        <div class="row justify-content-end">
+            <div>
+                <a class="btn btn-success" id="registerPlace" name="registerPlace" style="margin-right: 1px;" onclick="assignRole($('#id').val(), $('#role').val(),$('#password').val() )">Asignar</a>
+            </div>
+            <div>
+                <a class="btn btn-success" id="cleanPlace" name="cleanPlace" onclick="cleanProcess()">Limpiar</a>
+            </div>
+        </div>
+        <span id="messageSpanId"></span>
+        <br />
+        <br />
+
+        <h5 class="text-center text-info">Lista de Usuarios almacenados</h5>
+        <br />
+
+        <div class="table-wrapper-scroll-y my-custom-scrollbar">
+            <table id="tableID" class="table table-bordered table-striped mb-0">
+                <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Cedula</th>
+                        <th scope="col">Usuario</th>
+                        <th scope="col">Rol</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (CitasSAPSO.Models.UserModels user in ViewBag.userRoles)
+                    {
+                        <tr>
+                            <th> <a href="#" class="stretched-link " style="position: relative;">Seleccionar</a> </th>
+                            <td>@user.Cedula</td>
+                            <td>@user.Name</td>
+                            <td>@user.Role.Name</td>
+                            <td style="display:none;">@user.Role.IdRole</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+
+
+    </form>
+
+    </center>
+
+    <div class="col-sm-3">
+        @Html.ActionLink("Atrás", "DashboardAdministrator", "User", null, new { @class = "btn btn-success" })
+    </div>
+
+    <script>
+        //limpia el formulario
+        function cleanProcess() {
+            document.getElementById("login-form").reset();
+            $("#messageSpanId").html("");
+        }
+
+        $(document).ready(function () {
+            $('#role').on("change", function () {
+                var roleId = document.getElementById("role").value;
+                switch (roleId) {
+                    case '1':
+                        $("#password").show();
+                        break;
+                    case '2':
+                        $("#password").show();
+                        break;
+                    case '3':
+                        $("#password").hide();
+                }
+
+            });
+        });
+
+        //obtener valores de los campos seleccionados de la tabla
+        $("#tableID tr").click(function () {
+            $(this).addClass('selected').siblings().removeClass('selected');
+            var id = $(this).find('td:first').html();
+            var value = $(this).find('td:nth-child(2)');
+            var description = value.next().text();
+            var roleValue = $(this).find('td:nth-child(4)');
+            var role = roleValue.next().text();
+            $("#id").val(id);
+            $("#userName").val(description);
+            $("#role").val(role);
+
+        });
+
+  
+        function assignRole(id, role, password) {
+            var parameters = { "id": id, "role": role, "password": password};
+            $.ajax(
+                {
+                    data: parameters,
+                    url: '/Security/AssignUserRole',
+                    type: 'post',
+                    beforeSend: function () {
+                        $("#messageSpanId").html("Procesando, espere por favor ...");
+                    },
+                    success: function (response) {
+                        if (response == "Exitoso") {
+                            location.href = "/Security/Security";
+                        } else {
+                            $("#messageSpanId").html("No se pudo agregar");
+                        }
+                    }
+                }
+            );
+        }
+
+    </script>
