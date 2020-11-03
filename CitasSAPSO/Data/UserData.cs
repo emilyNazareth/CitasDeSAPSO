@@ -147,7 +147,7 @@ namespace CitasSAPSO.Data
                 _professional.Gender + "','" + _professional.CivilStatus + "'," + _professional.PlaceNumber + "," + _professional.Status + ",'" +
                  _professional.EmergencyContact + "'," + _professional.EmergencyContactNumber + ",'" + _professional.Scholarship + "','" +
                _professional.Specialty + "'," + _professional.SchoolCode + ",'" + _professional.Province + "','" + _professional.Canton + "','" + _professional.District + "','" +
-                _professional.Address + "'";
+                _professional.Address + "'," + _professional.Password;
 
             using (SqlCommand command = new SqlCommand(sqlQuery, connection))
             {

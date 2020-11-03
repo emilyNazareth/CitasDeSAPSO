@@ -11,6 +11,7 @@ namespace CitasSAPSO.Models
         public int Cedula { get; set; }
         public string Name { get; set; }
         public string Password { get; set; }
+        public string ConfirmPassword { get; set; }
         public string FirstLastName { get; set; }
         public string SecondLastName { get; set; }
         public string PersonalPhone { get; set; }
