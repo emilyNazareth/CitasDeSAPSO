@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebGrease.Css.Ast.Selectors;
 
 namespace CitasSAPSO.Controllers
 {
@@ -111,6 +112,12 @@ namespace CitasSAPSO.Controllers
             AppointmentBusiness functionaryBusiness = new AppointmentBusiness();
             functionaryBusiness.RegisterAppointment(_appointment);
             return Json("ok");
+        }
+        public ActionResult DeleteAppointment(AppointmentModels appointment)
+        {
+            AppointmentBusiness appointmentBusiness = new AppointmentBusiness();
+            appointmentBusiness.DeleteAppointment(appointment);
+            return Json("Exitoso");
         }
     }
 }

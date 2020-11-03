@@ -22,5 +22,10 @@ namespace CitasSAPSO.Business
             AppointmentData appointmentData = new AppointmentData();
             return appointmentData.SearchAppointmentsForFunctionary(_appointment);
         }
+        public void DeleteAppointment(AppointmentModels appointment)
+        {
+            AppointmentData appointmentData = new AppointmentData();
+            appointmentData.DeleteAppointment(appointment);
+        }
     }
 }
