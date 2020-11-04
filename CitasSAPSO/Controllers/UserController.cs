@@ -67,6 +67,15 @@ namespace CitasSAPSO.Controllers
 
         public ActionResult ConsultDateAdministrator()
         {
+            CatalogueModels catalogueProcess = new CatalogueModels();
+            catalogueProcess.Table = "proceso";
+            CatalogueBusiness catalogueBusiness = new CatalogueBusiness();
+            ViewBag.process = catalogueBusiness.GetListCatalogue(catalogueProcess);
+            ViewBag.offices = catalogueBusiness.GetCatalogueFunctionary("oficina");
+            UserBusiness userBusiness = new UserBusiness();
+            ViewBag.professional = userBusiness.GetListProfessionals();
+            AppointmentBusiness appointmentBusiness = new AppointmentBusiness();
+            ViewBag.appointments = appointmentBusiness.GetAppointmentsByFilter();
             return View("ConsultDateAdministrator");
         }
 
