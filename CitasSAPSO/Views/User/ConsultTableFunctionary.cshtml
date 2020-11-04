@@ -20,7 +20,7 @@
             <th scope="col">Cancelar</th>
         </tr>
     </thead>
-    <tbody>
+    <tbody id="tbody">
         @foreach (CitasSAPSO.Models.AppointmentModels appointment in ViewBag.appointments)
         {
         <tr>
@@ -35,7 +35,7 @@
             <td>@appointment.Date</td>
             <td>@appointment.Hour</td>
             <td><a class=" btn btn-success btn-sm" onclick="modifyProffesional()">Ver</a></td>
-            <td><a class=" btn btn-success btn-sm" onclick="modifyProffesional()">Modificar</a></td>
+            <td><a class=" btn btn-success btn-sm" onclick="modifyFunctionary()">Modificar</a></td>
             <td>
                 <button onclick="deleteProffesional()" type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#cancelModal">
                     Cancelar
@@ -72,61 +72,16 @@
 
 
 <script>
-    function searchAppointment() {
-       
-        var initialDate = $('#initialDate').val();
-        var finalDate = $('#finalDate').val();
-        var process = $('#process').val();
-        var assistance = $('#assistance').val();
-        var office = $('#office').val();
-        var identification = $('#identification').val();
-        var professional = $('#professional').val();
-        var gender = $('#gender').val();
-        var dateStatus = $('#dateStatus').val();
-        var consecutive = $('#consecutive').val();
-        var age = $('#age').val();
 
-        
-        var parameters = {
-            "initialDate": initialDate, "finalDate": finalDate, "process": process,
-            "assistance": assistance, "office": office, "identification": identification,
-            "professional": professional, "gender": gender, "dateStatus": dateStatus,
-            "consecutive": consecutive, "age": age
-        };
-        $.ajax(
-            {
-                data: parameters,
-                url: '/Appointment/SearchAppointmentByFiltersAdministrator',
-                type: 'post',
-                beforeSend: function () {
-                    //$("#messageSpanId").html("Procesando, espere por favor ...");
-                },
-                success: function (response) {
-                    var data = JSON.parse(response);
-                    var text = "";
-                    for (i in data) {
-                        text += "<tr>";
-                        text += '<td>' + data[i].ProfessionalId + '</td>';
-                        text += '<td>' + data[i].Cedula + '</td>';
-                        text += '<td>' + data[i].Name + '</td>';
-                        text += '<td>' + data[i].FirstLastName + '</td>';
-                        text += '<td><a class=" btn btn-success btn-sm" onclick="modifyProffesional()">Modificar</a></td>';
-                        text += '<button onclick="deleteProffesional()" type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#cancelModal">';
-                        text += "</tr>";
-                    }
-                    $("#tbody").html(text);
-
-
-                }
-            }
-        );
+    function modifyFunctionary() {
+        $("#tableID tr").click(function () {
+            $(this).addClass('selected').siblings().removeClass('selected');
+            var value = $(this).find('td:nth-child(4)');
+            var cedula = value.next().text();
+            //alert(cedula);
+            location.href = "/Appointment/MainFunctionaryModifyHome?Cedula=" + cedula;
+        });
     }
 
-    $("#tableID tr").click(function () {
-        $(this).addClass('selected').siblings().removeClass('selected');
-        var value = $(this).find('td:nth-child(4)');
-        var cedula = value.next().text();
-        //alert(cedula);
-        location.href = "/Appointment/MainFunctionaryModifyHome?Cedula=" + cedula;
-    });
+   
 </script>

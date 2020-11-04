@@ -23,10 +23,10 @@ namespace CitasSAPSO.Business
             return appointmentData.SearchAppointmentsForFunctionary(_appointment);
         }
         public List<AppointmentModels> SearchAppointmentByFiltersAdministrator(AppointmentModels appointment, String initialDate, 
-            String finalDate, int process, String dateStatus, int age)
+            String finalDate, int process, String dateStatus, int age, int professional)
         {
             AppointmentData appointmentData = new AppointmentData();
-            return appointmentData.SearchAppointmentByFiltersAdministrator(appointment, initialDate, finalDate, process, dateStatus, age);
+            return appointmentData.SearchAppointmentByFiltersAdministrator(appointment, initialDate, finalDate, process, dateStatus, age, professional);
         }
 
         public List<AppointmentModels> GetAppointmentsByFilter()

@@ -1,5 +1,6 @@
 ﻿using CitasSAPSO.Business;
 using CitasSAPSO.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -120,9 +121,10 @@ namespace CitasSAPSO.Controllers
             functionaryBusiness.RegisterAppointment(_appointment);
             return Json("ok");
         }
+
         [HttpPost]
-        public ActionResult SearchAppointmentByFiltersAdministrator(String initialDate, String finalDate, int process, int assistance,
-            int office, int identification, char gender, String dateStatus, int consecutive, int age)
+        public String ConsultDateAdministrator(String initialDate, String finalDate, int process, int assistance,
+            int office, int identification, char gender, String dateStatus, int consecutive, int age, int professional)
         {
             UserModels user = new UserModels();
             user.Cedula = identification;
@@ -133,8 +135,9 @@ namespace CitasSAPSO.Controllers
             appointment.Functionary = user;
             appointment.Id = consecutive;
             AppointmentBusiness appointmentBusiness = new AppointmentBusiness();
-            appointmentBusiness.SearchAppointmentByFiltersAdministrator(appointment, initialDate, finalDate, process, dateStatus, age);
-            return Json("ok");
+            //appointmentBusiness.SearchAppointmentByFiltersAdministrator(appointment, initialDate, finalDate, process, dateStatus, age, age);
+            return JsonConvert.SerializeObject(appointmentBusiness.SearchAppointmentByFiltersAdministrator(appointment, initialDate, finalDate, process, dateStatus, age, professional));
+            
         }
         
     }
