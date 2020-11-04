@@ -113,6 +113,14 @@ namespace CitasSAPSO.Controllers
 
         public ActionResult ProfessionalLogin()
         {
+            CatalogueModels catalogueProcess = new CatalogueModels();
+            catalogueProcess.Table = "proceso";
+            CatalogueBusiness catalogueBusiness = new CatalogueBusiness();
+            ViewBag.process = catalogueBusiness.GetListCatalogue(catalogueProcess);
+            catalogueProcess.Table = "oficina";           
+            ViewBag.office = catalogueBusiness.GetListCatalogue(catalogueProcess);
+            catalogueProcess.Table = "asistencia";
+            ViewBag.assistance = catalogueBusiness.GetListCatalogue(catalogueProcess);
             return View("DashboardProfessional");
         }
 
