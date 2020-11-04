@@ -251,9 +251,9 @@ namespace CitasSAPSO.Data
                     appointment.Functionary.SecondLastName = responseReader["tc_segundo_apellido"].ToString();
                     appointment.Date = responseReader["tf_fecha"].ToString();
                     appointment.Hour = responseReader["tc_hora"].ToString();
-                    appointment.Professional.Cedula = Int32.Parse(responseReader["fk_id_profesional"].ToString());
-                    appointment.SubProcess.Name = responseReader["tc_nombre_proceso"].ToString();
-                    appointment.SubActivity.Name = responseReader["tc_nombre_actividad"].ToString();
+                    //appointment.Professional.Cedula = Int32.Parse(responseReader["fk_id_profesional"].ToString());
+                   // appointment.SubProcess.Name = responseReader["tc_nombre_proceso"].ToString();
+                    //appointment.SubActivity.Name = responseReader["tc_nombre_actividad"].ToString();
                     appointment.Functionary.Gender = Char.Parse(responseReader["tc_sexo"].ToString());
                     appointment.Functionary.NamePlace = responseReader["tc_nombre_puesto"].ToString();
                     appointment.Functionary.NameArea = responseReader["tc_nombre_area"].ToString();

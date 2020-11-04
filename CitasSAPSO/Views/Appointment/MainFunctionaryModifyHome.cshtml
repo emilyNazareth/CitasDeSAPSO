@@ -117,17 +117,24 @@
                 <div class="row functionary-register">
                     <label class="col-sm-4 control-label small" for="assistance">Asistencia</label>
                     <select class="col-sm-5 custom-select custom-select-sm" id="assistance" name="assistance">
-                        @if (@data.Assistance == 1)
+                        @if (@data.Assistance == 4)
                         {
-                            <option value="1" selected>Asiste</option>
-                            <option value="0">No Asiste</option>
+                            <option value="4" selected>Pendiente</option>
                         }
-                        else
+                        else if (@data.Assistance == 5)
                         {
-                            <option value="1">Asiste</option>
-                            <option value="0" selected>No Asiste</option>
+                            <option value="5" selected>En Proceso</option>
+                        }
+                        else if (@data.Assistance == 6)
+                        {
+                            <option value="6" selected> Cancelada</option>
                         }
 
+                        @foreach (CitasSAPSO.Models.CatalogueModels assistance in ViewBag.assistance)
+                        {
+                            <option value="@assistance.ID">@assistance.Name</option>
+
+                        }
 
                     </select>
                 </div>
@@ -206,8 +213,8 @@
 
 
 
-                    @Html.ActionLink("Atrás", "Index", "Home", null, new { @class = "btn btn-success btn-sm" })
-                    @Html.ActionLink("Atrás(Admin)", "DashboardAdministrator", "Administrator", null, new { @class = "btn btn-success btn-sm" })
+                    
+                    @Html.ActionLink("Atrás", "ConsultDateAdministrator", "User", null, new { @class = "btn btn-success btn-sm" })
                     <input class="btn btn-success btn-sm" type="submit" id="siguiente" name="siguiente" value="Siguiente" style="margin-left: 5px;" />
                     @*Html.ActionLink("Siguiente", "ScheduleDatesHome", "Home", null, new { @class = "btn btn-success btn-sm" })*@
 
