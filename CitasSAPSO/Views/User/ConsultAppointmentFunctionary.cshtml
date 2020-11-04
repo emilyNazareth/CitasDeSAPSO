@@ -28,75 +28,75 @@
     </form>
 </center>
 <br />
-<div class="row condultFunctionaryTable">
-    <table class="table table-bordered table-striped table-hover table-sm table-responsive-md">
-        <thead>
-            <tr>
-                <th scope="col">Consecutivo</th>
-                <th scope="col">Nombre</th>
-                <th scope="col">Primer Apellido</th>
-                <th scope="col">Segundo Apellido</th>
-                <th scope="col">Cédula</th>
-                <th scope="col">Psicólogo</th>
-                <th scope="col">Proceso</th>
-                <th scope="col">Actividad</th>
-                <th scope="col">Fecha</th>
-                <th scope="col">Hora Inicio</th>
-                <th scope="col">Ver Detalle</th>
+    <div class="row condultFunctionaryTable">
+        <table class="table table-bordered table-striped table-hover table-sm table-responsive-md">
+            <thead>
+                <tr>
+                    <th scope="col">Consecutivo</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Primer Apellido</th>
+                    <th scope="col">Segundo Apellido</th>
+                    <th scope="col">Cédula</th>
+                    <th scope="col">Psicólogo</th>
+                    <th scope="col">Proceso</th>
+                    <th scope="col">Actividad</th>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Hora Inicio</th>
+                    <th scope="col">Ver Detalle</th>
 
-                <th scope="col">Cancelar</th>
-            </tr>
-        </thead>
-        <tbody>
+                    <th scope="col">Cancelar</th>
+                </tr>
+            </thead>
+            <tbody>
 
-            @*@if (ViewBag.appointments != null)
+                @if (ViewBag.appointments != null)
                 {
                     foreach (CitasSAPSO.Models.AppointmentModels appointments in ViewBag.appointments)
-                    {*@
-            <tr>
-                <td>ID</td>
-                <td>Emily</td>
-                <td>Melendez</td>
-                <td>Castro</td>
-                <td>304850984</td>
-                <td>Cesar</td>
-                <td>Proceso</td>
-                <td>Actividad</td>
-                <td>Fecha</td>
-                <td>Hora Inicio</td>
-                <td>@Html.ActionLink("Ver", "ShowAppointmentDetail", "Appointment", new { FunctionaryId = 302560310, IdAppointment = 2 }, new { @class = "btn btn-success btn-sm" })</td>
-                <td><button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#cancelModal">Cancelar</button></td>
-            </tr>
-            @* }
-                }*@
-        </tbody>
-    </table>
+                    {
+                <tr>
+                    <td>@appointments.Id</td>
+                    <td>@appointments.Functionary.Name</td>
+                    <td>@appointments.Functionary.FirstLastName</td>
+                    <td>@appointments.Functionary.SecondLastName</td>
+                    <td>@appointments.Functionary.Cedula</td>
+                    <td>@appointments.Professional.Name</td>
+                    <td>@appointments.SubProcess.Name</td>
+                    <td>@appointments.SubActivity.Name</td>
+                    <td>@appointments.Date</td>
+                    <td>@appointments.Hour</td>
+                    <td>@Html.ActionLink("Ver", "ShowAppointmentDetail", "Appointment", new { FunctionaryId = @appointments.Functionary.Name, IdAppointment = @appointments.Id }, new { @class = "btn btn-success btn-sm" })</td>
+                    <td><a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#cancelModal" onclick="selectAppointment(@appointments.Id);">Cancelar</a></td>
+                </tr>
+                    }
+                }
+            </tbody>
+        </table>
 
-    <div class="modal fade" id="cancelModal" tabindex="-1" role="dialog" aria-labelledby="cancelModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="cancelModalLabel">Cancelar Cita</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="justificationInput">Justificación:</label>
-                        <textarea class="form-control" id="justificationInput" name="justificationInput" rows="3"></textarea>
+        <div class="modal fade" id="cancelModal" tabindex="-1" role="dialog" aria-labelledby="cancelModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="cancelModalLabel">Cancelar Cita</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Atrás</button>
-                    <button type="button" class="btn btn-danger">Confirmar</button>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="justificationInput">Justificación:</label>
+                            <textarea class="form-control" id="justificationInput" name="justificationInput" rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Atrás</button>
+                        <button type="button" class="btn btn-danger">Confirmar</button>
+                    </div>
                 </div>
             </div>
         </div>
+        <div class="row justify-content-end">
+            <a class="btn btn-success btn-sm" href="/Appointment/Index">Atrás</a>
+        </div>
     </div>
-    <div class="row justify-content-end">
-        <a class="btn btn-success btn-sm" href="/Appointment/Index">Atrás</a>
-    </div>
-</div>
 
 
