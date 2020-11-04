@@ -1,4 +1,4 @@
-﻿@{
+@{
     ViewData["Title"] = "ConsultDateFunctionary";
 }
 
@@ -53,15 +53,20 @@
             {
                 foreach (CitasSAPSO.Models.AppointmentModels appointments in ViewBag.appointments)
                 {
-                <tr>
-                    <td>@appointments.Id</td>
-                    <td>@appointments.Functionary.Name</td>
-                    <td>@appointments.Professional.Name</td>
-                    <td>@appointments.Date</td>
-                    <td>@appointments.Hour</td>
-                    <td><a class=" btn btn-success btn-sm" asp-controller="Functionary" asp-action="FunctionaryDateDetail">Ver</a></td>
-                    <td><button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#cancelModal">Cancelar</button></td>
-                </tr>
+            <tr>
+                <td>@appointments.Id</td>
+                <td>@appointments.Functionary.Name</td>
+                <td>@appointments.Functionary.FirstLastName</td>
+                <td>@appointments.Functionary.SecondLastName</td>
+                <td>@appointments.Functionary.Cedula</td>
+                <td>@appointments.Professional.Name</td>
+                <td>@appointments.SubProcess.Name</td>
+                <td>@appointments.SubActivity.Name</td>
+                <td>@appointments.Date</td>
+                <td>@appointments.Hour</td>
+                <td>@Html.ActionLink("Ver", "ShowAppointmentDetail", "Appointment", new { FunctionaryId = appointments.Functionary.Cedula, IdAppointment = appointments.Id}, new { @class = "btn btn-success btn-sm" })</td>
+                <td><a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#cancelModal" onclick="selectAppointment(@appointments.Id);">Cancelar</a></td>
+            </tr>
                 } 
             }
         </tbody>
@@ -79,12 +84,12 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="justificationInput">Justificación:</label>
-                        <textarea class="form-control" id="justificationInput" name="justificationInput" rows="3"></textarea>
+                        <textarea class="form-control" id="justification" name="justification" rows="3"></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Atrás</button>
-                    <button type="button" class="btn btn-danger">Confirmar</button>
+                    <button type="button" class="btn btn-danger" onclick="deleteApppointment()">Confirmar</button>
                 </div>
             </div>
         </div>
@@ -94,3 +99,28 @@
     </div>
 </div>
 
+<script>
+    var id;
+    function selectAppointment(appointmentId) {
+        id = appointmentId;        
+    }
+
+    function deleteApppointment() {
+        var justification = $('#justification').val();
+        var parameters = { "id": id, "justification": justification };
+        $.ajax(
+            {
+                data: parameters,
+                url: '/Appointment/DeleteAppointment',
+                type: 'post',
+                success: function (response) {
+                    if (response == "Exitoso") {
+                        location.href = "/User/ConsultAppointmentFunctionary";
+                    } else {
+                        $("#messageSpanId").html("No se pudo agregar");
+                    }
+                }
+            }
+        );
+    }
+</script>

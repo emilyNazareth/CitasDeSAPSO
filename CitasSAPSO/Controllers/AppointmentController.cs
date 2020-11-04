@@ -1,11 +1,14 @@
-﻿using CitasSAPSO.Business;
+using CitasSAPSO.Business;
 using CitasSAPSO.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Web;
 using System.Web.Mvc;
+using WebGrease.Css.Ast.Selectors;
 
 namespace CitasSAPSO.Controllers
 {
@@ -142,6 +145,62 @@ namespace CitasSAPSO.Controllers
             AppointmentBusiness appointmentBusiness = new AppointmentBusiness();
             appointmentBusiness.RegisterAppointment(_appointment);
             return Json("ok");
+        }
+
+        [HttpPost]
+        public String ConsultDateAdministrator(String initialDate, String finalDate, int process, int assistance,
+            int office, int identification, char gender, String dateStatus, int consecutive, int age, int professional)
+        {
+            UserModels user = new UserModels();
+            user.Cedula = identification;
+            user.Gender = gender;
+            user.OfficeID = office;
+            user.Assistance = assistance;
+            AppointmentModels appointment = new AppointmentModels();
+            appointment.Functionary = user;
+            appointment.Id = consecutive;
+            AppointmentBusiness appointmentBusiness = new AppointmentBusiness();
+            //appointmentBusiness.SearchAppointmentByFiltersAdministrator(appointment, initialDate, finalDate, process, dateStatus, age, age);
+            return JsonConvert.SerializeObject(appointmentBusiness.SearchAppointmentByFiltersAdministrator(appointment, initialDate, finalDate, process, dateStatus, age, professional));
+            
+        }
+        
+
+
+        public ActionResult ShowAppointmentDetail(int FunctionaryId, int IdAppointment)
+        {
+            AppointmentModels appointmentModels = new AppointmentModels();
+            appointmentModels.Functionary.Cedula = FunctionaryId;
+            appointmentModels.Id = IdAppointment;           
+            AppointmentBusiness appointment = new AppointmentBusiness();            
+            ViewBag.appointment = appointment.getAppointmentDetail(appointmentModels);
+            foreach (AppointmentModels assistance in ViewBag.appointment)
+            {
+                Debug.WriteLine(assistance.Id);
+                Debug.WriteLine(assistance.Functionary.Cedula);
+                Debug.WriteLine(assistance.Functionary.Name);
+                Debug.WriteLine(assistance.Functionary.FirstLastName);
+                Debug.WriteLine(assistance.Functionary.SecondLastName);
+                Debug.WriteLine(assistance.Functionary.Gender);
+                Debug.WriteLine(assistance.Functionary.NamePlace);
+                Debug.WriteLine(assistance.Functionary.NameArea);
+                Debug.WriteLine(assistance.Functionary.NameOffice);
+                Debug.WriteLine(assistance.Functionary.PersonalPhone);
+                Debug.WriteLine(assistance.Functionary.Mail);
+                Debug.WriteLine(assistance.Date);
+                Debug.WriteLine(assistance.Hour);
+                Debug.WriteLine(assistance.Professional.Name);
+            }
+
+            return View("AppointmentDetail");
+        }
+      
+
+        public ActionResult DeleteAppointment(AppointmentModels appointment)
+        {
+            AppointmentBusiness appointmentBusiness = new AppointmentBusiness();
+            appointmentBusiness.DeleteAppointment(appointment);
+            return Json("Exitoso");
         }
 
     }

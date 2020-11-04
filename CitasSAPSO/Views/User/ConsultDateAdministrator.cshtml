@@ -27,7 +27,11 @@
         <div class="form-group row scheduleDatesFilter">
             <label class="col-sm-4 col-form-label-sm" for="process">Proceso</label>
             <select class="col-sm-4 custom-select custom-select-sm" id="process" name="process">
-                <!--opciones se cargar con javaScrip-->
+                <option value = 0>Seleccione..</option>
+                @foreach (CitasSAPSO.Models.CatalogueModels process in ViewBag.process)
+                {
+                    <option value="@process.ID">@process.Name</option>
+                }
             </select>
         </div>
     </div>
@@ -35,6 +39,7 @@
         <div class="form-group row scheduleDatesFilter">
             <label class="col-sm-4 col-form-label-sm" for="assistance">Asistencia</label>
             <select class="col-sm-4 custom-select custom-select-sm" id="assistance" name="assistance">
+                <option value = 0>Seleccione..</option>
                 <option value="1">Asistencia1</option>
                 <option value="1">Asistencia2</option>
             </select>
@@ -46,8 +51,11 @@
         <div class="form-group row scheduleDatesFilter">
             <label class="col-sm-4 col-form-label-sm" for="office">Oficina</label>
             <select class="col-sm-4 custom-select custom-select-sm" id="office" name="office">
-                <option value="1">Oficina1</option>
-                <option value="1">Oficina2</option>
+                <option value=0>Seleccione..</option>
+                @foreach (CitasSAPSO.Models.CatalogueModels offices in ViewBag.offices)
+                {
+                    <option value="@offices.ID">@offices.Name</option>
+                }
             </select>
         </div>
     </div>
@@ -63,8 +71,11 @@
         <div class="form-group row scheduleDatesFilter">
             <label class="col-sm-4 col-form-label-sm" for="professional">Profesional</label>
             <select class="col-sm-4 custom-select custom-select-sm" id="professional" name="professional">
-                <option value="1">Profesional1</option>
-                <option value="1">Profesional2</option>
+                <option value=0>Seleccione..</option>
+                @foreach (CitasSAPSO.Models.UserModels professional in ViewBag.professional)
+                {
+                    <option value="@professional.Cedula">@professional.Name @professional.FirstLastName</option>
+                }
             </select>
         </div>
     </div>
@@ -72,8 +83,8 @@
         <div class="form-group row scheduleDatesFilter">
             <label class="col-sm-4 col-form-label-sm" for="gender">Sexo</label>
             <select class="col-sm-4 custom-select custom-select-sm" id="gender" name="gender">
-                <option value="1">M</option>
-                <option value="1">F</option>
+                <option value="M">M</option>
+                <option value="F">F</option>
             </select>
         </div>
     </div>
@@ -83,8 +94,9 @@
         <div class="form-group row scheduleDatesFilter">
             <label class="col-sm-4 col-form-label-sm" for="dateStatus">Estado Cita</label>
             <select class="col-sm-4 custom-select custom-select-sm" id="dateStatus" name="dateStatus">
+                <option value="0">Seleccione..</option>
                 <option value="1">Estado Cita1</option>
-                <option value="1">Estado Cita2</option>
+                <option value="2">Estado Cita2</option>
             </select>
         </div>
         <div class="form-group row scheduleDatesFilter">
@@ -97,6 +109,7 @@
             <label class="col-sm-4 col-form-label-sm" for="age">Edad</label>
             <input type="number" class="col-sm-4 form-control form-control-sm" id="age" name="age" />
         </div>
+        <a onclick="searchAppointment()" class="btn btn-success btn-sm" style="margin-left: 100px;">Buscar</a>
     </div>
 </div>
 
@@ -108,9 +121,79 @@
 </div>
 
 <script>
-    window.onload = function () {
+    /*window.onload = function () {
         loadAdministratorConsult();
+    }*/
+    function searchAppointment() {
+
+        var initialDate = $('#initialDate').val();
+        if (initialDate == "") {
+            initialDate = null;
+        }
+        var finalDate = $('#finalDate').val();
+
+        if (finalDate == "") {
+            finalDate = null;
+        }
+        var process = $('#process').val();
+        var assistance = $('#assistance').val();
+        var office = $('#office').val();
+        var identification = $('#identification').val();
+        if (identification == "")
+            identification = 0;
+        var professional = $('#professional').val();
+        var gender = $('#gender').val();
+        var dateStatus = $('#dateStatus').val();
+        var consecutive = $('#consecutive').val();
+        if (consecutive == "")
+            consecutive = 0;
+        var age = $('#age').val();
+        if (age == "")
+            age = 0;
+
+        var parameters = {
+            "initialDate": initialDate, "finalDate": finalDate, "process": process,
+            "assistance": assistance, "office": office, "identification": identification,
+            "professional": professional, "gender": gender, "dateStatus": dateStatus,
+            "consecutive": consecutive, "age": age
+        };
+        $.ajax(
+            {
+                data: parameters,
+                url: '/Appointment/ConsultDateAdministrator',
+                type: 'post',
+                beforeSend: function () {
+                    //$("#messageSpanId").html("Procesando, espere por favor ...");
+                },
+                success: function (response) {
+                    var data = JSON.parse(response);
+                    var text = "";
+                    for (i in data) {
+                        text += "<tr>";
+                        text += '<td>' + data[i].Id + '</td>';
+                        text += '<td>' + data[i].Functionary.Name + '</td>';
+                        text += '<td>' + data[i].Functionary.FirstLastName + '</td>';
+                        text += '<td>' + data[i].Functionary.SecondLastName + '</td>';
+                        text += '<td>' + data[i].Functionary.Cedula + '</td>';
+                        text += '<td>' + data[i].Professional.Cedula + '</td>';
+                        text += '<td>' + data[i].SubProcess.Name + '</td>';
+                        text += '<td>' + data[i].SubProcess.Name + '</td>';
+                        text += '<td>' + data[i].Date + '</td>';
+                        text += '<td>' + data[i].Hour + '</td>';
+                        text += '<td><a class=" btn btn-success btn-sm" onclick="modifyProffesional()">Ver</a></td>';
+                        text += '<td><a class=" btn btn-success btn-sm" onclick="modifyFunctionary()">Modificar</a></td>';
+                        text += '<td><a class=" btn btn-danger btn-sm" onclick="modifyProffesional()">Cancelar</a></td>';
+                        text += "</tr>";
+                    }
+                    $("#tbody").html(text);                  
+
+
+                }
+            }
+        );
     }
+
+
 
 </script>
 
