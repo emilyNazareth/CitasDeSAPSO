@@ -32,10 +32,11 @@ namespace CitasSAPSO.Controllers
        
         public ActionResult MainFunctionaryRegisterAdministrator()
         {
-            CatalogueBusiness appointmentBusiness = new CatalogueBusiness();
-            ViewBag.places = appointmentBusiness.GetCatalogueFunctionary("puesto");
-            ViewBag.areas = appointmentBusiness.GetCatalogueFunctionary("area");
-            ViewBag.offices = appointmentBusiness.GetCatalogueFunctionary("oficina");
+            CatalogueBusiness catalogueBusiness = new CatalogueBusiness();
+            ViewBag.places = catalogueBusiness.GetCatalogueFunctionary("puesto");
+            ViewBag.areas = catalogueBusiness.GetCatalogueFunctionary("area");
+            ViewBag.offices = catalogueBusiness.GetCatalogueFunctionary("oficina");
+            ViewBag.assistance = catalogueBusiness.GetCatalogueFunctionary("asistencia");
             return View("MainFunctionaryRegisterAdministrator");
         }
 
@@ -91,6 +92,7 @@ namespace CitasSAPSO.Controllers
             ViewBag.places = catalogueBusiness.GetCatalogueFunctionary("puesto");
             ViewBag.areas = catalogueBusiness.GetCatalogueFunctionary("area");
             ViewBag.offices = catalogueBusiness.GetCatalogueFunctionary("oficina");
+            ViewBag.assistance = catalogueBusiness.GetCatalogueFunctionary("asistencia");
             UserBusiness functionaryBusiness = new UserBusiness();
             ViewBag.data = functionaryBusiness.GetFunctionaryByCedula(Int32.Parse(cedula));
             return View("MainFunctionaryModifyHome");
@@ -159,7 +161,38 @@ namespace CitasSAPSO.Controllers
             return JsonConvert.SerializeObject(appointmentBusiness.SearchAppointmentByFiltersAdministrator(appointment, initialDate, finalDate, process, dateStatus, age, professional));
             
         }
-        
+
+
+        public ActionResult ShowAppointmentDetailPost()
+        {
+            string FunctionaryId = Request.Params["cedula"]; 
+            string IdAppointment = Request.Params["id"];
+            AppointmentModels appointmentModels = new AppointmentModels();
+            appointmentModels.Functionary.Cedula = Int32.Parse(FunctionaryId);
+            appointmentModels.Id = Int32.Parse(IdAppointment);
+            AppointmentBusiness appointment = new AppointmentBusiness();
+            ViewBag.appointment = appointment.getAppointmentDetail(appointmentModels);
+            foreach (AppointmentModels assistance in ViewBag.appointment)
+            {
+                Debug.WriteLine(assistance.Id);
+                Debug.WriteLine(assistance.Functionary.Cedula);
+                Debug.WriteLine(assistance.Functionary.Name);
+                Debug.WriteLine(assistance.Functionary.FirstLastName);
+                Debug.WriteLine(assistance.Functionary.SecondLastName);
+                Debug.WriteLine(assistance.Functionary.Gender);
+                Debug.WriteLine(assistance.Functionary.NamePlace);
+                Debug.WriteLine(assistance.Functionary.NameArea);
+                Debug.WriteLine(assistance.Functionary.NameOffice);
+                Debug.WriteLine(assistance.Functionary.PersonalPhone);
+                Debug.WriteLine(assistance.Functionary.Mail);
+                Debug.WriteLine(assistance.Date);
+                Debug.WriteLine(assistance.Hour);
+                Debug.WriteLine(assistance.Professional.Name);
+            }
+
+            return View("AppointmentDetail");
+        }
+
 
 
         public ActionResult ShowAppointmentDetail(int FunctionaryId, int IdAppointment)
