@@ -49,21 +49,26 @@
         </thead>
         <tbody>
 
-            @if (ViewBag.appointments != null)
-            {
-                foreach (CitasSAPSO.Models.AppointmentModels appointments in ViewBag.appointments)
+            @*@if (ViewBag.appointments != null)
                 {
-                <tr>
-                    <td>@appointments.Id</td>
-                    <td>@appointments.Functionary.Name</td>
-                    <td>@appointments.Professional.Name</td>
-                    <td>@appointments.Date</td>
-                    <td>@appointments.Hour</td>
-                    <td><a class=" btn btn-success btn-sm" asp-controller="Functionary" asp-action="FunctionaryDateDetail">Ver</a></td>
-                    <td><button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#cancelModal">Cancelar</button></td>
-                </tr>
-                } 
-            }
+                    foreach (CitasSAPSO.Models.AppointmentModels appointments in ViewBag.appointments)
+                    {*@
+            <tr>
+                <td>ID</td>
+                <td>Emily</td>
+                <td>Melendez</td>
+                <td>Castro</td>
+                <td>304850984</td>
+                <td>Cesar</td>
+                <td>Proceso</td>
+                <td>Actividad</td>
+                <td>Fecha</td>
+                <td>Hora Inicio</td>
+                <td>@Html.ActionLink("Ver", "ShowAppointmentDetail", "Appointment", new { FunctionaryId = 302560310, IdAppointment = 2 }, new { @class = "btn btn-success btn-sm" })</td>
+                <td><button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#cancelModal">Cancelar</button></td>
+            </tr>
+            @* }
+                }*@
         </tbody>
     </table>
 
@@ -93,4 +98,5 @@
         <a class="btn btn-success btn-sm" href="/Appointment/Index">Atrás</a>
     </div>
 </div>
+
 
