@@ -1,4 +1,4 @@
-﻿@{
+@{
     ViewData["Title"] = "ConsultDateFunctionary";
 }
 
@@ -64,7 +64,7 @@
                 <td>@appointments.SubActivity.Name</td>
                 <td>@appointments.Date</td>
                 <td>@appointments.Hour</td>
-                <td><a class=" btn btn-success btn-sm" asp-controller="Functionary" asp-action="FunctionaryDateDetail">Ver</a></td>
+                <td>@Html.ActionLink("Ver", "ShowAppointmentDetail", "Appointment", new { FunctionaryId = appointments.Functionary.Cedula, IdAppointment = appointments.Id}, new { @class = "btn btn-success btn-sm" })</td>
                 <td><a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#cancelModal" onclick="selectAppointment(@appointments.Id);">Cancelar</a></td>
             </tr>
                 } 

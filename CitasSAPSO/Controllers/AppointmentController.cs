@@ -138,11 +138,43 @@ namespace CitasSAPSO.Controllers
             functionaryBusiness.RegisterAppointment(_appointment);
             return Json("ok");
         }
+
+
+        public ActionResult ShowAppointmentDetail(int FunctionaryId, int IdAppointment)
+        {
+            AppointmentModels appointmentModels = new AppointmentModels();
+            appointmentModels.Functionary.Cedula = FunctionaryId;
+            appointmentModels.Id = IdAppointment;           
+            AppointmentBusiness appointment = new AppointmentBusiness();            
+            ViewBag.appointment = appointment.getAppointmentDetail(appointmentModels);
+            foreach (AppointmentModels assistance in ViewBag.appointment)
+            {
+                Debug.WriteLine(assistance.Id);
+                Debug.WriteLine(assistance.Functionary.Cedula);
+                Debug.WriteLine(assistance.Functionary.Name);
+                Debug.WriteLine(assistance.Functionary.FirstLastName);
+                Debug.WriteLine(assistance.Functionary.SecondLastName);
+                Debug.WriteLine(assistance.Functionary.Gender);
+                Debug.WriteLine(assistance.Functionary.NamePlace);
+                Debug.WriteLine(assistance.Functionary.NameArea);
+                Debug.WriteLine(assistance.Functionary.NameOffice);
+                Debug.WriteLine(assistance.Functionary.PersonalPhone);
+                Debug.WriteLine(assistance.Functionary.Mail);
+                Debug.WriteLine(assistance.Date);
+                Debug.WriteLine(assistance.Hour);
+                Debug.WriteLine(assistance.Professional.Name);
+            }
+
+            return View("AppointmentDetail");
+        }
+        
+
         public ActionResult DeleteAppointment(AppointmentModels appointment)
         {
             AppointmentBusiness appointmentBusiness = new AppointmentBusiness();
             appointmentBusiness.DeleteAppointment(appointment);
             return Json("Exitoso");
         }
+
     }
 }
