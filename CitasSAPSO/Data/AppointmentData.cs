@@ -168,12 +168,17 @@ namespace CitasSAPSO.Data
                 {
                     AppointmentModels appointment = new AppointmentModels();
                     appointment.Id = Int32.Parse(responseReader["pk_id_cita"].ToString());
-                    appointment.Functionary.Cedula = Int32.Parse(responseReader["fk_id_funcionario"].ToString());
-                    appointment.Functionary.Name = responseReader["nombre_profesional"].ToString();
+                    appointment.Functionary.Cedula = Int32.Parse(responseReader["pk_cedula_usuario"].ToString());
+                    appointment.Functionary.Name = responseReader["tc_nombre"].ToString();
+                    appointment.Functionary.FirstLastName = responseReader["tc_primer_apellido"].ToString();
+                    appointment.Functionary.SecondLastName = responseReader["tc_segundo_apellido"].ToString();
+                    appointment.Professional.Cedula = Int32.Parse(responseReader["fk_id_profesional"].ToString());                    
+                    appointment.Professional.Name = responseReader["nombre_profesional"].ToString();
+                    appointment.SubProcess.Name = responseReader["tc_nombre_subproceso"].ToString();
+                    appointment.SubActivity.Name = responseReader["tc_nombre_subactividad"].ToString();
                     appointment.Date = responseReader["tf_fecha"].ToString();
                     appointment.Hour = responseReader["tc_hora"].ToString();
-                    appointment.Professional.Cedula = Int32.Parse(responseReader["fk_id_profesional"].ToString());                    
-                    appointment.Professional.Name = responseReader["nombre_profesional"].ToString();                    
+
                     appointments.Add(appointment);
                 } 
 
@@ -183,5 +188,22 @@ namespace CitasSAPSO.Data
             return appointments;
         }
 
+        public void DeleteAppointment(AppointmentModels appointment)
+        {
+            string sqlQuery = $"exec sp_eliminar_cita "+appointment.Id+",'"+appointment.Justification+"';";
+
+            using (SqlCommand command = new SqlCommand(sqlQuery, connection))
+            {
+
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = connection;
+                command.CommandType = CommandType.Text;
+
+                connection.Open();
+                command.ExecuteReader();
+                connection.Close();
+            }
+        }
     }
+
 }
