@@ -1,4 +1,4 @@
-﻿using CitasSAPSO.Business;
+using CitasSAPSO.Business;
 using CitasSAPSO.Models;
 using Newtonsoft.Json;
 using System;
@@ -8,6 +8,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Web;
 using System.Web.Mvc;
+using WebGrease.Css.Ast.Selectors;
 
 namespace CitasSAPSO.Controllers
 {
@@ -36,6 +37,24 @@ namespace CitasSAPSO.Controllers
             ViewBag.areas = appointmentBusiness.GetCatalogueFunctionary("area");
             ViewBag.offices = appointmentBusiness.GetCatalogueFunctionary("oficina");
             return View("MainFunctionaryRegisterAdministrator");
+        }
+
+        [HttpPost]
+        public ActionResult MainFunctionaryRegisterAdministrator(UserModels functionary)
+        {
+            UserBusiness functionaryBusiness = new UserBusiness();
+            functionaryBusiness.RegisterFunctionary(functionary);
+
+            CatalogueModels catalogueProcess = new CatalogueModels();
+            catalogueProcess.Table = "proceso";
+
+            UserBusiness userBusiness = new UserBusiness();
+            ViewBag.professional = userBusiness.GetListProfessionals();
+
+            CatalogueBusiness catalogueBusiness = new CatalogueBusiness();
+            ViewBag.subprocess = catalogueBusiness.GetCatalogueFunctionary("subproceso");
+            ViewBag.process = catalogueBusiness.GetListCatalogue(catalogueProcess);
+            return View("ScheduleDatesHome");
         }
         public ActionResult MainFunctionaryRegisterHome()
         {
@@ -122,6 +141,7 @@ namespace CitasSAPSO.Controllers
             return Json("ok");
         }
 
+
         [HttpPost]
         public String ConsultDateAdministrator(String initialDate, String finalDate, int process, int assistance,
             int office, int identification, char gender, String dateStatus, int consecutive, int age, int professional)
@@ -140,5 +160,44 @@ namespace CitasSAPSO.Controllers
             
         }
         
+
+
+        public ActionResult ShowAppointmentDetail(int FunctionaryId, int IdAppointment)
+        {
+            AppointmentModels appointmentModels = new AppointmentModels();
+            appointmentModels.Functionary.Cedula = FunctionaryId;
+            appointmentModels.Id = IdAppointment;           
+            AppointmentBusiness appointment = new AppointmentBusiness();            
+            ViewBag.appointment = appointment.getAppointmentDetail(appointmentModels);
+            foreach (AppointmentModels assistance in ViewBag.appointment)
+            {
+                Debug.WriteLine(assistance.Id);
+                Debug.WriteLine(assistance.Functionary.Cedula);
+                Debug.WriteLine(assistance.Functionary.Name);
+                Debug.WriteLine(assistance.Functionary.FirstLastName);
+                Debug.WriteLine(assistance.Functionary.SecondLastName);
+                Debug.WriteLine(assistance.Functionary.Gender);
+                Debug.WriteLine(assistance.Functionary.NamePlace);
+                Debug.WriteLine(assistance.Functionary.NameArea);
+                Debug.WriteLine(assistance.Functionary.NameOffice);
+                Debug.WriteLine(assistance.Functionary.PersonalPhone);
+                Debug.WriteLine(assistance.Functionary.Mail);
+                Debug.WriteLine(assistance.Date);
+                Debug.WriteLine(assistance.Hour);
+                Debug.WriteLine(assistance.Professional.Name);
+            }
+
+            return View("AppointmentDetail");
+        }
+        
+
+        public ActionResult DeleteAppointment(AppointmentModels appointment)
+        {
+            AppointmentBusiness appointmentBusiness = new AppointmentBusiness();
+            appointmentBusiness.DeleteAppointment(appointment);
+            return Json("Exitoso");
+        }
+
+
     }
 }

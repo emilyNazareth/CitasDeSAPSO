@@ -61,8 +61,7 @@ function loadScheduleDates() {
     });
 }
 
-function loadProfessionalDashboardInfo() {
-    loadProcesses();
+function loadProfessionalDashboardInfo() {    
     loadDates();
 };
 
