@@ -21,72 +21,28 @@
         </tr>
     </thead>
     <tbody>
+        @foreach (CitasSAPSO.Models.AppointmentModels appointment in ViewBag.appointments)
+        {
         <tr>
-            <th scope="row">1</th>
-            <td>Luis</td>
-            <td>Hidalgo</td>
-            <td>Quiros</td>
-            <td>305240010</td>
-            <td>Ana</td>
-            <td>Armas</td>
-            <td>Act1</td>
-            <td>10/22/2020</td>
-            <td>2:30</td>
-            <td><a class=" btn btn-success btn-sm" asp-controller="Functionary" asp-action="FunctionaryDateDetail">Ver</a></td>
-            <!--Controlar con Session solo Admin
-    <td><a class=" btn btn-success btn-sm" id="modify" onclick="modifyFunctionary()">Modificar</a></td>
-        -->
-   
-    <td><a class=" btn btn-success btn-sm" id="modify"  >Modificar</a></td>
-    <!---->
+            <td>@appointment.Id</td>
+            <td>@appointment.Functionary.Name</td>
+            <td>@appointment.Functionary.FirstLastName</td>
+            <td>@appointment.Functionary.SecondLastName</td>
+            <td>@appointment.Functionary.Cedula</td>
+            <td>@appointment.Professional.Cedula</td>
+            <td>@appointment.SubProcess.Name</td>
+            <td>@appointment.SubProcess.Name</td>
+            <td>@appointment.Date</td>
+            <td>@appointment.Hour</td>
+            <td><a class=" btn btn-success btn-sm" onclick="modifyProffesional()">Ver</a></td>
+            <td><a class=" btn btn-success btn-sm" onclick="modifyProffesional()">Modificar</a></td>
             <td>
-                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#cancelModal">
+                <button onclick="deleteProffesional()" type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#cancelModal">
                     Cancelar
                 </button>
             </td>
         </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>Jose</td>
-            <td>Hidalgo</td>
-            <td>Quiros</td>
-            <td>9630</td>
-            <td>Analibe</td>
-            <td>Armas</td>
-            <td>Act3</td>
-            <td>10/1/2020</td>
-            <td>5:30</td>
-            <td><a class=" btn btn-success btn-sm" asp-controller="Functionary" asp-action="FunctionaryDateDetail">Ver</a></td>
-            <!--Controlar con Session solo Admin-->
-            <td><a class=" btn btn-success btn-sm" id="modify">Modificar</a></td>
-            <!---->
-            <td>
-                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#cancelModal">
-                    Cancelar
-                </button>
-            </td>
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-            <td>Gustavo</td>
-            <td>Loaiza</td>
-            <td>Quiros</td>
-            <td>302560310</td>
-            <td>Analibe</td>
-            <td>Clinico</td>
-            <td>Act2</td>
-            <td>9/8/2020</td>
-            <td>6:00</td>
-            <td><a class=" btn btn-success btn-sm" asp-controller="Functionary" asp-action="FunctionaryDateDetail">Ver</a></td>
-            <!--Controlar con Session solo Admin-->
-            <td><a class=" btn btn-success btn-sm" id="modify">Modificar</a></td>
-            <!---->
-            <td>
-                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#cancelModal">
-                    Cancelar
-                </button>
-            </td>
-        </tr>
+        }
 
     </tbody>
 </table>
@@ -116,6 +72,55 @@
 
 
 <script>
+    function searchAppointment() {
+       
+        var initialDate = $('#initialDate').val();
+        var finalDate = $('#finalDate').val();
+        var process = $('#process').val();
+        var assistance = $('#assistance').val();
+        var office = $('#office').val();
+        var identification = $('#identification').val();
+        var professional = $('#professional').val();
+        var gender = $('#gender').val();
+        var dateStatus = $('#dateStatus').val();
+        var consecutive = $('#consecutive').val();
+        var age = $('#age').val();
+
+        
+        var parameters = {
+            "initialDate": initialDate, "finalDate": finalDate, "process": process,
+            "assistance": assistance, "office": office, "identification": identification,
+            "professional": professional, "gender": gender, "dateStatus": dateStatus,
+            "consecutive": consecutive, "age": age
+        };
+        $.ajax(
+            {
+                data: parameters,
+                url: '/Appointment/SearchAppointmentByFiltersAdministrator',
+                type: 'post',
+                beforeSend: function () {
+                    //$("#messageSpanId").html("Procesando, espere por favor ...");
+                },
+                success: function (response) {
+                    var data = JSON.parse(response);
+                    var text = "";
+                    for (i in data) {
+                        text += "<tr>";
+                        text += '<td>' + data[i].ProfessionalId + '</td>';
+                        text += '<td>' + data[i].Cedula + '</td>';
+                        text += '<td>' + data[i].Name + '</td>';
+                        text += '<td>' + data[i].FirstLastName + '</td>';
+                        text += '<td><a class=" btn btn-success btn-sm" onclick="modifyProffesional()">Modificar</a></td>';
+                        text += '<button onclick="deleteProffesional()" type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#cancelModal">';
+                        text += "</tr>";
+                    }
+                    $("#tbody").html(text);
+
+
+                }
+            }
+        );
+    }
 
     $("#tableID tr").click(function () {
         $(this).addClass('selected').siblings().removeClass('selected');

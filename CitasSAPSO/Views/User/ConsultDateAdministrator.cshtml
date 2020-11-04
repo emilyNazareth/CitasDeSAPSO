@@ -27,7 +27,10 @@
         <div class="form-group row scheduleDatesFilter">
             <label class="col-sm-4 col-form-label-sm" for="process">Proceso</label>
             <select class="col-sm-4 custom-select custom-select-sm" id="process" name="process">
-                <!--opciones se cargar con javaScrip-->
+                @foreach (CitasSAPSO.Models.CatalogueModels process in ViewBag.process)
+                {
+                    <option value="@process.ID">@process.Name</option>
+                }
             </select>
         </div>
     </div>
@@ -46,8 +49,10 @@
         <div class="form-group row scheduleDatesFilter">
             <label class="col-sm-4 col-form-label-sm" for="office">Oficina</label>
             <select class="col-sm-4 custom-select custom-select-sm" id="office" name="office">
-                <option value="1">Oficina1</option>
-                <option value="1">Oficina2</option>
+                @foreach (CitasSAPSO.Models.CatalogueModels offices in ViewBag.offices)
+                {
+                    <option value="@offices.ID">@offices.Name</option>
+                }
             </select>
         </div>
     </div>
@@ -63,8 +68,10 @@
         <div class="form-group row scheduleDatesFilter">
             <label class="col-sm-4 col-form-label-sm" for="professional">Profesional</label>
             <select class="col-sm-4 custom-select custom-select-sm" id="professional" name="professional">
-                <option value="1">Profesional1</option>
-                <option value="1">Profesional2</option>
+                @foreach (CitasSAPSO.Models.UserModels professional in ViewBag.professional)
+                {
+                    <option value="@professional.Cedula">@professional.Name @professional.FirstLastName</option>
+                }
             </select>
         </div>
     </div>
@@ -72,8 +79,8 @@
         <div class="form-group row scheduleDatesFilter">
             <label class="col-sm-4 col-form-label-sm" for="gender">Sexo</label>
             <select class="col-sm-4 custom-select custom-select-sm" id="gender" name="gender">
-                <option value="1">M</option>
-                <option value="1">F</option>
+                <option value="M">M</option>
+                <option value="F">F</option>
             </select>
         </div>
     </div>
@@ -84,7 +91,7 @@
             <label class="col-sm-4 col-form-label-sm" for="dateStatus">Estado Cita</label>
             <select class="col-sm-4 custom-select custom-select-sm" id="dateStatus" name="dateStatus">
                 <option value="1">Estado Cita1</option>
-                <option value="1">Estado Cita2</option>
+                <option value="2">Estado Cita2</option>
             </select>
         </div>
         <div class="form-group row scheduleDatesFilter">
@@ -97,6 +104,7 @@
             <label class="col-sm-4 col-form-label-sm" for="age">Edad</label>
             <input type="number" class="col-sm-4 form-control form-control-sm" id="age" name="age" />
         </div>
+        <a onclick="searchAppointment()" class="btn btn-success btn-sm" style="margin-left: 100px;">Buscar</a>
     </div>
 </div>
 
@@ -108,9 +116,12 @@
 </div>
 
 <script>
-    window.onload = function () {
+    /*window.onload = function () {
         loadAdministratorConsult();
-    }
+    }*/
+
+
+    
 
 </script>
 

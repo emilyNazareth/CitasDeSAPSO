@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Web;
 using System.Web.Mvc;
 
@@ -119,5 +120,22 @@ namespace CitasSAPSO.Controllers
             functionaryBusiness.RegisterAppointment(_appointment);
             return Json("ok");
         }
+        [HttpPost]
+        public ActionResult SearchAppointmentByFiltersAdministrator(String initialDate, String finalDate, int process, int assistance,
+            int office, int identification, char gender, String dateStatus, int consecutive, int age)
+        {
+            UserModels user = new UserModels();
+            user.Cedula = identification;
+            user.Gender = gender;
+            user.OfficeID = office;
+            user.Assistance = assistance;
+            AppointmentModels appointment = new AppointmentModels();
+            appointment.Functionary = user;
+            appointment.Id = consecutive;
+            AppointmentBusiness appointmentBusiness = new AppointmentBusiness();
+            appointmentBusiness.SearchAppointmentByFiltersAdministrator(appointment, initialDate, finalDate, process, dateStatus, age);
+            return Json("ok");
+        }
+        
     }
 }
