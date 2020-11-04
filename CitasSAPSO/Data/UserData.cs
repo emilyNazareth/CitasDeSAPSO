@@ -395,6 +395,30 @@ namespace CitasSAPSO.Data
 
             return catalogueItems;
         }
+        public List<CatalogueModels> GetProfessionalsByProcess(int id_process)
+        {
+            var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["connDB"].ConnectionString);
+            List<CatalogueModels> catalogueItems = new List<CatalogueModels>();
+
+            string sqlQuery = $"sp_obtener_profesional_por_proceso @proceso='{id_process}'";
+            using (SqlCommand command = new SqlCommand(sqlQuery, connection))
+            {
+                command.CommandType = CommandType.Text;
+                connection.Open();
+                SqlDataReader catalogueReader = command.ExecuteReader();
+                while (catalogueReader.Read())
+                {
+                    CatalogueModels catalogueTemp = new CatalogueModels();
+                    catalogueTemp.ID = Int32.Parse(catalogueReader["pk_cedula_usuario"].ToString());
+                    catalogueTemp.Name = catalogueReader["tc_nombre"].ToString();
+                    catalogueItems.Add(catalogueTemp);
+                }
+                connection.Close();
+            }
+
+
+            return catalogueItems;
+        }
 
         public String UserValidation(UserModels user)
         {

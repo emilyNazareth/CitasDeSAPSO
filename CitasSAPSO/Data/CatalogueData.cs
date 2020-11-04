@@ -179,6 +179,30 @@ namespace CitasSAPSO.Data
 
             return catalogueItems;
         }
+
+        public List<CatalogueModels> GetSubprocessListByProcess(int processId)
+        {
+            var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["connDB"].ConnectionString);
+            List<CatalogueModels> catalogueItems = new List<CatalogueModels>();
+
+            string sqlQuery = $"exec sp_obtener_subprocesos_de_proceso @proceso={processId}";
+            using (SqlCommand command = new SqlCommand(sqlQuery, connection))
+            {
+                command.CommandType = CommandType.Text;
+                connection.Open();
+                SqlDataReader catalogueReader = command.ExecuteReader();
+                while (catalogueReader.Read())
+                {
+                    CatalogueModels catalogueTemp = new CatalogueModels();
+                    catalogueTemp.ID = Int32.Parse(catalogueReader["pk_id_subproceso"].ToString());
+                    catalogueTemp.Name = catalogueReader["tc_nombre_subproceso"].ToString();
+                    catalogueItems.Add(catalogueTemp);
+                }
+                connection.Close();
+            }
+
+            return catalogueItems;
+        }
     }
 
 }
