@@ -207,7 +207,9 @@ namespace CitasSAPSO.Controllers
         {
             AppointmentModels appointmentModels = new AppointmentModels();
             appointmentModels.Functionary.Cedula = FunctionaryId;
-            appointmentModels.Id = IdAppointment;           
+            appointmentModels.Id = IdAppointment;
+            Debug.WriteLine("ID FUNCTIONARY" + FunctionaryId);
+            Debug.WriteLine("IDAPPOINTMENT" + IdAppointment);
             AppointmentBusiness appointment = new AppointmentBusiness();            
             ViewBag.appointment = appointment.getAppointmentDetail(appointmentModels);
             foreach (AppointmentModels assistance in ViewBag.appointment)

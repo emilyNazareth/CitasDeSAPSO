@@ -87,6 +87,7 @@
     </div>
 
 </div>
+@Html.ActionLink("Cerrar Sesión", "LogOut", "User", null, new { @class = "btn btn-success" })
 
 <script type="text/javascript" src="~/Scripts/timetable.js"></script>
 
@@ -118,8 +119,7 @@
         var office = $('#office').val();
         var identification = $('#identification').val();
         if (identification == "")
-            identification = 305030090;
-        var professional = 987654;
+            identification = null;
         var gender = $('#gender').val();
         var dateStatus = $('#dateStatus').val();
         var consecutive = $('#consecutive').val();
@@ -136,7 +136,6 @@
             "assistance": assistance,
             "office": office,
             "identification": identification,
-            "professional": professional,
             "gender": gender,
             "dateStatus": dateStatus,
             "consecutive": consecutive,
@@ -166,14 +165,13 @@
 
         for (index in data) {
             var formatDateInit = new Date(data[index].Date.substr(0, 9) + ' ' + data[index].Hour);
-            var formatDateEnd = new Date(data[index].Date.substr(0, 9) + ' ' + (data[index].Hour+1));
+            var formatDateEnd = new Date(data[index].Date.substr(0, 9) + ' ' + (data[index].Hour + 1));
             var day = formatDateInit.toLocaleDateString('es-MX', { weekday: 'long' });
             var options = {
                 appointment: data[index],
-                url: '#',
+                url: "/Appointment/ShowAppointmentDetail?FunctionaryId=" +
+                    data[index].Functionary.Cedula + "&IdAppointment=" + data[index].Id,
                 onClick: function (event, timetable, clickEvent) {
-                    console.log(event);
-                    alert(event.options.appointment.Id);
                 }
             };
             timetable.addEvent(data[index].Functionary.Cedula, day, formatDateInit, formatDateEnd, options);

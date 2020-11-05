@@ -140,6 +140,7 @@ namespace CitasSAPSO.Controllers
 
         public ActionResult ProfessionalLogin()
         {
+            
             CatalogueModels catalogueProcess = new CatalogueModels();
             catalogueProcess.Table = "proceso";
             CatalogueBusiness catalogueBusiness = new CatalogueBusiness();
@@ -165,6 +166,7 @@ namespace CitasSAPSO.Controllers
             return View("DateDetailFunctionary");
         }
         [HttpPost]
+        [AllowAnonymous]
         public ActionResult SearchAppointmentFunctionary(int _FunctionaryId, int _IdAppointment)
         {
             AppointmentModels appointment = new AppointmentModels();
@@ -178,16 +180,17 @@ namespace CitasSAPSO.Controllers
         }
         [HttpPost]
         public string SearchAppointmentProfessional(string initialDate, string finalDate, int process, int assistance,
-            int office, int identification, int professional, char gender, string dateStatus, int consecutive, int age)
+            int office, int identification, char gender, string dateStatus, int consecutive, int age)
      
         {
+            
             AppointmentModels appointment = new AppointmentModels();
             appointment.Id = consecutive;
             appointment.Functionary.Cedula = identification;
             appointment.Functionary.Gender = gender;
             appointment.Functionary.OfficeID = office;
             appointment.Functionary.Assistance = assistance;
-            appointment.Professional.ProfessionalId = professional;
+            appointment.Professional.ProfessionalId = Int32.Parse((string)Session["Identification"]);
             appointment.SubProcess.ID = process;
             appointment.State = dateStatus;
 
@@ -236,6 +239,14 @@ namespace CitasSAPSO.Controllers
             Session.Abandon();
             Session.Clear();
             return RedirectToAction("Index", "Appointment");
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public string LoadFunctionary(int identification) {
+            UserBusiness UserBusiness = new UserBusiness();
+            List<UserModels> UserList = UserBusiness.GetFunctionaryByCedula(identification);
+            return JsonConvert.SerializeObject(UserList);
         }
 
     }
