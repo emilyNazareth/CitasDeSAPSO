@@ -4,6 +4,8 @@
     ViewData["Title"] = "MainFunctionaryRegisterAdministrator";
 }
 
+<link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+<script src="https://unpkg.com/boxicons@latest/dist/boxicons.js"></script>
 <form asp-controller="Appointment" asp-action="MainFunctionaryRegisterAdministrator" method="post">
     <div class="row align-items-start">
         <div class="col">
@@ -11,14 +13,18 @@
             <div class="row functionary-register">
                 <label class="col-sm-6 control-label small" for="identification">Numero de identificacion:</label>
                 <input class="col-sm-4 form-control form-control-sm" type="text" id="cedula" name="cedula">
-                @*foreach (CitasSAPSO.Models.FunctionaryModels process in ViewBag.process)
-                    {
-                        <input class="col-sm-4 form-control form-control-sm" type="text" id="cedula" name="cedula" value=@process.Cedula>
-                    }*@
+                <div class="col-sm-2">
+                    <a class="btn btn-success" id="cleanPlace" name="cleanPlace" onclick="searchFunctionary()"><i class='bx bx-search'></i></a>
+                </div>
+                @*fo
+        @*foreach (CitasSAPSO.Models.FunctionaryModels process in ViewBag.process)
+            {
+                <input class="col-sm-4 form-control form-control-sm" type="text" id="cedula" name="cedula" value=@process.Cedula>
+            }*@
             </div>
             <div class="row functionary-register">
                 <label class="col-sm-6 control-label small" for="name">Nombre:</label>
-                <input class="col-sm-4 form-control form-control-sm" type="text" id="identification" name="name">
+                <input class="col-sm-4 form-control form-control-sm" type="text" id="name" name="name">
             </div>
             <div class="row functionary-register">
                 <label class="col-sm-6 control-label small" for="firstLastName">Primer Apellido:</label>
@@ -177,10 +183,10 @@
             <div class="row justify-content-end">
                 <!--Contorlar con Sessión-->
                 <!----
-    <a class="btn btn-success btn-sm" asp-controller="Home" asp-action="Index">Atrás</a>
-    <a class="btn btn-success btn-sm" asp-controller="Administrator" asp-action="AdministratorDashboard">Atrás(Admin)</a>
+                <a class="btn btn-success btn-sm" asp-controller="Home" asp-action="Index">Atrás</a>
+                <a class="btn btn-success btn-sm" asp-controller="Administrator" asp-action="AdministratorDashboard">Atrás(Admin)</a>
 
-    <a class="btn btn-success btn-sm" style="margin-left: 5px;" asp-controller="Home" asp-action="ScheduleDates">Siguiente</!-->
+                <a class="btn btn-success btn-sm" style="margin-left: 5px;" asp-controller="Home" asp-action="ScheduleDates">Siguiente</!-->
 
                 @Html.ActionLink("Atrás", "DashboardAdministrator", "User", null, new { @class = "btn btn-success btn-sm" })
                 <input class="btn btn-success btn-sm" type="submit" id="siguiente" name="siguiente" value="Siguiente" style="margin-left: 5px;" />
@@ -203,5 +209,44 @@
 <script>
     window.onload = function () {
         loadFunctionaryRegister();
+    }
+
+    function searchFunctionary() {
+        $.ajax(
+            {
+                data: { identification: $('#cedula').val() },
+                url: '/User/LoadFunctionary',
+                type: 'post',
+                beforeSend: function () {
+                    $("#messageSpanId").html("Procesando, espere por favor ...");
+                },
+                success: function (response) {
+                    data = JSON.parse(response);
+                    console.log(data);
+                    $('#name').val(data[0].Name);
+                    $('#firstLastName').val(data[0].FirstLastName);
+                    $('#secondLastName').val(data[0].SecondLastName);
+                    $('#personalPhone').val(data[0].PersonalPhone);
+                    $('#housePhone').val(data[0].RoomPhone);
+                    $('#birthday').val(data[0].Birthday);
+                    $('#gender').val(data[0].Gender);
+                    $('#scholarship').val(data[0].Scholarship);
+                    $('#province').val(data[0].Province);
+                    $('#canton').val(data[0].Canton);
+                    $('#district').val(data[0].District);
+                    $('#civilStatus').val(data[0].CivilStatus);
+                    $('#address').val(data[0].Address);
+                    $('#assistance').val(data[0].Assistance);
+                    $('#area').val(data[0].AreaID);
+                    $('#office').val(data[0].OfficeID);
+                    $('#place').val(data[0].PlaceID);
+                    $('#admissionDate').val(data[0].AdmissionDate);
+                    $('#oficePhone').val(data[0].OficePhone);
+                    $('#mail').val(data[0].Mail);
+                    $('#idPlaca').val(data[0].IdPlaca);
+                    $('#PortationExpirationDay').val(data[0].PortationExpirationDay);
+                }
+            }
+        );
     }
 </script>
