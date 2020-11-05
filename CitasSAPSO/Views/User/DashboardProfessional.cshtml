@@ -3,6 +3,7 @@
 }
 
 
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 
 <center><h3 class="titles">Agenda Profesional</h3></center>
 <br />
@@ -18,7 +19,6 @@
                     <div class="form-group row">
                         <label class="col-sm-7 col-form-label-sm" for="process">Proceso</label>
                         <select class="col-sm-5 custom-select custom-select-sm" id="process" name="process">
-                            <option selected>Choose...</option>
                             @foreach (CitasSAPSO.Models.CatalogueModels proc in ViewBag.process)
                             {
                                 <option value="@proc.ID">@proc.Name</option>
@@ -28,7 +28,6 @@
                     <div class="form-group row">
                         <label class="col-sm-7 col-form-label-sm" for="office">Oficina</label>
                         <select class="col-sm-5 custom-select custom-select-sm" id="office" name="office">
-                            <option selected>Choose...</option>
                             @foreach (CitasSAPSO.Models.CatalogueModels _office in ViewBag.office)
                             {
                                 <option value="@_office.ID">@_office.Name</option>
@@ -36,8 +35,8 @@
                         </select>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-7 col-form-label-sm" for="appointmentStatus">Estado cita</label>
-                        <input type="text" class="col-sm-5 form-control form-control-sm" id="appointmentStatus" name="appointmentStatus" />
+                        <label class="col-sm-7 col-form-label-sm" for="dateStatus">Estado cita</label>
+                        <input type="text" class="col-sm-5 form-control form-control-sm" id="dateStatus" name="dateStatus" />
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-7 col-form-label-sm" for="consecutive">Consecutivo</label>
@@ -50,9 +49,8 @@
                         <input type="date" class="col-sm-5 form-control form-control-sm" id="finalDate" name="finalDate" />
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-7 col-form-label-sm" for="Asistence">Asistencia</label>
-                        <select class="col-sm-5 custom-select custom-select-sm" id="Asistence" name="Asistence">
-                            <option selected>Choose...</option>
+                        <label class="col-sm-7 col-form-label-sm" for="assistance">Asistencia</label>
+                        <select class="col-sm-5 custom-select custom-select-sm" id="assistance" name="assistance">
                             @foreach (CitasSAPSO.Models.CatalogueModels _assitance in ViewBag.assistance)
                             {
                                 <option value="@_assitance.ID">@_assitance.Name</option>
@@ -66,7 +64,6 @@
                     <div class="form-group row">
                         <label class="col-sm-7 col-form-label-sm" for="gender">Sexo</label>
                         <select class="col-sm-5 custom-select custom-select-sm" id="gender" name="gender">
-                            <option selected>Choose...</option>
                             <option value="M">M</option>
                             <option value="F">F</option>
                         </select>
@@ -78,15 +75,111 @@
                 </div>
             </div>
             <div>
-                <a class="btn btn-success" id="query" name="query">Consultar</a>
+                <a class="btn btn-success" id="query" onclick="searchAppointmentsProfessional()" name="query">Consultar</a>
             </div>
         </form>
 
     </div>
-    <div class="col-sm-7 weekTable">
-        @{Html.RenderPartial("~/Views/Appointment/WeekTableHome.cshtml");}
-        <div class="row justify-content-end">
-            @Html.ActionLink("Cerrar Sesión", "Index", "Appointment", null, new { @class = "btn btn-success btn-sm" })
-        </div>
-    </div>
 </div>
+<div class="row">
+    <div class="col">
+        <div class="timetable"></div>
+    </div>
+
+</div>
+
+<script type="text/javascript" src="~/Scripts/timetable.js"></script>
+
+<script>
+    var timetable = new Timetable();
+
+    timetable.setScope(7, 18);
+    //timetable.useTwelveHour();
+    timetable.addLocations(['lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado']);
+
+
+
+    var renderer = new Timetable.Renderer(timetable);
+    renderer.draw('.timetable');
+
+
+    function searchAppointmentsProfessional() {
+
+        var initialDate = $('#initialDate').val();
+        if (initialDate == "") {
+            initialDate = null;
+        }
+        var finalDate = $('#finalDate').val();
+        if (finalDate == "") {
+            finalDate = null;
+        }
+        var process = $('#process').val();
+        var assistance = $('#assistance').val();
+        var office = $('#office').val();
+        var identification = $('#identification').val();
+        if (identification == "")
+            identification = 305030090;
+        var professional = 987654;
+        var gender = $('#gender').val();
+        var dateStatus = $('#dateStatus').val();
+        var consecutive = $('#consecutive').val();
+        if (consecutive == "")
+            consecutive = 0;
+        var age = $('#age').val();
+        if (age == "")
+            age = 0;
+
+        var parameters = {
+            "initialDate": initialDate,
+            "finalDate": finalDate,
+            "process": process,
+            "assistance": assistance,
+            "office": office,
+            "identification": identification,
+            "professional": professional,
+            "gender": gender,
+            "dateStatus": dateStatus,
+            "consecutive": consecutive,
+            "age": age
+        };
+
+        var data = 'Llego antes';
+        console.log(parameters);
+        $.ajax(
+            {
+                data: parameters,
+                url: '/User/SearchAppointmentProfessional',
+                type: 'post',
+                async: false,
+                beforeSend: function () {
+                    $("#messageSpanId").html("Procesando, espere por favor ...");
+                },
+                success: function (response) {
+                    data = JSON.parse(response);
+                }
+            }
+        );
+        updateTable(data);
+    }
+
+    function updateTable(data) {
+
+        for (index in data) {
+            var formatDateInit = new Date(data[index].Date.substr(0, 9) + ' ' + data[index].Hour);
+            var formatDateEnd = new Date(data[index].Date.substr(0, 9) + ' ' + (data[index].Hour+1));
+            var day = formatDateInit.toLocaleDateString('es-MX', { weekday: 'long' });
+            var options = {
+                appointment: data[index],
+                url: '#',
+                onClick: function (event, timetable, clickEvent) {
+                    console.log(event);
+                    alert(event.options.appointment.Id);
+                }
+            };
+            timetable.addEvent(data[index].Functionary.Cedula, day, formatDateInit, formatDateEnd, options);
+        }
+
+        renderer.draw('.timetable');
+    }
+
+</script>
