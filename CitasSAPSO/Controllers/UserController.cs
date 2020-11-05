@@ -13,13 +13,12 @@ namespace CitasSAPSO.Controllers
 {
     public class UserController : Controller
     {
+
         public ActionResult DashboardAdministrator()
-        {      
-            return View("DashboardAdministrator");
+        {
+                return View("DashboardAdministrator");      
         }
-
-
-        
+ 
         public ActionResult SearchProfessionalAdministrator()
         {
             UserBusiness UserBusiness = new UserBusiness();
@@ -142,6 +141,7 @@ namespace CitasSAPSO.Controllers
             return View("DashboardProfessional");
         }
 
+        [AllowAnonymous]
         public ActionResult ConsultAppointmentFunctionary()
         {
             return View("ConsultAppointmentFunctionary");
@@ -175,6 +175,7 @@ namespace CitasSAPSO.Controllers
             if (value.Equals("1"))
             {
                 Session["Identification"] = user.Cedula.ToString();
+                //Session.Timeout = 15;
                 Debug.WriteLine("IDENTIFICATION: " + (string)(Session["Identification"]));
                 if (GetRol(user).Equals("Profesional"))
                 {
@@ -194,6 +195,13 @@ namespace CitasSAPSO.Controllers
             UserBusiness userBusiness = new UserBusiness();
             rol = userBusiness.GetRol(user);                      
             return rol;
+        }
+
+        public ActionResult LogOut()
+        {
+            Session.Abandon();
+            Session.Clear();
+            return RedirectToAction("Index", "Appointment");
         }
 
     }

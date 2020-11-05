@@ -14,6 +14,7 @@ namespace CitasSAPSO.Controllers
 {
     public class AppointmentController : Controller
     {
+        [AllowAnonymous]
         public ActionResult Index()
         {
             return View();
@@ -24,6 +25,7 @@ namespace CitasSAPSO.Controllers
             return View();
         }
 
+        [AllowAnonymous]
         public ActionResult LoginHome()
         {
             return View();
@@ -58,6 +60,8 @@ namespace CitasSAPSO.Controllers
             Session["functionary"] = functionary;
             return View("ScheduleDatesHome");
         }
+
+        [AllowAnonymous]
         public ActionResult MainFunctionaryRegisterHome()
         {
             CatalogueBusiness appointmentBusiness = new CatalogueBusiness();
