@@ -94,14 +94,12 @@
                 type: 'post',
                 success: function (response) {
                     if (response == "Exitoso") {
-                        location.href = "/Appointment/ConsultDateAdministrator";
+                        location.href = "/User/ConsultDateAdministrator";
                     } else {
-                        $("#messageSpanId").html("No se pudo agregar");
+                        //$("#messageSpanId").html("No se pudo agregar");
                     }
                 }
             }
         );
     }
-
-   
 </script>
