@@ -21,7 +21,6 @@ const DAYS = [
     "Jueves",
     "Viernes",
     "Sábado",
-
 ];
 var today = new Date();
 document.getElementById('date_info').innerHTML = DAYS[today.getDay()] + " " + today.getDate()

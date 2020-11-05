@@ -34,12 +34,15 @@ namespace CitasSAPSO.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public ActionResult LoadProfessionalByProcess(int process)
         {
             UserBusiness UserBusiness = new UserBusiness();
             return Json(UserBusiness.GetProfessionalsByProcess(process));
            // return JsonConvert.SerializeObject(UserBusiness.GetProfessionalsByProcess(process));
         }
+
+        [AllowAnonymous]
         public String SearchProfessionalByFiltersAdministrator(int cedula, String nombre, String apellido)
         {
             UserModels professional = new UserModels();
@@ -164,6 +167,7 @@ namespace CitasSAPSO.Controllers
             return View("ConsultAppointmentFunctionary");
         }
 
+        [AllowAnonymous]
         public ActionResult ValidationLogin(int identification, String password)
         {
             String value;          
@@ -176,7 +180,7 @@ namespace CitasSAPSO.Controllers
             {
                 Session["Identification"] = user.Cedula.ToString();
                 //Session.Timeout = 15;
-                Debug.WriteLine("IDENTIFICATION: " + (string)(Session["Identification"]));
+              //  Debug.WriteLine("IDENTIFICATION: " + (string)(Session["Identification"]));
                 if (GetRol(user).Equals("Profesional"))
                 {
                     return Json("Professional");

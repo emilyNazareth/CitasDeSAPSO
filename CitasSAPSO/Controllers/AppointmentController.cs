@@ -72,6 +72,7 @@ namespace CitasSAPSO.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public ActionResult MainFunctionaryRegisterHome(UserModels functionary)
         {
            // UserBusiness functionaryBusiness = new UserBusiness();
@@ -91,7 +92,7 @@ namespace CitasSAPSO.Controllers
             return View("ScheduleDatesHome");
         }
 
-
+        [AllowAnonymous]
         public ActionResult MainFunctionaryModifyHome()
         {
             string cedula = Request.Params["Cedula"];
@@ -106,6 +107,7 @@ namespace CitasSAPSO.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public ActionResult MainFunctionaryModifyHome(UserModels functionary)
         {
             CatalogueModels catalogueProcess = new CatalogueModels();
@@ -122,7 +124,6 @@ namespace CitasSAPSO.Controllers
             ViewBag.process = catalogueBusiness.GetListCatalogue(catalogueProcess);
             return View("ScheduleDatesHome");
         }
-
 
         public ActionResult ScheduleDatesHome()
         {
@@ -143,6 +144,7 @@ namespace CitasSAPSO.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public ActionResult SaveAppointment(AppointmentModels _appointment)
         {
             UserBusiness functionaryBusiness = new UserBusiness();
