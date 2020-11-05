@@ -182,10 +182,10 @@
                         text += '<td>' + data[i].Hour + '</td>';
                         text += '<td><a class=" btn btn-success btn-sm" onclick="viewDetailAppointment()">Ver</a></td>';
                         text += '<td><a class=" btn btn-success btn-sm" onclick="modifyFunctionary()">Modificar</a></td>';
-                        text += '<td><a class=" btn btn-danger btn-sm" onclick="modifyProffesional()">Cancelar</a></td>';
+                        text += '<td><a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#cancelModal" onclick="cancelAppointment()">Cancelar</a></td>';
                         text += "</tr>";
                     }
-                    $("#tbody").html(text);                  
+                    $("#tbody").html(text);
 
 
                 }
@@ -198,10 +198,21 @@
             $(this).addClass('selected').siblings().removeClass('selected');
             var id = $(this).find('td:first').html();
             var valueId = $(this).find('td:nth-child(4)');
-            var identification = valueId.next().text();            
+            var identification = valueId.next().text();
             var IdAppointment = id
             //var parameters = { "FunctionaryId": identification, "IdAppointment": IdAppointment };
             location.href = "/Appointment/ShowAppointmentDetailPost?cedula=" + identification + "&id=" + IdAppointment;
+
+        });
+    }
+
+    function cancelAppointment() {
+        $("#tbody tr").click(function () {
+            $(this).addClass('selected').siblings().removeClass('selected');
+            var id = $(this).find('td:first').html();
+            var IdAppointment = id
+
+            selectAppointment(IdAppointment);
 
         });
     }
