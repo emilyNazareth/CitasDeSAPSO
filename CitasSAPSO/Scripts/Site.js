@@ -376,9 +376,80 @@ function loadProcessInfo() {
     }
 }
 
+//LOAD GEOGRAPHIC INFORMATION
+function loadGeographicInfo() {
+    $.ajax(
+        {
+            dataType: 'json',
+            url: "https://ubicaciones.paginasweb.cr/provincias.json",
+            data: {},
+            success: function (response) {
+                loadProvinses(response);
+            }
+        }
+    );
+}
 
+function loadProvinses(provinces) {
+    options = " ";
 
+    for (key in provinces) {
+        options += "<option value= \"" + provinces[key] + "\" data-num=\"" + key + "\">" + provinces[key] + "</option>";
+    }
 
+    professionalsSelect = document.getElementById("province");
+    professionalsSelect.innerHTML = options;
+};
+
+function loadCantons(cantons) {
+    options = " ";
+
+    for (key in cantons) {
+        options += "<option value= \"" + cantons[key] + "\" data-num=\"" + key + "\">" + cantons[key] + "</option>";
+    }
+
+    professionalsSelect = document.getElementById("canton");
+    professionalsSelect.innerHTML = options;
+    $("#canton").prop("disabled", false);
+};
+
+function loadDistricts(districts) {
+    options = " ";
+
+    for (key in districts) {
+        options += "<option value= \"" + districts[key] + "\" data-num=\"" + key + "\">" + districts[key] + "</option>";
+    }
+
+    professionalsSelect = document.getElementById("district");
+    professionalsSelect.innerHTML = options;
+    $("#district").prop("disabled", false);
+};
+
+function activeCanton() {
+    $.ajax(
+        {
+            dataType: 'json',
+            url: "https://ubicaciones.paginasweb.cr/provincia/" + $("#province").find(':selected').data('num') + "/cantones.json",
+            data: {},
+            success: function (response) {
+                loadCantons(response);
+            }
+        }
+    );
+}
+
+function activeDistrict() {
+    $.ajax(
+        {
+            dataType: 'json',
+            url: "https://ubicaciones.paginasweb.cr/provincia/" + $("#province").find(':selected').data('num') + "/canton/" + $("#canton").find(':selected').data('num') + "/distritos.json",
+            data: {},
+            success: function (response) {
+                loadDistricts(response);
+            }
+        }
+    );
+}
 
 
 
