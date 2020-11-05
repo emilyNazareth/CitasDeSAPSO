@@ -43,8 +43,8 @@ namespace CitasSAPSO.Controllers
         [HttpPost]
         public ActionResult MainFunctionaryRegisterAdministrator(UserModels functionary)
         {
-            UserBusiness functionaryBusiness = new UserBusiness();
-            functionaryBusiness.RegisterFunctionary(functionary);
+            //UserBusiness functionaryBusiness = new UserBusiness();
+            //functionaryBusiness.RegisterFunctionary(functionary);
 
             CatalogueModels catalogueProcess = new CatalogueModels();
             catalogueProcess.Table = "proceso";
@@ -55,6 +55,7 @@ namespace CitasSAPSO.Controllers
             CatalogueBusiness catalogueBusiness = new CatalogueBusiness();
             ViewBag.subprocess = catalogueBusiness.GetCatalogueFunctionary("subproceso");
             ViewBag.process = catalogueBusiness.GetListCatalogue(catalogueProcess);
+            Session["functionary"] = functionary;
             return View("ScheduleDatesHome");
         }
         public ActionResult MainFunctionaryRegisterHome()
@@ -69,8 +70,8 @@ namespace CitasSAPSO.Controllers
         [HttpPost]
         public ActionResult MainFunctionaryRegisterHome(UserModels functionary)
         {
-            UserBusiness functionaryBusiness = new UserBusiness();
-            functionaryBusiness.RegisterFunctionary(functionary);
+           // UserBusiness functionaryBusiness = new UserBusiness();
+           // functionaryBusiness.RegisterFunctionary(functionary);
             
             CatalogueModels catalogueProcess = new CatalogueModels();
             catalogueProcess.Table = "proceso";
@@ -81,6 +82,8 @@ namespace CitasSAPSO.Controllers
             CatalogueBusiness catalogueBusiness = new CatalogueBusiness();
             ViewBag.subprocess = catalogueBusiness.GetCatalogueFunctionary("subproceso");
             ViewBag.process = catalogueBusiness.GetListCatalogue(catalogueProcess);
+            Session["functionary"] = functionary;
+            ViewBag.functionary = functionary;
             return View("ScheduleDatesHome");
         }
 
@@ -138,11 +141,13 @@ namespace CitasSAPSO.Controllers
         [HttpPost]
         public ActionResult SaveAppointment(AppointmentModels _appointment)
         {
-            AppointmentBusiness functionaryBusiness = new AppointmentBusiness();
-            functionaryBusiness.RegisterAppointment(_appointment);
+            UserBusiness functionaryBusiness = new UserBusiness();
+            functionaryBusiness.RegisterFunctionary((UserModels)Session["functionary"]);
+
+            AppointmentBusiness appointmentBusiness = new AppointmentBusiness();
+            appointmentBusiness.RegisterAppointment(_appointment);
             return Json("ok");
         }
-
 
         [HttpPost]
         public String ConsultDateAdministrator(String initialDate, String finalDate, int process, int assistance,
@@ -222,7 +227,7 @@ namespace CitasSAPSO.Controllers
 
             return View("AppointmentDetail");
         }
-        
+      
 
         public ActionResult DeleteAppointment(AppointmentModels appointment)
         {
@@ -230,7 +235,6 @@ namespace CitasSAPSO.Controllers
             appointmentBusiness.DeleteAppointment(appointment);
             return Json("Exitoso");
         }
-
 
     }
 }

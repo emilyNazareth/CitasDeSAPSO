@@ -43,5 +43,11 @@ namespace CitasSAPSO.Business
             return catalogue.GetListProcessProfessional(id_professional);
         }
 
+        public List<CatalogueModels> GetSubprocessListByProcess(int processId)
+        {
+            CatalogueData catalogue = new CatalogueData();
+            return catalogue.GetSubprocessListByProcess(processId);
+        }
+
     }
 }

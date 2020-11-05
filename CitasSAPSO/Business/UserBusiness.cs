@@ -74,5 +74,12 @@ namespace CitasSAPSO.Business
             UserData userData = new UserData();
             return userData.GetRol(user);
         }
+
+        public List<CatalogueModels> GetProfessionalsByProcess(int id_process)
+        {
+            UserData userData = new UserData();
+
+            return userData.GetProfessionalsByProcess(id_process);
+        }
     }
 }

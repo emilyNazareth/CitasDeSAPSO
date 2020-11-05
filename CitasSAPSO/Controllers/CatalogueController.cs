@@ -364,5 +364,14 @@ namespace CitasSAPSO.Controllers
             ViewBag.assistance = catalogueBusiness.GetListCatalogue(catalogueOffice);
             return View("ManageAssistanceAdministrator");
         }
+
+        [HttpPost]
+        public ActionResult GetSubprocessListByProcess(int process)
+        {
+            CatalogueBusiness catalogueBusiness = new CatalogueBusiness();
+            return Json(catalogueBusiness.GetSubprocessListByProcess(process));
+            // return JsonConvert.SerializeObject(UserBusiness.GetProfessionalsByProcess(process));
+        }
+
     }
 }

@@ -1,5 +1,6 @@
 ﻿using CitasSAPSO.Business;
 using CitasSAPSO.Models;
+using Microsoft.Ajax.Utilities;
 using Newtonsoft.Json;
 using System;
 using System.Configuration;
@@ -31,6 +32,14 @@ namespace CitasSAPSO.Controllers
             UserBusiness UserBusiness = new UserBusiness();
             object json = new { data = UserBusiness.GetListProfessionals() };
             return json;
+        }
+
+        [HttpPost]
+        public ActionResult LoadProfessionalByProcess(int process)
+        {
+            UserBusiness UserBusiness = new UserBusiness();
+            return Json(UserBusiness.GetProfessionalsByProcess(process));
+           // return JsonConvert.SerializeObject(UserBusiness.GetProfessionalsByProcess(process));
         }
         public String SearchProfessionalByFiltersAdministrator(int cedula, String nombre, String apellido)
         {
