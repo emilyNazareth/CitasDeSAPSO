@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace CitasSAPSO.Controllers
 {
+    [AllowAnonymous]
     public class CatalogueController : Controller
     {
         // GET: Catalogue
