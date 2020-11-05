@@ -12,9 +12,9 @@ using WebGrease.Css.Ast.Selectors;
 
 namespace CitasSAPSO.Controllers
 {
-    [AllowAnonymous]
     public class AppointmentController : Controller
     {
+        [AllowAnonymous]
         public ActionResult Index()
         {
             return View();
@@ -25,6 +25,7 @@ namespace CitasSAPSO.Controllers
             return View();
         }
 
+        [AllowAnonymous]
         public ActionResult LoginHome()
         {
             return View();
@@ -61,6 +62,7 @@ namespace CitasSAPSO.Controllers
             return View("ScheduleDatesHome");
         }
 
+        [AllowAnonymous]
         public ActionResult MainFunctionaryRegisterHome()
         {
             CatalogueBusiness appointmentBusiness = new CatalogueBusiness();
@@ -71,7 +73,7 @@ namespace CitasSAPSO.Controllers
         }
 
         [HttpPost]
-        
+        [AllowAnonymous]
         public ActionResult MainFunctionaryRegisterHome(UserModels functionary)
         {
            // UserBusiness functionaryBusiness = new UserBusiness();
@@ -91,7 +93,7 @@ namespace CitasSAPSO.Controllers
             return View("ScheduleDatesHome");
         }
 
-    
+        [AllowAnonymous]
         public ActionResult MainFunctionaryModifyHome()
         {
             string cedula = Request.Params["Cedula"];
@@ -106,6 +108,7 @@ namespace CitasSAPSO.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public ActionResult MainFunctionaryModifyHome(UserModels functionary)
         {
             CatalogueModels catalogueProcess = new CatalogueModels();
@@ -123,6 +126,7 @@ namespace CitasSAPSO.Controllers
             return View("ScheduleDatesHome");
         }
 
+        [AllowAnonymous]
         public ActionResult ScheduleDatesHome()
         {
             CatalogueModels catalogueProcess = new CatalogueModels();
@@ -136,12 +140,14 @@ namespace CitasSAPSO.Controllers
             return View();
         }
 
+        [AllowAnonymous]
         public ActionResult DateConfirmationHome()
         {
             return View();
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public ActionResult SaveAppointment(AppointmentModels _appointment)
         {
             UserBusiness functionaryBusiness = new UserBusiness();
@@ -170,7 +176,7 @@ namespace CitasSAPSO.Controllers
             
         }
 
-
+        [AllowAnonymous]
         public ActionResult ShowAppointmentDetailPost()
         {
             string FunctionaryId = Request.Params["cedula"]; 
@@ -202,7 +208,7 @@ namespace CitasSAPSO.Controllers
         }
 
 
-
+        [AllowAnonymous]
         public ActionResult ShowAppointmentDetail(int FunctionaryId, int IdAppointment)
         {
             AppointmentModels appointmentModels = new AppointmentModels();
@@ -232,8 +238,8 @@ namespace CitasSAPSO.Controllers
 
             return View("AppointmentDetail");
         }
-      
 
+        [AllowAnonymous]
         public ActionResult DeleteAppointment(AppointmentModels appointment)
         {
             AppointmentBusiness appointmentBusiness = new AppointmentBusiness();

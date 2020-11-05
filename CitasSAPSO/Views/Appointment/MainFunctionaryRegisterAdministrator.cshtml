@@ -62,30 +62,20 @@
             </div>
             <div class="row functionary-register">
                 <label class="col-sm-6 control-label small" for="province">Provincia</label>
-                <select class="col-sm-5 custom-select custom-select-sm" id="province" name="province">
-                    <option value="san jose">San José</option>
-                    <option value="heredia">Heredia</option>
-                    <option value="cartago">Cartago</option>
-                    <option value="alajuela">Alajuela</option>
-                    <option value="puntarenas">Puntarenas</option>
-                    <option value="guanacaste">Guanacaste</option>
-                    <option value="limon">Limón</option>
+                <select class="col-sm-5 custom-select custom-select-sm" id="province" name="province" onchange="activeCanton(); return false;">
+
                 </select>
             </div>
             <div class="row functionary-register">
                 <label class="col-sm-6 control-label small" for="canton">Cantón</label>
-                <select class="col-sm-5 custom-select custom-select-sm" id="canton" name="canton">
-                    <option value="Canton1">Canton1</option>
-                    <option value="Canton2">Canton2</option>
-                    <option value="Canton3">Canton3</option>
+                <select class="col-sm-5 custom-select custom-select-sm" id="canton" name="canton" onchange="activeDistrict(); return false;">
+
                 </select>
             </div>
             <div class="row functionary-register">
                 <label class="col-sm-6 control-label small" for="district">Distrito</label>
                 <select class="col-sm-5 custom-select custom-select-sm" id="district" name="district">
-                    <option value="Distrito1">Distrito1</option>
-                    <option value="Distrito2">Distrito2</option>
-                    <option value="Distrito3">Distrito3</option>
+
                 </select>
             </div>
             <div class="row functionary-register">
@@ -208,7 +198,11 @@
 </form>
 <script>
     window.onload = function () {
+        $("#district").prop("disabled", true);
+        $("#canton").prop("disabled", true);
+
         loadFunctionaryRegister();
+        loadGeographicInfo();
     }
 
     function searchFunctionary() {
