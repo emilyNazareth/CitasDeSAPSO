@@ -2,6 +2,7 @@
 using CitasSAPSO.Models;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Diagnostics;
 using System.Linq;
@@ -121,6 +122,9 @@ namespace CitasSAPSO.Controllers
             ViewBag.office = catalogueBusiness.GetListCatalogue(catalogueProcess);
             catalogueProcess.Table = "asistencia";
             ViewBag.assistance = catalogueBusiness.GetListCatalogue(catalogueProcess);
+
+        
+            
             return View("DashboardProfessional");
         }
 
@@ -145,6 +149,26 @@ namespace CitasSAPSO.Controllers
 
             return View("ConsultAppointmentFunctionary");
         }
+        [HttpPost]
+        public string SearchAppointmentProfessional(string initialDate, string finalDate, int process, int assistance,
+            int office, int identification, int professional, char gender, string dateStatus, int consecutive, int age)
+     
+        {
+            AppointmentModels appointment = new AppointmentModels();
+            appointment.Id = consecutive;
+            appointment.Functionary.Cedula = identification;
+            appointment.Functionary.Gender = gender;
+            appointment.Functionary.OfficeID = office;
+            appointment.Functionary.Assistance = assistance;
+            appointment.Professional.ProfessionalId = professional;
+            appointment.SubProcess.ID = process;
+            appointment.State = dateStatus;
+
+            AppointmentBusiness appointmentBusiness = new AppointmentBusiness();
+            List<AppointmentModels> appointmentList = appointmentBusiness.SearchAppointmentsForProfesional(appointment, initialDate, finalDate, age);
+            return JsonConvert.SerializeObject(appointmentList);
+        }
+
 
         public ActionResult ValidationLogin(int identification, String password)
         {

@@ -86,7 +86,7 @@ namespace CitasSAPSO.Data
         public List<AppointmentModels> GetAppointmentList()
         {
             List<AppointmentModels> appointments = new List<AppointmentModels>();
-            string sqlQuery = $"exec sp_obtener_citas()";
+            string sqlQuery = $"exec sp_obtener_citas";
 
             using (SqlCommand command = new SqlCommand(sqlQuery, connection))
             {
@@ -98,15 +98,15 @@ namespace CitasSAPSO.Data
                 {
                     AppointmentModels appointment = new AppointmentModels();
                     appointment.Id = Int32.Parse(responseReader["pk_id_cita"].ToString());
-                    appointment.Functionary.Cedula = Int32.Parse(responseReader["fk_id_funcionario"].ToString());
+                    appointment.Functionary.Cedula = Int32.Parse(responseReader["pk_cedula_usuario"].ToString());
                     appointment.Date = responseReader["tf_fecha"].ToString();
                     appointment.Hour = responseReader["tc_hora"].ToString();
                     appointment.Professional.Cedula = Int32.Parse(responseReader["fk_id_profesional"].ToString());
-                    appointment.Patient = responseReader["tc_paciente"].ToString();
-                    appointment.State = responseReader["tc_estado"].ToString();
-                    appointment.SubProcess.ID = Int32.Parse(responseReader["fk_id_subproceso"].ToString());
-                    appointment.SubActivity.ID = Int32.Parse(responseReader["fk_id_subactividad"].ToString());
-                    appointment.Assistance.ID = Int32.Parse(responseReader["fk_id_asistencia"].ToString());
+                    //appointment.Patient = responseReader["tc_paciente"].ToString();
+                    //appointment.State = responseReader["tc_estado"].ToString();
+                    //appointment.SubProcess.ID = Int32.Parse(responseReader["fk_id_subproceso"].ToString());
+                    //appointment.SubActivity.ID = Int32.Parse(responseReader["fk_id_subactividad"].ToString());
+                    //appointment.Assistance.ID = Int32.Parse(responseReader["fk_id_asistencia"].ToString());
 
                     appointments.Add(appointment);
                 } // while
@@ -248,6 +248,41 @@ namespace CitasSAPSO.Data
             }
         }
 
+        public List<AppointmentModels> SearchAppointmentsForProfesional(AppointmentModels _appointment, string initialDate, string finalDate, int age)
+        {
+            string sqlQuery = $"exec sp_buscar_cita_para_funcionario_admi " + _appointment.Functionary.Cedula + "," + _appointment.Id + ",'" + initialDate + "','" +
+                  finalDate + "'," + _appointment.SubProcess.ID + "," + _appointment.Functionary.OfficeID + ", " + _appointment.Professional.ProfessionalId+ ", '" + _appointment.State + "'," + _appointment.Functionary.Assistance +
+                  ", '" + _appointment.Functionary.Gender + "', " + age + " ;";
+            List<AppointmentModels> appointments = new List<AppointmentModels>();
+
+            using (SqlCommand command = new SqlCommand(sqlQuery, connection))
+            {
+                command.CommandType = CommandType.Text;
+                command.CommandText = sqlQuery;
+                connection.Open();
+                SqlDataReader responseReader = command.ExecuteReader();
+
+                while (responseReader.Read())
+                {
+                    AppointmentModels appointment = new AppointmentModels();
+                    appointment.Id = Int32.Parse(responseReader["pk_id_cita"].ToString());
+                    appointment.Functionary.Cedula = Int32.Parse(responseReader["pk_cedula_usuario"].ToString());
+                    appointment.Functionary.Name = responseReader["tc_nombre"].ToString();
+                    appointment.Functionary.FirstLastName = responseReader["tc_primer_apellido"].ToString();
+                    appointment.Functionary.SecondLastName = responseReader["tc_segundo_apellido"].ToString();
+                    appointment.Date = responseReader["tf_fecha"].ToString();
+                    appointment.Hour = responseReader["tc_hora"].ToString();
+                    appointment.Professional.Cedula = Int32.Parse(responseReader["fk_id_profesional"].ToString());
+                    appointment.SubProcess.Name = responseReader["tc_nombre_proceso"].ToString();
+                    appointment.SubActivity.Name = responseReader["tc_nombre_actividad"].ToString();
+                    appointments.Add(appointment);
+                }
+
+                connection.Close();
+            }
+
+            return appointments;
+        }
     }
 
 }
