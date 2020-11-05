@@ -18,26 +18,26 @@
                     <div class="form-group row">
                         <label class="col-sm-7 col-form-label-sm" for="process">Proceso</label>
                         <select class="col-sm-5 custom-select custom-select-sm" id="process" name="process">
-                            <!--opciones se cargar con javaScrip-->
+                            <option selected>Choose...</option>
+                            @foreach (CitasSAPSO.Models.CatalogueModels proc in ViewBag.process)
+                            {
+                                <option value="@proc.ID">@proc.Name</option>
+                            }
                         </select>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-7 col-form-label-sm" for="office">Oficina</label>
                         <select class="col-sm-5 custom-select custom-select-sm" id="office" name="office">
                             <option selected>Choose...</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
+                            @foreach (CitasSAPSO.Models.CatalogueModels _office in ViewBag.office)
+                            {
+                                <option value="@_office.ID">@_office.Name</option>
+                            }
                         </select>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-7 col-form-label-sm" for="dateState">Estado cita</label>
-                        <select class="col-sm-5 custom-select custom-select-sm" id="dateState" name="dateState">
-                            <option selected>Choose...</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
-                        </select>
+                        <label class="col-sm-7 col-form-label-sm" for="appointmentStatus">Estado cita</label>
+                        <input type="text" class="col-sm-5 form-control form-control-sm" id="appointmentStatus" name="appointmentStatus" />
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-7 col-form-label-sm" for="consecutive">Consecutivo</label>
@@ -52,7 +52,11 @@
                     <div class="form-group row">
                         <label class="col-sm-7 col-form-label-sm" for="Asistence">Asistencia</label>
                         <select class="col-sm-5 custom-select custom-select-sm" id="Asistence" name="Asistence">
-                            <!--opciones se cargar con javaScrip-->
+                            <option selected>Choose...</option>
+                            @foreach (CitasSAPSO.Models.CatalogueModels _assitance in ViewBag.assistance)
+                            {
+                                <option value="@_assitance.ID">@_assitance.Name</option>
+                            }
                         </select>
                     </div>
                     <div class="form-group row">
@@ -86,8 +90,3 @@
         </div>
     </div>
 </div>
-<script>
-    window.onload = function () {
-        loadProfessionalDashboardInfo();
-    }
-</script>

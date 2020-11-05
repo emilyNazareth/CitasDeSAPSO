@@ -360,6 +360,7 @@
     <Content Include="Views\Appointment\MainFunctionaryRegisterAdministrator.cshtml" />
     <Content Include="Views\Security\Security.cshtml" />
     <Content Include="Views\Security\ManageRoles.cshtml" />
+    <Content Include="Views\Appointment\AppointmentDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
