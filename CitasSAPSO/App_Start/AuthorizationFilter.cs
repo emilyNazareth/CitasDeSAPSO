@@ -19,9 +19,6 @@ namespace CitasSAPSO.App_Start
             if (HttpContext.Current.Session["Identification"] == null )
             {
                 filterContext.Result = new RedirectResult("~/Appointment/Index");
-            }else if(HttpContext.Current.Session["functionary"] == null)
-            {
-                filterContext.Result = new RedirectResult("~/Appointment/Index");
             }
         }
     }

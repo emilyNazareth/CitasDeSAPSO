@@ -12,9 +12,9 @@ using WebGrease.Css.Ast.Selectors;
 
 namespace CitasSAPSO.Controllers
 {
+    [AllowAnonymous]
     public class AppointmentController : Controller
     {
-        [AllowAnonymous]
         public ActionResult Index()
         {
             return View();
@@ -25,7 +25,6 @@ namespace CitasSAPSO.Controllers
             return View();
         }
 
-        [AllowAnonymous]
         public ActionResult LoginHome()
         {
             return View();
@@ -61,7 +60,6 @@ namespace CitasSAPSO.Controllers
             return View("ScheduleDatesHome");
         }
 
-        [AllowAnonymous]
         public ActionResult MainFunctionaryRegisterHome()
         {
             CatalogueBusiness appointmentBusiness = new CatalogueBusiness();
@@ -72,7 +70,7 @@ namespace CitasSAPSO.Controllers
         }
 
         [HttpPost]
-        [AllowAnonymous]
+        
         public ActionResult MainFunctionaryRegisterHome(UserModels functionary)
         {
            // UserBusiness functionaryBusiness = new UserBusiness();
@@ -92,7 +90,7 @@ namespace CitasSAPSO.Controllers
             return View("ScheduleDatesHome");
         }
 
-        [AllowAnonymous]
+    
         public ActionResult MainFunctionaryModifyHome()
         {
             string cedula = Request.Params["Cedula"];
@@ -107,7 +105,6 @@ namespace CitasSAPSO.Controllers
         }
 
         [HttpPost]
-        [AllowAnonymous]
         public ActionResult MainFunctionaryModifyHome(UserModels functionary)
         {
             CatalogueModels catalogueProcess = new CatalogueModels();
@@ -144,7 +141,6 @@ namespace CitasSAPSO.Controllers
         }
 
         [HttpPost]
-        [AllowAnonymous]
         public ActionResult SaveAppointment(AppointmentModels _appointment)
         {
             UserBusiness functionaryBusiness = new UserBusiness();
