@@ -364,6 +364,7 @@
     <Content Include="Views\Security\Security.cshtml" />
     <Content Include="Views\Security\ManageRoles.cshtml" />
     <Content Include="Views\Appointment\AppointmentDetail.cshtml" />
+    <Content Include="Views\User\ReportsView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

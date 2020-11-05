@@ -9,7 +9,7 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" href="#">Reportes <span class="sr-only">(current)</span></a>
+                @Html.ActionLink("Reportes", "ReportsView", "User", null, new { @class = "nav-link" })
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -64,82 +64,3 @@
         </ul>
     </div>
 </nav>
-<br />
-<div class="row">
-    <div class="col">
-        <canvas id="AppointmentQuantity"></canvas>
-    </div>
-    <div class="col">
-        <canvas id="ProcessPercentage"></canvas>
-    </div>
-</div>
-        
-
-        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-
-        <script>
-            appointments = "";
-            window.onload = function () {
-                $.ajax(
-                    {
-                        url: '/Catalogue/GetAppointmensQuantityFirstSemester',
-                        type: 'post',
-                        success: function (response) {
-                            var appointmentChart = document.getElementById('AppointmentQuantity').getContext('2d');
-                            var chart = new Chart(appointmentChart, {
-                                // The type of chart we want to create
-                                type: 'bar',
-
-                                // The data for our dataset
-                                data: {
-                                    labels: ['Julio', 'Agosto', 'Setiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-                                    datasets: [{
-                                        label: 'CItas Segundo Semestre',
-                                        backgroundColor: ['rgba( 230, 134, 113, 1)',
-                                            'rgba( 230, 207, 113, 1)',
-                                            'rgba( 113, 230, 186, 1)',
-                                            'rgba( 113, 154, 230, 1)',
-                                            'rgba( 33, 199, 108, 1)',
-                                            'rgba(  0, 135, 255, 1)'
-                                        ],
-                                        borderColor: 'rgb(255, 99, 132)',
-                                        data: response
-                                    }]
-                                },
-
-                                // Configuration options go here
-                                options: {
-                                    responsive: true
-                                }
-                            });
-                        }
-
-                    }
-                );
-            }
-
-            //GRAFICO DE BARRAS
-            
-
-            //GRAFICO PROCESOS
-            var processChart = document.getElementById('ProcessPercentage').getContext('2d');
-            var myDoughnutChart = new Chart(processChart, {
-                type: 'doughnut',
-                data: {
-                    labels: ['Clínico', 'Incidente', 'Armas', 'Capitulo V', 'Charlas'],
-                    datasets: [{
-                        label: 'Porcentaje por tipo de proceso',
-                        data: [0, 10, 5, 2, 20],
-                        backgroundColor: ['rgba( 230, 207, 113, 1)',
-                            'rgba( 113, 230, 186, 1)',
-                            'rgba( 113, 154, 230, 1)',
-                            'rgba( 33, 199, 108, 1)',
-                            'rgba(  0, 135, 255, 1)'
-                        ]
-                    }]
-                },
-                options: {
-                    responsive: true
-                }
-            });
-        </script>

@@ -55,5 +55,11 @@ namespace CitasSAPSO.Business
             return catalogue.GetAppointmensQuantityFirstSemester();
         }
 
+        public int[] GetAppointmentsQuantity()
+        {
+            CatalogueData catalogue = new CatalogueData();
+            return catalogue.GetAppointmentsQuantity();
+        }
+
     }
 }

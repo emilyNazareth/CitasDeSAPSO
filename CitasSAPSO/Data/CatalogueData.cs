@@ -229,6 +229,31 @@ namespace CitasSAPSO.Data
 
             return appointmentList;
         }
+
+        public int[] GetAppointmentsQuantity()
+        {
+            var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["connDB"].ConnectionString);
+            int[] appointmentList = new int[6];
+
+            string sqlQuery = $"exec sp_obtener_cantidad_citas_proceso";
+            using (SqlCommand command = new SqlCommand(sqlQuery, connection))
+            {
+                command.CommandType = CommandType.Text;
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    appointmentList[0] = Int32.Parse(reader["Clinico"].ToString());
+                    appointmentList[1] = Int32.Parse(reader["incidente"].ToString());
+                    appointmentList[2] = Int32.Parse(reader["Armas"].ToString());
+                    appointmentList[3] = Int32.Parse(reader["Charlas"].ToString());
+                    appointmentList[4] = Int32.Parse(reader["CapituloV"].ToString());
+                }
+                connection.Close();
+            }
+
+            return appointmentList;
+        }
     }
 
 }

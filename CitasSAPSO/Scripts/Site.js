@@ -41,18 +41,19 @@ function loadScheduleDates() {
             getProfessionalsBySelectedProcess(processId);
             getSubProcesslsBySelectedProcess(processId);
             switch (processId) {
-                case '4':
+                case '1':
                     $("#procesoClinico").show();
+                    $('#appointmentType').removeAttr(disabled);
                     break;
-                case '5':
+                case '2':
                     $("#incidente").show();
                     break;
-                case '6':
+                case '3':
                     $("#armas").show();
-                case '7':
+                case '4':
                     $("#charlas").show();
                     break;
-                case '8':
+                case '5':
                     $("#capituloV").show();
                     break;
             }

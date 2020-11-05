@@ -383,5 +383,13 @@ namespace CitasSAPSO.Controllers
             // return JsonConvert.SerializeObject(catalogueBusiness.GetAppointmensQuantityFirstSemester());
         }
 
+        [HttpPost]
+        public ActionResult GetAppointmensQuantity()
+        {
+            CatalogueBusiness catalogueBusiness = new CatalogueBusiness();
+            return Json(catalogueBusiness.GetAppointmentsQuantity());
+            // return JsonConvert.SerializeObject(catalogueBusiness.GetAppointmensQuantityFirstSemester());
+        }
+
     }
 }
