@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace CitasSAPSO.Controllers
 {
+    [AllowAnonymous]
     public class CatalogueController : Controller
     {
         // GET: Catalogue
@@ -364,5 +365,14 @@ namespace CitasSAPSO.Controllers
             ViewBag.assistance = catalogueBusiness.GetListCatalogue(catalogueOffice);
             return View("ManageAssistanceAdministrator");
         }
+
+        [HttpPost]
+        public ActionResult GetSubprocessListByProcess(int process)
+        {
+            CatalogueBusiness catalogueBusiness = new CatalogueBusiness();
+            return Json(catalogueBusiness.GetSubprocessListByProcess(process));
+            // return JsonConvert.SerializeObject(UserBusiness.GetProfessionalsByProcess(process));
+        }
+
     }
 }

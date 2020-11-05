@@ -20,73 +20,25 @@
             <th scope="col">Cancelar</th>
         </tr>
     </thead>
-    <tbody>
+    <tbody id="tbody">
+        @foreach (CitasSAPSO.Models.AppointmentModels appointment in ViewBag.appointments)
+        {
         <tr>
-            <th scope="row">1</th>
-            <td>Luis</td>
-            <td>Hidalgo</td>
-            <td>Quiros</td>
-            <td>305240010</td>
-            <td>Ana</td>
-            <td>Armas</td>
-            <td>Act1</td>
-            <td>10/22/2020</td>
-            <td>2:30</td>
-            <td><a class=" btn btn-success btn-sm" asp-controller="Functionary" asp-action="FunctionaryDateDetail">Ver</a></td>
-            <!--Controlar con Session solo Admin
-    <td><a class=" btn btn-success btn-sm" id="modify" onclick="modifyFunctionary()">Modificar</a></td>
-        -->
-   
-    <td><a class=" btn btn-success btn-sm" id="modify"  >Modificar</a></td>
-    <!---->
-            <td>
-                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#cancelModal">
-                    Cancelar
-                </button>
-            </td>
+            <td>@appointment.Id</td>
+            <td>@appointment.Functionary.Name</td>
+            <td>@appointment.Functionary.FirstLastName</td>
+            <td>@appointment.Functionary.SecondLastName</td>
+            <td>@appointment.Functionary.Cedula</td>
+            <td>@appointment.Professional.Cedula</td>
+            <td>@appointment.SubProcess.Name</td>
+            <td>@appointment.SubProcess.Name</td>
+            <td>@appointment.Date</td>
+            <td>@appointment.Hour</td>
+            <td>@Html.ActionLink("Ver", "ShowAppointmentDetail", "Appointment", new { FunctionaryId = appointment.Functionary.Cedula, IdAppointment = appointment.Id }, new { @class = "btn btn-success btn-sm" })</td>
+            <td><a class=" btn btn-success btn-sm" onclick="modifyFunctionary()">Modificar</a></td>
+            <td><a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#cancelModal" onclick="selectAppointment(@appointment.Id);">Cancelar</a></td>
         </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>Jose</td>
-            <td>Hidalgo</td>
-            <td>Quiros</td>
-            <td>9630</td>
-            <td>Analibe</td>
-            <td>Armas</td>
-            <td>Act3</td>
-            <td>10/1/2020</td>
-            <td>5:30</td>
-            <td><a class=" btn btn-success btn-sm" asp-controller="Functionary" asp-action="FunctionaryDateDetail">Ver</a></td>
-            <!--Controlar con Session solo Admin-->
-            <td><a class=" btn btn-success btn-sm" id="modify">Modificar</a></td>
-            <!---->
-            <td>
-                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#cancelModal">
-                    Cancelar
-                </button>
-            </td>
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-            <td>Gustavo</td>
-            <td>Loaiza</td>
-            <td>Quiros</td>
-            <td>302560310</td>
-            <td>Analibe</td>
-            <td>Clinico</td>
-            <td>Act2</td>
-            <td>9/8/2020</td>
-            <td>6:00</td>
-            <td><a class=" btn btn-success btn-sm" asp-controller="Functionary" asp-action="FunctionaryDateDetail">Ver</a></td>
-            <!--Controlar con Session solo Admin-->
-            <td><a class=" btn btn-success btn-sm" id="modify">Modificar</a></td>
-            <!---->
-            <td>
-                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#cancelModal">
-                    Cancelar
-                </button>
-            </td>
-        </tr>
+        }
 
     </tbody>
 </table>
@@ -103,12 +55,12 @@
             <div class="modal-body">
                 <div class="form-group">
                     <label for="justificationInput">Justificación:</label>
-                    <textarea class="form-control" id="justificationInput" name="justificationInput" rows="3"></textarea>
+                    <textarea class="form-control" id="justification" name="justification" rows="3"></textarea>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Atrás</button>
-                <button type="button" class="btn btn-danger">Confirmar</button>
+                <button type="button" class="btn btn-danger"  onclick="deleteApppointment()">Confirmar</button>
             </div>
         </div>
     </div>
@@ -117,11 +69,37 @@
 
 <script>
 
-    $("#tableID tr").click(function () {
-        $(this).addClass('selected').siblings().removeClass('selected');
-        var value = $(this).find('td:nth-child(4)');
-        var cedula = value.next().text();
-        //alert(cedula);
-        location.href = "/Appointment/MainFunctionaryModifyHome?Cedula=" + cedula;
-    });
+    function modifyFunctionary() {
+        $("#tableID tr").click(function () {
+            $(this).addClass('selected').siblings().removeClass('selected');
+            var value = $(this).find('td:nth-child(4)');
+            var cedula = value.next().text();
+            //alert(cedula);
+            location.href = "/Appointment/MainFunctionaryModifyHome?Cedula=" + cedula;
+        });
+    }
+
+
+    var id;
+    function selectAppointment(appointmentId) {
+        id = appointmentId;
+    }
+    function deleteApppointment() {
+        var justification = $('#justification').val();
+        var parameters = { "id": id, "justification": justification };
+        $.ajax(
+            {
+                data: parameters,
+                url: '/Appointment/DeleteAppointment',
+                type: 'post',
+                success: function (response) {
+                    if (response == "Exitoso") {
+                        location.href = "/User/ConsultDateAdministrator";
+                    } else {
+                        //$("#messageSpanId").html("No se pudo agregar");
+                    }
+                }
+            }
+        );
+    }
 </script>

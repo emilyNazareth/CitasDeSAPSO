@@ -1,5 +1,6 @@
 ﻿using CitasSAPSO.Business;
 using CitasSAPSO.Models;
+using Microsoft.Ajax.Utilities;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -13,13 +14,12 @@ namespace CitasSAPSO.Controllers
 {
     public class UserController : Controller
     {
+
         public ActionResult DashboardAdministrator()
-        {      
-            return View("DashboardAdministrator");
+        {
+                return View("DashboardAdministrator");      
         }
-
-
-        
+ 
         public ActionResult SearchProfessionalAdministrator()
         {
             UserBusiness UserBusiness = new UserBusiness();
@@ -33,6 +33,17 @@ namespace CitasSAPSO.Controllers
             object json = new { data = UserBusiness.GetListProfessionals() };
             return json;
         }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult LoadProfessionalByProcess(int process)
+        {
+            UserBusiness UserBusiness = new UserBusiness();
+            return Json(UserBusiness.GetProfessionalsByProcess(process));
+           // return JsonConvert.SerializeObject(UserBusiness.GetProfessionalsByProcess(process));
+        }
+
+        [AllowAnonymous]
         public String SearchProfessionalByFiltersAdministrator(int cedula, String nombre, String apellido)
         {
             UserModels professional = new UserModels();
@@ -68,6 +79,15 @@ namespace CitasSAPSO.Controllers
 
         public ActionResult ConsultDateAdministrator()
         {
+            CatalogueModels catalogueProcess = new CatalogueModels();
+            catalogueProcess.Table = "proceso";
+            CatalogueBusiness catalogueBusiness = new CatalogueBusiness();
+            ViewBag.process = catalogueBusiness.GetListCatalogue(catalogueProcess);
+            ViewBag.offices = catalogueBusiness.GetCatalogueFunctionary("oficina");
+            UserBusiness userBusiness = new UserBusiness();
+            ViewBag.professional = userBusiness.GetListProfessionals();
+            AppointmentBusiness appointmentBusiness = new AppointmentBusiness();
+            ViewBag.appointments = appointmentBusiness.GetAppointmentsByFilter();
             return View("ConsultDateAdministrator");
         }
 
@@ -128,6 +148,7 @@ namespace CitasSAPSO.Controllers
             return View("DashboardProfessional");
         }
 
+        [AllowAnonymous]
         public ActionResult ConsultAppointmentFunctionary()
         {
             return View("ConsultAppointmentFunctionary");
@@ -170,6 +191,7 @@ namespace CitasSAPSO.Controllers
         }
 
 
+        [AllowAnonymous]
         public ActionResult ValidationLogin(int identification, String password)
         {
             String value;          
@@ -181,7 +203,8 @@ namespace CitasSAPSO.Controllers
             if (value.Equals("1"))
             {
                 Session["Identification"] = user.Cedula.ToString();
-                Debug.WriteLine("IDENTIFICATION: " + (string)(Session["Identification"]));
+                //Session.Timeout = 15;
+              //  Debug.WriteLine("IDENTIFICATION: " + (string)(Session["Identification"]));
                 if (GetRol(user).Equals("Profesional"))
                 {
                     return Json("Professional");
@@ -200,6 +223,13 @@ namespace CitasSAPSO.Controllers
             UserBusiness userBusiness = new UserBusiness();
             rol = userBusiness.GetRol(user);                      
             return rol;
+        }
+
+        public ActionResult LogOut()
+        {
+            Session.Abandon();
+            Session.Clear();
+            return RedirectToAction("Index", "Appointment");
         }
 
     }

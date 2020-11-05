@@ -6,9 +6,11 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace CitasSAPSO.Data
 {
+    [AllowAnonymous]
     public class UserData
     {
 
@@ -387,6 +389,30 @@ namespace CitasSAPSO.Data
                     CatalogueModels catalogueTemp = new CatalogueModels();
                     catalogueTemp.ID = Int32.Parse(catalogueReader["pk_id_proceso"].ToString());
                     catalogueTemp.Name = catalogueReader["tc_nombre_proceso"].ToString();
+                    catalogueItems.Add(catalogueTemp);
+                }
+                connection.Close();
+            }
+
+
+            return catalogueItems;
+        }
+        public List<CatalogueModels> GetProfessionalsByProcess(int id_process)
+        {
+            var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["connDB"].ConnectionString);
+            List<CatalogueModels> catalogueItems = new List<CatalogueModels>();
+
+            string sqlQuery = $"sp_obtener_profesional_por_proceso @proceso='{id_process}'";
+            using (SqlCommand command = new SqlCommand(sqlQuery, connection))
+            {
+                command.CommandType = CommandType.Text;
+                connection.Open();
+                SqlDataReader catalogueReader = command.ExecuteReader();
+                while (catalogueReader.Read())
+                {
+                    CatalogueModels catalogueTemp = new CatalogueModels();
+                    catalogueTemp.ID = Int32.Parse(catalogueReader["pk_cedula_usuario"].ToString());
+                    catalogueTemp.Name = catalogueReader["tc_nombre"].ToString();
                     catalogueItems.Add(catalogueTemp);
                 }
                 connection.Close();

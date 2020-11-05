@@ -21,7 +21,6 @@ const DAYS = [
     "Jueves",
     "Viernes",
     "Sábado",
-
 ];
 var today = new Date();
 document.getElementById('date_info').innerHTML = DAYS[today.getDay()] + " " + today.getDate()
@@ -39,6 +38,8 @@ function loadScheduleDates() {
         $('#process').on("change", function () {
             hideProcess();
             var processId = document.getElementById("process").value;
+            getProfessionalsBySelectedProcess(processId);
+            getSubProcesslsBySelectedProcess(processId);
             switch (processId) {
                 case '4':
                     $("#procesoClinico").show();
@@ -61,7 +62,43 @@ function loadScheduleDates() {
     });
 }
 
-function loadProfessionalDashboardInfo() {    
+function getProfessionalsBySelectedProcess(processId) {
+    var parameters =
+    {
+        "process": processId,
+    };
+    $.ajax(
+        {
+            data: parameters,
+            url: '/User/LoadProfessionalByProcess',
+            type: 'post',
+            success: function (response) {
+                loadProfessionals(response);
+            }
+        }
+    );
+}
+
+function getSubProcesslsBySelectedProcess(processId) {
+    var parameters =
+    {
+        "process": processId,
+    };
+    $.ajax(
+        {
+            data: parameters,
+            url: '/Catalogue/GetSubprocessListByProcess',
+            type: 'post',
+            success: function (response) {
+                loadSubProcesByProcess(response);
+            }
+        }
+    );
+}
+
+
+function loadProfessionalDashboardInfo() {
+    loadProcesses();
     loadDates();
 };
 
@@ -76,6 +113,35 @@ function loadProcesses() {
     response += "<option value= \" 3 \"> Proceso3  </option>";
     processes = document.getElementById("process");
     processes.innerHTML = response;
+};
+
+function loadProfessionals(profesionals) {
+    options = " "; 
+    if (profesionals.length != 0) {
+        for (var i = 0; i < profesionals.length; i++) {
+            options += "<option value= \"" + profesionals[i].ID + "\">" + profesionals[i].Name + "</option>";
+        }
+
+    } else {
+        options = "<option value= \" -1 \"> No hay profesionales </option>";
+    }
+    
+    professionalsSelect = document.getElementById("ProfessionalId");
+    professionalsSelect.innerHTML = options;
+};
+
+function loadSubProcesByProcess(subprocess) {
+    options = " ";
+    if (subprocess.length != 0) {
+        for (var i = 0; i < subprocess.length; i++) {
+            options += "<option value= \"" + subprocess[i].ID + "\">" + subprocess[i].Name + "</option>";
+        }
+    } else {
+        options = "<option value= \" -1 \"> No hay Subprocesos </option>";
+    }
+    subprocessesSelect = document.getElementById("SubprocessId");
+    subprocessesSelect.innerHTML = options;
+
 };
 
 function loadAreas() {

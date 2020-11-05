@@ -4,9 +4,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace CitasSAPSO.Business
 {
+    [AllowAnonymous]
     public class UserBusiness
     {
 
@@ -73,6 +75,13 @@ namespace CitasSAPSO.Business
         {
             UserData userData = new UserData();
             return userData.GetRol(user);
+        }
+
+        public List<CatalogueModels> GetProfessionalsByProcess(int id_process)
+        {
+            UserData userData = new UserData();
+
+            return userData.GetProfessionalsByProcess(id_process);
         }
     }
 }

@@ -103,9 +103,11 @@
             <div class="row functionary-register">
                 <label class="col-sm-4 control-label small" for="assistance">Asistencia</label>
                 <select class="col-sm-5 custom-select custom-select-sm" id="assistance" name="assistance">
+                    @foreach (CitasSAPSO.Models.CatalogueModels assistance in ViewBag.assistance)
+                    {
+                        <option value="@assistance.ID">@assistance.Name</option>
 
-                    <option value="1">Asiste</option>
-                    <option value="0">No Asiste</option>
+                    }
 
                 </select>
             </div>

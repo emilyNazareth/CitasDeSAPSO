@@ -26,6 +26,7 @@ namespace CitasSAPSO.Models
             SubProcess = new CatalogueModels();
             SubActivity = new CatalogueModels();
             Assistance = new CatalogueModels();
+            SubActivity = new CatalogueModels();
                 
         }
     }
