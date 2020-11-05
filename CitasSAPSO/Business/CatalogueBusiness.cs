@@ -49,5 +49,11 @@ namespace CitasSAPSO.Business
             return catalogue.GetSubprocessListByProcess(processId);
         }
 
+        public int[] GetAppointmensQuantityFirstSemester()
+        {
+            CatalogueData catalogue = new CatalogueData();
+            return catalogue.GetAppointmensQuantityFirstSemester();
+        }
+
     }
 }

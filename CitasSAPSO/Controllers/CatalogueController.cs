@@ -1,5 +1,6 @@
 ﻿using CitasSAPSO.Business;
 using CitasSAPSO.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -372,6 +373,14 @@ namespace CitasSAPSO.Controllers
             CatalogueBusiness catalogueBusiness = new CatalogueBusiness();
             return Json(catalogueBusiness.GetSubprocessListByProcess(process));
             // return JsonConvert.SerializeObject(UserBusiness.GetProfessionalsByProcess(process));
+        }
+
+        [HttpPost]
+        public ActionResult GetAppointmensQuantityFirstSemester()
+        {
+            CatalogueBusiness catalogueBusiness = new CatalogueBusiness();
+            return Json(catalogueBusiness.GetAppointmensQuantityFirstSemester());
+            // return JsonConvert.SerializeObject(catalogueBusiness.GetAppointmensQuantityFirstSemester());
         }
 
     }
