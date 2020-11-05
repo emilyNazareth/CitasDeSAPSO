@@ -23,6 +23,14 @@ namespace CitasSAPSO.Business
             return appointmentData.SearchAppointmentsForFunctionary(_appointment);
         }
 
+        public List<AppointmentModels> SearchAppointmentsForProfesional(AppointmentModels _appointment, string initialDate, string finalDate, int age)
+        {
+            AppointmentData appointmentData = new AppointmentData();
+            return appointmentData.SearchAppointmentsForProfesional(_appointment, initialDate, finalDate, age);
+           
+        }
+
+
         public List<AppointmentModels> SearchAppointmentByFiltersAdministrator(AppointmentModels appointment, String initialDate, 
             String finalDate, int process, String dateStatus, int age, int professional)
         {
@@ -35,6 +43,7 @@ namespace CitasSAPSO.Business
             AppointmentData appointmentData = new AppointmentData();
             return appointmentData.GetAppointmentsByFilter();
         }
+
 
 
         public List<AppointmentModels> getAppointmentDetail(AppointmentModels _appointment)
