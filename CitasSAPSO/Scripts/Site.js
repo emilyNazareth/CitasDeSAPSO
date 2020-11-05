@@ -33,27 +33,36 @@ function loadFunctionaryRegister() {
 
 function loadScheduleDates() {
     $(document).ready(function () {
-        
         hideProcess();
+        var processId = document.getElementById("process").value;
+        if (processId === '1') {
+            $('#appointmentType').prop("disabled", false);
+        }
+        
         $('#process').on("change", function () {
             hideProcess();
             var processId = document.getElementById("process").value;
             getProfessionalsBySelectedProcess(processId);
             getSubProcesslsBySelectedProcess(processId);
             switch (processId) {
-                case '4':
+                case '1':
                     $("#procesoClinico").show();
+                    $('#appointmentType').prop("disabled",false);
+                    break;
+                case '2':
+                    $("#incidente").show();
+                    $('#appointmentType').prop("disabled", true);
+                    break;
+                case '3':
+                    $("#armas").show();
+                    $('#appointmentType').prop("disabled", true);
+                case '4':
+                    $("#charlas").show();
+                    $('#appointmentType').prop("disabled", true);
                     break;
                 case '5':
-                    $("#incidente").show();
-                    break;
-                case '6':
-                    $("#armas").show();
-                case '7':
-                    $("#charlas").show();
-                    break;
-                case '8':
                     $("#capituloV").show();
+                    $('#appointmentType').prop("disabled", true);
                     break;
             }
 

@@ -2,17 +2,28 @@
     ViewData["Title"] = "DateConfirmationHome";
 }
 
-<center><h3 class="titles">Confirmación de cita</h3></center>
-<div class="row">
-    Se envió a su correo un formulario que debe presentar el día de la cita
-</div>
-<div class="row">
-    <div class="col-sm-11">
-        @{Html.RenderPartial("WeekTableHome");}
+<center>
+    <h3 class="titles">Confirmación de cita</h3>
+    <div class="row" style="text-align:center;">
+        Se envió a su correo un formulario que debe presentar el día de la cita
     </div>
-    <div class="col-sm-1">
+    <div class="row">
+        <div class="col-sm-11">
+            @{Html.RenderPartial("WeekTableHome");}
+        </div>
+
+    </div>
+    <div class="row">
         <!--Controlar con Sesión-->
-        @Html.ActionLink("Cerrar Sesión", "LogOut", "User", null, new { @class = "nav-link" })
-        @Html.ActionLink("Cerrar(Admin)", "DashboardAdministrator", "User", null, new { @class = "btn btn-success btn-sm" })
+        @if (Session["functionary"] != null)
+        {
+            @Html.ActionLink("Cerrar Sesión", "LogOut", "User", null, new { @class = "nav-link" })
+        }
+        else
+        {
+            @Html.ActionLink("Cerrar", "DashboardAdministrator", "User", null, new { @class = "btn btn-success btn-sm" })
+        }
+
+
     </div>
-</div>
+</center>

@@ -203,6 +203,57 @@ namespace CitasSAPSO.Data
 
             return catalogueItems;
         }
+
+        public int[] GetAppointmensQuantityFirstSemester()
+        {
+            var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["connDB"].ConnectionString);
+            int[] appointmentList = new int[6];
+
+            string sqlQuery = $"exec sp_obtener_cantidad_citas_segundo_semestre";
+            using (SqlCommand command = new SqlCommand(sqlQuery, connection))
+            {
+                command.CommandType = CommandType.Text;
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    appointmentList[0] = Int32.Parse(reader["julio"].ToString());
+                    appointmentList[1] = Int32.Parse(reader["agosto"].ToString());
+                    appointmentList[2] = Int32.Parse(reader["setiembre"].ToString());
+                    appointmentList[3] = Int32.Parse(reader["octubre"].ToString());
+                    appointmentList[4] = Int32.Parse(reader["noviembre"].ToString());
+                    appointmentList[5] = Int32.Parse(reader["diciembre"].ToString());
+                }
+                connection.Close();
+            }
+
+            return appointmentList;
+        }
+
+        public int[] GetAppointmentsQuantity()
+        {
+            var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["connDB"].ConnectionString);
+            int[] appointmentList = new int[6];
+
+            string sqlQuery = $"exec sp_obtener_cantidad_citas_proceso";
+            using (SqlCommand command = new SqlCommand(sqlQuery, connection))
+            {
+                command.CommandType = CommandType.Text;
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    appointmentList[0] = Int32.Parse(reader["Clinico"].ToString());
+                    appointmentList[1] = Int32.Parse(reader["incidente"].ToString());
+                    appointmentList[2] = Int32.Parse(reader["Armas"].ToString());
+                    appointmentList[3] = Int32.Parse(reader["Charlas"].ToString());
+                    appointmentList[4] = Int32.Parse(reader["CapituloV"].ToString());
+                }
+                connection.Close();
+            }
+
+            return appointmentList;
+        }
     }
 
 }

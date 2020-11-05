@@ -17,9 +17,15 @@ namespace CitasSAPSO.Controllers
 
         public ActionResult DashboardAdministrator()
         {
-                return View("DashboardAdministrator");      
+            return View("DashboardAdministrator");      
         }
- 
+
+        public ActionResult ReportsView()
+        {
+            return View("ReportsView");
+        }
+
+
         public ActionResult SearchProfessionalAdministrator()
         {
             UserBusiness UserBusiness = new UserBusiness();
