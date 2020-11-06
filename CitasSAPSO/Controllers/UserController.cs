@@ -94,6 +94,8 @@ namespace CitasSAPSO.Controllers
             ViewBag.professional = userBusiness.GetListProfessionals();
             AppointmentBusiness appointmentBusiness = new AppointmentBusiness();
             ViewBag.appointments = appointmentBusiness.GetAppointmentsByFilter();
+            catalogueProcess.Table = "asistencia";
+            ViewBag.assistance = catalogueBusiness.GetListCatalogue(catalogueProcess);
             return View("ConsultDateAdministrator");
         }
 
