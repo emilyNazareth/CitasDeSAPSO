@@ -2,7 +2,8 @@
 @{
     ViewData["Title"] = "MainProfessionalRegister";
 }
-
+<link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+<script src="https://unpkg.com/boxicons@latest/dist/boxicons.js"></script>
 @foreach (CitasSAPSO.Models.UserModels professional in ViewBag.professional)
 {
     <form asp-controller="Administrator" asp-action="MainProfessionalRegisterAdministrator" method="post">
@@ -59,11 +60,7 @@
                 </div>
                 <div class="row professional-register">
                     <label class="col-sm-6 control-label small" for="placeNumber">Número de plaza</label>
-                    <select class="col-sm-5 custom-select custom-select-sm" id="placeNumber" name="placeNumber">
-                        <option value="@professional.PlaceNumber">Número plaza: @professional.PlaceNumber</option>
-                        <option value="1">Uno</option>
-                        <option value="2">Dos</option>
-                    </select>
+                    <input class="col-sm-4 form-control form-control-sm" type="text" id="placeNumber" name="placeNumber" value="@professional.PlaceNumber">
                 </div>
 
 
@@ -76,7 +73,7 @@
                             <input id="active" type="radio" for="status" name="status" checked value="Active">Activo
 
                             <br />
-                            <input id="inactive" type="radio" for="status" name="status"  value="Inactive">Inactivo
+                            <input id="inactive" type="radio" for="status" name="status" value="Inactive">Inactivo
                         </div>
                     }
                     if (professional.Status == 1)
@@ -151,47 +148,23 @@
                 </div>
                 <div class="row professional-register">
                     <label class="col-sm-6 control-label small" for="specialty">Especialidad:</label>
-                    <select class="col-sm-5 custom-select custom-select-sm" id="specialty" name="specialty">
-                        <option selected value="@professional.Specialty">@professional.Specialty</option>
-                        <option value="Especialidad 1">Especialidad 1</option>
-                        <option value="Especialidad 2">Especialidad 2</option>
-                        <option value="Especialidad 3">Especialidad 3</option>
-                    </select>
+                    <input class="col-sm-4 form-control form-control-sm" type="text" id="specialty" name="specialty" value="@professional.Specialty">
                 </div>
                 <div class="row professional-register">
                     <label class="col-sm-6 control-label small" for="schoolCode">Código de colegio:</label>
                     <input class="col-sm-4 form-control form-control-sm" type="number" id="schoolCode" name="schoolCode" value="@professional.SchoolCode">
                 </div>
-                <div class="row professional-register">
+                <div class="row functionary-register">
                     <label class="col-sm-6 control-label small" for="province">Provincia</label>
-                    <select class="col-sm-5 custom-select custom-select-sm" id="province" name="province">
-                        <option selected value="@professional.Province">@professional.Province</option>
-                        <option value="san jose">San José</option>
-                        <option value="heredia">Heredia</option>
-                        <option value="cartago">Cartago</option>
-                        <option value="alajuela">Alajuela</option>
-                        <option value="puntarenas">Puntarenas</option>
-                        <option value="guanacaste">Guanacaste</option>
-                        <option value="limon">Limón</option>
-                    </select>
+                    <input class="col-sm-4 form-control form-control-sm" type="text" id="province" name="province" value="@professional.Province">
                 </div>
-                <div class="row professional-register">
+                <div class="row functionary-register">
                     <label class="col-sm-6 control-label small" for="canton">Cantón</label>
-                    <select class="col-sm-5 custom-select custom-select-sm" id="canton" name="canton">
-                        <option selected value="@professional.Canton">@professional.Canton</option>
-                        <option value="Canton1">Canton1</option>
-                        <option value="Canton1">Canton1</option>
-                        <option value="Canton3">Canton3</option>
-                    </select>
+                    <input class="col-sm-4 form-control form-control-sm" type="text" id="canton" name="canton" value="@professional.Canton">
                 </div>
-                <div class="row professional-register">
+                <div class="row functionary-register">
                     <label class="col-sm-6 control-label small" for="district">Distrito</label>
-                    <select class="col-sm-5 custom-select custom-select-sm" id="district" name="district">
-                        <option selected value="@professional.District">@professional.District</option>
-                        <option value="Distrito1">Distrito1</option>
-                        <option value="Distrito2">Distrito2</option>
-                        <option value="Distrito3">Distrito3</option>
-                    </select>
+                    <input class="col-sm-4 form-control form-control-sm" type="text" id="district" name="district" value="@professional.District">
                 </div>
                 <div class="row professional-register">
                     <label class="col-sm-6 control-label small" for="address">Dirección:</label>
@@ -214,7 +187,8 @@
     <span id="resultado"></span>
 </div>
 
-<script>
+<script> 
+
     function goBack() {
         window.history.back();
     }

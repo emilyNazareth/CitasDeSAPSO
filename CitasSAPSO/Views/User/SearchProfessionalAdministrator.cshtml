@@ -138,7 +138,7 @@
                         text += '<td>' + data[i].Name + '</td>';
                         text += '<td>' + data[i].FirstLastName + '</td>';
                         text += '<td><a class=" btn btn-success btn-sm" onclick="modifyProffesional()">Modificar</a></td>';
-                        text += '<button onclick="deleteProffesional()" type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#cancelModal">';
+                        text += '<td><button onclick="deleteProffesional()" type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#cancelModal">Eliminar</button ></td>'; 
                         text += "</tr>";
                     }
                     $("#tbody").html(text);
