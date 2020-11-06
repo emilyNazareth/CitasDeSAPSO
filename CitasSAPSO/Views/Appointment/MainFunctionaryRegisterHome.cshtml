@@ -12,7 +12,7 @@
             <p class="text-success">Datos Personales</p>
             <div class="row functionary-register">
                 <label class="col-sm-6 control-label small" for="identification">Numero de identificacion:</label>
-                <input class="col-sm-4 form-control form-control-sm" type="text" id="cedula" name="cedula">
+                <input class="col-sm-4 form-control form-control-sm" type="text" id="cedula" name="cedula" required>
                 <div class="col-sm-2">
                     <a class="btn btn-success" id="cleanPlace" name="cleanPlace" onclick="searchFunctionary()"><i class='bx bx-search'></i></a>
                 </div>
@@ -23,27 +23,27 @@
                 </div>
             <div class="row functionary-register">
                 <label class="col-sm-6 control-label small" for="name">Nombre:</label>
-                <input class="col-sm-4 form-control form-control-sm" type="text" id="name" name="name">
+                <input class="col-sm-4 form-control form-control-sm" type="text" id="name" name="name" required>
             </div>
             <div class="row functionary-register">
                 <label class="col-sm-6 control-label small" for="firstLastName">Primer Apellido:</label>
-                <input class="col-sm-4 form-control form-control-sm" type="text" id="firstLastName" name="firstLastName">
+                <input class="col-sm-4 form-control form-control-sm" type="text" id="firstLastName" name="firstLastName" required>
             </div>
             <div class="row functionary-register">
                 <label class="col-sm-6 control-label small" for="secondLastName">Segundo Apellido:</label>
-                <input class="col-sm-4 form-control form-control-sm" type="text" id="secondLastName" name="secondLastName">
+                <input class="col-sm-4 form-control form-control-sm" type="text" id="secondLastName" name="secondLastName" required>
             </div>
             <div class="row functionary-register">
                 <label class="col-sm-6 control-label small" for="personalPhone">Teléfono Personal:</label>
-                <input class="col-sm-4 form-control form-control-sm" type="text" id="personalPhone" name="personalPhone">
+                <input class="col-sm-4 form-control form-control-sm" type="text" id="personalPhone" name="personalPhone" required>
             </div>
             <div class="row functionary-register">
                 <label class="col-sm-6 control-label small" for="housePhone">Teléfono de habitación:</label>
-                <input class="col-sm-4 form-control form-control-sm" type="text" id="housePhone" name="roomPhone">
+                <input class="col-sm-4 form-control form-control-sm" type="text" id="housePhone" name="roomPhone" required>
             </div>
             <div class="row functionary-register">
                 <label class="col-sm-6 control-label small" for="birthday">Fecha de nacimineto</label>
-                <input type="date" placeholder="dd-mm-yyyy" class="col-sm-4 form-control form-control-sm" id="birthday" name="birthday" />
+                <input type="date" placeholder="dd-mm-yyyy" class="col-sm-4 form-control form-control-sm" id="birthday" name="birthday" required/>
             </div>
             <div class="row functionary-register">
                 <label class="col-sm-6 control-label small" for="gender">Sexo</label>
@@ -142,16 +142,16 @@
             </div>
             <div class="row functionary-register">
                 <label class="col-sm-6 control-label small" for="officePhone">Teléfono Oficina:</label>
-                <input class="col-sm-4 form-control form-control-sm" type="text" id="oficePhone" name="oficePhone">
+                <input class="col-sm-4 form-control form-control-sm" type="text" id="oficePhone" name="oficePhone" >
             </div>
             <div class="row functionary-register">
                 <label class="col-sm-6 control-label small" for="email">Correo electrónico:</label>
-                <input class="col-sm-4 form-control form-control-sm" type="email" id="mail" name="mail">
+                <input class="col-sm-4 form-control form-control-sm" type="email" id="mail" name="mail" required>
             </div>
             <p class="text-success">Aplica si el puesto lo amerita</p>
             <div class="row functionary-register">
                 <label class="col-sm-6 control-label small" for="plateCode">Código de placa:</label>
-                <select class="col-sm-5 custom-select custom-select-sm" id="idPlaca" name="idPlaca">
+                <select class="col-sm-5 custom-select custom-select-sm" id="idPlaca" name="idPlaca" >
                     <option value="Codigo1">Código1</option>
                     <option value="Codigo2">Código2</option>
                     <option value="Codigo3">Código3</option>
