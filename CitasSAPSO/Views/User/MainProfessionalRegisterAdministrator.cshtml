@@ -2,13 +2,15 @@
 @{
     ViewData["Title"] = "MainProfessionalRegister";
 }
-<form class="needs-validation" novalidate  asp-controller="Administrator" asp-action="MainProfessionalRegisterAdministrator" method="post">
+<link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+<script src="https://unpkg.com/boxicons@latest/dist/boxicons.js"></script>
+<form class="needs-validation" novalidate asp-controller="Administrator" asp-action="MainProfessionalRegisterAdministrator" method="post">
     <div class="row align-items-start">
         <div class="col">
             <p class="text-success">Datos Personales del Profesional</p>
             <div class="row professional-register">
                 <label class="col-sm-6 control-label small" for="Cedula">Numero de identificacion:</label>
-                <input  class="col-sm-4 form-control form-control-sm" type="text" id="Cedula" name="Cedula" required>
+                <input class="col-sm-4 form-control form-control-sm" type="text" id="Cedula" name="Cedula" required>
             </div>
             <div class="row professional-register">
                 <label class="col-sm-6 control-label small" for="Password">Contraseña:</label>
@@ -60,10 +62,7 @@
             </div>
             <div class="row professional-register">
                 <label class="col-sm-6 control-label small" for="placeNumber">Número de plaza</label>
-                <select class="col-sm-5 custom-select custom-select-sm" id="placeNumber" name="placeNumber">
-                    <option value="1">Uno</option>
-                    <option value="2">Dos</option>
-                </select>
+                <input class="col-sm-4 form-control form-control-sm" type="text" id="placeNumber" name="placeNumber">
             </div>
 
             <div class="professional-register" id="state">
@@ -108,42 +107,25 @@
             </div>
             <div class="row professional-register">
                 <label class="col-sm-6 control-label small" for="specialty">Especialidad:</label>
-                <select class="col-sm-5 custom-select custom-select-sm" id="specialty" name="specialty">
-                    <option value="Especialidad 1">Especialidad 1</option>
-                    <option value="Especialidad 2">Especialidad 2</option>
-                    <option value="Especialidad 3">Especialidad 3</option>
-                </select>
+                <input class="col-sm-4 form-control form-control-sm" type="text" id="specialty" name="specialty">
             </div>
             <div class="row professional-register">
                 <label class="col-sm-6 control-label small" for="schoolCode">Código de colegio:</label>
                 <input class="col-sm-4 form-control form-control-sm" type="number" id="schoolCode" name="schoolCode">
             </div>
-            <div class="row professional-register">
+            <div class="row functionary-register">
                 <label class="col-sm-6 control-label small" for="province">Provincia</label>
-                <select class="col-sm-5 custom-select custom-select-sm" id="province" name="province">
-                    <option value="san jose">San José</option>
-                    <option value="heredia">Heredia</option>
-                    <option value="cartago">Cartago</option>
-                    <option value="alajuela">Alajuela</option>
-                    <option value="puntarenas">Puntarenas</option>
-                    <option value="guanacaste">Guanacaste</option>
-                    <option value="limon">Limón</option>
+                <select class="col-sm-5 custom-select custom-select-sm" id="province" name="province" onchange="activeCanton(); return false;">
                 </select>
             </div>
-            <div class="row professional-register">
+            <div class="row functionary-register">
                 <label class="col-sm-6 control-label small" for="canton">Cantón</label>
-                <select class="col-sm-5 custom-select custom-select-sm" id="canton" name="canton">
-                    <option value="Canton1">Canton1</option>
-                    <option value="Canton1">Canton1</option>
-                    <option value="Canton3">Canton3</option>
+                <select class="col-sm-5 custom-select custom-select-sm" id="canton" name="canton" onchange="activeDistrict(); return false;">
                 </select>
             </div>
-            <div class="row professional-register">
+            <div class="row functionary-register">
                 <label class="col-sm-6 control-label small" for="district">Distrito</label>
                 <select class="col-sm-5 custom-select custom-select-sm" id="district" name="district">
-                    <option value="Distrito1">Distrito1</option>
-                    <option value="Distrito2">Distrito2</option>
-                    <option value="Distrito3">Distrito3</option>
                 </select>
             </div>
             <div class="row professional-register">
@@ -159,7 +141,7 @@
 
         </div>
         <div class="col justify-content-end">
-            <a onclick="registerProfessional()" class="btn btn-success btn-sm" style="margin-left: 100px;">Aceptar</a>            
+            <a onclick="registerProfessional()" class="btn btn-success btn-sm" style="margin-left: 100px;">Aceptar</a>
         </div>
     </div>
 </form>
@@ -167,3 +149,11 @@
     <span id="resultado"></span>
 </div>
 <script src="~/Scripts/Site.js"></script>
+
+<script>
+    window.onload = function () {
+        $("#district").prop("disabled", true);
+        $("#canton").prop("disabled", true);
+        loadGeographicInfo();
+    }
+</script>

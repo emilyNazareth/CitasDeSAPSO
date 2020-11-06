@@ -38,10 +38,12 @@
     <div class="col-sm ">
         <div class="form-group row scheduleDatesFilter">
             <label class="col-sm-4 col-form-label-sm" for="assistance">Asistencia</label>
-            <select class="col-sm-4 custom-select custom-select-sm" id="assistance" name="assistance">
-                <option value = 0>Seleccione..</option>
-                <option value="1">Asistencia1</option>
-                <option value="1">Asistencia2</option>
+            <select class="col-sm-5 custom-select custom-select-sm" id="assistance" name="assistance">
+                <option value=0>Seleccione..</option>
+                @foreach (CitasSAPSO.Models.CatalogueModels _assitance in ViewBag.assistance)
+                {
+                    <option value="@_assitance.ID">@_assitance.Name</option>
+                }
             </select>
         </div>
     </div>
@@ -93,11 +95,7 @@
     <div class="col-sm ">
         <div class="form-group row scheduleDatesFilter">
             <label class="col-sm-4 col-form-label-sm" for="dateStatus">Estado Cita</label>
-            <select class="col-sm-4 custom-select custom-select-sm" id="dateStatus" name="dateStatus">
-                <option value="0">Seleccione..</option>
-                <option value="1">Estado Cita1</option>
-                <option value="2">Estado Cita2</option>
-            </select>
+            <input type="text" class="col-sm-4 form-control form-control-sm" id="dateStatus" name="dateStatus" />
         </div>
         <div class="form-group row scheduleDatesFilter">
             <label class="col-sm-4 col-form-label-sm" for="consecutive">Consecutivo</label>
@@ -144,6 +142,8 @@
         var professional = $('#professional').val();
         var gender = $('#gender').val();
         var dateStatus = $('#dateStatus').val();
+        if (dateStatus == "")
+            dateStatus = '0';
         var consecutive = $('#consecutive').val();
         if (consecutive == "")
             consecutive = 0;
