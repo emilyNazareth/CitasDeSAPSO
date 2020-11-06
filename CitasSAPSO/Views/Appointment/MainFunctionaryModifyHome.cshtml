@@ -65,37 +65,9 @@
                         <option value="Segundaria">Segundaria</option>
                     </select>
                 </div>
-                <div class="row functionary-register">
-                    <label class="col-sm-6 control-label small" for="province">Provincia</label>
-                    <select class="col-sm-5 custom-select custom-select-sm" id="province" name="province">
-                        <option value=@data.Province selected>@data.Province</option>
-                        <option value="san jose">San José</option>
-                        <option value="heredia">Heredia</option>
-                        <option value="cartago">Cartago</option>
-                        <option value="alajuela">Alajuela</option>
-                        <option value="puntarenas">Puntarenas</option>
-                        <option value="guanacaste">Guanacaste</option>
-                        <option value="limon">Limón</option>
-                    </select>
-                </div>
-                <div class="row functionary-register">
-                    <label class="col-sm-6 control-label small" for="canton">Cantón</label>
-                    <select class="col-sm-5 custom-select custom-select-sm" id="canton" name="canton">
-                        <option value=@data.Canton selected>@data.Canton</option>
-                        <option value="Canton1">Canton1</option>
-                        <option value="Canton2">Canton2</option>
-                        <option value="Canton3">Canton3</option>
-                    </select>
-                </div>
-                <div class="row functionary-register">
-                    <label class="col-sm-6 control-label small" for="district">Distrito</label>
-                    <select class="col-sm-5 custom-select custom-select-sm" id="district" name="district">
-                        <option value=@data.District selected>@data.District</option>
-                        <option value="Distrito1">Distrito1</option>
-                        <option value="Distrito2">Distrito2</option>
-                        <option value="Distrito3">Distrito3</option>
-                    </select>
-                </div>
+
+
+
                 <div class="row functionary-register">
                     <label class="col-sm-6 control-label small" for="civilStatus">Estado civil:</label>
                     <select class="col-sm-5 custom-select custom-select-sm" id="civilStatus" name="civilStatus">
@@ -106,6 +78,22 @@
                         <option value="Soltero(a)">Soltero(a)</option>
                     </select>
                 </div>
+
+                <div class="row functionary-register">
+                    <label class="col-sm-6 control-label small" for="province">Provincia</label>
+                    <input class="col-sm-4 form-control form-control-sm" type="text" id="province" name="province" value="@data.Province">
+                </div>
+                <div class="row functionary-register">
+                    <label class="col-sm-6 control-label small" for="canton">Cantón</label>
+                    <input class="col-sm-4 form-control form-control-sm" type="text" id="canton" name="canton" value="@data.Canton">
+                </div>
+                <div class="row functionary-register">
+                    <label class="col-sm-6 control-label small" for="district">Distrito</label>
+                    <input class="col-sm-4 form-control form-control-sm" type="text" id="district" name="district" value="@data.District">
+
+                </div>
+
+
                 <div class="row functionary-register">
                     <label class="col-sm-6 control-label small" for="address">Dirección:</label>
                     <textarea class="col-sm-6 form-control form-control-sm" id="address" name="address" rows="1">@data.Address</textarea>
@@ -117,18 +105,6 @@
                 <div class="row functionary-register">
                     <label class="col-sm-4 control-label small" for="assistance">Asistencia</label>
                     <select class="col-sm-5 custom-select custom-select-sm" id="assistance" name="assistance">
-                        @if (@data.Assistance == 4)
-                        {
-                            <option value="4" selected>Pendiente</option>
-                        }
-                        else if (@data.Assistance == 5)
-                        {
-                            <option value="5" selected>En Proceso</option>
-                        }
-                        else if (@data.Assistance == 6)
-                        {
-                            <option value="6" selected> Cancelada</option>
-                        }
 
                         @foreach (CitasSAPSO.Models.CatalogueModels assistance in ViewBag.assistance)
                         {
@@ -190,13 +166,9 @@
                 </div>
                 <p class="text-success">Aplica si el puesto lo amerita</p>
                 <div class="row functionary-register">
-                    <label class="col-sm-6 control-label small" for="plateCode">Código de placa:</label>
-                    <select class="col-sm-5 custom-select custom-select-sm" id="idPlaca" name="idPlaca">
-                        <option value=@data.IdPlaca selected>@data.IdPlaca</option>
-                        <option value="Codigo1">Código1</option>
-                        <option value="Codigo2">Código2</option>
-                        <option value="Codigo3">Código3</option>
-                    </select>
+                    <label class="col-sm-6 control-label small" for="idPlaca">Id placa</label>
+                    <input class="col-sm-4 form-control form-control-sm" type="text" id="idPlaca" name="idPlaca" value="@data.IdPlaca">
+
                 </div>
                 <div class="row functionary-register">
                     <label class="col-sm-6 control-label small" for="expDate">Fecha de vecimiento portación de armas</label>
@@ -204,19 +176,11 @@
                 </div>
                 <br />
                 <div class="row justify-content-end">
-                    <!--Contorlar con Sessión-->
-                    <!----
-    <a class="btn btn-success btn-sm" asp-controller="Home" asp-action="Index">Atrás</a>
-    <a class="btn btn-success btn-sm" asp-controller="Administrator" asp-action="AdministratorDashboard">Atrás(Admin)</a>
-
-    <a class="btn btn-success btn-sm" style="margin-left: 5px;" asp-controller="Home" asp-action="ScheduleDates">Siguiente</!-->
 
 
-
-                    
                     @Html.ActionLink("Atrás", "ConsultDateAdministrator", "User", null, new { @class = "btn btn-success btn-sm" })
                     <input class="btn btn-success btn-sm" type="submit" id="siguiente" name="siguiente" value="Siguiente" style="margin-left: 5px;" />
-                    @*Html.ActionLink("Siguiente", "ScheduleDatesHome", "Home", null, new { @class = "btn btn-success btn-sm" })*@
+
 
                 </div>
             </div>
@@ -228,4 +192,6 @@
     /*  window.onload = function () {
           loadFunctionaryRegister();
       }*/
+
+ 
 </script>

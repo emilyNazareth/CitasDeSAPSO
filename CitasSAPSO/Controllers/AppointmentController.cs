@@ -123,6 +123,8 @@ namespace CitasSAPSO.Controllers
             CatalogueBusiness catalogueBusiness = new CatalogueBusiness();
             ViewBag.subprocess = catalogueBusiness.GetCatalogueFunctionary("subproceso");
             ViewBag.process = catalogueBusiness.GetListCatalogue(catalogueProcess);
+            Session["functionary"] = functionary;
+            ViewBag.functionary = functionary;
             return View("ScheduleDatesHome");
         }
 
