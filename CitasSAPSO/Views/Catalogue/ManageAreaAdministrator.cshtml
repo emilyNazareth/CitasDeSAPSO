@@ -7,7 +7,7 @@
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <center>
     <form id="login-form">
-        <h3 class="text-center text-info">Administración de area</h3>
+        <h3 class="titles">Administración de área</h3>
         <div class="form-group">
             <input type="number" name="id" id="id" class="form-control" placeholder="ID" readonly>
         </div>
@@ -17,24 +17,24 @@
 
         <div class="row justify-content-end">
             <div>
-                <a class="btn btn-success" id="updateArea" name="updateArea" onclick="updateArea($('#id').val(),
+                <a class="btn btn-success" id="updateArea" name="updateArea"  style="margin-right: 1px; display: none" onclick="updateArea($('#id').val(),
                              $('#description').val())"> Modificar</a>
             </div>
             <div>
-                <a class="btn btn-success" id="registerArea" name="registerArea" style="margin-left: 1px;" onclick="registerArea($('#description').val())">Nuevo</a>
+                <a class="btn btn-success" id="registerArea" name="registerArea" style="display: inline"  onclick="registerArea($('#description').val())">Nuevo</a>
             </div>
             <div>
-                <a class="btn btn-success" id="deleteArea" name="deleteArea" style="margin-left: 1px;" onclick="deleteArea($('#id').val())">Eliminar</a>
+                <a class="btn btn-success" id="deleteArea" name="deleteArea" style="margin-right: 1px; display: none" onclick="deleteArea($('#id').val())">Eliminar</a>
             </div>
             <div>
-                <a class="btn btn-success" id="cleanArea" name="cleanArea" style="margin-left: 1px;" onclick="cleanArea()">Limpiar</a>
+                <a class="btn btn-success" id="cleanArea" name="cleanArea" style="display: inline" onclick="cleanArea()">Limpiar</a>
             </div>
         </div>
         <span id="messageSpanId"></span>
         <br />
         <br />
 
-        <h5 class="text-center text-info">Lista de registros almacenados</h5>
+        <h5 class="titles">Lista de registros almacenados</h5>
         <br />
 
         <table id="tableID" class="table table-sm">
@@ -71,6 +71,9 @@
         function cleanArea() {
             document.getElementById("login-form").reset();
             $("#messageSpanId").html("");
+            document.getElementById("deleteArea").style.display = "none";
+            document.getElementById("updateArea").style.display = "none";
+            document.getElementById("registerArea").style.display = "inline"; 
         }
         //metodos para llamados a modificar, agregar y borrar con ajax
         function updateArea(id, description) {
@@ -107,7 +110,7 @@
                         if (response == "Exitoso") {
                             location.href = "/Catalogue/ManageAreaAdministrator";
                         } else {
-                            $("#messageSpanId").html("No se pudo agregar");
+                            $("#messageSpanId").html(response);
                         }
                     }
                 }
@@ -143,6 +146,9 @@
             var description = value.next().text();
             $("#id").val(id);
             $("#description").val(description);
+            document.getElementById("deleteArea").style.display = "inline";
+            document.getElementById("updateArea").style.display = "inline";
+            document.getElementById("registerArea").style.display = "none"; 
         });
 
     </script>

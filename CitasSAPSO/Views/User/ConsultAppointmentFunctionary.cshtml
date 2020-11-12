@@ -4,13 +4,13 @@
 
 <center>
     <h3 class="titles">Citas</h3>
-    <p class="text-success"> Seleccione el tipo de búsqueda</p>
+    <p class="titles">Seleccione el tipo de b&uacutesqueda</p>
 </center>
 
 <center>
     <form id="search-form" action="/User/SearchAppointmentFunctionary" method="post">
         <div class="form-group row">
-            <label for="identificationInput" class="col-sm-7 col-form-label-sm">Cédula</label>
+            <label for="identificationInput" class="col-sm-7 col-form-label-sm">C&eacutedula</label>
             <input type="text" name="_FunctionaryId" id="_FunctionaryId" class="col-sm-5 form-control form-control-sm" required>
         </div>
         <div class="form-group row">
@@ -21,9 +21,6 @@
             <button class="btn btn-success btn-sm" type="submit">
                 Consultar
             </button>
-            @*<a class="btn btn-success btn-sm" id="updateAssistance" name="updateAssistance" onclick="searchAppointment()"> Consultar</a>*@
-            @*@Html.ActionLink("Consultar", "SearchAppointmentFunctionary", "User", new { _IdAppointment = $("_IdAppointment").val(), _FunctionaryId = $("_FunctionaryId").val() }, new { @class = "btn btn-success btn-sm" })*@
-
         </div>
     </form>
 </center>
@@ -36,8 +33,8 @@
                 <th scope="col">Nombre</th>
                 <th scope="col">Primer Apellido</th>
                 <th scope="col">Segundo Apellido</th>
-                <th scope="col">Cédula</th>
-                <th scope="col">Psicólogo</th>
+                <th scope="col">C&eacutedula</th>
+                <th scope="col">Psic&oacutelogo</th>
                 <th scope="col">Proceso</th>
                 <th scope="col">Actividad</th>
                 <th scope="col">Fecha</th>
@@ -88,14 +85,14 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Atrás</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Atr&aacutes</button>
                     <button type="button" class="btn btn-danger" onclick="deleteApppointment()">Confirmar</button>
                 </div>
             </div>
         </div>
     </div>
     <div class="row justify-content-end">
-        <a class="btn btn-success btn-sm" href="/Appointment/Index">Atrás</a>
+        <a class="btn btn-success btn-sm" href="/Appointment/Index">Atr&aacutes</a>
     </div>
 </div>
 
