@@ -4,8 +4,10 @@
 
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <center>
-    <form id="security-form" method="post">
-        <h3 class="text-center text-info">Administrar Seguridad</h3>
+
+    <form id="login-form" method="post">
+        <h3 class="titles">Administrar Seguridad</h3>
+
         <div class="form-group">
             <input type="text" name="id" id="id" class="form-control" placeholder="Cédula" readonly required >
         </div>
@@ -35,14 +37,14 @@
         </div>
         <span id="messageSpanId"></span>
 
-        <h5 class="text-center text-info">Lista de Usuarios almacenados</h5>
+        <h5 class="titles">Lista de Usuarios almacenados</h5>
 
         <div class="table-wrapper-scroll-y my-custom-scrollbar">
             <table id="tableID" class="table table-bordered table-striped mb-0">
                 <thead>
                     <tr>
                         <th scope="col"></th>
-                        <th scope="col">Cedula</th>
+                        <th scope="col">Cédula</th>
                         <th scope="col">Usuario</th>
                         <th scope="col">Rol</th>
                     </tr>

@@ -23,13 +23,18 @@ namespace CitasSAPSO.Controllers
         public ActionResult RegisterProcessAdministrator(String description)
 
         {
-            CatalogueModels catalogueProcess = new CatalogueModels();
-            catalogueProcess.Table = "proceso";
-            catalogueProcess.Name = description;
-            CatalogueBusiness catalogueBusiness = new CatalogueBusiness();
-            catalogueBusiness.RegisterCatalogueItem(catalogueProcess);
-            ViewBag.process = catalogueBusiness.GetListCatalogue(catalogueProcess);
-            return Json("Exitoso");
+            if (description != "")
+            {
+                CatalogueModels catalogueProcess = new CatalogueModels();
+                catalogueProcess.Table = "proceso";
+                catalogueProcess.Name = description;
+                CatalogueBusiness catalogueBusiness = new CatalogueBusiness();
+                catalogueBusiness.RegisterCatalogueItem(catalogueProcess);
+                ViewBag.process = catalogueBusiness.GetListCatalogue(catalogueProcess);
+                return Json("Exitoso");
+            }
+            return Json("Debe ingresar una descripción");
+
         }
 
         public ActionResult ModifyProcessAdministrator(int id, String description)
@@ -56,14 +61,18 @@ namespace CitasSAPSO.Controllers
         }
         public ActionResult RegisterSubprocessAdministrator(String description, int father)
         {
-            CatalogueModels catalogue = new CatalogueModels();
-            catalogue.Table = "subproceso";
-            catalogue.Name = description;
-            catalogue.FatherID = father;
-            CatalogueBusiness catalogueBusiness = new CatalogueBusiness();
-            catalogueBusiness.RegisterCatalogueItem(catalogue);
-            ViewBag.process = catalogueBusiness.GetListCatalogue(catalogue);
-            return Json("Exitoso");
+            if (description != "")
+            {
+                CatalogueModels catalogue = new CatalogueModels();
+                catalogue.Table = "subproceso";
+                catalogue.Name = description;
+                catalogue.FatherID = father;
+                CatalogueBusiness catalogueBusiness = new CatalogueBusiness();
+                catalogueBusiness.RegisterCatalogueItem(catalogue);
+                ViewBag.process = catalogueBusiness.GetListCatalogue(catalogue);
+                return Json("Exitoso");
+            }
+            return Json("Debe ingresar una descripción");
         }
 
         public ActionResult ModifySubprocessAdministrator(int id, String description, int father)
@@ -91,13 +100,17 @@ namespace CitasSAPSO.Controllers
         }
         public ActionResult RegisterActivityAdministrator(String description)
         {
-            CatalogueModels catalogue = new CatalogueModels();
-            catalogue.Table = "actividad";
-            catalogue.Name = description;
-            CatalogueBusiness catalogueBusiness = new CatalogueBusiness();
-            catalogueBusiness.RegisterCatalogueItem(catalogue);
-            ViewBag.process = catalogueBusiness.GetListCatalogue(catalogue);
-            return Json("Exitoso");
+            if (description != "")
+            {
+                CatalogueModels catalogue = new CatalogueModels();
+                catalogue.Table = "actividad";
+                catalogue.Name = description;
+                CatalogueBusiness catalogueBusiness = new CatalogueBusiness();
+                catalogueBusiness.RegisterCatalogueItem(catalogue);
+                ViewBag.process = catalogueBusiness.GetListCatalogue(catalogue);
+                return Json("Exitoso");
+            }
+            return Json("Debe ingresar una descripción");
         }
 
         public ActionResult ModifyActivityAdministrator(int id, String description)
@@ -123,14 +136,18 @@ namespace CitasSAPSO.Controllers
         }
         public ActionResult RegisterSubactivityAdministrator(String description, int father)
         {
-            CatalogueModels catalogue = new CatalogueModels();
-            catalogue.Table = "Subactividad";
-            catalogue.Name = description;
-            catalogue.FatherID = father;
-            CatalogueBusiness catalogueBusiness = new CatalogueBusiness();
-            catalogueBusiness.RegisterCatalogueItem(catalogue);
-            ViewBag.process = catalogueBusiness.GetListCatalogue(catalogue);
-            return Json("Exitoso");
+            if (description != "")
+            {
+                CatalogueModels catalogue = new CatalogueModels();
+                catalogue.Table = "Subactividad";
+                catalogue.Name = description;
+                catalogue.FatherID = father;
+                CatalogueBusiness catalogueBusiness = new CatalogueBusiness();
+                catalogueBusiness.RegisterCatalogueItem(catalogue);
+                ViewBag.process = catalogueBusiness.GetListCatalogue(catalogue);
+                return Json("Exitoso");
+            }
+            return Json("Debe ingresar una descripción");
         }
 
         public ActionResult ModifySubactivityAdministrator(int id, String description, int father)
@@ -159,13 +176,18 @@ namespace CitasSAPSO.Controllers
 
         public ActionResult RegisterPlaceAdministrator(String description)
         {
-            CatalogueModels cataloguePlace = new CatalogueModels();
-            cataloguePlace.Table = "puesto";
-            cataloguePlace.Name = description;
-            CatalogueBusiness catalogueBusiness = new CatalogueBusiness();
-            catalogueBusiness.RegisterCatalogueItem(cataloguePlace);
-            ViewBag.process = catalogueBusiness.GetListCatalogue(cataloguePlace);
-            return Json("Exitoso");
+            
+            if (description != "")
+            {
+                CatalogueModels cataloguePlace = new CatalogueModels();
+                cataloguePlace.Table = "puesto";
+                cataloguePlace.Name = description;
+                CatalogueBusiness catalogueBusiness = new CatalogueBusiness();
+                catalogueBusiness.RegisterCatalogueItem(cataloguePlace);
+                ViewBag.process = catalogueBusiness.GetListCatalogue(cataloguePlace);
+                return Json("Exitoso");
+            }
+            return Json("Debe ingresar una descripción");
         }
 
         public ActionResult ModifyPlaceAdministrator(int id, String description)
@@ -192,12 +214,16 @@ namespace CitasSAPSO.Controllers
 
         public ActionResult RegisterAreaAdministrator(String description)
         {
-            CatalogueModels catalogueArea = new CatalogueModels();
-            catalogueArea.Table = "area";
-            catalogueArea.Name = description;
-            CatalogueBusiness catalogueBusiness = new CatalogueBusiness();
-            catalogueBusiness.RegisterCatalogueItem(catalogueArea);
-            return Json("Exitoso");
+            if (description != "")
+            {
+                CatalogueModels catalogueArea = new CatalogueModels();
+                catalogueArea.Table = "area";
+                catalogueArea.Name = description;
+                CatalogueBusiness catalogueBusiness = new CatalogueBusiness();
+                catalogueBusiness.RegisterCatalogueItem(catalogueArea);
+                return Json("Exitoso");
+            }
+            return Json("Debe ingresar una descripción");
         }
 
         public ActionResult ModifyAreaAdministrator(int id, String description)
@@ -224,12 +250,16 @@ namespace CitasSAPSO.Controllers
 
         public ActionResult RegisterOfficeAdministrator(String description)
         {
-            CatalogueModels catalogueOficce = new CatalogueModels();
-            catalogueOficce.Table = "oficina";
-            catalogueOficce.Name = description;
-            CatalogueBusiness catalogueBusiness = new CatalogueBusiness();
-            catalogueBusiness.RegisterCatalogueItem(catalogueOficce);
-            return Json("Exitoso");
+            if (description != "")
+            {
+                CatalogueModels catalogueOficce = new CatalogueModels();
+                catalogueOficce.Table = "oficina";
+                catalogueOficce.Name = description;
+                CatalogueBusiness catalogueBusiness = new CatalogueBusiness();
+                catalogueBusiness.RegisterCatalogueItem(catalogueOficce);
+                return Json("Exitoso");
+            }
+            return Json("Debe ingresar una descripción");
         }
 
         public ActionResult ModifyOfficeAdministrator(int id, String description)
@@ -257,12 +287,17 @@ namespace CitasSAPSO.Controllers
 
         public ActionResult RegisterAssistanceAdministrator(String description)
         {
-            CatalogueModels catalogueAssitance = new CatalogueModels();
-            catalogueAssitance.Table = "asistencia";
-            catalogueAssitance.Name = description;
-            CatalogueBusiness catalogueBusiness = new CatalogueBusiness();
-            catalogueBusiness.RegisterCatalogueItem(catalogueAssitance);
-            return Json("Exitoso");
+            if (description != "")
+            {
+                CatalogueModels catalogueAssitance = new CatalogueModels();
+                catalogueAssitance.Table = "asistencia";
+                catalogueAssitance.Name = description;
+                CatalogueBusiness catalogueBusiness = new CatalogueBusiness();
+                catalogueBusiness.RegisterCatalogueItem(catalogueAssitance);
+                return Json("Exitoso");
+            }
+            return Json("Debe ingresar una descripción");
+
         }
 
         public ActionResult ModifyAssistanceAdministrator(int id, String description)
