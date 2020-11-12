@@ -5,7 +5,7 @@
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <center>
     <form id="login-form">
-        <h3 class="text-center text-info">Administración de asistencia</h3>
+        <h3 class="titles">Administración de asistencia</h3>
         <div class="form-group">
             <input type="number" name="id" id="id" class="form-control" placeholder="ID" readonly>
         </div>
@@ -15,24 +15,24 @@
 
         <div class="row justify-content-end">
             <div>
-                <a class="btn btn-success" id="updateAssistance" name="updateAssistance" onclick="updateAssistance($('#id').val(),
+                <a class="btn btn-success" id="updateAssistance" name="updateAssistance" style="margin-right: 1px; display: none" onclick="updateAssistance($('#id').val(),
                              $('#description').val())"> Modificar</a>
             </div>
             <div>
-                <a class="btn btn-success" id="registerAssistance" name="registerAssistance" style="margin-left: 1px;" onclick="registerAssistance($('#description').val())">Nuevo</a>
+                <a class="btn btn-success" id="registerAssistance" name="registerAssistance" style="display: inline"  onclick="registerAssistance($('#description').val())">Nuevo</a>
             </div>
             <div>
-                <a class="btn btn-success" id="deleteAssistance" name="deleteAssistance" style="margin-left: 1px;" onclick="deleteAssistance($('#id').val())">Eliminar</a>
+                <a class="btn btn-success" id="deleteAssistance" name="deleteAssistance" style="margin-right: 1px; display: none" onclick="deleteAssistance($('#id').val())">Eliminar</a>
             </div>
             <div>
-                <a class="btn btn-success" id="cleanAssistance" name="cleanAssistance" style="margin-left: 1px;" onclick="cleanAssistance()">Limpiar</a>
+                <a class="btn btn-success" id="cleanAssistance" name="cleanAssistance" style="display: inline" onclick="cleanAssistance()">Limpiar</a>
             </div>
         </div>
         <span id="messageSpanId"></span>
         <br />
         <br />
 
-        <h5 class="text-center text-info">Lista de registros almacenados</h5>
+        <h5 class="titles">Lista de registros almacenados</h5>
         <br />
 
         <table id="tableID" class="table table-sm">
@@ -71,6 +71,9 @@
     function cleanAssistance() {
         document.getElementById("login-form").reset();
         $("#messageSpanId").html("");
+        document.getElementById("deleteAssistance").style.display = "none";
+        document.getElementById("updateAssistance").style.display = "none";
+        document.getElementById("registerAssistance").style.display = "inline"; 
     }
     //metodos para llamados a modificar, agregar y borrar con ajax
     function updateAssistance(id, description) {
@@ -107,7 +110,7 @@
                     if (response == "Exitoso") {
                         location.href = "/Catalogue/ManageAssistanceAdministrator";
                     } else {
-                        $("#messageSpanId").html("No se pudo agregar");
+                        $("#messageSpanId").html(response);
                     }
                 }
             }
@@ -143,6 +146,9 @@
         var description = value.next().text();
         $("#id").val(id);
         $("#description").val(description);
+        document.getElementById("deleteAssistance").style.display = "inline";
+        document.getElementById("updateAssistance").style.display = "inline";
+        document.getElementById("registerAssistance").style.display = "none";
     });
 
 </script>
