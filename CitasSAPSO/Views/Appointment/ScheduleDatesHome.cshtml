@@ -28,7 +28,6 @@
                         {
                             <option value="@process.ID">@process.Name</option>
                         }
-                        <option value="0">Test</option>
                     </select>
                 </div>
             </div>
@@ -46,7 +45,7 @@
             <div class="col-sm">
                 <div class="form-group row scheduleDatesFilter">
                     <label class="col-sm-4 col-form-label-sm" for="professional">Profesional</label>
-                    <select class="col-sm-4 custom-select custom-select-sm" id="ProfessionalId" name="ProfessionalId">
+                    <select onChange=" update_table(); " class="col-sm-4 custom-select custom-select-sm" id="ProfessionalId" name="ProfessionalId">
                         @foreach (CitasSAPSO.Models.UserModels professional in ViewBag.professional)
                         {
                             <option value="@professional.Cedula">@professional.Name</option>
@@ -68,13 +67,13 @@
             <div class="col-sm ">
                 <div class="form-group row scheduleDatesFilter">
                     <label class="col-sm-4 control-label small" for="hour">Hora deseada</label>
-                    <input type="time" class="col-sm-4 form-control form-control-sm" id="Hour" name="Hour" required />
+                    <input type="time" onChange=" update_table(); " class="col-sm-4 form-control form-control-sm" id="Hour" name="Hour" required />
                 </div>
             </div>
             <div class="col-sm ">
                 <div class="form-group row scheduleDatesFilter">
                     <label class="col-sm-4 control-label small" for="date">Fecha: </label>
-                    <input type="date" class="col-sm-4 form-control form-control-sm" id="date" />
+                    <input type="date" onChange="update_table(); " class="col-sm-4 form-control form-control-sm" id="date" />
                 </div>
             </div>
         </div>
@@ -123,9 +122,9 @@
 
             </div>
         </div>
-        <div class="row" id="incidente">
-            <!--Proceso incidente-->
-            <h3>Se Enviará un formulario a su correo electronico registrado</h3>
+        <!--<div class="row" id="incidente">-->
+        <!--Proceso incidente-->
+        <!--<h3>Se Enviará un formulario a su correo electronico registrado</h3>
 
         </div>
         <div class="row" id="armas">
@@ -133,16 +132,16 @@
 
         </div>
 
-        <div class="row" id="capituloV">
-            <!--Proceso capituloV-->
-            <h3>Se Enviará un formulario a su correo electronico registrado</h3>
+        <div class="row" id="capituloV">-->
+        <!--Proceso capituloV-->
+        <!--<h3>Se Enviará un formulario a su correo electronico registrado</h3>
 
         </div>
-        <div class="row" id="charlas">
-            <!--Proceso capituloV-->
-            <h3>Su solicitud será enviada</h3>
+        <div class="row" id="charlas">-->
+        <!--Proceso capituloV-->
+        <!--<h3>Su solicitud será enviada</h3>
 
-        </div>
+        </div>-->
         <input type="number" id="FunctionaryId" name="FunctionaryId" value="@functionary.Cedula" hidden />
         @*<input type="number" id="FunctionaryId" name="FunctionaryId" value="305050946" hidden />*@
         <input type="text" id="Patient" name="Patient" value="paciente" hidden />
@@ -150,7 +149,7 @@
         <br />
         <div class="row">
             <div class="col-sm-11 scheduleDatesTable">
-                @{Html.RenderPartial("WeekTableHome");}
+                <div class="timetable"></div>
             </div>
             <div class="col-sm-1">
                 @Html.ActionLink("Atrás", "MainFunctionaryRegisterHome", "Appointment", null, new { @class = "btn btn-success btn-sm" })
@@ -165,11 +164,45 @@
     </div>
 </div>
 
+<script type="text/javascript" src="~/Scripts/timetable.js"></script>
 
 <script>
-    window.onload = function () {
-        loadScheduleDates();
+    function init_table() {
+        var timetable = new Timetable();
+
+
+        timetable.setScope(7, 18);
+        timetable.addLocations(['lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado']);
+
+        var renderer = new Timetable.Renderer(timetable);
+        renderer.draw('.timetable');
     }
+    init_table();
+
+    function update_table() {
+        var timetable = new Timetable();
+
+        timetable.setScope(7, 18);
+        timetable.addLocations(['lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado']);
+
+        var renderer = new Timetable.Renderer(timetable);
+        renderer.draw('.timetable');
+
+        var profesional = $('#ProfessionalId').val();
+        var date = $('#date').val();
+        var hour = $('#Hour').val();
+
+        var formatDateInit = new Date(date.substr(0, 10) + ' ' + hour);
+        var formatDateEnd = new Date(date.substr(0, 10) + ' ' + hour);
+        var day = formatDateInit.toLocaleDateString('es-MX', { weekday: 'long' });
+        hour = formatDateEnd.getHours() + 2;
+        formatDateEnd.setHours(hour);
+ 
+        timetable.addEvent(profesional, day, formatDateInit, formatDateEnd, null);
+        renderer.draw('.timetable');
+
+    }
+
 
     function saveAppointment2() {
 
@@ -207,7 +240,9 @@
                 url: '/Appointment/SaveAppointment',
                 type: 'post',
                 success: function (response) {
-                    location.href = "/Appointment/DateConfirmationHome";
+                    if (response == 'ok') {
+                        location.href = "/Appointment/DateConfirmationHome";
+                    }
                 }
 
             }

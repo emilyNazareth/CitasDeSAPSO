@@ -165,8 +165,11 @@
 
         for (index in data) {
             var formatDateInit = new Date(data[index].Date.substr(0, 9) + ' ' + data[index].Hour);
-            var formatDateEnd = new Date(data[index].Date.substr(0, 9) + ' ' + (data[index].Hour + 1));
+            var formatDateEnd = new Date(data[index].Date.substr(0, 9) + ' ' + data[index].Hour);
             var day = formatDateInit.toLocaleDateString('es-MX', { weekday: 'long' });
+            var hour = formatDateEnd.getHours() + 2;
+            formatDateEnd.setHours(hour);
+            
             var options = {
                 appointment: data[index],
                 url: "/Appointment/ShowAppointmentDetail?FunctionaryId=" +
