@@ -4,13 +4,13 @@
 
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <center>
-    <form id="login-form" method="post">
+    <form id="security-form" method="post">
         <h3 class="text-center text-info">Administrar Seguridad</h3>
         <div class="form-group">
-            <input type="text" name="id" id="id" class="form-control" placeholder="Cédula" readonly>
+            <input type="text" name="id" id="id" class="form-control" placeholder="Cédula" readonly required >
         </div>
         <div class="form-group">
-            <input type="text" name="userName" id="userName" class="form-control" placeholder="Nombre de Usuario" readonly>
+            <input type="text" name="userName" id="userName" class="form-control" placeholder="Nombre de Usuario" readonly required>
         </div>
         <div class="form-group row">
             <label class="col-sm-4 col-form-label-sm" for="role">Rol</label>
@@ -27,18 +27,15 @@
 
         <div class="row justify-content-end">
             <div>
-                <a class="btn btn-success" id="registerPlace" name="registerPlace" style="margin-right: 1px;" onclick="assignRole($('#id').val(), $('#role').val(),$('#password').val() )">Asignar</a>
+                <a class="btn btn-success btn-sm" id="registerPlace" name="registerPlace" style="margin-right: 1px;" onclick="assignRole($('#id').val(), $('#role').val(),$('#password').val() )">Asignar</a>
             </div>
             <div>
-                <a class="btn btn-success" id="cleanPlace" name="cleanPlace" onclick="cleanProcess()">Limpiar</a>
+                <a class="btn btn-success btn-sm" id="cleanPlace" name="cleanPlace" onclick="cleanProcess()">Limpiar</a>
             </div>
         </div>
         <span id="messageSpanId"></span>
-        <br />
-        <br />
 
         <h5 class="text-center text-info">Lista de Usuarios almacenados</h5>
-        <br />
 
         <div class="table-wrapper-scroll-y my-custom-scrollbar">
             <table id="tableID" class="table table-bordered table-striped mb-0">
@@ -113,8 +110,16 @@
 
         });
 
+        function isEmpty(str) {
+            return (!str || 0 === str.length);
+        }
   
         function assignRole(id, role, password) {
+            if (isEmpty(id) || isEmpty(role) || isEmpty(password)) {
+                alert("Datos inválidos");
+                return 0;
+            }
+
             var parameters = { "id": id, "role": role, "password": password};
             $.ajax(
                 {
