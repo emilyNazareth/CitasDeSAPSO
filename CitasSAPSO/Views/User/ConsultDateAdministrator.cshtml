@@ -111,11 +111,13 @@
     </div>
 </div>
 
-<div class="row administratorConsultTable">
-    @{Html.RenderPartial("~/Views/User/ConsultTableFunctionary.cshtml");}
-    <div class="row justify-content-end">        
-            @Html.ActionLink("Atrás", "DashboardAdministrator", "User", null, new { @class = "btn btn-success btn-sm" })        
+<div class="row">
+    <div class="administratorConsultTable">
+        @{Html.RenderPartial("~/Views/User/ConsultTableFunctionary.cshtml");}
     </div>
+</div>
+<div class=" row justify-content-end">
+    @Html.ActionLink("Atrás", "DashboardAdministrator", "User", null, new { @class = "btn btn-success btn-sm" })
 </div>
 
 <script>

@@ -76,6 +76,13 @@ body, html {
     overflow: auto;
 }
 
+.administratorConsultTable {
+    position: relative;
+    height: 200px;
+    width: 1000px;
+    overflow: auto;
+} 
+
 .table-wrapper-scroll-y {
     display:block;
 }
