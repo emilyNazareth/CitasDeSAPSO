@@ -188,6 +188,16 @@
             return 0;
         }
 
+        if (SubprocessId == -1) {
+            alert("no hay subproceso");
+            return 0;
+        }
+
+        if (ProfessionalId == -1) {
+            alert("no hay profesionales");
+            return 0;
+        }
+
         var parameters =
         {
             "Functionary": { "Cedula": FunctionaryId },
