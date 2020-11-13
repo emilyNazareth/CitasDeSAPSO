@@ -6,9 +6,14 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    
+
     <link rel="stylesheet" href="~/Scripts/timetablejs.css">
     <link rel="stylesheet" href="~/Scripts/demo.css">
+
+    <link href='~/Scripts/fullcalendar/main.css' rel='stylesheet' />
+    <script src='~/Scripts/fullcalendar/main.js'></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
 </head>
 <body>
     <div class="bg1">
@@ -22,6 +27,9 @@
                 </div>
             </div>
             <div style="margin-top: 1em;">
+   
+
+
                 @RenderBody()
             </div>
         </div>

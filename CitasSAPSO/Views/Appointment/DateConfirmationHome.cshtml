@@ -9,15 +9,15 @@
     </div>
     <div class="row">
         <div class="col-sm-12">
-            <div class="timetable"></div>
-        </div>
+            <div id='calendar'></div>
+            </div>
 
     </div>
     <div class="row">
         <!--Controlar con Sesión-->
-        @if (Session["functionary"] != null)
+        @if (Session["functionary"] == null)
         {
-            @Html.ActionLink("Cerrar Sesión", "LogOut", "User", null, new { @class = "nav-link" })
+            @Html.ActionLink("Cerrar Sesión", "LogOut", "User", null, new { @class = "btn btn-success btn-sm" })
         }
         else
         {
@@ -28,29 +28,23 @@
     </div>
 </center>
 
-<script type="text/javascript" src="~/Scripts/timetable.js"></script>
 
 <script>
-    var timetable = new Timetable();
-
-    timetable.setScope(7, 18);
-    //timetable.useTwelveHour();
-    timetable.addLocations(['lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado']);
-
-    var renderer = new Timetable.Renderer(timetable);
-    console.log('test');
     var appointment = @Html.Raw(Json.Encode(ViewBag.appointment));
-    console.log(appointment);
 
-    var formatDateInit = new Date(appointment.Date.substr(0, 10) + ' ' + appointment.Hour);
-    var formatDateEnd = new Date(appointment.Date.substr(0, 10) + ' ' + appointment.Hour);
-    var day = formatDateInit.toLocaleDateString('es-MX', { weekday: 'long' });
-    hour = formatDateEnd.getHours() + 2;
-    formatDateEnd.setHours(hour);
+    var date = new Date(appointment.Date + ' ' + appointment.Hour + ':00');
 
+    var calendarEl = document.getElementById('calendar');
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'timeGridWeek',
+        events: [
+            {
+                title: appointment.Functionary.Cedula,
+                start: date,
+            }
+        ]
 
-    timetable.addEvent('Su cita se a guardado de forma exitosa en este periodo', day, formatDateInit, formatDateEnd, null);
-    renderer.draw('.timetable');
-
+    });
+    calendar.render();
 
 </script>

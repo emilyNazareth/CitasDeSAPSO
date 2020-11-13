@@ -366,6 +366,40 @@ namespace CitasSAPSO.Data
 
             return appointments;
         }
+
+        public List<AppointmentModels> getProfessinalScheldule(int professionalId)
+        {
+            string sqlQuery = $"exec sp_obtener_agenda_profesional " + professionalId + " ;";
+            List<AppointmentModels> appointments = new List<AppointmentModels>();
+
+            using (SqlCommand command = new SqlCommand(sqlQuery, connection))
+            {
+                command.CommandType = CommandType.Text;
+                command.CommandText = sqlQuery;
+                connection.Open();
+                SqlDataReader responseReader = command.ExecuteReader();
+
+                while (responseReader.Read())
+                {
+                    AppointmentModels appointment = new AppointmentModels();
+                    appointment.Id = Int32.Parse(responseReader["pk_id_cita"].ToString());
+                    appointment.Functionary.Cedula = Int32.Parse(responseReader["pk_cedula_usuario"].ToString());
+                    appointment.Functionary.Name = responseReader["tc_nombre"].ToString();
+                    appointment.Functionary.FirstLastName = responseReader["tc_primer_apellido"].ToString();
+                    appointment.Functionary.SecondLastName = responseReader["tc_segundo_apellido"].ToString();
+                    appointment.Date = responseReader["tf_fecha"].ToString();
+                    appointment.Hour = responseReader["tc_hora"].ToString();
+                    appointment.Professional.Cedula = Int32.Parse(responseReader["fk_id_profesional"].ToString());
+                    appointment.SubProcess.Name = responseReader["tc_nombre_proceso"].ToString();
+                    appointment.SubActivity.Name = responseReader["tc_nombre_actividad"].ToString();
+                    appointments.Add(appointment);
+                }
+
+                connection.Close();
+            }
+
+            return appointments;
+        }
     }
 
 }
