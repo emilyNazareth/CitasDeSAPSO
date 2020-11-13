@@ -181,7 +181,7 @@ namespace CitasSAPSO.Data
         public List<UserModels> SearchProfessional(UserModels _professional)
         {
             List<UserModels> professionales = new List<UserModels>();
-            string sqlQuery = $"exec sp_buscar_profesional " + _professional.Cedula + ", '" + _professional.FirstLastName + "' , '" +
+            string sqlQuery = $"exec sp_buscar_profesional " + _professional.Cedula + ", '" + _professional.Name + "' , '" +
            _professional.SecondLastName + "' ;";
             using (SqlCommand command = new SqlCommand(sqlQuery, connection))
             {
