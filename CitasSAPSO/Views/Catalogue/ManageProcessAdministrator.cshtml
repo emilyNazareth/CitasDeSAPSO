@@ -5,7 +5,7 @@
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <center>
     <form id="login-form" method="post">
-        <h3 class="text-center text-info">Administración de proceso</h3>
+        <h3 class="titles">Administración de proceso</h3>
         <div class="form-group">
             <input type="number" name="id" id="id" class="form-control" placeholder="ID" readonly>
         </div>
@@ -15,24 +15,24 @@
 
         <div class="row justify-content-end">
             <div>
-                <a class="btn btn-success" id="updatePlace" name="updatePlace" onclick="updateProcess($('#id').val(),
+                <a class="btn btn-success" id="updatePlace" name="updatePlace" style="margin-right: 1px; display: none" onclick="updateProcess($('#id').val(),
                              $('#description').val())"> Modificar</a>
             </div>
             <div>
-                <a class="btn btn-success" id="registerPlace" name="registerPlace" style="margin-right: 1px;" onclick="registerProcess($('#description').val())">Nuevo</a>
+                <a class="btn btn-success" id="registerPlace" name="registerPlace"  style="display: inline" onclick="registerProcess($('#description').val())">Nuevo</a>
             </div>
             <div>
-                <a class="btn btn-success" id="deletePlace" name="deletePlace" style="margin-right: 1px;" onclick="deleteProcess($('#id').val())">Eliminar</a>
+                <a class="btn btn-success" id="deletePlace" name="deletePlace" style="margin-right: 1px; display: none" onclick="deleteProcess($('#id').val())">Eliminar</a>
             </div>
             <div>
-                <a class="btn btn-success" id="cleanPlace" name="cleanPlace" onclick="cleanProcess()">Limpiar</a>
+                <a class="btn btn-success" id="cleanPlace" name="cleanPlace" style="display: inline" onclick="cleanProcess()">Limpiar</a>
             </div>
         </div>
         <span id="messageSpanId"></span>
         <br />
         <br />
 
-        <h5 class="text-center text-info">Lista de registros almacenados</h5>
+        <h5 class="titles">Lista de registros almacenados</h5>
         <br />
 
         <table id="tableID" class="table table-sm">
@@ -69,6 +69,9 @@
     function cleanProcess() {
         document.getElementById("login-form").reset();
         $("#messageSpanId").html("");
+        document.getElementById("deletePlace").style.display = "none";
+        document.getElementById("updatePlace").style.display = "none";
+        document.getElementById("registerPlace").style.display = "inline"; 
     }
 
     //obtener valores de los campos seleccionados de la tabla
@@ -79,6 +82,9 @@
         var description = value.next().text();
         $("#id").val(id);
         $("#description").val(description);
+        document.getElementById("deletePlace").style.display = "inline";
+        document.getElementById("updatePlace").style.display = "inline";
+        document.getElementById("registerPlace").style.display = "none"; 
     });
 
     //metodos para llamados a modificar, agregar y borrar con ajax
@@ -116,7 +122,7 @@
                     if (response == "Exitoso") {
                         location.href = "/Catalogue/ManageProcessAdministrator";
                     } else {
-                        $("#messageSpanId").html("No se pudo agregar");
+                        $("#messageSpanId").html(response);
                     }
                 }
             }

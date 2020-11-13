@@ -76,6 +76,13 @@ body, html {
     overflow: auto;
 }
 
+.administratorConsultTable {
+    position: relative;
+    height: 200px;
+    width: 1000px;
+    overflow: auto;
+} 
+
 .table-wrapper-scroll-y {
     display:block;
 }
@@ -89,8 +96,9 @@ body, html {
 .titles {
     margin: 0;
     font: bold;
-    color: #f87c28;
+    color: #FF9900 !important;
 }
+
 
 .scheduleDatesTable {
     font-size: 10px;
@@ -121,4 +129,6 @@ body, html {
     background-color: #FF9900 !important;
     border-color: #FF9900 !important;
 }
+
+
 
