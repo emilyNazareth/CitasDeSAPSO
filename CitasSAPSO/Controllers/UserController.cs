@@ -152,8 +152,11 @@ namespace CitasSAPSO.Controllers
             catalogueProcess.Table = "asistencia";
             ViewBag.assistance = catalogueBusiness.GetListCatalogue(catalogueProcess);
 
-        
-            
+            //temporal para cargar los datos de las citas en la nueva agenda porque los filtros estan pal tigre 
+            AppointmentBusiness appointmentBusiness = new AppointmentBusiness();
+            List<AppointmentModels> appointmentList = appointmentBusiness.GetAppointmentsByFilter();
+            ViewBag.appointmentList = appointmentList;
+            //---------------------------------------------------------------
             return View("DashboardProfessional");
         }
 
@@ -198,6 +201,7 @@ namespace CitasSAPSO.Controllers
 
             AppointmentBusiness appointmentBusiness = new AppointmentBusiness();
             List<AppointmentModels> appointmentList = appointmentBusiness.SearchAppointmentsForProfesional(appointment, initialDate, finalDate, age);
+            
             return JsonConvert.SerializeObject(appointmentList);
         }
 
@@ -251,5 +255,13 @@ namespace CitasSAPSO.Controllers
             return JsonConvert.SerializeObject(UserList);
         }
 
+        [HttpPost]
+        [AllowAnonymous]
+        public string GetProfesionalScheldule(int professionalId)
+        {
+            AppointmentBusiness appointmentBusiness = new AppointmentBusiness();
+            List<AppointmentModels> appointmentList = appointmentBusiness.getProfessinalScheldule(professionalId);
+            return JsonConvert.SerializeObject(appointmentList);
+        }
     }
 }

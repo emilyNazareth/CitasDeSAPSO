@@ -58,6 +58,12 @@ namespace CitasSAPSO.Business
             AppointmentData appointmentData = new AppointmentData();
             appointmentData.DeleteAppointment(appointment);
         }
+        public List<AppointmentModels> getProfessinalScheldule(int professionalId)
+        {
+            AppointmentData appointmentData = new AppointmentData();
+            return appointmentData.getProfessinalScheldule(professionalId);
+        }
+
 
 
     }

@@ -8,16 +8,16 @@
         Se envió a su correo un formulario que debe presentar el día de la cita
     </div>
     <div class="row">
-        <div class="col-sm-11">
-            @{Html.RenderPartial("WeekTableHome");}
-        </div>
+        <div class="col-sm-12">
+            <div id='calendar'></div>
+            </div>
 
     </div>
     <div class="row">
         <!--Controlar con Sesión-->
-        @if (Session["functionary"] != null)
+        @if (Session["functionary"] == null)
         {
-            @Html.ActionLink("Cerrar Sesión", "LogOut", "User", null, new { @class = "nav-link" })
+            @Html.ActionLink("Cerrar Sesión", "LogOut", "User", null, new { @class = "btn btn-success btn-sm" })
         }
         else
         {
@@ -27,3 +27,24 @@
 
     </div>
 </center>
+
+
+<script>
+    var appointment = @Html.Raw(Json.Encode(ViewBag.appointment));
+
+    var date = new Date(appointment.Date + ' ' + appointment.Hour + ':00');
+
+    var calendarEl = document.getElementById('calendar');
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'timeGridWeek',
+        events: [
+            {
+                title: appointment.Functionary.Cedula,
+                start: date,
+            }
+        ]
+
+    });
+    calendar.render();
+
+</script>

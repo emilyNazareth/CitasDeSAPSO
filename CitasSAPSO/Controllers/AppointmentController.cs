@@ -145,6 +145,7 @@ namespace CitasSAPSO.Controllers
         [AllowAnonymous]
         public ActionResult DateConfirmationHome()
         {
+            ViewBag.appointment = Session["appointment"];
             return View();
         }
 
@@ -157,6 +158,7 @@ namespace CitasSAPSO.Controllers
 
             AppointmentBusiness appointmentBusiness = new AppointmentBusiness();
             appointmentBusiness.RegisterAppointment(_appointment);
+            Session["appointment"] = _appointment;
             return Json("ok");
         }
 
@@ -248,6 +250,7 @@ namespace CitasSAPSO.Controllers
             appointmentBusiness.DeleteAppointment(appointment);
             return Json("Exitoso");
         }
+
 
 
 

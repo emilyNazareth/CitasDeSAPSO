@@ -72,7 +72,7 @@
     <br />
     <br />
     <div style="padding:50px" class="row justify-content-end">
-        <a class="btn btn-success btn-sm" href="javascript:history.back()">Atr&aacutes</a>
+        @Html.ActionLink("Atrás", "DashboardAdministrator", "User", null, new { @class = "btn btn-success" })
     </div>
 </div>
 
@@ -116,18 +116,22 @@
         var cedula = $('#id').val();
         var nombre = $('#name').val()
         var apellido = $('#lastname').val()
+        if (!nombre) {
+            nombre = "";
+        }
         if (!cedula) {
             cedula = 0;
         }
+        if (!apellido) {
+            apellido = "";
+        }
         var parameters = { "cedula": cedula, "nombre": nombre, "apellido": apellido };
+        console.log(parameters);
         $.ajax(
             {
                 data: parameters,
                 url: '/User/SearchProfessionalByFiltersAdministrator',
                 type: 'post',
-                beforeSend: function () {
-                    //$("#messageSpanId").html("Procesando, espere por favor ...");
-                },
                 success: function (response) {
                     var data = JSON.parse(response);
                     var text = "";
