@@ -80,8 +80,8 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="justificationInput">Justificación:</label>
-                        <textarea class="form-control" id="justification" name="justification" rows="3"></textarea>
+                        <label for="justificationInput">Justificaci&oacuten:</label>
+                        <textarea class="form-control" id="justification"  required name="justification" rows="3"></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -102,22 +102,26 @@
         id = appointmentId;        
     }
 
-    function deleteApppointment() {
+    function deleteApppointment() {        
         var justification = $('#justification').val();
-        var parameters = { "id": id, "justification": justification };
-        $.ajax(
-            {
-                data: parameters,
-                url: '/Appointment/DeleteAppointment',
-                type: 'post',
-                success: function (response) {
-                    if (response == "Exitoso") {
-                        location.href = "/User/ConsultAppointmentFunctionary";
-                    } else {
-                        $("#messageSpanId").html("No se pudo agregar");
+        if (justification == "") {           
+            alert("Debe ingresar una justificaci\u00F3n v\u00E1lida");
+        } else {
+            var parameters = { "id": id, "justification": justification };
+            $.ajax(
+                {
+                    data: parameters,
+                    url: '/Appointment/DeleteAppointment',
+                    type: 'post',
+                    success: function (response) {
+                        if (response == "Exitoso") {
+                            location.href = "/User/ConsultAppointmentFunctionary";
+                        } else {
+                            $("#messageSpanId").html("No se pudo agregar");
+                        }
                     }
                 }
-            }
-        );
+            );
+        }
     }
 </script>
