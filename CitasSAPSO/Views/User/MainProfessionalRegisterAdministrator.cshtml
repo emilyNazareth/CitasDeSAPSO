@@ -7,17 +7,17 @@
 <form class="needs-validation" novalidate asp-controller="Administrator" asp-action="MainProfessionalRegisterAdministrator" method="post">
     <div class="row align-items-start">
         <div class="col">
-            <p class="text-success">Datos Personales del Profesional</p>
+            <p class="titles">Datos Personales del Profesional</p>
             <div class="row professional-register">
                 <label class="col-sm-6 control-label small" for="Cedula">Numero de identificacion:</label>
                 <input class="col-sm-4 form-control form-control-sm" type="text" id="Cedula" name="Cedula" required>
             </div>
             <div class="row professional-register">
-                <label class="col-sm-6 control-label small" for="Password">Contraseña:</label>
+                <label class="col-sm-6 control-label small" for="Password">Contrase&ntilde;a:</label>
                 <input class="col-sm-4 form-control form-control-sm" type="password" id="Password" name="Password" required>
             </div>
             <div class="row professional-register">
-                <label class="col-sm-6 control-label small" for="ConfirmPassword">Confirmar contraseña:</label>
+                <label class="col-sm-6 control-label small" for="ConfirmPassword">Confirmar contrase&ntilde;a:</label>
                 <input class="col-sm-4 form-control form-control-sm" type="password" id="ConfirmPassword" name="ConfirmPassword" required>
             </div>
             <div class="row professional-register">
@@ -33,11 +33,11 @@
                 <input class="col-sm-4 form-control form-control-sm" type="text" id="secondLastName" name="secondLastName">
             </div>
             <div class="row professional-register">
-                <label class="col-sm-6 control-label small" for="personalPhone">Teléfono Personal:</label>
+                <label class="col-sm-6 control-label small" for="personalPhone">Tel&eacute;fono Personal:</label>
                 <input class="col-sm-4 form-control form-control-sm" type="text" id="personalPhone" name="personalPhone">
             </div>
             <div class="row professional-register">
-                <label class="col-sm-6 control-label small" for="RoomPhone">Teléfono de habitación:</label>
+                <label class="col-sm-6 control-label small" for="RoomPhone">Tel&eacutefono de habitaci&oacuten:</label>
                 <input class="col-sm-4 form-control form-control-sm" type="text" id="RoomPhone" name="RoomPhone">
             </div>
             <div class="row professional-register">
@@ -61,7 +61,7 @@
                 </select>
             </div>
             <div class="row professional-register">
-                <label class="col-sm-6 control-label small" for="placeNumber">Número de plaza</label>
+                <label class="col-sm-6 control-label small" for="placeNumber">N&uacutemero de plaza</label>
                 <input class="col-sm-4 form-control form-control-sm" type="text" id="placeNumber" name="placeNumber">
             </div>
 
@@ -92,16 +92,16 @@
                 <input class="col-sm-4 form-control form-control-sm" type="text" id="EmergencyContact" name="EmergencyContact">
             </div>
             <div class="row professional-register">
-                <label class="col-sm-6 control-label small" for="EmergencyContactNumber">Número del contacto:</label>
+                <label class="col-sm-6 control-label small" for="EmergencyContactNumber">N&uacutemero del contacto:</label>
                 <input class="col-sm-4 form-control form-control-sm" type="text" id="EmergencyContactNumber" name="EmergencyContactNumber">
             </div>
             <div class="row professional-register">
                 <label class="col-sm-6 control-label small" for="scholarship">Escolaridad:</label>
                 <select class="col-sm-5 custom-select custom-select-sm" id="scholarship" name="scholarship">
-                    <option value="Técnico">Técnico</option>
+                    <option value="Técnico">T&eacutecnico</option>
                     <option value="Bachillerato">Bachillerato</option>
                     <option value="Licenciatura">Licenciatura</option>
-                    <option value="Maestría">Maestría</option>
+                    <option value="Maestría">Maestr&iacutea</option>
                     <option value="Doctorado">Doctorado</option>
                 </select>
             </div>
@@ -110,17 +110,19 @@
                 <input class="col-sm-4 form-control form-control-sm" type="text" id="specialty" name="specialty">
             </div>
             <div class="row professional-register">
-                <label class="col-sm-6 control-label small" for="schoolCode">Código de colegio:</label>
+                <label class="col-sm-6 control-label small" for="schoolCode">C&oacutedigo de colegio:</label>
                 <input class="col-sm-4 form-control form-control-sm" type="number" id="schoolCode" name="schoolCode">
             </div>
             <div class="row functionary-register">
                 <label class="col-sm-6 control-label small" for="province">Provincia</label>
                 <select class="col-sm-5 custom-select custom-select-sm" id="province" name="province" onchange="activeCanton(); return false;">
+                    <option selected>Seleccione...</option>
                 </select>
             </div>
             <div class="row functionary-register">
-                <label class="col-sm-6 control-label small" for="canton">Cantón</label>
+                <label class="col-sm-6 control-label small" for="canton">Cant&oacuten</label>
                 <select class="col-sm-5 custom-select custom-select-sm" id="canton" name="canton" onchange="activeDistrict(); return false;">
+                    
                 </select>
             </div>
             <div class="row functionary-register">
@@ -129,17 +131,17 @@
                 </select>
             </div>
             <div class="row professional-register">
-                <label class="col-sm-6 control-label small" for="address">Dirección:</label>
+                <label class="col-sm-6 control-label small" for="address">Direcci&oacuten:</label>
                 <textarea class="col-sm-6 form-control form-control-sm" id="address" name="address" rows="1"></textarea>
             </div>
         </div>
     </div>
     <div class="row">
-        <div class="col justify-content-lg-start">
+        <div class="row justify-content-end">
 
-            @Html.ActionLink("Atrás", "DashboardAdministrator", "User", null, new { @class = "btn btn-success btn-sm" })
+            @Html.ActionLink("Atras", "DashboardAdministrator", "User", null, new { @class = "btn btn-success btn-sm" })
 
-        </div>
+        </div>      
         <div class="col justify-content-end">
             <a onclick="registerProfessional()" class="btn btn-success btn-sm" style="margin-left: 100px;">Aceptar</a>
         </div>

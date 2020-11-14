@@ -5,7 +5,7 @@
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <center>
     <form id="login-form">
-        <h3 class="text-center text-info">Administración de sub tipo actividad</h3>
+        <h3 class="titles">Administración de subactividad</h3>
         <div class="form-group">
             <input type="number" name="id" id="id" class="form-control" placeholder="ID" readonly>
         </div>
@@ -27,23 +27,23 @@
         <br />
         <div class="row justify-content-end">
             <div>
-                <a class="btn btn-success" id="updatePlace" name="updatePlace" onclick="updateSubactivity($('#id').val(),
+                <a class="btn btn-success" id="updatePlace" name="updatePlace" style="margin-right: 1px; display: none" onclick="updateSubactivity($('#id').val(),
                              $('#description').val(), $('#father').val())"> Modificar</a>
             </div>
             <div>
-                <a class="btn btn-success" id="registerPlace" name="registerPlace" style="margin-right: 1px;" onclick="registerSubactivity($('#description').val(), $('#father').val())">Nuevo</a>
+                <a class="btn btn-success" id="registerPlace" name="registerPlace" style="display: inline" onclick="registerSubactivity($('#description').val(), $('#father').val())">Nuevo</a>
             </div>
             <div>
-                <a class="btn btn-success" id="deletePlace" name="deletePlace" style="margin-right: 1px;" onclick="deleteSubactivity($('#id').val())">Eliminar</a>
+                <a class="btn btn-success" id="deletePlace" name="deletePlace" style="margin-right: 1px; display: none" onclick="deleteSubactivity($('#id').val())">Eliminar</a>
             </div>
             <div>
-                <a class="btn btn-success" id="cleanPlace" name="cleanPlace" onclick="cleanActivitySubtype()">Limpiar</a>
+                <a class="btn btn-success" id="cleanPlace" name="cleanPlace" style="display: inline" onclick="cleanActivitySubtype()">Limpiar</a>
             </div>
         </div>
         <span id="messageSpanId"></span>
         <br />
 
-        <h5 class="text-center text-info">Lista de registros almacenados</h5>
+        <h5 class="titles">Lista de registros almacenados</h5>
 
 
         <table id="tableID" class="table table-sm">
@@ -81,6 +81,10 @@
     function cleanActivitySubtype() {
         document.getElementById("login-form").reset();
         $("#messageSpanId").html("");
+        document.getElementById("deletePlace").style.display = "none";
+        document.getElementById("updatePlace").style.display = "none";
+        document.getElementById("registerPlace").style.display = "inline";        
+        
     }
     function updateSubactivity(id, description, father) {
         var parameters = { "id": id, "description": description, "father": father };
@@ -116,7 +120,7 @@
                     if (response == "Exitoso") {
                         location.href = "/Catalogue/ManageSubactivityAdministrator";
                     } else {
-                        $("#messageSpanId").html("No se pudo agregar");
+                        $("#messageSpanId").html(response);
                     }
                 }
             }
@@ -156,6 +160,9 @@
         $("#id").val(id);
         $("#description").val(description);
         $("#father").val(father);
+        document.getElementById("deletePlace").style.display = "inline";
+        document.getElementById("updatePlace").style.display = "inline";
+        document.getElementById("registerPlace").style.display = "none"; 
     });
 
 </script>

@@ -392,7 +392,7 @@ function loadGeographicInfo() {
 
 function loadProvinses(provinces) {
     options = " ";
-
+    options += "<option value= \"" + 'Seleccione..' + "\" data-num=\"" + 0 + "\">" + 'Seleccione..' + "</option>";
     for (key in provinces) {
         options += "<option value= \"" + provinces[key] + "\" data-num=\"" + key + "\">" + provinces[key] + "</option>";
     }
@@ -403,7 +403,7 @@ function loadProvinses(provinces) {
 
 function loadCantons(cantons) {
     options = " ";
-
+    options += "<option value= \"" + 'Seleccione..' + "\" data-num=\"" + 0 + "\">" + 'Seleccione..' + "</option>";
     for (key in cantons) {
         options += "<option value= \"" + cantons[key] + "\" data-num=\"" + key + "\">" + cantons[key] + "</option>";
     }
@@ -415,7 +415,7 @@ function loadCantons(cantons) {
 
 function loadDistricts(districts) {
     options = " ";
-
+    options += "<option value= \"" + 'Seleccione..' + "\" data-num=\"" + 0 + "\">" + 'Seleccione..' + "</option>";
     for (key in districts) {
         options += "<option value= \"" + districts[key] + "\" data-num=\"" + key + "\">" + districts[key] + "</option>";
     }

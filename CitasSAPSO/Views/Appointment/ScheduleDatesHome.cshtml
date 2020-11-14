@@ -4,18 +4,23 @@
     var functionary = (CitasSAPSO.Models.UserModels)ViewBag.functionary;
 }
 
-<center><h3 class="titles">Agenda</h3></center>
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv=”Content-Type” content=”text/html; charset=UTF-8″ />
+</head>
+    <center><h3 class="titles">Agenda</h3></center>
 
-<div class="row">
-    <div class="col-sm-2">
-        <div class="card">
-            <div class="card-header">
-                Observaciones
-            </div>
-            <div class="card-body">
-                <textarea class="form-control form-control-sm" id="observations" rows="4"></textarea>
-            </div>
+    <div class="row">
+        <div class="col-sm-2">
+            <div class="card">
+                <div class="card-header">
+                    Observaciones
+                </div>
+                <div class="card-body">
+                    <textarea class="form-control form-control-sm" id="observations" rows="4"></textarea>
+                </div>
 
+            </div>
         </div>
     </div>
     <div class="col-sm-10">
@@ -29,18 +34,20 @@
                             <option value="@process.ID">@process.Name</option>
                         }
                     </select>
+
                 </div>
-            </div>
-            <div class="col-sm ">
-                <div class="form-group row scheduleDatesFilter">
-                    <label class="col-sm-4 col-form-label-sm" for="subprocess">Subproceso</label>
-                    <select class="col-sm-4 custom-select custom-select-sm" id="SubprocessId" name="SubprocessId">
-                        @foreach (CitasSAPSO.Models.CatalogueModels subprocess in ViewBag.subprocess)
-                        {
-                            <option value="@subprocess.ID">@subprocess.Name</option>
-                        }
-                    </select>
+                <div class="col-sm ">
+                    <div class="form-group row scheduleDatesFilter">
+                        <label class="col-sm-4 col-form-label-sm" for="subprocess">Subproceso</label>
+                        <select class="col-sm-4 custom-select custom-select-sm" id="SubprocessId" name="SubprocessId">
+                            @foreach (CitasSAPSO.Models.CatalogueModels subprocess in ViewBag.subprocess)
+                            {
+                                <option value="@subprocess.ID">@subprocess.Name</option>
+                            }
+                        </select>
+                    </div>
                 </div>
+
             </div>
             <div class="col-sm">
                 <div class="form-group row scheduleDatesFilter">
@@ -51,18 +58,20 @@
                             <option value="@professional.Cedula">@professional.Name</option>
                         }
                     </select>
+
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-sm ">
-                <div class="form-group row scheduleDatesFilter">
-                    <label class="col-sm-4 col-form-label-sm" for="appointmentType">Tipo de Cita</label>
-                    <select class="col-sm-4 custom-select custom-select-sm" id="appointmentType" disabled>
-                        <option value="1">Presencial</option>
-                        <option value="1">Telepsicología</option>
-                    </select>
+            <div class="row">
+                <div class="col-sm ">
+                    <div class="form-group row scheduleDatesFilter">
+                        <label class="col-sm-4 col-form-label-sm" for="appointmentType">Tipo de Cita</label>
+                        <select class="col-sm-4 custom-select custom-select-sm" id="appointmentType" disabled>
+                            <option value="1">Presencial</option>
+                            <option value="1">Telepsicolog&iacutea</option>
+                        </select>
+                    </div>
                 </div>
+
             </div>
             <div class="col-sm ">
                 <div class="form-group row scheduleDatesFilter">
@@ -74,53 +83,55 @@
                 <div class="form-group row scheduleDatesFilter">
                     <label class="col-sm-4 control-label small" for="date">Fecha: </label>
                     <input type="date" onChange="updateCalendar(); " class="col-sm-4 form-control form-control-sm" id="date" />
+
                 </div>
             </div>
-        </div>
 
-        <div class="row">
-            <div class="col-sm ">
-                <div class="form-group row scheduleDatesFilter">
-                    <label class="col-sm-4 control-label small" for="initialDate">Fecha inicial</label>
-                    <input type="date" class="col-sm-4 form-control form-control-sm" id="initialDate" />
-                </div>
-            </div>
-            <div class="col-sm ">
-                <div class="form-group row scheduleDatesFilter">
-                    <label class="col-sm-4 control-label small" for="finalDate">Fecha Final</label>
-                    <input type="date" class="col-sm-4 form-control form-control-sm" id="finalDate" />
-                </div>
-            </div>
-        </div>
-
-
-        <br />
-
-        <div class="row" id="procesoClinico">
-            <!--Proceso Clínico-->
             <div class="row">
-                @*<div class="col-sm ">
-                            <div class="form-group row">
-                                <label class="col-sm control-label small" for="autoId">ID</label>
-                                <input type="text" class="col-sm form-control form-control-sm" id="Id" name="Id" disabled value="1" />
-                            </div>
-                        </div>
-                        <div class="col-sm ">
-                            <div class="form-group row">
-                                <label class="col-sm control-label small" for="email">Correo electrónico</label>
-                                <input type="email" class="col-sm-6 form-control form-control-sm" id="email" />
-                            </div>
-                        </div>
-                        <div class="col-sm ">
-                            <div class="form-group row">
-                                <label class="col-sm control-label small" for="telephone">ID</label>
-                                <input type="text" class="col-sm form-control form-control-sm" id="telephone" disabled value="88888888" />
-                            </div>
-                        </div>
-                    </div>*@
-                <h3>Se Enviará un formulario a su correo electronico registrado</h3>
-
+                <div class="col-sm ">
+                    <div class="form-group row scheduleDatesFilter">
+                        <label class="col-sm-4 control-label small" for="initialDate">Fecha inicial</label>
+                        <input type="date" class="col-sm-4 form-control form-control-sm" id="initialDate" />
+                    </div>
+                </div>
+                <div class="col-sm ">
+                    <div class="form-group row scheduleDatesFilter">
+                        <label class="col-sm-4 control-label small" for="finalDate">Fecha Final</label>
+                        <input type="date" class="col-sm-4 form-control form-control-sm" id="finalDate" />
+                    </div>
+                </div>
             </div>
+
+
+            <br />
+
+            <div class="row" id="procesoClinico">
+                <!--Proceso Clínico-->
+                <div class="row">
+                    @*<div class="col-sm ">
+                                <div class="form-group row">
+                                    <label class="col-sm control-label small" for="autoId">ID</label>
+                                    <input type="text" class="col-sm form-control form-control-sm" id="Id" name="Id" disabled value="1" />
+                                </div>
+                            </div>
+                            <div class="col-sm ">
+                                <div class="form-group row">
+                                    <label class="col-sm control-label small" for="email">Correo electrónico</label>
+                                    <input type="email" class="col-sm-6 form-control form-control-sm" id="email" />
+                                </div>
+                            </div>
+                            <div class="col-sm ">
+                                <div class="form-group row">
+                                    <label class="col-sm control-label small" for="telephone">ID</label>
+                                    <input type="text" class="col-sm form-control form-control-sm" id="telephone" disabled value="88888888" />
+                                </div>
+                            </div>
+                        </div>*@
+                    <h3>Se Enviará un formulario a su correo electronico registrado</h3>
+
+                </div>
+            </div>
+
         </div>
         @*<div class="row" id="incidente">
         Proceso incidente
@@ -130,39 +141,47 @@
         <div class="row" id="armas">
             <h3>Su cita será apartada, recuerde presentarse 15 minutos antes</h3>
 
-        </div>
 
-        <div class="row" id="capituloV">
-        Proceso capituloV
-        <h3>Se Enviará un formulario a su correo electronico registrado</h3>
-
-        </div>
-        <div class="row" id="charlas">
-        Proceso capituloV
-        <h3>Su solicitud será enviada</h3>
-
-        </div>*@
-        <input type="number" id="FunctionaryId" name="FunctionaryId" value="@functionary.Cedula" hidden />
-        @*<input type="number" id="FunctionaryId" name="FunctionaryId" value="305050946" hidden />*@
-        <input type="text" id="Patient" name="Patient" value="paciente" hidden />
-        <input type="text" id="State" name="State" value="Apartada" hidden />
-        <br />
-        <div class="row">
-            <div class="col-sm-11">
-               <div id='calendar'></div>
             </div>
-            <div class="col-sm-1">
-                @Html.ActionLink("Atrás", "MainFunctionaryRegisterHome", "Appointment", null, new { @class = "btn btn-success btn-sm" })
+            <div class="row" id="armas">
+                <h3>Su cita será apartada, recuerde presentarse 15 minutos antes</h3>
 
-                <button type="button" name="finalizar" id="finalizar" href="javascript:;"
-                        onclick="saveAppointment2(); return false;"
-                        class="btn btn-success btn-sm ">
-                    Finalizar
-                </button>
+
             </div>
+
+            <div class="row" id="capituloV">
+                <!--Proceso capituloV-->
+                <h3>Se Enviará un formulario a su correo electronico registrado</h3>
+
+
+            </div>
+            <div class="row" id="charlas">
+                <!--Proceso capituloV-->
+                <h3>Su solicitud será enviada</h3>
+
+            </div>
+            <input type="number" id="FunctionaryId" name="FunctionaryId" value="@functionary.Cedula" hidden />
+            @*<input type="number" id="FunctionaryId" name="FunctionaryId" value="305050946" hidden />*@
+            <input type="text" id="Patient" name="Patient" value="paciente" hidden />
+            <input type="text" id="State" name="State" value="Apartada" hidden />
+            <br />
+           
+                <div class="col-sm-11 scheduleDatesTable">
+                    @{Html.RenderPartial("WeekTableHome");}
+                </div>
+                <div class="row justify-content-end">
+                    @Html.ActionLink("Atras", "MainFunctionaryRegisterHome", "Appointment", null, new { @class = "btn btn-success btn-sm" })
+
+                    <button type="button" name="finalizar" id="finalizar" href="javascript:;"
+                            onclick="saveAppointment2(); return false;"
+                            class="btn btn-success btn-sm ">
+                        Finalizar
+                    </button>
+                </div>
+           
         </div>
     </div>
-</div>
+
 
 <script>
 
@@ -244,20 +263,36 @@
     }
 
 
-    function saveAppointment2() {
 
-        var FunctionaryId = document.getElementById("FunctionaryId").value;
-        var fecha = document.getElementById("date").value;
-        var Hour = document.getElementById("Hour").value;
-        var ProfessionalId = document.getElementById("ProfessionalId").value;
-        var Patient = document.getElementById("Patient").value;
-        var State = document.getElementById("State").value;
-        var SubprocessId = document.getElementById("SubprocessId").value;
-        //var Assistance = document.getElementById("Assistance").value;
-        //var SubActivityId = document.getElementById("SubActivityId").value;
+        window.onload = function () {
+            loadScheduleDates();
+        }
 
-        if (Hour == "") {
-            alert("ingrese la hora por favor");
+        function saveAppointment2() {
+
+            var FunctionaryId = document.getElementById("FunctionaryId").value;
+            var fecha = document.getElementById("date").value;
+            var Hour = document.getElementById("Hour").value;
+            var ProfessionalId = document.getElementById("ProfessionalId").value;
+            var Patient = document.getElementById("Patient").value;
+            var State = document.getElementById("State").value;
+            var SubprocessId = document.getElementById("SubprocessId").value;
+            //var Assistance = document.getElementById("Assistance").value;
+            //var SubActivityId = document.getElementById("SubActivityId").value;
+
+            if (Hour == "") {
+                alert("ingrese la hora por favor");
+                return 0;
+            }
+
+
+        if (SubprocessId == -1) {
+            alert("no hay subproceso");
+            return 0;
+        }
+
+        if (ProfessionalId == -1) {
+            alert("no hay profesionales");
             return 0;
         }
 
@@ -274,18 +309,16 @@
             "SubActivity": { "ID": 1 }
         };
 
-        $.ajax(
-            {
-                data: parameters,
-                url: '/Appointment/SaveAppointment',
-                type: 'post',
-                success: function (response) {
-                    if (response == 'ok') {
+
+            $.ajax(
+                {
+                    data: parameters,
+                    url: '/Appointment/SaveAppointment',
+                    type: 'post',
+                    success: function (response) {
                         location.href = "/Appointment/DateConfirmationHome";
                     }
                 }
-
-            }
-        );
-    }
-</script>
+            );
+        }
+    </script>
