@@ -9,6 +9,9 @@
 <br />
 <div class="row">
     <div class="col-sm-5">
+        <br />
+        <br />
+        <br />
         <form id="professionalDashboard-form">
             <div class="row">
                 <div class="col">
@@ -80,29 +83,27 @@
         </form>
 
     </div>
-</div>
-<div class="row">
-    <div class="col">
-        <div class="timetable"></div>
+
+    <div class="col-sm-7">
+        <div id="calendar"></div>
     </div>
 
 </div>
+<br />
 @Html.ActionLink("Cerrar Sesión", "LogOut", "User", null, new { @class = "btn btn-success" })
 
-<script type="text/javascript" src="~/Scripts/timetable.js"></script>
+
+
 
 <script>
-    var timetable = new Timetable();
+    var appointmentList = @Html.Raw(Json.Encode(ViewBag.appointmentList));
 
-    timetable.setScope(7, 18);
-    //timetable.useTwelveHour();
-    timetable.addLocations(['lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado']);
-
-
-
-    var renderer = new Timetable.Renderer(timetable);
-    renderer.draw('.timetable');
-
+    var calendarEl = document.getElementById('calendar');
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'timeGridWeek'
+    });
+    calendar.render();
+    updateTable(appointmentList);
 
     function searchAppointmentsProfessional() {
 
@@ -163,21 +164,32 @@
 
     function updateTable(data) {
 
+        var params = [];
         for (index in data) {
-            var formatDateInit = new Date(data[index].Date.substr(0, 9) + ' ' + data[index].Hour);
-            var formatDateEnd = new Date(data[index].Date.substr(0, 9) + ' ' + (data[index].Hour + 1));
-            var day = formatDateInit.toLocaleDateString('es-MX', { weekday: 'long' });
-            var options = {
-                appointment: data[index],
-                url: "/Appointment/ShowAppointmentDetail?FunctionaryId=" +
-                    data[index].Functionary.Cedula + "&IdAppointment=" + data[index].Id,
-                onClick: function (event, timetable, clickEvent) {
-                }
-            };
-            timetable.addEvent(data[index].Functionary.Cedula, day, formatDateInit, formatDateEnd, options);
-        }
 
-        renderer.draw('.timetable');
+            var date = new Date(data[index].Date);
+            date = new Date(date.toDateString() + ' ' + data[index].Hour + ':00');
+
+            params.push({
+                title: data[index].Functionary.Cedula,
+                start: date,
+                url: "/Appointment/ShowAppointmentDetail?FunctionaryId=" + data[index].Functionary.Cedula + "&IdAppointment=" + data[index].Id,
+                
+            });
+
+        }
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            headerToolbar: { center: 'timeGridWeek,dayGridMonth' }, // buttons for switching between views
+            initialView: 'timeGridWeek',
+            eventClick: function (info) {
+                console.log(info);
+            },
+            events: params
+
+        });
+        calendar.render();
+
+
     }
 
 </script>

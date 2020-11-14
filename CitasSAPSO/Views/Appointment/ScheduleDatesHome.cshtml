@@ -22,19 +22,19 @@
 
             </div>
         </div>
-        <div class="col-sm-10">
-            <div class="row">
-                <div class="col-sm ">
-                    <div class="form-group row scheduleDatesFilter">
-                        <label class="col-sm-4 col-form-label-sm" for="process">Proceso</label>
-                        <select class="col-sm-4 custom-select custom-select-sm" id="process">
-                            @foreach (CitasSAPSO.Models.CatalogueModels process in ViewBag.process)
-                            {
-                                <option value="@process.ID">@process.Name</option>
-                            }
-                            <option value="0">Test</option>
-                        </select>
-                    </div>
+    </div>
+    <div class="col-sm-10">
+        <div class="row">
+            <div class="col-sm ">
+                <div class="form-group row scheduleDatesFilter">
+                    <label class="col-sm-4 col-form-label-sm" for="process">Proceso</label>
+                    <select class="col-sm-4 custom-select custom-select-sm" id="process">
+                        @foreach (CitasSAPSO.Models.CatalogueModels process in ViewBag.process)
+                        {
+                            <option value="@process.ID">@process.Name</option>
+                        }
+                    </select>
+
                 </div>
                 <div class="col-sm ">
                     <div class="form-group row scheduleDatesFilter">
@@ -47,16 +47,18 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-sm">
-                    <div class="form-group row scheduleDatesFilter">
-                        <label class="col-sm-4 col-form-label-sm" for="professional">Profesional</label>
-                        <select class="col-sm-4 custom-select custom-select-sm" id="ProfessionalId" name="ProfessionalId">
-                            @foreach (CitasSAPSO.Models.UserModels professional in ViewBag.professional)
-                            {
-                                <option value="@professional.Cedula">@professional.Name</option>
-                            }
-                        </select>
-                    </div>
+
+            </div>
+            <div class="col-sm">
+                <div class="form-group row scheduleDatesFilter">
+                    <label class="col-sm-4 col-form-label-sm" for="professional">Profesional</label>
+                    <select onChange=" profesionalSchedule(); " class="col-sm-4 custom-select custom-select-sm" id="ProfessionalId" name="ProfessionalId">
+                        @foreach (CitasSAPSO.Models.UserModels professional in ViewBag.professional)
+                        {
+                            <option value="@professional.Cedula">@professional.Name</option>
+                        }
+                    </select>
+
                 </div>
             </div>
             <div class="row">
@@ -69,17 +71,19 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-sm ">
-                    <div class="form-group row scheduleDatesFilter">
-                        <label class="col-sm-4 control-label small" for="hour">Hora deseada</label>
-                        <input type="time" class="col-sm-4 form-control form-control-sm" id="Hour" name="Hour" required />
-                    </div>
+
+            </div>
+            <div class="col-sm ">
+                <div class="form-group row scheduleDatesFilter">
+                    <label class="col-sm-4 control-label small" for="hour">Hora deseada</label>
+                    <input type="time" onChange=" updateCalendar(); " class="col-sm-4 form-control form-control-sm" id="Hour" name="Hour" required />
                 </div>
-                <div class="col-sm ">
-                    <div class="form-group row scheduleDatesFilter">
-                        <label class="col-sm-4 control-label small" for="date">Fecha: </label>
-                        <input type="date" class="col-sm-4 form-control form-control-sm" id="date" />
-                    </div>
+            </div>
+            <div class="col-sm ">
+                <div class="form-group row scheduleDatesFilter">
+                    <label class="col-sm-4 control-label small" for="date">Fecha: </label>
+                    <input type="date" onChange="updateCalendar(); " class="col-sm-4 form-control form-control-sm" id="date" />
+
                 </div>
             </div>
 
@@ -127,19 +131,28 @@
 
                 </div>
             </div>
-            <div class="row" id="incidente">
-                <!--Proceso incidente-->
-                <h3>Se Enviará un formulario a su correo electronico registrado</h3>
+
+        </div>
+        @*<div class="row" id="incidente">
+        Proceso incidente
+        <h3>Se Enviará un formulario a su correo electronico registrado</h3>
+
+        </div>
+        <div class="row" id="armas">
+            <h3>Su cita será apartada, recuerde presentarse 15 minutos antes</h3>
+
 
             </div>
             <div class="row" id="armas">
                 <h3>Su cita será apartada, recuerde presentarse 15 minutos antes</h3>
+
 
             </div>
 
             <div class="row" id="capituloV">
                 <!--Proceso capituloV-->
                 <h3>Se Enviará un formulario a su correo electronico registrado</h3>
+
 
             </div>
             <div class="row" id="charlas">
@@ -170,7 +183,87 @@
     </div>
 
 
-    <script>
+<script>
+
+    var calendarEl = document.getElementById('calendar');
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'timeGridWeek'
+    });
+    calendar.render();
+    var events = [];
+    var youAppointment = [];
+
+    function cleanEvents() {
+        events = [];
+    }
+    function profesionalSchedule() {
+        var profesinal = $('#ProfessionalId').val();
+        var parameters = { "professionalId": profesinal };
+        $.ajax(
+            {
+                data: parameters,
+                url: '/User/GetProfesionalScheldule',
+                type: 'post',
+                async: false,
+                beforeSend: function () {
+                    $("#messageSpanId").html("Procesando, espere por favor ...");
+                },
+                success: function (response) {
+                    response = JSON.parse(response)
+                    generedEvents(response);
+                }
+            }
+        );
+    }
+    profesionalSchedule();
+
+
+    function generedEvents(data) {
+        cleanEvents();
+        for (index in data) {
+
+            var date = new Date(data[index].Date);
+            date = new Date(date.toDateString() + ' ' + data[index].Hour + ':00');
+
+            events.push({
+                title: 'Ocupado',
+                start: date,
+                color: 'black'
+            });
+
+        }
+        refreshCalendar();
+    }
+    function refreshCalendar() {
+        events.push(youAppointment);
+
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            headerToolbar: { center: 'timeGridWeek,dayGridMonth' },
+            initialView: 'timeGridWeek',
+            eventClick: function (info) {
+                console.log(info);
+            },
+            events: events,
+
+        });
+        calendar.render();
+    }
+
+    function updateCalendar() {
+        var date = $('#date').val();
+        var hour = $('#Hour').val();
+
+        date = new Date(date);
+        date = new Date(date.toDateString() + ' ' + hour + ':00');
+
+        youAppointment = { title: 'Tu cita', start: date }
+
+
+        refreshCalendar();
+    }
+
+
+
         window.onload = function () {
             loadScheduleDates();
         }
@@ -191,6 +284,7 @@
                 alert("ingrese la hora por favor");
                 return 0;
             }
+
 
         if (SubprocessId == -1) {
             alert("no hay subproceso");
@@ -215,6 +309,7 @@
             "SubActivity": { "ID": 1 }
         };
 
+
             $.ajax(
                 {
                     data: parameters,
@@ -223,7 +318,6 @@
                     success: function (response) {
                         location.href = "/Appointment/DateConfirmationHome";
                     }
-
                 }
             );
         }
