@@ -1,4 +1,4 @@
-@using CitasSAPSO.Models
+﻿@using CitasSAPSO.Models
 @{
     ViewData["Title"] = "ScheduleDatesHome";
     var functionary = (CitasSAPSO.Models.UserModels)ViewBag.functionary;
@@ -170,7 +170,7 @@
                     @{Html.RenderPartial("WeekTableHome");}
                 </div>
                 <div class="row justify-content-end">
-                    @Html.ActionLink("Atras", "MainFunctionaryRegisterHome", "Appointment", null, new { @class = "btn btn-success btn-sm" })
+                    @Html.ActionLink("Atr\u00E1s", "MainFunctionaryRegisterHome", "Appointment", null, new { @class = "btn btn-success btn-sm" })
 
                     <button type="button" name="finalizar" id="finalizar" href="javascript:;"
                             onclick="saveAppointment2(); return false;"
