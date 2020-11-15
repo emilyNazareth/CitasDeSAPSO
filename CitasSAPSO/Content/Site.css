@@ -1,5 +1,4 @@
-﻿
-body, html {
+﻿body, html {
     height: 100%;
     margin: 0;
 }
@@ -72,7 +71,7 @@ body, html {
 .my-custom-scrollbar {
     position: relative;
     height: 200px;
-    width:460px;
+    width: 460px;
     overflow: auto;
 }
 
@@ -81,10 +80,10 @@ body, html {
     height: 200px;
     width: 1000px;
     overflow: auto;
-} 
+}
 
 .table-wrapper-scroll-y {
-    display:block;
+    display: block;
 }
 
 .nav-link {
@@ -130,4 +129,20 @@ body, html {
     border-color: #FF9900 !important;
 }
 
+#instructions {
+    color: white;
+    background-color: #f47424;
+    
+}
 
+#asignInstruction {
+    color: black;
+    background-color: #f7dd4b;
+}
+
+#welcomeMessage {
+    position: relative;
+    left: 125px;    
+    top: -10px;
+    color: yellow;
+}
