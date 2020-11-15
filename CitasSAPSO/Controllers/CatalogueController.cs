@@ -125,14 +125,15 @@ namespace CitasSAPSO.Controllers
             return Json("Exitoso");
         }
         public ActionResult DeleteActivityAdministrator(int id)
-        {
-            CatalogueModels catalogueProcess = new CatalogueModels();
-            catalogueProcess.Table = "actividad";
-            catalogueProcess.ID = id;
-            CatalogueBusiness catalogueBusiness = new CatalogueBusiness();
-            catalogueBusiness.DeleteCatalogueItems(catalogueProcess);
-            ViewBag.process = catalogueBusiness.GetListCatalogue(catalogueProcess);
-            return Json("Exitoso");
+        {            
+                CatalogueModels catalogueProcess = new CatalogueModels();
+                catalogueProcess.Table = "actividad";
+                catalogueProcess.ID = id;
+                CatalogueBusiness catalogueBusiness = new CatalogueBusiness();
+                catalogueBusiness.DeleteCatalogueItems(catalogueProcess);
+                ViewBag.process = catalogueBusiness.GetListCatalogue(catalogueProcess);
+                return Json("Exitoso");
+            
         }
         public ActionResult RegisterSubactivityAdministrator(String description, int father)
         {
