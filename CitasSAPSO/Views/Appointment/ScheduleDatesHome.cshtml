@@ -8,21 +8,21 @@
     <meta charset="UTF-8" />
     <meta http-equiv=”Content-Type” content=”text/html; charset=UTF-8″ />
 </head>
-    <center><h3 class="titles">Agenda</h3></center>
+<center><h3 class="titles">Agenda</h3></center>
 
-    <div class="row">
-        <div class="col-sm-2">
-            <div class="card">
-                <div class="card-header">
-                    Observaciones
-                </div>
-                <div class="card-body">
-                    <textarea class="form-control form-control-sm" id="observations" rows="4"></textarea>
-                </div>
-
+<div class="row">
+    <div class="col-sm-2">
+        <div class="card">
+            <div class="card-header">
+                Observaciones
             </div>
+            <div class="card-body">
+                <textarea class="form-control form-control-sm" id="observations" rows="4"></textarea>
+            </div>
+
         </div>
     </div>
+
     <div class="col-sm-10">
         <div class="row">
             <div class="col-sm ">
@@ -134,54 +134,54 @@
 
         </div>
         @*<div class="row" id="incidente">
-        Proceso incidente
-        <h3>Se Enviará un formulario a su correo electronico registrado</h3>
-
-        </div>
-        <div class="row" id="armas">
-            <h3>Su cita será apartada, recuerde presentarse 15 minutos antes</h3>
-
+            Proceso incidente
+            <h3>Se Enviará un formulario a su correo electronico registrado</h3>
 
             </div>
             <div class="row" id="armas">
                 <h3>Su cita será apartada, recuerde presentarse 15 minutos antes</h3>
 
 
-            </div>
-
-            <div class="row" id="capituloV">
-                <!--Proceso capituloV-->
-                <h3>Se Enviará un formulario a su correo electronico registrado</h3>
-
-
-            </div>
-            <div class="row" id="charlas">
-                <!--Proceso capituloV-->
-                <h3>Su solicitud será enviada</h3>
-
-            </div>
-            <input type="number" id="FunctionaryId" name="FunctionaryId" value="@functionary.Cedula" hidden />
-            @*<input type="number" id="FunctionaryId" name="FunctionaryId" value="305050946" hidden />*@
-            <input type="text" id="Patient" name="Patient" value="paciente" hidden />
-            <input type="text" id="State" name="State" value="Apartada" hidden />
-            <br />
-           
-            <div class="col-sm-11 scheduleDatesTable">
-                <div id='calendar'></div>
-            </div>
-                <div class="row justify-content-end">
-                    @Html.ActionLink("Atr\u00E1s", "MainFunctionaryRegisterHome", "Appointment", null, new { @class = "btn btn-success btn-sm" })
-
-                    <button type="button" name="finalizar" id="finalizar" href="javascript:;"
-                            onclick="saveAppointment2(); return false;"
-                            class="btn btn-success btn-sm ">
-                        Finalizar
-                    </button>
                 </div>
-           
-        </div>
-    </div>
+                <div class="row" id="armas">
+                    <h3>Su cita será apartada, recuerde presentarse 15 minutos antes</h3>
 
+
+                </div>
+
+                <div class="row" id="capituloV">
+                    <!--Proceso capituloV-->
+                    <h3>Se Enviará un formulario a su correo electronico registrado</h3>
+
+
+                </div>
+                <div class="row" id="charlas">
+                    <!--Proceso capituloV-->
+                    <h3>Su solicitud será enviada</h3>
+
+                </div>
+                <input type="number" id="FunctionaryId" name="FunctionaryId" value="@functionary.Cedula" hidden />
+                @*<input type="number" id="FunctionaryId" name="FunctionaryId" value="305050946" hidden />*@
+        <input type="text" id="Patient" name="Patient" value="paciente" hidden />
+        <input type="text" id="State" name="State" value="Apartada" hidden />
+        <br />
+
+        <div class="col-sm-11 scheduleDatesTable">
+            <div id='calendar'></div>
+        </div>
+        <div class="row justify-content-end">
+            @Html.ActionLink("Atr\u00E1s", "MainFunctionaryRegisterHome", "Appointment", null, new { @class = "btn btn-success btn-sm" })
+
+            <button type="button" name="finalizar" id="finalizar" href="javascript:;"
+                    onclick="saveAppointment2(); return false;"
+                    class="btn btn-success btn-sm ">
+                Finalizar
+            </button>
+        </div>
+
+    </div>
+</div>
+    </div>
 
 <script>
 
@@ -264,26 +264,26 @@
 
 
 
-        window.onload = function () {
-            loadScheduleDates();
+    window.onload = function () {
+        loadScheduleDates();
+    }
+
+    function saveAppointment2() {
+
+        var FunctionaryId = document.getElementById("FunctionaryId").value;
+        var fecha = document.getElementById("date").value;
+        var Hour = document.getElementById("Hour").value;
+        var ProfessionalId = document.getElementById("ProfessionalId").value;
+        var Patient = document.getElementById("Patient").value;
+        var State = document.getElementById("State").value;
+        var SubprocessId = document.getElementById("SubprocessId").value;
+        //var Assistance = document.getElementById("Assistance").value;
+        //var SubActivityId = document.getElementById("SubActivityId").value;
+
+        if (Hour == "") {
+            alert("ingrese la hora por favor");
+            return 0;
         }
-
-        function saveAppointment2() {
-
-            var FunctionaryId = document.getElementById("FunctionaryId").value;
-            var fecha = document.getElementById("date").value;
-            var Hour = document.getElementById("Hour").value;
-            var ProfessionalId = document.getElementById("ProfessionalId").value;
-            var Patient = document.getElementById("Patient").value;
-            var State = document.getElementById("State").value;
-            var SubprocessId = document.getElementById("SubprocessId").value;
-            //var Assistance = document.getElementById("Assistance").value;
-            //var SubActivityId = document.getElementById("SubActivityId").value;
-
-            if (Hour == "") {
-                alert("ingrese la hora por favor");
-                return 0;
-            }
 
 
         if (SubprocessId == -1) {
@@ -310,15 +310,15 @@
         };
 
 
-            $.ajax(
-                {
-                    data: parameters,
-                    url: '/Appointment/SaveAppointment',
-                    type: 'post',
-                    success: function (response) {
-                        location.href = "/Appointment/DateConfirmationHome";
-                    }
+        $.ajax(
+            {
+                data: parameters,
+                url: '/Appointment/SaveAppointment',
+                type: 'post',
+                success: function (response) {
+                    location.href = "/Appointment/DateConfirmationHome";
                 }
-            );
-        }
-    </script>
+            }
+        );
+    }
+</script>
