@@ -46,22 +46,18 @@ function loadScheduleDates() {
             getSubProcesslsBySelectedProcess(processId);
             switch (processId) {
                 case '1':
-                    $("#procesoClinico").show();
                     $('#appointmentType').prop("disabled",false);
                     break;
                 case '2':
-                    $("#incidente").show();
                     $('#appointmentType').prop("disabled", true);
                     break;
                 case '3':
                     $("#armas").show();
                     $('#appointmentType').prop("disabled", true);
                 case '4':
-                    $("#charlas").show();
                     $('#appointmentType').prop("disabled", true);
                     break;
                 case '5':
-                    $("#capituloV").show();
                     $('#appointmentType').prop("disabled", true);
                     break;
             }
@@ -348,10 +344,10 @@ function registerProfessional() {
 
 function hideProcess() {
     $("#armas").hide();
-    $("#incidente").hide();
+   /* $("#incidente").hide();
     $("#charlas").hide();
     $("#capituloV").hide();
-    $("#procesoClinico").hide();
+    $("#procesoClinico").hide();*/
 }
 
 function loadProcessInfo() {
