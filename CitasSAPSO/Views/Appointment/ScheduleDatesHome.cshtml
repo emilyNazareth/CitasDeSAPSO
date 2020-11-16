@@ -13,7 +13,7 @@
 <div class="row">
     <div class="col-sm-2">
         <div class="card">
-            <div class="card-header">
+            <div class="card-header" id="instructions">
                 Observaciones
             </div>
             <div class="card-body">
@@ -26,7 +26,7 @@
     <div class="col-sm-10">
         <div class="row">
             <div class="col-sm ">
-                <div class="form-group row scheduleDatesFilter">
+                <div class="form-group scheduleDatesFilter">
                     <label class="col-sm-4 col-form-label-sm" for="process">Proceso</label>
                     <select class="col-sm-4 custom-select custom-select-sm" id="process">
                         @foreach (CitasSAPSO.Models.CatalogueModels process in ViewBag.process)
@@ -36,18 +36,17 @@
                     </select>
 
                 </div>
-                <div class="col-sm ">
-                    <div class="form-group row scheduleDatesFilter">
-                        <label class="col-sm-4 col-form-label-sm" for="subprocess">Subproceso</label>
-                        <select class="col-sm-4 custom-select custom-select-sm" id="SubprocessId" name="SubprocessId">
-                            @foreach (CitasSAPSO.Models.CatalogueModels subprocess in ViewBag.subprocess)
-                            {
-                                <option value="@subprocess.ID">@subprocess.Name</option>
-                            }
-                        </select>
-                    </div>
+            </div>
+            <div class="col-sm ">
+                <div class="form-group scheduleDatesFilter">
+                    <label class="col-sm-4 col-form-label-sm" for="subprocess">Subproceso</label>
+                    <select class="col-sm-4 custom-select custom-select-sm" id="SubprocessId" name="SubprocessId">
+                        @foreach (CitasSAPSO.Models.CatalogueModels subprocess in ViewBag.subprocess)
+                        {
+                            <option value="@subprocess.ID">@subprocess.Name</option>
+                        }
+                    </select>
                 </div>
-
             </div>
             <div class="col-sm">
                 <div class="form-group row scheduleDatesFilter">
@@ -61,109 +60,78 @@
 
                 </div>
             </div>
-            <div class="row">
-                <div class="col-sm ">
-                    <div class="form-group row scheduleDatesFilter">
-                        <label class="col-sm-4 col-form-label-sm" for="appointmentType">Tipo de Cita</label>
-                        <select class="col-sm-4 custom-select custom-select-sm" id="appointmentType" disabled>
-                            <option value="1">Presencial</option>
-                            <option value="1">Telepsicolog&iacutea</option>
-                        </select>
-                    </div>
-                </div>
+        </div>
 
-            </div>
-            
-            <div class="row">
-                <div class="col-sm ">
-                    <div class="form-group row scheduleDatesFilter">
-                        <label class="col-sm-4 control-label small" for="date">Fecha: </label>
-                        <input type="date" onChange="updateCalendar(); " class="col-sm-4 form-control form-control-sm" id="date" />
-
-                    </div>
-                </div>
-                <div class="col-sm ">
-                    <div class="form-group row scheduleDatesFilter">
-                        <label class="col-sm-4 control-label small" for="initialDate">Fecha inicial</label>
-                        <input type="date" class="col-sm-4 form-control form-control-sm" id="initialDate" />
-                    </div>
-                </div>
-                <div class="col-sm ">
-                    <div class="form-group row scheduleDatesFilter">
-                        <label class="col-sm-4 control-label small" for="finalDate">Fecha Final</label>
-                        <input type="date" class="col-sm-4 form-control form-control-sm" id="finalDate" />
-                    </div>
-                </div>
-                <div class="col-sm ">
-                    <div class="form-group row scheduleDatesFilter">
-                        <label class="col-sm-4 control-label small" for="hour">Hora deseada</label>
-                        <input type="time" onChange=" updateCalendar(); " class="col-sm-4 form-control form-control-sm" id="Hour" name="Hour" required />
-                    </div>
+        <div class="row">
+            <div class="col-sm ">
+                <div class="form-group row scheduleDatesFilter">
+                    <label class="col-sm-4 col-form-label-sm" for="appointmentType">Tipo de Cita</label>
+                    <select class="col-sm-4 custom-select custom-select-sm" id="appointmentType" disabled>
+                        <option value="1">Presencial</option>
+                        <option value="1">Telepsicolog&iacutea</option>
+                    </select>
                 </div>
             </div>
 
+            <div class="col-sm ">
+                <div class="form-group row scheduleDatesFilter">
+                    <label class="col-sm-4 control-label small" for="date">Fecha: </label>
+                    <input type="date" onChange="updateCalendar(); " class="col-sm-4 form-control form-control-sm" id="date" />
 
-            <div class="row" id="procesoClinico">
-                <!--Proceso Clínico-->
-                <div class="row">
-                    
-                    <h3>Se Enviará un formulario a su correo electronico registrado</h3>
+                </div>
+            </div>
 
+            <div class="col-sm ">
+                <div class="form-group row scheduleDatesFilter">
+                    <label class="col-sm-4 control-label small" for="hour">Hora deseada</label>
+                    <input type="time" onChange=" updateCalendar(); " class="col-sm-4 form-control form-control-sm" id="Hour" name="Hour" required />
                 </div>
             </div>
 
         </div>
-        <div class="row" id="incidente">
-            Proceso incidente
-            <h3>Se Enviará un formulario a su correo electronico registrado</h3>
 
+        <div class="row" id="armas">
+
+            <div class="col-sm ">
+                <div class="form-group row scheduleDatesFilter">
+                    <label class="col-sm-4 control-label small" for="initialDate">Fecha inicial</label>
+                    <input type="date" class="col-sm-4 form-control form-control-sm" id="initialDate" />
+                </div>
             </div>
-            <div class="row" id="armas">
-                <h3>Su cita será apartada, recuerde presentarse 15 minutos antes</h3>
-
-
+            <div class="col-sm ">
+                <div class="form-group row scheduleDatesFilter">
+                    <label class="col-sm-4 control-label small" for="finalDate">Fecha Final</label>
+                    <input type="date" class="col-sm-4 form-control form-control-sm" id="finalDate" />
                 </div>
-                <div class="row" id="armas">
-                    <h3>Su cita será apartada, recuerde presentarse 15 minutos antes</h3>
+            </div>
+
+        </div>
 
 
-                </div>
-
-                <div class="row" id="capituloV">
-                    <!--Proceso capituloV-->
-                    <h3>Se Enviará un formulario a su correo electronico registrado</h3>
 
 
-                </div>
-                <div class="row" id="charlas">
-                    <!--Proceso capituloV-->
-                    <h3>Su solicitud será enviada</h3>
-
-                </div>
-                <input type="number" id="FunctionaryId" name="FunctionaryId" value="@functionary.Cedula" hidden />
-                @*<input type="number" id="FunctionaryId" name="FunctionaryId" value="305050946" hidden />*@
+        <input type="number" id="FunctionaryId" name="FunctionaryId" value="@functionary.Cedula" hidden />
+        @*<input type="number" id="FunctionaryId" name="FunctionaryId" value="305050946" hidden />*@
         <input type="text" id="Patient" name="Patient" value="paciente" hidden />
         <input type="text" id="State" name="State" value="Apartada" hidden />
-        <br />
 
-        
+        <div class="col-sm-11 scheduleDatesTable">
+            <div id='calendar'></div>
+        </div>
+
         <div class="row justify-content-end">
             @Html.ActionLink("Atr\u00E1s", "MainFunctionaryRegisterHome", "Appointment", null, new { @class = "btn btn-success btn-sm" })
 
             <button type="button" name="finalizar" id="finalizar" href="javascript:;"
                     onclick="saveAppointment2(); return false;"
-                    class="btn btn-success btn-sm ">
+                    class="btn btn-success btn-sm " style="margin-left: 15px;">
                 Finalizar
             </button>
         </div>
 
     </div>
 </div>
-<center>
-<div class="col-sm-11 scheduleDatesTable">
-    <div id='calendar'></div>
-</div>
-</center>
+
     <script>
 
         var calendarEl = document.getElementById('calendar');

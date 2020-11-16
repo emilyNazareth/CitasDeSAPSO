@@ -110,14 +110,6 @@
     max-height: 400px;
 }
 
-    .weekTable tbody tr td:hover, .scheduleDatesTable tbody tr td:hover {
-        background-color: #fcbc94;
-    }
-
-    .weekTable tbody tr:hover, .scheduleDatesTable tbody tr:hover {
-        background-color: #fadbc3;
-    }
-
 #back {
     position: relative;
     left: 0px;
