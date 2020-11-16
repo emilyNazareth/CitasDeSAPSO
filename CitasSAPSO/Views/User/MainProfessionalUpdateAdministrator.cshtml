@@ -41,8 +41,7 @@
                 </div>
                 <div class="row professional-register">
                     <label class="col-sm-6 control-label small" for="gender">Sexo</label>
-                    <select class="col-sm-5 custom-select custom-select-sm" id="gender" name="gender">
-                        <option value="@professional.Gender">Género: @professional.Gender</option>
+                    <select class="col-sm-5 custom-select custom-select-sm" id="gender" name="gender">                        
                         <option value="M">Masculino</option>
                         <option value="F">Femenino</option>
                     </select>
@@ -50,9 +49,8 @@
                 <div class="row professional-register">
                     <label class="col-sm-6 control-label small" for="civilStatus">Estado civil:</label>
                     <select class="col-sm-5 custom-select custom-select-sm" id="civilStatus" name="civilStatus" value="@professional.CivilStatus">
-                        <option selected value="@professional.CivilStatus">Estado Civil: @professional.CivilStatus</option>
-                        <option value="Casado(a)">Casado(a)</option>
                         <option value="Divorsiado(a)">Divorsiado(a)</option>
+                        <option value="Casado(a)">Casado(a)</option>                        
                         <option value="Viudo(a)">Viudo(a)</option>
                         <option value="Soltero(a)">Soltero(a)</option>
                     </select>
@@ -189,7 +187,18 @@
     <span id="resultado"></span>
 </div>
 
-<script> 
+<script>
+
+
+
+    var professional =@Html.Raw(Json.Encode(ViewBag.professional[0]));
+
+    document.getElementById("civilStatus").value = professional.CivilStatus;
+    document.getElementById("gender").value = professional.Gender;
+   
+       
+
+
 
     function goBack() {
         window.history.back();
