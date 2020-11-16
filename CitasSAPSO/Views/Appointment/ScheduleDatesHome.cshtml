@@ -166,9 +166,9 @@
             <input type="text" id="State" name="State" value="Apartada" hidden />
             <br />
            
-                <div class="col-sm-11 scheduleDatesTable">
-                    @{Html.RenderPartial("WeekTableHome");}
-                </div>
+            <div class="col-sm-11 scheduleDatesTable">
+                <div id='calendar'></div>
+            </div>
                 <div class="row justify-content-end">
                     @Html.ActionLink("Atr\u00E1s", "MainFunctionaryRegisterHome", "Appointment", null, new { @class = "btn btn-success btn-sm" })
 

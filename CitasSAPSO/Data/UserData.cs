@@ -462,8 +462,6 @@ namespace CitasSAPSO.Data
             return rol;
         }
 
-        
-
 
     }
 }
