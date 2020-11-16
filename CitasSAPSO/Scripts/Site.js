@@ -294,53 +294,60 @@ function registerProfessional() {
     var district = document.getElementById("district").value;
     var address = document.getElementById("address").value;
 
-    var parameters =
-    {
-        "cedula": cedula,
-        "password": password,
-        "confirmPassword": confirmPassword,
-        "name": name,
-        "firstLastName": firstLastName,
-        "secondLastName": secondLastName,
-        "personalPhone": personalPhone,
-        "RoomPhone": RoomPhone,
-        "birthday": birthday,
-        "gender": gender,
-        "civilStatus": civilStatus,
-        "placeNumber": placeNumber,
-        "Status": stateValue,
-        "process": process,
-        "EmergencyContact": EmergencyContact, 
-        "EmergencyContactNumber": contactNumber,
-        "scholarship": scholarship,
-        "specialty": specialty,
-        "schoolCode": schoolCode,
-        "province": province,
-        "canton": canton,
-        "district": district,
-        "address": address
+    if (cedula == '' || password == '' || confirmPassword == '' || name == '' || firstLastName == '' || secondLastName == '' ||
+        personalPhone == '' || RoomPhone == '' || birthday == '' || gender == '' || civilStatus == '' || placeNumber == '' ||
+        EmergencyContact == '' || contactNumber == '' || scholarship == '' || specialty == '' || schoolCode == '' ||
+        province == '' || canton == '' || district == '' || address == '') {
+        $("#resultado").html("*Todos los campos son requeridos");
+    } else {
+        var parameters =
+            {
+                "cedula": cedula,
+                "password": password,
+                "confirmPassword": confirmPassword,
+                "name": name,
+                "firstLastName": firstLastName,
+                "secondLastName": secondLastName,
+                "personalPhone": personalPhone,
+                "RoomPhone": RoomPhone,
+                "birthday": birthday,
+                "gender": gender,
+                "civilStatus": civilStatus,
+                "placeNumber": placeNumber,
+                "Status": stateValue,
+                "process": process,
+                "EmergencyContact": EmergencyContact, 
+                "EmergencyContactNumber": contactNumber,
+                "scholarship": scholarship,
+                "specialty": specialty,
+                "schoolCode": schoolCode,
+                "province": province,
+                "canton": canton,
+                "district": district,
+                "address": address
 
       
 
-    };
-    if (password != confirmPassword) {
-        $("#resultado").html("Contraseñas incorrectas");
-    } else {       
-        $.ajax(
-                {
-                    data: parameters,
-                    url: '/User/MainProfessionalRegisterAdministrator',
-                    type: 'post',
-                    beforeSend: function () {
-                        $("#resultado").html("Procesando, espere por favor ...");                
-                    },
-                    success: function (response) {
-                        $("#resultado").html("Registrado con éxito");
+            };
+            if (password != confirmPassword) {
+                $("#resultado").html("Contraseñas incorrectas");
+            } else {       
+                $.ajax(
+                        {
+                            data: parameters,
+                            url: '/User/MainProfessionalRegisterAdministrator',
+                            type: 'post',
+                            beforeSend: function () {
+                                $("#resultado").html("Procesando, espere por favor ...");                
+                            },
+                            success: function (response) {
+                                $("#resultado").html("Registrado con éxito");
                 
-                    }
-                }
-            );
-    }
+                            }
+                        }
+                    );
+            }
+    }  
 
     
 
