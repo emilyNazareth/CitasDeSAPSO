@@ -36,7 +36,6 @@
     <table id="tbl" class="table table-bordered table-striped table-hover table-sm table-responsive-md">
         <thead>
             <tr>
-                <th scope="col">Consecutivo</th>
                 <th scope="col">C&eacutedula</th>
                 <th scope="col">Nombre</th>
                 <th scope="col">Apellidos</th>
@@ -50,7 +49,6 @@
             @foreach (CitasSAPSO.Models.UserModels professionals in ViewBag.professionals)
             {
                 <tr>
-                    <td>@professionals.ProfessionalId</td>
                     <td>@professionals.Cedula</td>
                     <td>@professionals.Name</td>
                     <td>@professionals.FirstLastName</td>
