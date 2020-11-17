@@ -152,11 +152,10 @@ namespace CitasSAPSO.Controllers
             catalogueProcess.Table = "asistencia";
             ViewBag.assistance = catalogueBusiness.GetListCatalogue(catalogueProcess);
 
-            //temporal para cargar los datos de las citas en la nueva agenda porque los filtros estan pal tigre 
             AppointmentBusiness appointmentBusiness = new AppointmentBusiness();
-            List<AppointmentModels> appointmentList = appointmentBusiness.GetAppointmentsByFilter();
+            int idprofesional = (int)Session["Identification"];
+            List<AppointmentModels> appointmentList = appointmentBusiness.getProfessinalScheldule(idprofesional);
             ViewBag.appointmentList = appointmentList;
-            //---------------------------------------------------------------
             return View("DashboardProfessional");
         }
 
