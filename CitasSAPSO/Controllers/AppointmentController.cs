@@ -110,22 +110,6 @@ namespace CitasSAPSO.Controllers
             return View("MainFunctionaryModifyHome");
         }
 
-        [AllowAnonymous]
-        public ActionResult MainFunctionaryModifyAdministrator()
-        {
-            UserModels functionary = new UserModels();
-            functionary = (UserModels)Session["functionary"];
-            
-            //string cedula = Request.Params["Cedula"];
-            CatalogueBusiness catalogueBusiness = new CatalogueBusiness();
-            ViewBag.places = catalogueBusiness.GetCatalogueFunctionary("puesto");
-            ViewBag.areas = catalogueBusiness.GetCatalogueFunctionary("area");
-            ViewBag.offices = catalogueBusiness.GetCatalogueFunctionary("oficina");
-            ViewBag.assistance = catalogueBusiness.GetCatalogueFunctionary("asistencia");
-            UserBusiness functionaryBusiness = new UserBusiness();
-            ViewBag.data = functionaryBusiness.GetFunctionaryByCedula(functionary.Cedula);
-            return View("MainFunctionaryModifyHome");
-        }
 
         [HttpPost]
         [AllowAnonymous]

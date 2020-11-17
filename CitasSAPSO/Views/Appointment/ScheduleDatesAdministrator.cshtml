@@ -120,7 +120,10 @@
         </div>
 
         <div class="row justify-content-end">
-            @Html.ActionLink("Atr\u00E1s", "MainFunctionaryModifyAdministrator", "Appointment", null, new { @class = "btn btn-success btn-sm" })
+            <button type="button" name="atras" id="atras" href="javascript:;"
+                    onclick="goBack();" class="btn btn-success btn-sm " style="margin-left: 15px;">
+                Atrás
+            </button>
 
             <button type="button" name="finalizar" id="finalizar" href="javascript:;"
                     onclick="updateAppointment(); return false;"
@@ -132,7 +135,12 @@
     </div>
 </div>
 
-    <script>
+<script>
+    
+       function goBack() {
+            window.history.back();
+       }
+
 
         var calendarEl = document.getElementById('calendar');
         var calendar = new FullCalendar.Calendar(calendarEl, {
