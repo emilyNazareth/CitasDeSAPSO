@@ -188,6 +188,7 @@
     </Compile>
     <Compile Include="Models\AppointmentModels.cs" />
     <Compile Include="Models\CatalogueModels.cs" />
+    <Compile Include="Models\MailModels.cs" />
     <Compile Include="Models\RoleModels.cs" />
     <Compile Include="Models\UserModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -199,6 +200,8 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\img\FO102621.png" />
+    <Content Include="Content\img\FO102633.png" />
     <Content Include="Content\img\FondoSAPSO.png" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />

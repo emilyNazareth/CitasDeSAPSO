@@ -58,6 +58,7 @@ namespace CitasSAPSO.Controllers
             ViewBag.subprocess = catalogueBusiness.GetCatalogueFunctionary("subproceso");
             ViewBag.process = catalogueBusiness.GetListCatalogue(catalogueProcess);
             Session["functionary"] = functionary;
+            Session["email"] = functionary.Mail;
             ViewBag.functionary = functionary;
             return View("ScheduleDatesHome");
         }
@@ -89,6 +90,7 @@ namespace CitasSAPSO.Controllers
             ViewBag.subprocess = catalogueBusiness.GetCatalogueFunctionary("subproceso");
             ViewBag.process = catalogueBusiness.GetListCatalogue(catalogueProcess);
             Session["functionary"] = functionary;
+            Session["email"] = functionary.Mail;
             ViewBag.functionary = functionary;
             return View("ScheduleDatesHome");
         }
@@ -124,6 +126,7 @@ namespace CitasSAPSO.Controllers
             ViewBag.subprocess = catalogueBusiness.GetCatalogueFunctionary("subproceso");
             ViewBag.process = catalogueBusiness.GetListCatalogue(catalogueProcess);
             Session["functionary"] = functionary;
+            Session["email"] = functionary.Mail;
             ViewBag.functionary = functionary;
             return View("ScheduleDatesHome");
         }
@@ -155,9 +158,10 @@ namespace CitasSAPSO.Controllers
         {
             UserBusiness functionaryBusiness = new UserBusiness();
             functionaryBusiness.RegisterFunctionary((UserModels)Session["functionary"]);
-
+            CreateMail(_appointment);
             AppointmentBusiness appointmentBusiness = new AppointmentBusiness();
             appointmentBusiness.RegisterAppointment(_appointment);
+            
             Session["appointment"] = _appointment;
             return Json("ok");
         }
@@ -252,7 +256,58 @@ namespace CitasSAPSO.Controllers
         }
 
 
+        public void CreateMail(AppointmentModels appointment)
+        {
+            CatalogueController catalogue = new CatalogueController();
+            int process = catalogue.GetProcessBySubprocess(appointment.SubProcess.ID);
 
+            string email = (string)Session["email"];
+
+            MailModels mail;
+            String message = "Su cita ha sido programada con éxito. \n " +
+                    "\n\tRESUMEN DE CITA:\n" +
+                    "Fecha: " + appointment.Date + "\n" +
+                    "Hora: " + appointment.Hour + "\n" +
+                    "Paciente: " + appointment.Functionary.Cedula +
+                    "\n\n Para cualquier consulta comuniquese al teléfono 2295-4181," +
+                    " al correo sapso@poder-judicial.go.cr o a nuestro sitio web de citas para cancelar o modificar su cita";
+            switch (process)
+            {
+                case 1:
+                    mail = new MailModels("DAVID.ALVARADOELIZONDO@ucr.ac.cr", email,
+                    "ESTE CORREO ES PARA CONFIRMAR SU CITA DE PROCESO CLINICO EN SAPSO \n" + message,
+                    "CONFIRMACION CITA CLÍNICO", 0);
+                    break;
+                case 2:
+                    mail = new MailModels("DAVID.ALVARADOELIZONDO@ucr.ac.cr", email,
+                    "ESTE CORREO ES PARA CONFIRMAR SU CITA DE PROCESO INCIDENTE CRÍTICO EN SAPSO\n" + message +
+                    "IMPORTANTE Complete el formulario adjunto y preséntelo el día de su cita",
+                    "CONFIRMACION CITA INCIDENTES CRITICOS", 2);
+                    break;
+                case 3:
+                     mail = new MailModels("DAVID.ALVARADOELIZONDO@ucr.ac.cr", email,
+                    "ESTE CORREO ES PARA CONFIRMAR SU CITA DE PROCESO ARMAS EN SAPSO \n" + message,
+                    "CONFIRMACION DE CITA", 0);
+                    break;
+                case 4:
+                     mail = new MailModels("DAVID.ALVARADOELIZONDO@ucr.ac.cr", email,
+                    "ESTE CORREO ES PARA CONFIRMAR SU CITA DE PROCESO CHARLAS EN SAPSO \n" + message,
+                    "CONFIRMACION DE CITA", 0);
+                    break;
+                case 5:
+                    mail = new MailModels("DAVID.ALVARADOELIZONDO@ucr.ac.cr", email,
+                    "ESTE CORREO ES PARA CONFIRMAR SU CITA DE PROCESO CAPITULO \"V\" EN SAPSO \n" + message+
+                    "IMPORTANTE: Complete el formulario adjunto y preséntelo el día de su cita",
+                    "CONFIRMACION CITA CAPITULO V", 1);
+                    break;
+                default:
+                    mail = new MailModels("DAVID.ALVARADOELIZONDO@ucr.ac.cr", email,
+                    "ESTE CORREO ES PARA CONFIRMAR SU CITA EN SAPSO \n" + message, "CONFIRMACION DE CITA", 0);
+                    break;
+            }
+            mail.SendMail();
+
+        }
 
     }
 }

@@ -411,6 +411,13 @@ namespace CitasSAPSO.Controllers
             // return JsonConvert.SerializeObject(UserBusiness.GetProfessionalsByProcess(process));
         }
 
+        public int GetProcessBySubprocess(int subprocess)
+        {
+            CatalogueBusiness catalogueBusiness = new CatalogueBusiness();
+            return catalogueBusiness.GetProcessBySubprocess(subprocess);
+        }
+
+
         [HttpPost]
         public ActionResult GetAppointmensQuantityFirstSemester()
         {
