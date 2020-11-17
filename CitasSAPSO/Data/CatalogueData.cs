@@ -204,6 +204,27 @@ namespace CitasSAPSO.Data
             return catalogueItems;
         }
 
+        public int GetProcessBySubprocess(int subprocess)
+        {
+            var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["connDB"].ConnectionString);
+            int proceso = 1;
+            string sqlQuery = $"exec sp_obtener_proceso_por_subproceso @subproceso={subprocess}";
+            using (SqlCommand command = new SqlCommand(sqlQuery, connection))
+            {
+                command.CommandType = CommandType.Text;
+                connection.Open();
+                SqlDataReader catalogueReader = command.ExecuteReader();
+                while (catalogueReader.Read())
+                {
+                    proceso = Int32.Parse(catalogueReader["fk_id_proceso"].ToString());
+
+                }
+                connection.Close();
+            }
+
+            return proceso;
+        }
+
         public int[] GetAppointmensQuantityFirstSemester()
         {
             var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["connDB"].ConnectionString);

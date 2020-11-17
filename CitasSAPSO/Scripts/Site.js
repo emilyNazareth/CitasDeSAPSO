@@ -41,6 +41,7 @@ function loadScheduleDates() {
         
         $('#process').on("change", function () {
             hideProcess();
+            $('#appointmentType').prop("disabled", true);
             var processId = document.getElementById("process").value;
             getProfessionalsBySelectedProcess(processId);
             getSubProcesslsBySelectedProcess(processId);
@@ -49,16 +50,16 @@ function loadScheduleDates() {
                     $('#appointmentType').prop("disabled",false);
                     break;
                 case '2':
-                    $('#appointmentType').prop("disabled", true);
+                    
                     break;
                 case '3':
                     $("#armas").show();
-                    $('#appointmentType').prop("disabled", true);
+
                 case '4':
-                    $('#appointmentType').prop("disabled", true);
+
                     break;
                 case '5':
-                    $('#appointmentType').prop("disabled", true);
+
                     break;
             }
 
