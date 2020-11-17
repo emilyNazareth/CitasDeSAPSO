@@ -120,15 +120,15 @@
         var office = $('#office').val();
         var identification = $('#identification').val();
         if (identification == "")
-            identification = null;
+            identification = -1;
         var gender = $('#gender').val();
         var dateStatus = $('#dateStatus').val();
         var consecutive = $('#consecutive').val();
         if (consecutive == "")
-            consecutive = 0;
+            consecutive = -1;
         var age = $('#age').val();
         if (age == "")
-            age = 0;
+            age = -1;
 
         var parameters = {
             "initialDate": initialDate,

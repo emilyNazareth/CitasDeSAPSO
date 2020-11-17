@@ -232,7 +232,7 @@ namespace CitasSAPSO.Data
                     professionalTemp.RoomPhone = catalogueReader["tc_telefono_habitacion"].ToString();
                     professionalTemp.Birthday = catalogueReader["tf_fecha_nacimiento"].ToString();
                     professionalTemp.Gender = Char.Parse(catalogueReader["tc_sexo"].ToString());
-                    professionalTemp.CivilStatus = catalogueReader["tc_sexo"].ToString();
+                    professionalTemp.CivilStatus = catalogueReader["tc_estado_civil"].ToString();
                     professionalTemp.PlaceNumber = Int32.Parse(catalogueReader["tn_numero_plaza"].ToString());
                     professionalTemp.Status = Int32.Parse(catalogueReader["tc_estado"].ToString());
                     professionalTemp.EmergencyContact = catalogueReader["tc_contacto_emergencia"].ToString();
