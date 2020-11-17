@@ -99,6 +99,7 @@ namespace CitasSAPSO.Controllers
         public ActionResult MainFunctionaryModifyHome()
         {
             string cedula = Request.Params["Cedula"];
+            Session["idAppointment"] = Request.Params["id"];
             CatalogueBusiness catalogueBusiness = new CatalogueBusiness();
             ViewBag.places = catalogueBusiness.GetCatalogueFunctionary("puesto");
             ViewBag.areas = catalogueBusiness.GetCatalogueFunctionary("area");
@@ -108,6 +109,7 @@ namespace CitasSAPSO.Controllers
             ViewBag.data = functionaryBusiness.GetFunctionaryByCedula(Int32.Parse(cedula));
             return View("MainFunctionaryModifyHome");
         }
+
 
         [HttpPost]
         [AllowAnonymous]
@@ -128,11 +130,25 @@ namespace CitasSAPSO.Controllers
             Session["functionary"] = functionary;
             Session["email"] = functionary.Mail;
             ViewBag.functionary = functionary;
-            return View("ScheduleDatesHome");
+            return View("ScheduleDatesAdministrator");
         }
 
         [AllowAnonymous]
         public ActionResult ScheduleDatesHome()
+        {
+            CatalogueModels catalogueProcess = new CatalogueModels();
+            catalogueProcess.Table = "proceso";
+            CatalogueBusiness appointmentBusiness = new CatalogueBusiness();
+            UserBusiness userBusiness = new UserBusiness();
+
+            ViewBag.professional = userBusiness.GetListProfessionals();
+            ViewBag.subprocess = appointmentBusiness.GetCatalogueFunctionary("subproceso");
+            ViewBag.process = appointmentBusiness.GetListCatalogue(catalogueProcess);
+            return View();
+        }
+
+        [AllowAnonymous]
+        public ActionResult ScheduleDatesAdministrator()
         {
             CatalogueModels catalogueProcess = new CatalogueModels();
             catalogueProcess.Table = "proceso";
@@ -162,6 +178,22 @@ namespace CitasSAPSO.Controllers
             AppointmentBusiness appointmentBusiness = new AppointmentBusiness();
             appointmentBusiness.RegisterAppointment(_appointment);
             
+            Session["appointment"] = _appointment;
+            return Json("ok");
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult UpdateAppointment(AppointmentModels _appointment)
+        {
+            UserBusiness functionaryBusiness = new UserBusiness();
+            functionaryBusiness.RegisterFunctionary((UserModels)Session["functionary"]);
+            CreateMail(_appointment);
+            AppointmentBusiness appointmentBusiness = new AppointmentBusiness();
+            string idAppointment = (string)Session["idAppointment"];
+            Debug.WriteLine("iiiiiiiiiiiiiiiiiiiiiiiiddddddddddddddddddddddddddddd: "+idAppointment);
+            appointmentBusiness.UpdateAppointment(_appointment, Int32.Parse(idAppointment));
+
             Session["appointment"] = _appointment;
             return Json("ok");
         }

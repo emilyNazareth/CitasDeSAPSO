@@ -442,6 +442,7 @@
     <Content Include="Views\Security\ManageRoles.cshtml" />
     <Content Include="Views\Appointment\AppointmentDetail.cshtml" />
     <Content Include="Views\User\ReportsView.cshtml" />
+    <Content Include="Views\Appointment\ScheduleDatesAdministrator.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
