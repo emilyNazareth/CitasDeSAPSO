@@ -135,6 +135,7 @@
                     var text = "";
                     for (i in data) {
                         text += "<tr>";
+                        text += '<td style="display:none;">' + data[i].Cedula + '</td>';
                         text += '<td>' + data[i].Cedula + '</td>';
                         text += '<td>' + data[i].Name + '</td>';
                         text += '<td>' + data[i].FirstLastName + '</td>';
