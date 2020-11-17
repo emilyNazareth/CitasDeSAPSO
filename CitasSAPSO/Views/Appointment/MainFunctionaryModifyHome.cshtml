@@ -59,10 +59,12 @@
                 </div>
                 <div class="row functionary-register">
                     <label class="col-sm-6 control-label small" for="scholarship">Escolaridad</label>
-                    <select class="col-sm-5 custom-select custom-select-sm" id="scholarship" name="scholarship">
-                        <option value=@data.Scholarship selected>@data.Scholarship</option>
-                        <option value="Primaria">Primaria</option>
-                        <option value="Segundaria">Segundaria</option>
+                    <select class="col-sm-5 custom-select custom-select-sm" id="scholarship" name="scholarship" value="@data.Scholarship">
+                        <option value="Técnico">T&eacutecnico</option>
+                        <option value="Bachillerato">Bachillerato</option>
+                        <option value="Licenciatura">Licenciatura</option>
+                        <option value="Maestría">Maestr&iacutea</option>
+                        <option value="Doctorado">Doctorado</option>
                     </select>
                 </div>
 
@@ -70,8 +72,7 @@
 
                 <div class="row functionary-register">
                     <label class="col-sm-6 control-label small" for="civilStatus">Estado civil:</label>
-                    <select class="col-sm-5 custom-select custom-select-sm" id="civilStatus" name="civilStatus">
-                        <option value=@data.CivilStatus selected>@data.CivilStatus</option>
+                    <select class="col-sm-5 custom-select custom-select-sm" id="civilStatus" name="civilStatus" value="@data.CivilStatus">
                         <option value="Casado(a)">Casado(a)</option>
                         <option value="Divorsiado(a)">Divorsiado(a)</option>
                         <option value="Viudo(a)">Viudo(a)</option>
@@ -120,9 +121,7 @@
                 <p class="text-success">Datos Laborales</p>
                 <div class="row functionary-register">
                     <label class="col-sm-6 control-label small" for="area">Área</label>
-                    <select class="col-sm-5 custom-select custom-select-sm" id="area" name="areaID">
-                        <!--Se cargar desde javaScript-->
-                        <option value=@data.AreaID selected>@data.NameArea</option>
+                    <select class="col-sm-5 custom-select custom-select-sm" id="area" name="areaID" value="@data.AreaID">
                         @foreach (CitasSAPSO.Models.CatalogueModels areas in ViewBag.areas)
                         {
                             <option value="@areas.ID">@areas.Name</option>
@@ -132,8 +131,7 @@
                 </div>
                 <div class="row functionary-register">
                     <label class="col-sm-6 control-label small" for="office">Oficina</label>
-                    <select class="col-sm-5 custom-select custom-select-sm" id="office" name="officeID">
-                        <option value=@data.OfficeID selected>@data.NameOffice</option>
+                    <select class="col-sm-5 custom-select custom-select-sm" id="office" name="officeID" value="@data.OfficeID">
                         @foreach (CitasSAPSO.Models.CatalogueModels offices in ViewBag.offices)
                         {
                             <option value="@offices.ID">@offices.Name</option>
@@ -143,8 +141,7 @@
                 </div>
                 <div class="row functionary-register">
                     <label class="col-sm-6 control-label small" for="place">Puesto</label>
-                    <select class="col-sm-5 custom-select custom-select-sm" id="place" name="placeID">
-                        <option value=@data.PlaceID selected>@data.NamePlace</option>
+                    <select class="col-sm-5 custom-select custom-select-sm" id="place" name="placeID" value="@data.PlaceID">
                         @foreach (CitasSAPSO.Models.CatalogueModels places in ViewBag.places)
                         {
                             <option value="@places.ID">@places.Name</option>
@@ -189,9 +186,16 @@
     }
 </form>
 <script>
+
+    var functionary =@Html.Raw(Json.Encode(ViewBag.data[0]));
+    document.getElementById("scholarship").value = functionary.Scholarship;
+    document.getElementById("civilStatus").value = functionary.CivilStatus;
+    document.getElementById("area").value = functionary.AreaID;
+    document.getElementById("office").value = functionary.OfficeID;
+    document.getElementById("place").value = functionary.PlaceID;
     /*  window.onload = function () {
           loadFunctionaryRegister();
       }*/
 
- 
+
 </script>
