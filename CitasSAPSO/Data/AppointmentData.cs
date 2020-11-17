@@ -133,12 +133,12 @@ namespace CitasSAPSO.Data
             }
 
         }
-        public void UpdateAppointment(AppointmentModels _appointment)
+        public void UpdateAppointment(AppointmentModels _appointment, int idAppointment)
         {
-            string sqlQuery = $"exec sp_guardar_cita_ (" + _appointment.Functionary.Cedula + ",'" + _appointment.Date + "','"
+            string sqlQuery = $"exec sp_modificar_cita " + _appointment.Functionary.Cedula + ",'" + _appointment.Date + "','"
                 + _appointment.Hour + "'," + _appointment.Professional.Cedula + ",'" + _appointment.Patient + "','"
-                + _appointment.State + "'," + _appointment.SubProcess.ID + "," + _appointment.Assistance + "',"
-                + _appointment.SubActivity.ID + ")";
+                + _appointment.State + "'," + _appointment.SubProcess.ID + "," + _appointment.Assistance.ID + ","
+                + _appointment.SubActivity.ID +","+ idAppointment;
 
             using (SqlCommand command = new SqlCommand(sqlQuery, connection))
             {

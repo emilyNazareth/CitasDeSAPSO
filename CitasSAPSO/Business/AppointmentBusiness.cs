@@ -16,6 +16,11 @@ namespace CitasSAPSO.Business
             AppointmentData appointmentData = new AppointmentData();
             appointmentData.SaveAppointment(_appointment);
         }
+        public void UpdateAppointment(AppointmentModels _appointment, int idAppointment)
+        {
+            AppointmentData appointmentData = new AppointmentData();
+            appointmentData.UpdateAppointment(_appointment, idAppointment);
+        }
 
         public List<AppointmentModels> SearchAppointmentsForFunctionary(AppointmentModels _appointment)
         {
