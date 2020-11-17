@@ -27,7 +27,7 @@
         <div class="form-group row scheduleDatesFilter">
             <label class="col-sm-4 col-form-label-sm" for="process">Proceso</label>
             <select class="col-sm-4 custom-select custom-select-sm" id="process" name="process">
-                <option value = 0>Seleccione..</option>
+                @*<option value = 0>Seleccione..</option>*@
                 @foreach (CitasSAPSO.Models.CatalogueModels process in ViewBag.process)
                 {
                     <option value="@process.ID">@process.Name</option>
@@ -39,7 +39,7 @@
         <div class="form-group row scheduleDatesFilter">
             <label class="col-sm-4 col-form-label-sm" for="assistance">Asistencia</label>
             <select class="col-sm-5 custom-select custom-select-sm" id="assistance" name="assistance">
-                <option value=0>Seleccione..</option>
+                @*<option value=0>Seleccione..</option>*@
                 @foreach (CitasSAPSO.Models.CatalogueModels _assitance in ViewBag.assistance)
                 {
                     <option value="@_assitance.ID">@_assitance.Name</option>
@@ -53,7 +53,7 @@
         <div class="form-group row scheduleDatesFilter">
             <label class="col-sm-4 col-form-label-sm" for="office">Oficina</label>
             <select class="col-sm-4 custom-select custom-select-sm" id="office" name="office">
-                <option value=0>Seleccione..</option>
+                @*<option value=0>Seleccione..</option>*@
                 @foreach (CitasSAPSO.Models.CatalogueModels offices in ViewBag.offices)
                 {
                     <option value="@offices.ID">@offices.Name</option>
@@ -73,7 +73,7 @@
         <div class="form-group row scheduleDatesFilter">
             <label class="col-sm-4 col-form-label-sm" for="professional">Profesional</label>
             <select class="col-sm-4 custom-select custom-select-sm" id="professional" name="professional">
-                <option value=0>Seleccione..</option>
+                @*<option value=0>Seleccione..</option>*@
                 @foreach (CitasSAPSO.Models.UserModels professional in ViewBag.professional)
                 {
                     <option value="@professional.Cedula">@professional.Name @professional.FirstLastName</option>
@@ -140,18 +140,17 @@
         var office = $('#office').val();
         var identification = $('#identification').val();
         if (identification == "")
-            identification = 0;
+            identification = -1;
         var professional = $('#professional').val();
         var gender = $('#gender').val();
         var dateStatus = $('#dateStatus').val();
-        if (dateStatus == "")
-            dateStatus = '0';
+
         var consecutive = $('#consecutive').val();
         if (consecutive == "")
-            consecutive = 0;
+            consecutive = -1;
         var age = $('#age').val();
         if (age == "")
-            age = 0;
+            age = -1;
 
         var parameters = {
             "initialDate": initialDate, "finalDate": finalDate, "process": process,

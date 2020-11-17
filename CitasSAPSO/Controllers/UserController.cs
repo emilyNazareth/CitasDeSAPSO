@@ -153,7 +153,7 @@ namespace CitasSAPSO.Controllers
             ViewBag.assistance = catalogueBusiness.GetListCatalogue(catalogueProcess);
 
             AppointmentBusiness appointmentBusiness = new AppointmentBusiness();
-            int idprofesional = (int)Session["Identification"];
+            int idprofesional = Int32.Parse((string)Session["Identification"]);
             List<AppointmentModels> appointmentList = appointmentBusiness.getProfessinalScheldule(idprofesional);
             ViewBag.appointmentList = appointmentList;
             return View("DashboardProfessional");
