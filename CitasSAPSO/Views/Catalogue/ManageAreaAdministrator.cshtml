@@ -67,6 +67,7 @@
     </div>
 
     <script>
+        var letters = /^[A-Za-z]+$/; 
         //limpia el formulario
         function cleanArea() {
             document.getElementById("login-form").reset();
@@ -77,6 +78,10 @@
         }
         //metodos para llamados a modificar, agregar y borrar con ajax
         function updateArea(id, description) {
+            if (description.match(letters) == null) {
+                $("#messageSpanId").html("*El campo Descripción es inválido");
+                return;
+            }
             var parameters = { "id": id, "description": description };
             $.ajax(
                 {
@@ -97,6 +102,10 @@
             );     
         }
         function registerArea(description) {
+            if (description.match(letters) == null) {
+                $("#messageSpanId").html("*El campo Descripción es inválido");
+                return;
+            }
             var parameters = { "description": description };
             $.ajax(
                 {
