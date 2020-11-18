@@ -174,10 +174,13 @@ function goBack() {
 
 
 function modifyProfessionalUrl(identification) {
+    console.log(identification);
     window.location.href = '/User/MainProfessionalUpdateAdministrator?login=' + identification;
 }
 
 function modifyInformationProfessional() {
+    var letters = /^[A-Za-z]+$/;  
+
     var cedula = document.getElementById("Cedula").value;
     var name = document.getElementById("name").value;
     var firstLastName = document.getElementById("firstLastName").value;
@@ -211,50 +214,95 @@ function modifyInformationProfessional() {
         process.push($(this).val());
     });
 
-    var parameters =
-    {
-        "cedula": cedula,
-        "name": name,
-        "firstLastName": firstLastName,
-        "secondLastName": secondLastName,
-        "personalPhone": personalPhone,
-        "RoomPhone": RoomPhone,
-        "birthday": birthday,
-        "gender": gender,
-        "civilStatus": civilStatus,
-        "placeNumber": placeNumber,
-        "Status": stateValue,
-        "process": process,
-        "EmergencyContact": EmergencyContact,
-        "contactNumber": contactNumber,
-        "scholarship": scholarship,
-        "specialty": specialty,
-        "schoolCode": schoolCode,
-        "province": province,
-        "canton": canton,
-        "district": district,
-        "address": address
+    if (cedula == '' ||  name == '' || firstLastName == '' || secondLastName == '' ||
+        personalPhone == '' || RoomPhone == '' || birthday == '' || gender == '' || civilStatus == '' || placeNumber == '' ||
+        EmergencyContact == '' || contactNumber == '' || scholarship == '' || specialty == '' || schoolCode == '' ||
+        province == '' || canton == '' || district == '' || address == '') {
+        $("#resultado").html("*Todos los campos son requeridos");
 
-
-    };
-    $.ajax(
-        {
-            data: parameters,
-            url: '/User/MainProfessionalUpdateAdministrator',
-            type: 'post',
-            beforeSend: function () {
-                $("#resultado").html("Procesando, espere por favor ...");
-            },
-            success: function (response) {
-                $("#resultado").html("Modificado con éxito");
-
-            }
+    } else {
+        if (name.match(letters) == null) {
+            $("#resultado").html("*El campo Nombre es inválido");
+            return;
         }
-    );
+        if (firstLastName.match(letters) == null) {
+            $("#resultado").html("*El campo Primer Apellido es inválido");
+            return;
+        }
+        if (secondLastName.match(letters) == null) {
+            $("#resultado").html("*El campo Segundo Apellido es inválido");
+            return;
+        }
+        if (personalPhone.length < 8 || personalPhone.length > 8) {
+            $("#resultado").html("*El campo Teléfono personal es inválido");
+            return;
+        }
+        if (RoomPhone.length < 8 || RoomPhone.length > 8) {
+            $("#resultado").html("*El campo Teléfono de habitación es inválido");
+            return;
+        }
+        if (contactNumber.length < 8 || contactNumber.length > 8) {
+            $("#resultado").html("*El campo Número de contacto es inválido");
+            return;
+        }
+        if (EmergencyContact.match(letters) == null) {
+            $("#resultado").html("*El campo Contacto Emergencia es inválido");
+            return;
+        }
+        if (specialty.match(letters) == null) {
+            $("#resultado").html("*El campo Especialidad es inválido");
+            return;
+        }
+       var parameters =
+        {
+            "cedula": cedula,
+            "name": name,
+            "firstLastName": firstLastName,
+            "secondLastName": secondLastName,
+            "personalPhone": personalPhone,
+            "RoomPhone": RoomPhone,
+            "birthday": birthday,
+            "gender": gender,
+            "civilStatus": civilStatus,
+            "placeNumber": placeNumber,
+            "Status": stateValue,
+            "process": process,
+            "EmergencyContact": EmergencyContact,
+            "EmergencyContactNumber": contactNumber,
+            "scholarship": scholarship,
+            "specialty": specialty,
+            "schoolCode": schoolCode,
+            "province": province,
+            "canton": canton,
+            "district": district,
+            "address": address
+
+
+        };
+        $.ajax(
+            {
+                data: parameters,
+                url: '/User/MainProfessionalUpdateAdministrator',
+                type: 'post',
+                beforeSend: function () {
+                    $("#resultado").html("Procesando, espere por favor ...");
+                },
+                success: function (response) {
+                    $("#resultado").html("Modificado con éxito");
+
+                }
+            }
+        );
+    }
+
+ 
 }
 
 
-function registerProfessional() {    
+function registerProfessional() {
+    
+    var letters = /^[A-Za-z]+$/;    
+    
     var cedula = document.getElementById("Cedula").value;
     var password = document.getElementById("Password").value;
     var confirmPassword = document.getElementById("ConfirmPassword").value;
@@ -289,14 +337,52 @@ function registerProfessional() {
     var province = document.getElementById("province").value;
     var canton = document.getElementById("canton").value;
     var district = document.getElementById("district").value;
-    var address = document.getElementById("address").value;
+    var address = document.getElementById("address").value;     
+
+    console.log(contactNumber);
 
     if (cedula == '' || password == '' || confirmPassword == '' || name == '' || firstLastName == '' || secondLastName == '' ||
         personalPhone == '' || RoomPhone == '' || birthday == '' || gender == '' || civilStatus == '' || placeNumber == '' ||
         EmergencyContact == '' || contactNumber == '' || scholarship == '' || specialty == '' || schoolCode == '' ||
         province == '' || canton == '' || district == '' || address == '') {
         $("#resultado").html("*Todos los campos son requeridos");
+
     } else {
+        if (name.match(letters) == null) {
+            $("#resultado").html("*El campo Nombre es inválido");
+            return;
+        }
+        if (firstLastName.match(letters) == null) {
+            $("#resultado").html("*El campo Primer Apellido es inválido");
+            return;
+        }
+        if (secondLastName.match(letters) == null) {
+            $("#resultado").html("*El campo Segundo Apellido es inválido");
+            return;
+        }       
+        if (personalPhone.length < 8 || personalPhone.length > 8) {
+            $("#resultado").html("*El campo Teléfono personal es inválido");
+            return;
+        }
+        if (RoomPhone.length < 8 || RoomPhone.length > 8) {
+            $("#resultado").html("*El campo Teléfono de habitación es inválido");
+            return;
+        }
+        if (contactNumber.length < 8 || contactNumber.length > 8) {
+            $("#resultado").html("*El campo Número de contacto es inválido");
+            return;
+        }
+        if (EmergencyContact.match(letters) == null) {
+            $("#resultado").html("*El campo Contacto Emergencia es inválido");
+            return;
+        }
+        if (specialty.match(letters) == null) {
+            $("#resultado").html("*El campo Especialidad es inválido");
+            return;
+        }
+
+        
+
         var parameters =
             {
                 "cedula": cedula,

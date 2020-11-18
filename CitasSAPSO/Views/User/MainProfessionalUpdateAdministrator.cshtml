@@ -29,11 +29,11 @@
                 </div>
                 <div class="row professional-register">
                     <label class="col-sm-6 control-label small" for="personalPhone">Teléfono Personal:</label>
-                    <input class="col-sm-4 form-control form-control-sm" type="text" id="personalPhone" name="personalPhone" value="@professional.PersonalPhone">
+                    <input class="col-sm-4 form-control form-control-sm" type="number" id="personalPhone" name="personalPhone" value="@professional.PersonalPhone">
                 </div>
                 <div class="row professional-register">
                     <label class="col-sm-6 control-label small" for="RoomPhone">Teléfono de habitación:</label>
-                    <input class="col-sm-4 form-control form-control-sm" type="text" id="RoomPhone" name="RoomPhone" value="@professional.RoomPhone">
+                    <input class="col-sm-4 form-control form-control-sm" type="number" id="RoomPhone" name="RoomPhone" value="@professional.RoomPhone">
                 </div>
                 <div class="row professional-register">
                     <label class="col-sm-6 control-label small" for="birthday">Fecha de nacimiento</label>
@@ -58,7 +58,7 @@
                 </div>
                 <div class="row professional-register">
                     <label class="col-sm-6 control-label small" for="placeNumber">Número de plaza</label>
-                    <input class="col-sm-4 form-control form-control-sm" type="text" id="placeNumber" name="placeNumber" value="@professional.PlaceNumber">
+                    <input class="col-sm-4 form-control form-control-sm" type="number" id="placeNumber" name="placeNumber" value="@professional.PlaceNumber">
                 </div>
 
 
@@ -131,16 +131,15 @@
                 </div>
                 <div class="row professional-register">
                     <label class="col-sm-6 control-label small" for="EmergencyContactNumber">Número del contacto:</label>
-                    <input class="col-sm-4 form-control form-control-sm" type="text" id="EmergencyContactNumber" name="EmergencyContactNumber" value="@professional.EmergencyContactNumber">
+                    <input class="col-sm-4 form-control form-control-sm" type="number" id="EmergencyContactNumber" name="EmergencyContactNumber" value="@professional.EmergencyContactNumber">
                 </div>
                 <div class="row professional-register">
                     <label class="col-sm-6 control-label small" for="scholarship">Escolaridad:</label>
                     <select class="col-sm-5 custom-select custom-select-sm" id="scholarship" name="scholarship" value="@professional.Scholarship">
-                        <option selected value="@professional.Scholarship">@professional.Scholarship</option>
-                        <option value="Técnico">Técnico</option>
+                        <option value="T&eacutecnico">T&eacutecnico</option>
                         <option value="Bachillerato">Bachillerato</option>
                         <option value="Licenciatura">Licenciatura</option>
-                        <option value="Maestría">Maestría</option>
+                        <option value="Maestr&iacutea">Maestr&iacutea</option>
                         <option value="Doctorado">Doctorado</option>
                     </select>
                 </div>
@@ -168,6 +167,9 @@
                     <label class="col-sm-6 control-label small" for="address">Dirección:</label>
                     <textarea class="col-sm-6 form-control form-control-sm" id="address" name="address" rows="1">@professional.Address</textarea>
                 </div>
+                <div class="alert-danger">
+                    <span id="resultado"></span>
+                </div>
             </div>
         </div>
         <div class="row">
@@ -183,18 +185,16 @@
         </div>
     </form>
 }
-<div class="alert-danger">
-    <span id="resultado"></span>
-</div>
+
 
 <script>
-
 
 
     var professional =@Html.Raw(Json.Encode(ViewBag.professional[0]));
 
     document.getElementById("civilStatus").value = professional.CivilStatus;
     document.getElementById("gender").value = professional.Gender;
+    document.getElementById("scholarship").value = professional.Scholarship;
    
        
 

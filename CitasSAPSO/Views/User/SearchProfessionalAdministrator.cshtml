@@ -79,8 +79,8 @@
         $("#tbl tr").click(function () {
             $(this).addClass('selected').siblings().removeClass('selected');
             var id = $(this).find('td:first').html();
-            var value = $(this).find('td:nth-child(1)');
-            var identification = value.next().text();
+            var value = $(this).find('td:nth-child(0)');
+            var identification = id;
             modifyProfessionalUrl(identification);
         });
     }
@@ -90,7 +90,7 @@
             $(this).addClass('selected').siblings().removeClass('selected');
             var id = $(this).find('td:first').html();
             var value = $(this).find('td:nth-child(1)');
-            var identification = value.next().text();
+            var identification = id;
             $(this).remove();
             var parameters = { "id_professional": identification };
             $.ajax(
