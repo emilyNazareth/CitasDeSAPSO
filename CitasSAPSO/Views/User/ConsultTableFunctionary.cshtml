@@ -31,7 +31,7 @@
             <td>@appointment.Functionary.Cedula</td>
             <td>@appointment.Professional.Cedula</td>
             <td>@appointment.SubProcess.Name</td>
-            <td>@appointment.SubProcess.Name</td>
+            <td>@appointment.SubActivity.Name</td>
             <td>@appointment.Date</td>
             <td>@appointment.Hour</td>
             <td>@Html.ActionLink("Ver", "ShowAppointmentDetail", "Appointment", new { FunctionaryId = appointment.Functionary.Cedula, IdAppointment = appointment.Id }, new { @class = "btn btn-success btn-sm" })</td>

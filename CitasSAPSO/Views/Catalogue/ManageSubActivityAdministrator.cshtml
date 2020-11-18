@@ -77,6 +77,7 @@
 </div>
 
 <script>
+    var letters = /^[A-Za-z]+$/;
     //limpia el formulario
     function cleanActivitySubtype() {
         document.getElementById("login-form").reset();
@@ -87,6 +88,10 @@
         
     }
     function updateSubactivity(id, description, father) {
+        if (description.match(letters) == null) {
+            $("#messageSpanId").html("*El campo Descripción es inválido");
+            return;
+        }
         var parameters = { "id": id, "description": description, "father": father };
         $.ajax(
             {
@@ -107,6 +112,10 @@
         );
     }
     function registerSubactivity(description, father) {
+        if (description.match(letters) == null) {
+            $("#messageSpanId").html("*El campo Descripción es inválido");
+            return;
+        }
         var parameters = { "description": description, "father": father };
         $.ajax(
             {
