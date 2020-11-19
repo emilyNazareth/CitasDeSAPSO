@@ -120,7 +120,10 @@
         </div>
 
         <div class="row justify-content-end">
-            @Html.ActionLink("Atr\u00E1s", "MainFunctionaryRegisterHome", "Appointment", null, new { @class = "btn btn-success btn-sm" })
+            <button type="button" name="atras" id="atras" href="javascript:;"
+                    onclick="goBack();" class="btn btn-success btn-sm " style="margin-left: 15px;">
+                Atrás
+            </button>
 
             <button type="button" name="finalizar" id="finalizar" href="javascript:;"
                     onclick="saveAppointment2(); return false;"
@@ -133,7 +136,9 @@
 </div>
 
     <script>
-
+        function goBack() {
+            window.history.back();
+        }
         var calendarEl = document.getElementById('calendar');
         var calendar = new FullCalendar.Calendar(calendarEl, {
             initialView: 'timeGridWeek'
@@ -230,18 +235,18 @@
             //var SubActivityId = document.getElementById("SubActivityId").value;
 
             if (Hour == "") {
-                alert("ingrese la hora por favor");
+                alert("Ingrese la hora por favor");
                 return 0;
             }
 
 
             if (SubprocessId == -1) {
-                alert("no hay subproceso");
+                alert("No hay subproceso");
                 return 0;
             }
 
             if (ProfessionalId == -1) {
-                alert("no hay profesionales");
+                alert("No hay profesionales");
                 return 0;
             }
 

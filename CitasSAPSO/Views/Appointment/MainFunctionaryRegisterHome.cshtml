@@ -6,7 +6,7 @@
 <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
 <script src="https://unpkg.com/boxicons@latest/dist/boxicons.js"></script>
 
-<form asp-controller="Appointment" asp-action="MainFunctionaryRegisterHome" method="post">
+<form asp-controller="Appointment" id="registerFunctionaryForm" asp-action="MainFunctionaryRegisterHome" method="post">
     <div class="row align-items-start">
         <div class="col">
             <p class="titles">Datos Personales</p>
@@ -16,10 +16,6 @@
                 <div class="col-sm-2">
                     <a class="btn btn-success" id="cleanPlace" name="cleanPlace" onclick="searchFunctionary()"><i class='bx bx-search'></i></a>
                 </div>
-                    @*foreach (CitasSAPSO.Models.FunctionaryModels process in ViewBag.process)
-        {
-            <input class="col-sm-4 form-control form-control-sm" type="text" id="cedula" name="cedula" value=@process.Cedula>
-        }*@
                 </div>
             <div class="row functionary-register">
                 <label class="col-sm-6 control-label small" for="name">Nombre:</label>
@@ -166,20 +162,11 @@
             <br />
 
             <div class="row justify-content-end">
-                <!--Contorlar con Sessión-->
-                <!----
-        <a class="btn btn-success btn-sm" asp-controller="Home" asp-action="Index">Atrás</a>
-        <a class="btn btn-success btn-sm" asp-controller="Administrator" asp-action="AdministratorDashboard">Atrás(Admin)</a>
 
-        <a class="btn btn-success btn-sm" style="margin-left: 5px;" asp-controller="Home" asp-action="ScheduleDates">Siguiente</!-->
                 @Html.ActionLink("Atrás", "Index", "Appointment", null, new { @class = "btn btn-success btn-sm" })
-                <input class="btn btn-success btn-sm" type="submit" id="siguiente" name="siguiente" value="Siguiente" style="margin-left: 5px;" />
+                <input class="btn btn-success btn-sm" type="button" id="siguiente" onclick="verifyData()" name="siguiente" value="Siguiente" style="margin-left: 5px;" />
 
 
-
-
-
-                @*Html.ActionLink("Siguiente", "ScheduleDatesHome", "Home", null, new { @class = "btn btn-success btn-sm" })*@
 
             </div>
 
@@ -191,6 +178,11 @@
 
 </form>
 <script>
+    function verifyData() {
+
+        document.getElementById("registerFunctionaryForm").submit();
+    }
+
     window.onload = function () {
         $("#district").prop("disabled", true);
         $("#canton").prop("disabled", true);

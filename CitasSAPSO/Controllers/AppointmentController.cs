@@ -191,7 +191,6 @@ namespace CitasSAPSO.Controllers
             CreateMail(_appointment);
             AppointmentBusiness appointmentBusiness = new AppointmentBusiness();
             string idAppointment = (string)Session["idAppointment"];
-            Debug.WriteLine("iiiiiiiiiiiiiiiiiiiiiiiiddddddddddddddddddddddddddddd: "+idAppointment);
             appointmentBusiness.UpdateAppointment(_appointment, Int32.Parse(idAppointment));
 
             Session["appointment"] = _appointment;
@@ -292,7 +291,14 @@ namespace CitasSAPSO.Controllers
         {
             CatalogueController catalogue = new CatalogueController();
             int process = catalogue.GetProcessBySubprocess(appointment.SubProcess.ID);
-
+            UserBusiness userBusiness = new UserBusiness();
+            int cedula = appointment.Professional.Cedula;
+            List<UserModels> professionals = userBusiness.GetProfessionalByIdentification(cedula);
+            String nameProfessional = "";
+            foreach (UserModels professional in professionals)
+            {
+                 nameProfessional = professional.Name +" "+ professional.FirstLastName + " " + professional.SecondLastName;
+            }
             string email = (string)Session["email"];
 
             MailModels mail;
@@ -300,7 +306,8 @@ namespace CitasSAPSO.Controllers
                     "\n\tRESUMEN DE CITA:\n" +
                     "Fecha: " + appointment.Date + "\n" +
                     "Hora: " + appointment.Hour + "\n" +
-                    "Paciente: " + appointment.Functionary.Cedula +
+                    "Paciente: " + appointment.Functionary.Cedula + "\n" +
+                    "Psicólogo: " + nameProfessional +
                     "\n\n Para cualquier consulta comuniquese al teléfono 2295-4181," +
                     " al correo sapso@poder-judicial.go.cr o a nuestro sitio web de citas para cancelar o modificar su cita";
             switch (process)
