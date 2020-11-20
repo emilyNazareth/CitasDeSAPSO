@@ -179,7 +179,7 @@ function modifyProfessionalUrl(identification) {
 }
 
 function modifyInformationProfessional() {
-    var letters = /^[A-Za-z]+$/;  
+    var letters = /^[A-Za-z+À-ú\s]+$/;  
 
     var cedula = document.getElementById("Cedula").value;
     var name = document.getElementById("name").value;
@@ -301,7 +301,7 @@ function modifyInformationProfessional() {
 
 function registerProfessional() {
     
-    var letters = /^[A-Za-z]+$/;    
+    var letters = /^[A-Za-z+À-ú\s]+$/;  
     
     var cedula = document.getElementById("Cedula").value;
     var password = document.getElementById("Password").value;

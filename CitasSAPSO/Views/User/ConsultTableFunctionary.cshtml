@@ -58,9 +58,12 @@
                     <textarea class="form-control" id="justification" name="justification" rows="3"></textarea>
                 </div>
             </div>
+            <div class="alert-danger justify-content-end">
+                <span id="resultado"></span>
+            </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Atrás</button>
-                <button type="button" class="btn btn-danger"  onclick="deleteApppointment()">Confirmar</button>
+                <button type="button" class="btn btn-danger" onclick="deleteApppointment()">Confirmar</button>
             </div>
         </div>
     </div>
@@ -86,8 +89,16 @@
         id = appointmentId;
     }
     function deleteApppointment() {
+        var letters = /^[A-Za-z+À-ú\s]+$/;  
         var justification = $('#justification').val();
+        console.log(justification);
+        
         var parameters = { "id": id, "justification": justification };
+        if (justification.match(letters) == null) {
+            $("#resultado").html("*El campo Justificación es inválido");
+            return;
+        }
+        
         $.ajax(
             {
                 data: parameters,

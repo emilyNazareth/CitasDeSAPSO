@@ -1,12 +1,15 @@
 ﻿using CitasSAPSO.Business;
 using CitasSAPSO.Models;
 using Microsoft.Ajax.Utilities;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -261,6 +264,15 @@ namespace CitasSAPSO.Controllers
             AppointmentBusiness appointmentBusiness = new AppointmentBusiness();
             List<AppointmentModels> appointmentList = appointmentBusiness.getProfessinalScheldule(professionalId);
             return JsonConvert.SerializeObject(appointmentList);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+
+        public  FileResult helpManual()
+        {
+            var path = "~/Files/Manual-de-usuario-en-linea.pdf";
+            return File(path, "application/force- download", Path.GetFileName(path));
         }
     }
 }
