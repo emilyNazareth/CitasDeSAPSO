@@ -13,7 +13,7 @@
             <p class="titles">Datos Personales</p>
             <div class="row functionary-register">
                 <label class="col-sm-6 control-label small" for="identification">Numero de identificación:</label>
-                <input class="col-sm-4 form-control form-control-sm" type="text" id="cedula" name="cedula" required>
+                <input class="col-sm-4 form-control form-control-sm" type="text" id="cedula" name="cedula" required pattern="[0-9]+" title="Cédula inválida">
                 <div class="col-sm-2">
                     <a class="btn btn-success" id="cleanPlace" name="cleanPlace" onclick="searchFunctionary()"><i class='bx bx-search'></i></a>
                 </div>
@@ -25,23 +25,23 @@
             </div>
             <div class="row functionary-register">
                 <label class="col-sm-6 control-label small" for="name">Nombre:</label>
-                <input class="col-sm-4 form-control form-control-sm" type="text" id="name" name="name" required pattern="[A-Za-z\u00E0-\u00FC]+">
+                <input class="col-sm-4 form-control form-control-sm" type="text" id="name" name="name" required pattern="[A-Za-z\u00E0-\u00FC]+" title="Nombre inválido">
             </div>
             <div class="row functionary-register">
                 <label class="col-sm-6 control-label small" for="firstLastName">Primer Apellido:</label>
-                <input class="col-sm-4 form-control form-control-sm" type="text" id="firstLastName" name="firstLastName" required pattern="[A-Za-z\u00E0-\u00FC]+" >
+                <input class="col-sm-4 form-control form-control-sm" type="text" id="firstLastName" name="firstLastName" required pattern="[A-Za-z\u00E0-\u00FC]+" title="Primer Apellido inválido">
             </div>
             <div class="row functionary-register">
                 <label class="col-sm-6 control-label small" for="secondLastName">Segundo Apellido:</label>
-                <input class="col-sm-4 form-control form-control-sm" type="text" id="secondLastName" name="secondLastName" required pattern="[A-Za-z\u00E0-\u00FC]+" title="Apellido inválido" >
+                <input class="col-sm-4 form-control form-control-sm" type="text" id="secondLastName" name="secondLastName" required pattern="[A-Za-z\u00E0-\u00FC]+" title="Segundo Apellido inválido" >
             </div>
             <div class="row functionary-register">
                 <label class="col-sm-6 control-label small" for="personalPhone">Teléfono Personal:</label>
-                <input class="col-sm-4 form-control form-control-sm" type="text" id="personalPhone" name="personalPhone" required pattern="[0-9]+">
+                <input class="col-sm-4 form-control form-control-sm" type="text" id="personalPhone" name="personalPhone" required pattern="[0-9]+" title="Número de teléfono inválido">
             </div>
             <div class="row functionary-register">
                 <label class="col-sm-6 control-label small" for="housePhone">Teléfono de habitación:</label>
-                <input class="col-sm-4 form-control form-control-sm" type="text" id="housePhone" name="roomPhone" required pattern="[0-9]+">
+                <input class="col-sm-4 form-control form-control-sm" type="text" id="housePhone" name="roomPhone" required pattern="[0-9]+" title="Número de teléfono inválido">
             </div>
             <div class="row functionary-register">
                 <label class="col-sm-6 control-label small" for="birthday">Fecha de nacimineto</label>
@@ -152,16 +152,16 @@
             </div>
             <div class="row functionary-register">
                 <label class="col-sm-6 control-label small" for="officePhone">Teléfono Oficina:</label>
-                <input class="col-sm-4 form-control form-control-sm" type="text" id="oficePhone" name="oficePhone" pattern="[0-9]+">
+                <input class="col-sm-4 form-control form-control-sm" type="text" id="oficePhone" name="oficePhone" pattern="[0-9]+" title="Número de teléfono inválido">
             </div>
             <div class="row functionary-register">
                 <label class="col-sm-6 control-label small" for="email">Correo electrónico:</label>
-                <input class="col-sm-4 form-control form-control-sm" type="email" id="mail" name="mail" required>
+                <input class="col-sm-4 form-control form-control-sm" type="email" id="mail" name="mail" required title="Correo inválido">
             </div>
             <p class="titles">Aplica si el puesto lo amerita</p>
             <div class="row functionary-register">
                 <label class="col-sm-6 control-label small" for="idPlaca">Id placa</label>
-                <input class="col-sm-4 form-control form-control-sm" type="text" id="idPlaca" name="idPlaca" pattern="[0-9]+">
+                <input class="col-sm-4 form-control form-control-sm" type="text" id="idPlaca" name="idPlaca" pattern="[0-9]+" title="Codigo de placa inválido">
 
             </div>
             <div class="row functionary-register">
@@ -181,7 +181,9 @@
     window.onload = function () {
         $("#district").prop("disabled", true);
         $("#canton").prop("disabled", true);
-
+        $("#admissionDate").prop("max", new Date().toISOString().split("T")[0]);
+        $("#admissionDate").prop("min", '1948-01-01');
+        $("#PortationExpirationDay").prop("min", '2010-01-01');
         loadFunctionaryRegister();
         loadGeographicInfo();
     }
