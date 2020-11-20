@@ -84,7 +84,7 @@
             <div class="col-sm ">
                 <div class="form-group row scheduleDatesFilter">
                     <label class="col-sm-4 control-label small" for="hour">Hora deseada</label>
-                    <input type="time" onChange=" updateCalendar(); " class="col-sm-4 form-control form-control-sm" id="Hour" name="Hour" required />
+                    <input type="time" onChange=" updateCalendar(); " class="col-sm-4 form-control form-control-sm" id="Hour" name="Hour"  min="07:00" max="16:00" step="600" required />
                 </div>
             </div>
 
@@ -219,6 +219,8 @@
 
 
         window.onload = function () {
+            $('#date').prop("min", new Date().toISOString().split("T")[0]);
+            $('#date').prop("max", '2020-12-30');
             loadScheduleDates();
         }
 
