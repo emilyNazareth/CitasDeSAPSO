@@ -13,32 +13,32 @@
                 <p class="text-success">Datos Personales</p>
                 <div class="row functionary-register">
                     <label class="col-sm-6 control-label small" for="identification">Numero de identificacion:</label>
-                    <input class="col-sm-4 form-control form-control-sm" type="text" id="cedula" name="cedula" value=@data.Cedula>
+                    <input class="col-sm-4 form-control form-control-sm" type="text" id="cedula" name="cedula" value=@data.Cedula pattern="[0-9]+" title="Cédula inválida">
 
                 </div>
                 <div class="row functionary-register">
                     <label class="col-sm-6 control-label small" for="name">Nombre:</label>
-                    <input class="col-sm-4 form-control form-control-sm" type="text" id="identification" name="name" value=@data.Name>
+                    <input class="col-sm-4 form-control form-control-sm" type="text" id="identification" name="name" value=@data.Name pattern="[A-Za-z\u00E0-\u00FC]+" title="Nombre inválido">
                 </div>
                 <div class="row functionary-register">
                     <label class="col-sm-6 control-label small" for="firstLastName">Primer Apellido:</label>
-                    <input class="col-sm-4 form-control form-control-sm" type="text" id="firstLastName" name="firstLastName" value=@data.FirstLastName>
+                    <input class="col-sm-4 form-control form-control-sm" type="text" id="firstLastName" name="firstLastName" value=@data.FirstLastName pattern="[A-Za-z\u00E0-\u00FC]+" title="Primer Apellido inválido" >
                 </div>
                 <div class="row functionary-register">
                     <label class="col-sm-6 control-label small" for="secondLastName">Segundo Apellido:</label>
-                    <input class="col-sm-4 form-control form-control-sm" type="text" id="secondLastName" name="secondLastName" value=@data.SecondLastName>
+                    <input class="col-sm-4 form-control form-control-sm" type="text" id="secondLastName" name="secondLastName" value=@data.SecondLastName pattern="[A-Za-z\u00E0-\u00FC]+" title="Segundo Apellido inválido" >
                 </div>
                 <div class="row functionary-register">
                     <label class="col-sm-6 control-label small" for="personalPhone">Teléfono Personal:</label>
-                    <input class="col-sm-4 form-control form-control-sm" type="text" id="personalPhone" name="personalPhone" value=@data.PersonalPhone>
+                    <input class="col-sm-4 form-control form-control-sm" type="text" id="personalPhone" name="personalPhone" value=@data.PersonalPhone pattern="[0-9]+" title="Número de teléfono inválido">
                 </div>
                 <div class="row functionary-register">
                     <label class="col-sm-6 control-label small" for="housePhone">Teléfono de habitación:</label>
-                    <input class="col-sm-4 form-control form-control-sm" type="text" id="housePhone" name="roomPhone" value=@data.RoomPhone>
+                    <input class="col-sm-4 form-control form-control-sm" type="text" id="housePhone" name="roomPhone" value=@data.RoomPhone pattern="[0-9]+" title="Número de teléfono inválido">
                 </div>
                 <div class="row functionary-register">
                     <label class="col-sm-6 control-label small" for="birthday">Fecha de nacimineto</label>
-                    <input type="datetime" class="col-sm-4 form-control form-control-sm" id="birthday" name="birthday" value="@data.Birthday" />
+                    <input type="datetime" class="col-sm-4 form-control form-control-sm" id="birthday" name="birthday" value="@data.Birthday" required min="1930-01-01" max="2003-01-01"/>
                 </div>
                 <div class="row functionary-register">
                     <label class="col-sm-6 control-label small" for="gender">Sexo</label>
@@ -84,22 +84,22 @@
 
                 <div class="row functionary-register">
                     <label class="col-sm-6 control-label small" for="province">Provincia</label>
-                    <input class="col-sm-4 form-control form-control-sm" type="text" id="province" name="province" value="@data.Province">
+                    <input class="col-sm-4 form-control form-control-sm" type="text" id="province" name="province" value="@data.Province" required pattern="[A-Za-z\u00E0-\u00FC]+" title="Provincia inválida">
                 </div>
                 <div class="row functionary-register">
                     <label class="col-sm-6 control-label small" for="canton">Cantón</label>
-                    <input class="col-sm-4 form-control form-control-sm" type="text" id="canton" name="canton" value="@data.Canton">
+                    <input class="col-sm-4 form-control form-control-sm" type="text" id="canton" name="canton" value="@data.Canton" required pattern="[A-Za-z\u00E0-\u00FC]+" title="SCantón inválido">
                 </div>
                 <div class="row functionary-register">
                     <label class="col-sm-6 control-label small" for="district">Distrito</label>
-                    <input class="col-sm-4 form-control form-control-sm" type="text" id="district" name="district" value="@data.District">
+                    <input class="col-sm-4 form-control form-control-sm" type="text" id="district" name="district" value="@data.District" required pattern="[A-Za-z\u00E0-\u00FC]+" title="Distrito inválido">
 
                 </div>
 
 
                 <div class="row functionary-register">
                     <label class="col-sm-6 control-label small" for="address">Dirección:</label>
-                    <textarea class="col-sm-6 form-control form-control-sm" id="address" name="address" rows="1">@data.Address</textarea>
+                    <textarea class="col-sm-6 form-control form-control-sm" id="address" name="address" rows="1" required>@data.Address</textarea>
                 </div>
             </div>
             <div class="col">
@@ -157,7 +157,7 @@
                 </div>
                 <div class="row functionary-register">
                     <label class="col-sm-6 control-label small" for="officePhone">Teléfono Oficina:</label>
-                    <input class="col-sm-4 form-control form-control-sm" type="text" id="oficePhone" name="oficePhone" value=@data.OficePhone>
+                    <input class="col-sm-4 form-control form-control-sm" type="text" id="oficePhone" name="oficePhone" value=@data.OficePhone pattern="[0-9]+" title="Número de teléfono inválido">
                 </div>
                 <div class="row functionary-register">
                     <label class="col-sm-6 control-label small" for="email">Correo electrónico:</label>
@@ -166,7 +166,7 @@
                 <p class="text-success">Aplica si el puesto lo amerita</p>
                 <div class="row functionary-register">
                     <label class="col-sm-6 control-label small" for="idPlaca">Id placa</label>
-                    <input class="col-sm-4 form-control form-control-sm" type="text" id="idPlaca" name="idPlaca" value="@data.IdPlaca">
+                    <input class="col-sm-4 form-control form-control-sm" type="text" id="idPlaca" name="idPlaca" value="@data.IdPlaca" pattern="[0-9]+" title="Codigo de placa inválido">
 
                 </div>
                 <div class="row functionary-register">
