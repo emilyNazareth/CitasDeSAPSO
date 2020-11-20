@@ -12,7 +12,7 @@
         <div class="form-group row">
             <label for="identificationInput" class="col-sm-7 col-form-label-sm">C&eacutedula</label>
 
-            <input type="text" name="id" id="id" class="col-sm-5 form-control form-control-sm">
+            <input type="number" name="id" id="id" class="col-sm-5 form-control form-control-sm">
 
         </div>
         <div class="form-group row">
@@ -25,6 +25,9 @@
         </div>
         <div>
             <a class="btn btn-success btn-sm" id="consultDate" onclick="searchProfessional()" name="consultDate">Buscar</a>
+        </div>
+        <div class="alert-danger justify-content-end">
+            <span id="resultado"></span>
         </div>
     </form>
 </center>
@@ -111,6 +114,8 @@
 
 
     function searchProfessional() {
+        var letters = /^[A-Za-z+À-ú\s]+$/;  
+        $("#resultado").html("");
         var cedula = $('#id').val();
         var nombre = $('#name').val()
         var apellido = $('#lastname').val()
@@ -122,6 +127,29 @@
         }
         if (!apellido) {
             apellido = "";
+        }
+        if (nombre == "" && cedula == -1 && apellido == "") {
+            $("#resultado").html("*No se especificó ningún tipo de búsqueda");
+            return;
+        }
+
+        if (nombre != "") {
+            if (nombre.match(letters) == null) {
+                $("#resultado").html("*El campo Nombre es inválido");
+                return;
+            }
+        }
+        if (apellido != "") {
+            if (nombre.match(letters) == null) {
+                $("#resultado").html("*El campo Apellidos es inválido");
+                return;
+            }
+        }
+        if (cedula != -1) {
+            if (cedula < 0) {
+                $("#resultado").html("*El campo Cédula es inválido");
+                return;
+            }
         }
         var parameters = { "cedula": cedula, "nombre": nombre, "apellido": apellido };
         console.log(parameters);
