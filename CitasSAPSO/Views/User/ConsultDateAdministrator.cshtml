@@ -1,4 +1,4 @@
-﻿@{
+@{
     ViewData["Title"] = "AdministratorConsultDate";
 }
 
@@ -110,8 +110,11 @@
         </div>
         
         <a onclick="searchAppointment()" class="btn btn-success btn-sm" style="margin-left: 100px;">Buscar</a>
+        <div class="alert-danger justify-content-end">
+            <span id="resultado"></span>
+        </div>
     </div>
-    
+
 </div>
 
 <div class="row">
@@ -127,8 +130,14 @@
     /*window.onload = function () {
         loadAdministratorConsult();
     }*/
+    function validNumber(data) {
+        if (Math.sign(data) == -1) {
+            $("#resultado").html("Datos invalidos");
+            return 
+        }
+    }
     function searchAppointment() {
-
+        $("#resultado").html("");
         var initialDate = $('#initialDate').val();
         if (initialDate == "") {
             initialDate = null;
@@ -142,6 +151,7 @@
         var assistance = $('#assistance').val();
         var office = $('#office').val();
         var identification = $('#identification').val();
+        validNumber(identification);
         if (identification == "")
             identification = -1;
         var professional = $('#professional').val();
@@ -149,9 +159,11 @@
         var dateStatus = $('#dateStatus').val();
 
         var consecutive = $('#consecutive').val();
+        validNumber(consecutive);
         if (consecutive == "")
             consecutive = -1;
         var age = $('#age').val();
+        validNumber(age);
         if (age == "")
             age = -1;
 
